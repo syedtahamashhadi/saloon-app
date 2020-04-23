@@ -5,6 +5,14 @@ import Button from '../component/Button'
 
 const Welcome = () =>{
 
+    const handleSignIn = () =>{
+        console.log('SignIn is Clicked...')
+    }
+
+    const handleGuest = () =>{
+        console.log('SignIn is Clicked...')
+    }
+
     return(
         <View style={styles.container}>
             <View style={{marginTop:60}}>
@@ -20,7 +28,7 @@ const Welcome = () =>{
 
             <View style={{marginTop:90,width:'100%',justifyContent:'center',alignItems:'center'}}>
                 <Button title='Sign In' />
-                <Text style={{fontSize:20,color:'grey' , marginVertical:0 }}>
+                <Text style={{fontSize:20,color:'grey' }}>
                     or
                 </Text>
                 <Button title='Guest' btnColor='#19479c'/>
