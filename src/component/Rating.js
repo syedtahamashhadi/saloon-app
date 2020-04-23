@@ -6,6 +6,8 @@ import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 const Rating = (props) =>{
     
     let rating = props.rating ? props.rating : 0
+    let ratingColor = props.textColor ? props.textColor : 'black'
+
     console.log('Rating is >>',props.rating)
     const getStars = (rating)=>{
         let starArr = ['star-o','star-o','star-o','star-o','star-o']
@@ -50,7 +52,7 @@ const Rating = (props) =>{
                     )
                 })}
             </View>
-            <Text style={{fontSize:16}}>{rating}</Text>
+            <Text style={{fontSize:16 , color:ratingColor , fontWeight:'bold'}}>{rating}</Text>
         </View>
     )   
 }

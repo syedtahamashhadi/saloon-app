@@ -9,7 +9,7 @@ const Chat = () =>{
 
     return(
         <View style={{backgroundColor:'#fff' , flex:1}}>
-            <View style={{flex:3.5 , backgroundColor:'blue', marginHorizontal:20}}>
+            <View style={{flex:3.5 , backgroundColor:'#fff', marginHorizontal:20}}>
                 <View style={{flexDirection:"row" , justifyContent:'space-between' , top:35 }}>
                         <TouchableOpacity onPress={()=>console.log('Back Button is Pressed...')}>
                             <AntIcon name="arrowleft" size={25} />
@@ -21,6 +21,7 @@ const Chat = () =>{
                             </View>
                         </TouchableOpacity>
                 </View>
+
                 <View style={{flexDirection:'row',top:60,height:100}}>
                     <View style={{justifyContent:'flex-end',marginRight:10}}>
                         <Avatar rounded source={require('../../assets/cat.jpg')} size={55}/>
@@ -33,8 +34,8 @@ const Chat = () =>{
                 </View>
             </View>
            
-            <View style={{flex:6.5 , backgroundColor:'red'}}>
-                <View style={{height:150,backgroundColor:'green'}}>
+            <View style={{flex:6.5 , backgroundColor:'#fff'}}>
+                <View style={{height:150,backgroundColor:'#fff'}}>
                     <Image source={require('../../assets/barber-shave.jpg') } style={styles.image}/>
                     <View style={styles.imageOverLay}>
                         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
@@ -55,7 +56,38 @@ const Chat = () =>{
                     </View>
                 </View>
                 <View style={{marginHorizontal:20}}>
+                    <View style={{justifyContent:'center',alignItems:'center'}}>
+                        <View style={styles.stylistAvatarContainer}>
+                            <Avatar rounded source={require('../../assets/cat.jpg')} size={55}/>
+                        </View>
+                        <View style={{marginTop:2}}>
+                            <Text style={{fontSize:30}}>Matt Perry</Text>
+                        </View>
+                        <View style={{marginTop:2}}>
+                            <Text style={{fontSize:18}}>5 star / 85 reviews</Text>
+                        </View>
+                    </View>
+                </View>
 
+                <View style={{marginVertical:20 , marginHorizontal:20}}>
+                    <Text style={{fontSize:25}}>Choose a service</Text>
+                    <View style={{flexDirection:'row', marginTop:10}}>
+                        <View style={styles.servicesIconContainer}>
+                            <View style={{height:65,width:65,borderRadius:40,backgroundColor:'red' }}>
+                            </View>
+                            <Text style={{fontSize:18}}>Shave</Text>
+                        </View>
+                        <View style={styles.servicesIconContainer}>
+                            <View style={{height:65,width:65,borderRadius:40,backgroundColor:'red' }}>
+                            </View>
+                            <Text style={{fontSize:18}}>HairCut</Text>
+                        </View>
+                        <View style={styles.servicesIconContainer}>
+                            <View style={{height:65,width:65,borderRadius:40,backgroundColor:'red' }}>
+                            </View>
+                            <Text style={{fontSize:18}}>Beard Trim</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
         </View>
@@ -74,6 +106,19 @@ export default Stylist;
 
 const styles= StyleSheet.create(
     {
+        servicesIconContainer:{
+            width:100,
+            height:70,
+            // backgroundColor:'green',
+            alignItems:'center',
+            // marginRight:20
+        },
+        stylistAvatarContainer:{
+            marginTop:-25,
+            borderRadius:40,
+            borderWidth:3,
+            borderColor:'#fff'
+        },
         seprator:{
             width:100,
             height:35,

@@ -7,10 +7,16 @@ import Overlay from './src/screen/Shop'
 import Heading from './src/component/Heading'
 import Stylist from './src/screen/Stylist'
 import StylistProfile from './src/screen/StylistProfile'
-
-
+import SelectStylist from './src/screen/SelectStylist'
+import SaloonList from './src/screen/SaloonList'
+import SalonnBanner from './src/component/SaloonBanner'
+import Welcome from './src/screen/Welcome'
+import ChooseStylist from './src/component/ChooseStylist'
 import Test from './src/Test'
-
+import SaloonBanner from './src/component/SaloonBanner';
+import CheckBox from './src/component/CheckBox'
+import TimeCard from './src/component/TimeCard';
+import SignUp from './src/screen/SignUp'
 
 export default function App() {
   return (
@@ -19,8 +25,16 @@ export default function App() {
     // <Shop/>
     // <Overlay />
     // <Heading title='testing' top={80}/>
-    <Stylist />
-        // <StylistProfile />
+    // <Stylist />
+    // <StylistProfile />
+      // <SelectStylist />
+      // <SaloonList />
+      // <SaloonBanner/>
+      // <Welcome />
+      // <ChooseStylist />
+      // <CheckBox />
+      // <TimeCard />
+      <SignUp />
     );
 }
 
