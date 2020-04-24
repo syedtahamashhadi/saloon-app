@@ -17,6 +17,15 @@ import SaloonBanner from './src/component/SaloonBanner';
 import CheckBox from './src/component/CheckBox'
 import TimeCard from './src/component/TimeCard';
 import SignUp from './src/screen/SignUp'
+import SignIn from './src/screen/SignIn'
+import EmailConfirmation from './src/screen/EmailConfirmation'
+import ForgotPassword from './src/screen/ForgotPassword'
+import Congratgulation from './src/screen/Congratgulation'
+import CurrentBookings from './src/screen/CurrentBookings'
+import SetProfileInfo from './src/screen/SetProfileInfo'
+import SocialCard from './src/component/SocialCard'
+import SetBillingDetail from './src/screen/SetBillingDetail'
+import UserDetail from './src/screen/UserDetail'
 
 export default function App() {
   return (
@@ -34,7 +43,16 @@ export default function App() {
       // <ChooseStylist />
       // <CheckBox />
       // <TimeCard />
-      <SignUp />
+      // <SignUp />
+      // <SignIn />
+      // <EmailConfirmation />
+      // <ForgotPassword />
+      // <Congratgulation />
+      <CurrentBookings />
+      // <SetProfileInfo />
+      // <UserDetail />
+      // <SocialCard />
+      // <SetBillingDetail />
     );
 }
 
