@@ -125,7 +125,6 @@ const styles = StyleSheet.create(
             marginTop:20,
             flexDirection:'row',
             width:'80%',
-            // backgroundColor:'red',
             height:60,
             justifyContent:'space-between',
             alignItems:'center',
@@ -148,7 +147,6 @@ const styles = StyleSheet.create(
             marginLeft:5,
             marginBottom:20,
             fontSize:20,
-            // backgroundColor:'red'
         },
        
     }
