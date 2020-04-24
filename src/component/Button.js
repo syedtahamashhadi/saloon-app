@@ -5,6 +5,8 @@ import {View , Text , StyleSheet , TouchableOpacity} from 'react-native'
 const Button = (props) =>{  
 
     let btnColor = props.btnColor ? props.btnColor : '#49D3CE'
+    let textSize = props.textSize ? props.textSize : 22
+    console.log('Props is >>',props)
     const styles = {
         container:{
             marginVertical:15,
@@ -21,10 +23,10 @@ const Button = (props) =>{
     }
     return(
 
-        <TouchableOpacity style={styles.touchableContainer} onPress={()=>console.log('Next Button is Presses')}>
+        <TouchableOpacity style={styles.touchableContainer} onPress={()=>props.handleButton('Taha')}>
             <View style={styles.container}>
-                <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize:22,color:'#fff'}}>{props.title}</Text>
+                <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+                    <Text style={{fontSize:textSize,color:'#fff'}}>{props.title}</Text>
                 </View>
             </View>
         </TouchableOpacity>
