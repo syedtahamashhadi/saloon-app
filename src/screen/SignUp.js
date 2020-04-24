@@ -56,7 +56,7 @@ const SignUp = () =>{
                         style={{width:'80%',height:40,borderRadius:6,borderWidth:1}}
                         onChangeText= {val=>setName(val)}
                         value={name}
-                        placeholder='Name'
+                        placeholder='Phone'
                     />
                 </View>
                 <View style={{alignItems:'center',marginTop:12}}>

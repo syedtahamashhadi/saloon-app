@@ -11,11 +11,6 @@ const SignIn = () =>{
 
     return(
         <View style={styles.container}>
-            {/* <View style={{marginTop:35}}>
-                <TouchableOpacity>
-                    <AntIcon name="arrowleft" size={25} />
-                </TouchableOpacity>
-            </View> */}
             <View style={{marginTop:130,justifyContent:'center',alignItems:'center',backgroundColor:'#fff'}}>
                 <View style={{width:120 , height:100 , backgroundColor:'#fff'}}>
                     <Image source={require('../../assets/email-confirmation.png')}  style={styles.image} />
