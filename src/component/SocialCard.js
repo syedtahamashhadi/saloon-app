@@ -18,6 +18,15 @@ const SocialCard = (props) =>{
                 return <AwsomeIcon name='facebook' size={20} color='#FFF'/>
         }
     }
+    const container = {
+        width:60,
+        height:40,
+        borderRadius:10,
+        backgroundColor:props.bColor,
+        justifyContent:'center',
+        alignItems:'center',
+        elevation:5
+    }
 
     const handlePress = async () =>{
         // await setLink(socialLink)
@@ -26,8 +35,7 @@ const SocialCard = (props) =>{
     return(
         // <View style={styles.container}>
             <TouchableOpacity onPress={async ()=>{setLink(props.link) ; await handlePress()}}>
-                <View style={{width:60,height:40,borderRadius:10,backgroundColor:props.bColor,justifyContent:'center'
-                                ,alignItems:'center'}}>
+                <View style={container}>
                     {settingValues(props.icon)}
                 </View>
             </TouchableOpacity>
@@ -40,11 +48,13 @@ export default SocialCard;
 const styles = StyleSheet.create(
     {
         // container:{
-        //     flex:1,
+        //     width:60,
+        //     height:40,
+        //     borderRadius:10,
+        //     backgroundColor:props.bColor,
         //     justifyContent:'center',
         //     alignItems:'center',
-        //     backgroundColor:'#fff',
-        //     elevation:120
+        //     elevation:5
         // }
     }
 )

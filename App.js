@@ -26,6 +26,8 @@ import SetProfileInfo from './src/screen/SetProfileInfo'
 import SocialCard from './src/component/SocialCard'
 import SetBillingDetail from './src/screen/SetBillingDetail'
 import UserDetail from './src/screen/UserDetail'
+import ChangePassword from './src/screen/ChangePassword'
+import MFA from './src/screen/MFA'
 
 export default function App() {
   return (
@@ -47,10 +49,12 @@ export default function App() {
       // <SignIn />
       // <EmailConfirmation />
       // <ForgotPassword />
+      // <ChangePassword />
       // <Congratgulation />
-      <CurrentBookings />
+      // <CurrentBookings />
       // <SetProfileInfo />
       // <UserDetail />
+      <MFA />
       // <SocialCard />
       // <SetBillingDetail />
     );

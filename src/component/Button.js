@@ -14,7 +14,8 @@ const Button = (props) =>{
             height:35,
             width:200,
             backgroundColor:btnColor,
-            borderRadius:20
+            borderRadius:20,
+            elevation:4
         },
         touchableContainer:{
             width:'100%',
