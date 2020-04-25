@@ -28,11 +28,11 @@ export default Footer ;
 const styles = StyleSheet.create(
     {
         nextPage:{
-            width:50,
-            height:40,
+            width:60,
+            height:50,
             backgroundColor:'blue',
-            borderTopLeftRadius:20,
-            borderBottomLeftRadius:20,
+            borderTopLeftRadius:25,
+            borderBottomLeftRadius:25,
             justifyContent:'center',
             alignItems:'center'
         },

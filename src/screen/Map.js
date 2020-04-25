@@ -3,6 +3,7 @@ import {View , StyleSheet, Text, Dimensions , TextInput ,Image , TouchableOpacit
 import MapView , { Overlay } from 'react-native-maps'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import MapFooter from '../component/MapFooter'
 
 import {Ionicons} from '@expo/vector-icons'
 
@@ -21,34 +22,47 @@ const Search = () =>{
     }
     return(
         <View style={styles.overLay}>
-            <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
-               
-                <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
-                <Image style={{borderRadius:40 , height:40 , width:40}}
-                    source={require('../../assets/cat.jpg')}
-                />
+            <View style={{width:'100%',height:'100%',flexDirection:'column' ,justifyContent:'space-between'}}>
+                <View style={{marginHorizontal:20}}>
+
+                    <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
+                    
+                        <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
+                        <Image style={{borderRadius:40 , height:40 , width:40}}
+                            source={require('../../assets/test.png')}
+                        />
+                    
+                    </View>
+                    <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
+                        
+                        <View style={styles.searchContainer}>
+                            <Icon name="map-marker" size={25} style= {styles.searchIcon} />
+                            
+                            <TextInput
+                                onChangeText={text => onChangeText(text)}
+                                placeholder="Whats your style for today"
+                                value={value}
+                                underlineColorAndroid="transparent"
+                            />
+                        </View>
+                        <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
+                            <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
+                                <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
+                            </View>
+                        </TouchableOpacity>
+                        
+                            
+                    </View>
+                </View>
+
+
+                <View >
+                    <MapFooter />
+                </View>
             
             </View>
-            <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
-                   
-                <View style={styles.searchContainer}>
-                    <Icon name="map-marker" size={25} style= {styles.searchIcon} />
-                    
-                    <TextInput
-                        onChangeText={text => onChangeText(text)}
-                        placeholder="Whats your style for today"
-                        value={value}
-                        underlineColorAndroid="transparent"
-                    />
-                </View>
-                <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
-                    <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
-                        <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
-                    </View>
-                </TouchableOpacity>
-                
-                    
-            </View>
+            
+            
            
         </View>
     )
@@ -57,9 +71,13 @@ const Search = () =>{
 
 const Map = () =>{
 
-    // const getLocation = () =>{
+    const getLocation = () =>{
 
-    // }
+    }
+
+    const handleLocButton = () =>{
+        console.log('Current Loc Button is Pressed.....')
+    }
 
     return(
         <View style={styles.container}>
@@ -81,6 +99,7 @@ const Map = () =>{
                     }
                 />
             </View>
+           
         </View>
     )
 }
@@ -95,7 +114,7 @@ const styles= StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent:'center',
         alignItems:'center',
-        marginHorizontal:20,
+        // marginHorizontal:20,
     },
     map:{
         flex:8,
@@ -107,6 +126,7 @@ const styles= StyleSheet.create({
         zIndex: 9999,
         width: '100%',
         top:40 ,
+        height:'88%',
     },
     searchContainer:{
         alignItems: 'center',
