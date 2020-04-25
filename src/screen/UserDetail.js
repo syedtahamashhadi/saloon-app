@@ -2,25 +2,38 @@ import React from 'react'
 import {View , Text , StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
 import SetProfileInfo from './SetProfileInfo'
 import SetBillingDetail from './SetBillingDetail'
-
+import ChangePassword from './ChangePassword'
 
 const UserDetail = () =>{
 
     const [highlight,setHighLight] = React.useState('Profile Detail')
-    const pages = [{name:'Profile Detail'} , {name:'Payment Method'}]
+    const pages = [{name:'Profile Detail'} , {name:'Payment Method'} , {name:'Change Password'}]
+
+    const getComponent = (val) =>{
+        
+        switch (true) {
+            case val == 'Profile Detail': return <SetProfileInfo />
+            case val == 'Payment Method': return  <SetBillingDetail />
+            case val == 'Change Password': return   <ChangePassword />      
+            default: return <SetProfileInfo />
+        }
+    }
 
     return(
         <View style={styles.container}>
             
             <View style={styles.header}>
-                <View style={{marginTop:45}}>
+                <View style={{marginTop:45 , marginHorizontal:20}}>
                     <Text style={{fontSize:30}}>User Detail</Text>
                 </View>
-                <View style={{flexDirection:'row',marginBottom:0 , justifyContent:'space-between'}}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{marginTop:10 , 
+                    marginHorizontal:20}}>
+                    <View style={{flexDirection:'row',marginBottom:0 , justifyContent:'space-between'}}>
+
                     {
                         pages.map((val,index)=>{
                             return(
-                                <View >
+                                <View style={{marginRight:20}}>
                                     <TouchableOpacity onPress={()=>setHighLight(val.name)} key={index}>
                                         <Text style={{fontSize:18}}>{val.name}</Text>
                                     </TouchableOpacity>
@@ -31,10 +44,12 @@ const UserDetail = () =>{
                             )
                         })
                     }
-                </View>
-            </View>
+                    </View>
+                </ScrollView>
+            </View>           
+
             <ScrollView showsVerticalScrollIndicator={false}>
-            {highlight == 'Profile Detail' ? <SetProfileInfo/> : <SetBillingDetail /> }
+                {getComponent(highlight)}
 
             </ScrollView>
 
@@ -50,15 +65,14 @@ const styles = StyleSheet.create(
         container:{
             flex:1,
             backgroundColor:'#fff',
-            // elevation:5,
-            // marginHorizontal:20
+            position:'relative'
         },
         header:{
-            marginHorizontal:20,
+            // marginHorizontal:20,
             height:'22%',
             backgroundColor:'#fff',
-            flexDirection:'column',
-            justifyContent:'space-between',
+            borderBottomWidth:0.5,
+            elevation:15,
         },
     }
 )
