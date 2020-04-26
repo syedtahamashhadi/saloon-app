@@ -88,6 +88,7 @@ const Map = () =>{
                             longitudeDelta:0.0421
                         }
                     }
+                    showsCompass={false}
                 />
             </View>
 
