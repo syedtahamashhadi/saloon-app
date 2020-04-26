@@ -29,6 +29,9 @@ import UserDetail from './src/screen/UserDetail'
 import ChangePassword from './src/screen/ChangePassword'
 import MFA from './src/screen/MFA'
 import MapFooter from './src/component/MapFooter'
+import ConfirmBookingCard from './src/component/ConfirmBookingCard'
+import ConfirmBooking from './src/screen/ConfirmBooking'
+
 
 export default function App() {
   return (
@@ -41,7 +44,7 @@ export default function App() {
     // <Stylist />
     // <StylistProfile />
       // <SelectStylist />
-      <SaloonList />
+      // <SaloonList />
       // <SaloonBanner/>
       // <Welcome />
       // <ChooseStylist />
@@ -59,6 +62,8 @@ export default function App() {
       // <MFA />
       // <SocialCard />
       // <SetBillingDetail />
+      // <ConfirmBookingCard />
+      <ConfirmBooking />
     );
 }
 

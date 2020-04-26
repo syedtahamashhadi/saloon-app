@@ -9,11 +9,20 @@ import Chat from '../component/Chat'
 import ChooseStylist from '../component/ChooseStylist'
 
 const SelectStylist = () =>{
+    const [pageView,setPageView] = React.useState(3.5)
+
+    const handlePageView= () =>{
+        pageView==3.5 ? setPageView(1) : setPageView(3.5)
+    }
+
+    const handleButton = () =>{
+        console.log('Button is Presse....')
+    }
 
     return(
         <View style={styles.container}>
             
-            <View style={{flex:3.5 , backgroundColor:'#fff', marginHorizontal:20}}>
+            <View style={{flex:pageView , backgroundColor:'#fff', marginHorizontal:20}}>
                 
                 <View style={{flexDirection:"row" , justifyContent:'space-between' , top:35 }}>
                         <TouchableOpacity onPress={()=>console.log('Back Button is Pressed...')}>
@@ -29,7 +38,6 @@ const SelectStylist = () =>{
                 <View style={{marginTop:50}}>
                     <Chat 
                         desc='Hey, time to choose a speacilist you need and a service you want'
-                        image='../../assets/cat.jpg'
                     />
                 </View>
 
@@ -41,13 +49,15 @@ const SelectStylist = () =>{
                     title='TONI&GUY' 
                     desc='Book and experience our stylist'
                     time={22}
+                    handlePageView={handlePageView}
+                    bannerImg= {require('../../assets/barber-shave.jpg')}
                 />
 
                 <View style={{marginTop:15 , marginHorizontal:20 }}>
                     <Text style={{fontSize:25}}>Choose a stylist</Text>
                 </View>
 
-                <ScrollView style={{marginTop:15 , marginHorizontal:20}}>
+                <ScrollView style={{marginTop:15 , marginHorizontal:20}} showsVerticalScrollIndicator={false}>
                     <ChooseStylist />
                     <ChooseStylist />
                     <ChooseStylist />
@@ -60,7 +70,7 @@ const SelectStylist = () =>{
                     
                 </ScrollView>
 
-                <Button title='Next'/>
+                <Button title='Next' handleButton={handleButton}/>
 
             </View>
         </View>

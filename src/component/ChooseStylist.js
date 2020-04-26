@@ -62,9 +62,10 @@ const styles = StyleSheet.create(
             justifyContent:'center',
             width:65,
             height:65,
-            backgroundColor:'blue',
+            backgroundColor:'#fff',
             borderRadius:40,
-            alignItems:'center'
+            alignItems:'center',
+            elevation:5,
         },
         serviceAvatarContainer:{
             width:27,

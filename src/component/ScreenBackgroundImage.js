@@ -1,16 +1,24 @@
 import React from 'react'
-import {View , Text , StyleSheet , Dimensions , Image} from 'react-native'
+import {View , Text , StyleSheet , Dimensions , Image , TouchableOpacity} from 'react-native'
 
 
 const ScreenBackgroundImage = (props) =>{
-
+    console.log('Props are >>',props)
     return(
         <View style={{height:150,backgroundColor:'#fff'}}>
-            <Image source={require('../../assets/barber-shave.jpg') } style={styles.image}/>
+            <Image source={props.bannerImg } style={styles.image}/>
             
             <View style={styles.imageOverLay}>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                    <View>
+
+                <TouchableOpacity  onPress={()=>props.handlePageView()}
+                            style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
+                                <View style={{height:20,width:60}}>
+                                    <View style={{width:60,height:2,backgroundColor:'red'}}></View>
+                                </View>
+                </TouchableOpacity>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}>
+                    <View style={{marginLeft:20}}>
                         <Text style={{fontSize:35,color:'#fff',fontWeight:'bold'}}>{props.title}</Text>
                     </View>
                     <View style={{justifyContent:'flex-end'}}>
@@ -21,7 +29,7 @@ const ScreenBackgroundImage = (props) =>{
                         </View>
                     </View>
                 </View>
-                <View style={{marginTop:5}}>
+                <View style={{marginTop:5,marginLeft:25}}>
                     <Text style={{color:'white',fontSize:16}}>{props.desc}</Text>
                 </View>
             </View>
@@ -34,10 +42,11 @@ export default ScreenBackgroundImage;
 const styles = StyleSheet.create(
     {
         seprator:{
-            width:100,
+            width:80,
             height:35,
             backgroundColor:'#FA7268',
-            borderRadius:20,
+            borderTopLeftRadius:20,
+            borderBottomLeftRadius:20,
         },
         sepratorText:{
             marginVertical:5,
@@ -54,8 +63,8 @@ const styles = StyleSheet.create(
         },
         imageOverLay:{
             position:'absolute',
-            marginLeft:20,
-            marginVertical:30,
+            // marginLeft:20,
+            // marginVertical:30,
             width:Dimensions.get("window").width
         }
     }
