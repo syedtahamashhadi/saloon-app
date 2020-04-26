@@ -28,10 +28,12 @@ import SetBillingDetail from './src/screen/SetBillingDetail'
 import UserDetail from './src/screen/UserDetail'
 import ChangePassword from './src/screen/ChangePassword'
 import MFA from './src/screen/MFA'
+import MapFooter from './src/component/MapFooter'
 
 export default function App() {
   return (
-    // <Map />
+    <Map />
+    // <MapFooter />
     // <Test />
     // <Shop/>
     // <Overlay />
@@ -54,7 +56,7 @@ export default function App() {
       // <CurrentBookings />
       // <SetProfileInfo />
       // <UserDetail />
-      <MFA />
+      // <MFA />
       // <SocialCard />
       // <SetBillingDetail />
     );

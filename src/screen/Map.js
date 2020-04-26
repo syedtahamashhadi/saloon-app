@@ -22,49 +22,40 @@ const Search = () =>{
     }
     return(
         <View style={styles.overLay}>
-            <View style={{width:'100%',height:'100%',flexDirection:'column' ,justifyContent:'space-between'}}>
-                <View style={{marginHorizontal:20}}>
+            <View style={{marginHorizontal:20}}>
 
-                    <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
+                <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
+                
+                    <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
                     
-                        <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
-                        <Image style={{borderRadius:40 , height:40 , width:40}}
-                            source={require('../../assets/test.png')}
+                    <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
+                        source={require('../../assets/user.png')}
+                    />
+                
+                </View>
+                <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
+                    
+                    <View style={styles.searchContainer}>
+                        <Icon name="map-marker" size={25} style= {styles.searchIcon} />
+                        
+                        <TextInput
+                            onChangeText={text => onChangeText(text)}
+                            placeholder="Whats your style for today"
+                            value={value}
+                            underlineColorAndroid="transparent"
                         />
-                    
                     </View>
-                    <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
-                        
-                        <View style={styles.searchContainer}>
-                            <Icon name="map-marker" size={25} style= {styles.searchIcon} />
-                            
-                            <TextInput
-                                onChangeText={text => onChangeText(text)}
-                                placeholder="Whats your style for today"
-                                value={value}
-                                underlineColorAndroid="transparent"
-                            />
+                    <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
+                        <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
+                            <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
                         </View>
-                        <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
-                            <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
-                                <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
-                            </View>
-                        </TouchableOpacity>
-                        
-                            
-                    </View>
+                    </TouchableOpacity>
+                   
                 </View>
-
-
-                <View >
-                    <MapFooter />
-                </View>
-            
             </View>
-            
-            
-           
+        
         </View>
+
     )
 }
 
@@ -99,6 +90,8 @@ const Map = () =>{
                     }
                 />
             </View>
+
+            <MapFooter />
            
         </View>
     )
@@ -112,9 +105,7 @@ const styles= StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: '#fff',
-        justifyContent:'center',
-        alignItems:'center',
-        // marginHorizontal:20,
+       
     },
     map:{
         flex:8,
@@ -125,8 +116,7 @@ const styles= StyleSheet.create({
         position: 'absolute',
         zIndex: 9999,
         width: '100%',
-        top:40 ,
-        height:'88%',
+        top:40,
     },
     searchContainer:{
         alignItems: 'center',
@@ -141,9 +131,7 @@ const styles= StyleSheet.create({
         paddingRight:10 , 
         paddingLeft:10
     },
-    seachInput:{
-
-    },
+    
     
 })
 
