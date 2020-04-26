@@ -9,7 +9,7 @@ const Chat = (props) =>{
         <View style={{flexDirection:'row'}}>
             
             <View style={{justifyContent:'flex-end',marginRight:10}}>
-                <Avatar rounded source={require(`../../assets/cat.jpg`)} size={55}/>  
+                <Avatar rounded source={require(`../../assets/bot-1.png`)} size={55}/>  
             </View>
             
             <View style={styles.messageContainer}>

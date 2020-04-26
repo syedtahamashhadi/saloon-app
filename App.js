@@ -32,14 +32,14 @@ import MapFooter from './src/component/MapFooter'
 
 export default function App() {
   return (
-    <Map />
+    // <Map />
     // <MapFooter />
     // <Test />
     // <Shop/>
     // <Overlay />
     // <Heading title='testing' top={80}/>
     // <Stylist />
-    // <StylistProfile />
+    <StylistProfile />
       // <SelectStylist />
       // <SaloonList />
       // <SaloonBanner/>
