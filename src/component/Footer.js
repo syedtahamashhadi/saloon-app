@@ -34,7 +34,8 @@ const styles = StyleSheet.create(
             borderTopLeftRadius:25,
             borderBottomLeftRadius:25,
             justifyContent:'center',
-            alignItems:'center'
+            alignItems:'center',
+            // elevation:15,
         },
         footer:{
             flexDirection:'row',
@@ -44,11 +45,12 @@ const styles = StyleSheet.create(
         },
         markerContainer:{
             borderRadius:40 , 
-            backgroundColor:'green' , 
+            backgroundColor:'#fff' , 
             width:40 ,
             height:40 ,
             justifyContent:'center',
-            alignItems:'center'
+            alignItems:'center',
+            elevation:5,
         },
         
     }

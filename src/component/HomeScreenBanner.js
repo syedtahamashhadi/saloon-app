@@ -21,9 +21,13 @@ const HomeScreenBanner = () =>{
             <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                
                 <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
-                <Image style={{borderRadius:40 , height:40 , width:40}}
-                    source={require('../../assets/cat.jpg')}
-                />
+                
+                <View style={{borderRadius:40,borderWidth:2,borderColor:'#fff',elevation:5}}>
+                    <Image style={{borderRadius:38,height:38,width:40}}
+                        source={require('../../assets/user.png')}
+                    />
+                </View>
+                
             
             </View>
 
@@ -40,8 +44,10 @@ const HomeScreenBanner = () =>{
                     />
                 </View>
                 <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
-                    <View style={{borderRadius:40 , backgroundColor:'green' , width:40 , height:40}}>
-                        <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
+                    <View style={{borderRadius:40 , backgroundColor:'green' , width:40 , height:40 ,
+                                    elevation:5 ,justifyContent:'center',alignItems:'center',
+                                    backgroundColor:'#fff' }}>
+                        <AntIcon name='filter' size={25} />
                     </View>
                 </TouchableOpacity>
                 
@@ -59,13 +65,14 @@ const styles = StyleSheet.create(
         searchContainer:{
             alignItems: 'center',
             flexDirection: 'row',
-            backgroundColor:'red',
+            backgroundColor:'#fff',
             borderRadius:10,
             padding:5,
-            width:240
+            width:240,
+            elevation:5,
         },
         searchIcon:{
-            color:'green' , 
+            color:'black' , 
             paddingRight:10 , 
             paddingLeft:10
         },

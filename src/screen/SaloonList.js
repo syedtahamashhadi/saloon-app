@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , StyleSheet, ScrollView } from 'react-native'
+import {View , StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import HomeScreenBanner from '../component/HomeScreenBanner'
 import SaloonBanner from '../component/SaloonBanner'
 import Footer from '../component/Footer'
@@ -10,6 +10,10 @@ const SaloonList = () =>{
                         {time:15,name:'La Coupe',rating:4.7,distance:1.3},
                         {time:17,name:'Slough Barber',rating:4.7,distance:1.3}
                         ]
+
+    const handleSaloonPress = (name) =>{
+        console.log(`Saloon ${name} is pressed`)
+    }
     return(
         <View style={styles.container}>
             
@@ -20,12 +24,15 @@ const SaloonList = () =>{
        
             <ScrollView style={{marginTop:40 , marginHorizontal:20}}>
                 {saloonData.map((val,index)=> 
-                    <SaloonBanner key={index}
-                        time={val.time}
-                        name={val.name}
-                        rating={val.rating}
-                        distance={val.distance}
-                    />
+                    <TouchableOpacity onPress={()=>{handleSaloonPress(val.name)}}>
+                         <SaloonBanner key={index}
+                            time={val.time}
+                            name={val.name}
+                            rating={val.rating}
+                            distance={val.distance}
+                        />
+                    </TouchableOpacity>
+                   
                 )}
             </ScrollView>
 

@@ -38,10 +38,10 @@ export default function App() {
     // <Shop/>
     // <Overlay />
     // <Heading title='testing' top={80}/>
-    <Stylist />
+    // <Stylist />
     // <StylistProfile />
       // <SelectStylist />
-      // <SaloonList />
+      <SaloonList />
       // <SaloonBanner/>
       // <Welcome />
       // <ChooseStylist />
