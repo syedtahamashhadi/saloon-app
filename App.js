@@ -2,8 +2,7 @@ import React from 'react';
 // import { StyleSheet, Text, View } from 'react-native';
 import Search from './src/screen/Map'
 import Map from './src/screen/Map'
-import Shop from './src/screen/Shop'
-import Overlay from './src/screen/Shop'
+// import Overlay from './src/screen/Shop'
 import Heading from './src/component/Heading'
 import Stylist from './src/screen/Stylist'
 import StylistProfile from './src/screen/StylistProfile'
@@ -31,6 +30,7 @@ import MFA from './src/screen/MFA'
 import MapFooter from './src/component/MapFooter'
 import ConfirmBookingCard from './src/component/ConfirmBookingCard'
 import ConfirmBooking from './src/screen/ConfirmBooking'
+import Saloon from './src/screen/Saloon'
 
 
 export default function App() {
@@ -63,7 +63,8 @@ export default function App() {
       // <SocialCard />
       // <SetBillingDetail />
       // <ConfirmBookingCard />
-      <ConfirmBooking />
+      // <ConfirmBooking />
+      <Saloon />
     );
 }
 
