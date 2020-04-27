@@ -10,6 +10,17 @@ import ChooseStylist from '../component/ChooseStylist'
 
 const SelectStylist = () =>{
     const [pageView,setPageView] = React.useState(3.5)
+    const [selectedStylist,setSelectedStylist]=React.useState('')
+
+    const getStylist = (stylist) =>{
+        setSelectedStylist(stylist)
+    }
+
+    const stylistData = [{img:require('../../assets/stylist-1.png'),name:'Sherry Palmel',rating:5.0},
+                        {img:require('../../assets/stylist-2.png'),name:'Matt Perry',rating:5.0},
+                        {img:require('../../assets/stylist-3.png'),name:'Kelly Menston',rating:4.5},
+                        {img:require('../../assets/stylist-4.png'),name:'Martin.T',rating:3.5}]
+    
 
     const handlePageView= () =>{
         pageView==3.5 ? setPageView(1) : setPageView(3.5)
@@ -58,16 +69,21 @@ const SelectStylist = () =>{
                 </View>
 
                 <ScrollView style={{marginTop:15 , marginHorizontal:20}} showsVerticalScrollIndicator={false}>
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    <ChooseStylist />
-                    
+                    {stylistData.map( (val,index)=>{
+                        return(
+                            <View key={index}>
+                                <ChooseStylist 
+                                    name={val.name}
+                                    img={val.img}
+                                    rating={val.rating}
+                                    getStylist={getStylist}
+                                    selectedStylist={selectedStylist}
+                                />
+                            </View>
+                            
+                        )
+                    } )}
+                   
                 </ScrollView>
 
                 <Button title='Next' handleButton={handleButton}/>
