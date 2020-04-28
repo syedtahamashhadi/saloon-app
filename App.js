@@ -31,6 +31,8 @@ import MapFooter from './src/component/MapFooter'
 import ConfirmBookingCard from './src/component/ConfirmBookingCard'
 import ConfirmBooking from './src/screen/ConfirmBooking'
 import Saloon from './src/screen/Saloon'
+import PickDate from './src/screen/PickDate'
+import MyCalender from './src/component/MyCalender'
 
 
 export default function App() {
@@ -43,7 +45,7 @@ export default function App() {
     // <Heading title='testing' top={80}/>
     // <Stylist />
     // <StylistProfile />
-      // <SelectStylist />
+      <SelectStylist />
       // <SaloonList />
       // <SaloonBanner/>
       // <Welcome />
@@ -64,7 +66,9 @@ export default function App() {
       // <SetBillingDetail />
       // <ConfirmBookingCard />
       // <ConfirmBooking />
-      <Saloon />
+      // <Saloon />
+      // <PickDate />
+      // <MyCalender />
     );
 }
 
