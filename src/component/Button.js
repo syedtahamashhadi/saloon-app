@@ -24,7 +24,7 @@ const Button = (props) =>{
     }
     return(
 
-        <TouchableOpacity style={styles.touchableContainer} onPress={()=>props.handleButton('Taha')}>
+        <TouchableOpacity style={styles.touchableContainer} onPress={()=>props.handleButton()}>
             <View style={styles.container}>
                 <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
                     <Text style={{fontSize:textSize,color:'#fff'}}>{props.title}</Text>

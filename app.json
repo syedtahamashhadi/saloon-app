@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "saloon",
-    "slug": "saloon",
+    "name": "Saloon",
+    "slug": "Saloon",
     "platforms": [
       "ios",
       "android",
@@ -9,7 +9,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/scisor-icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

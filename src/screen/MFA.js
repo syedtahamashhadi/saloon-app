@@ -2,13 +2,18 @@ import React from 'react'
 import {View , Text , TextInput ,StyleSheet , ScrollView} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
+import {connect} from 'react-redux'
+import { mfaRequest } from '../redux/authenticate/actions'
 
-const MFA = () =>{
+const MFA = (props) =>{
 
     const [otp,setOtp] = React.useState(null)
 
+    props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
+
     const handleButton=()=>{
-        console.log('Button is Pressed...')
+        console.log('Button is Pressed...',props.mfaState)
+        props.mfa({otp:otp})
     }
 
     return(
@@ -44,8 +49,19 @@ const MFA = () =>{
     )
 } 
 
+mapStateToProps = (state) =>{
+    return{
+        mfaState: state.mfaReducer
+    }
+}
 
-export default MFA;
+mapDispatchToProps = (dispatch) =>{
+    return{
+        mfa: (credential) => dispatch(mfaRequest(credential))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MFA);
 
 const styles = StyleSheet.create(
     {
