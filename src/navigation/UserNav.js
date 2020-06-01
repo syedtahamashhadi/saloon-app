@@ -16,6 +16,8 @@ import Congratgulation from '../screen/Congratgulation'
 import MFA from '../screen/MFA'
 import StylistProfile from '../screen/StylistProfile'
 import SaloonInfo from '../component/SaloonInfo'
+import BookingSelectStylist from '../screen/BookingSelectStylist'
+import BookingSelectServices from '../screen/BookingSelectServices'
 
 
 
@@ -27,7 +29,7 @@ const UserNav = () =>{
 
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome" 
+        <Stack.Navigator initialRouteName="BookingSelectServices" 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
@@ -44,6 +46,9 @@ const UserNav = () =>{
             <Stack.Screen name='SelectStylist' component={SelectStylist}/>
             <Stack.Screen name='StylistProfile' component={StylistProfile}/>
             <Stack.Screen name='SaloonInfo' component={SaloonInfo}/>
+            <Stack.Screen name='BookingSelectStylist' component={BookingSelectStylist} />
+            <Stack.Screen name='BookingSelectServices' component={BookingSelectServices} />
+
 
 
 

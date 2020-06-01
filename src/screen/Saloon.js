@@ -147,9 +147,9 @@ const Saloon = (props) =>{
                    </View>
                 </View>
                 
-                <View style={{marginHorizontal:20}}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{marginHorizontal:20}}>
                     {data !== undefined ? getComponent(highlight,data) : null}
-                </View>
+                </ScrollView>
 
 
             </View>

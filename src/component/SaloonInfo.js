@@ -2,6 +2,7 @@ import React from 'react'
 import {View , Text , StyleSheet , ScrollView ,TouchableOpacity,Image} from 'react-native'
 import Heading from './Heading'
 import { Avatar } from 'react-native-elements'
+import Button from './Button'
 
 
 const SaloonInfo = (props) =>{
@@ -36,42 +37,48 @@ const SaloonInfo = (props) =>{
         })
     }
 
+    const handleBooking = () =>{
+        console.log('Booking is Pressed')
+    }
+
     return(
         <View >
-            
-            <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Crew</Text>
-            
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {/* <View > */}
+                <View>
+                    <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Crew</Text>
+                    
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
-                <View style={{marginTop:15,flexDirection:'row'}}>
+                        <View style={{marginTop:15,flexDirection:'row'}}>
 
-                {
-                    props.stylist.map((val,index)=>{
-                        let myColor = val.name == selectedCrew ? '#49D3CE' : null
-                        let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
-                        return(
+                        {
+                            props.stylist.map((val,index)=>{
+                                let myColor = val.name == selectedCrew ? '#49D3CE' : null
+                                let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
+                                return(
 
-                            <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
+                                    <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
-                                <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                    <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
-                                    borderWidth:3,borderColor:myBorderColor,elevation:5}}>
-                                        <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
-                                    </View>
-                                    <Text style={{color:myColor}}>
-                                        {val.name.length>15 ? val.name.slice(0,12) : val.name}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    })
+                                        <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
+                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
+                                            borderWidth:3,borderColor:myBorderColor,elevation:5}}>
+                                                <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
+                                            </View>
+                                            <Text style={{color:myColor}}>
+                                                {val.name.length>15 ? val.name.slice(0,12) : val.name}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })
 
-                }
+                        }
 
+                        </View>
+
+                    </ScrollView>
                 </View>
-
-            </ScrollView>
-                
+                    
                 <View >
                     <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Service</Text>
                     
@@ -107,8 +114,15 @@ const SaloonInfo = (props) =>{
                     </ScrollView>
                     
                 </View>
-           
+                    
+            
+            {/* </View> */}
+            <View style={{marginTop:15,backgroundColor:'#fff'}}>
+                <Button title='Book Now' btnColor='#49D3CE' handleButton={handleBooking}/>
             </View>
+                        
+            
+        </View>
     )
 }
 
