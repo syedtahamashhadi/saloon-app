@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
-import { loginReducer, signUpReducer , mfaReducer , forgotPasswordReducer } from './authenticate/reducers'
+import { loginReducer, 
+        signUpReducer ,
+        mfaReducer ,
+        forgotPasswordReducer ,
+        nearestSaloonReducer } from './authenticate/reducers'
 
 
 const rootReducer = combineReducers(
@@ -8,6 +12,7 @@ const rootReducer = combineReducers(
         signUpReducer: signUpReducer,
         mfaReducer: mfaReducer,
         forgotPasswordReducer: forgotPasswordReducer,
+        nearestSaloonReducer: nearestSaloonReducer,
     }
 )
 

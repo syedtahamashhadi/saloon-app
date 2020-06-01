@@ -3,29 +3,94 @@ import {View,ScrollView,Text,TouchableOpacity,StyleSheet,Image} from 'react-nati
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Rating from '../component/Rating'
 import SaloonInfo from '../component/SaloonInfo'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
+import { connect } from 'react-redux'
 
 
-const Saloon = () =>{
+const GET_SALOON_BY_ID = gql `
+    query abc($_id: ID!)
+    {
+        salon(_id: $_id) {
+            displayName
+            backgroundProfileImage
+            rating
+            profileImage
+            portfolioImages
+
+            services{
+                name
+                _id
+                description
+                approxTime
+                price
+            }
+
+            serviceProviders{
+                name
+                _id
+                status
+                rating
+                profileImageURL
+            }
+        }
+    }
+`
+
+const Saloon = (props) =>{
+
+    const {saloonId} = props.route.params
+    console.log('ID IS >>>>' , typeof saloonId)
 
     const [highlight,setHighLight] = React.useState('Info')
 
     const pages = [{name:'Info'} , {name:'Offers'} , {name:'Reviews'}]
 
-    const getComponent = (val) =>{
-        
+    const {data , loading , error} = useQuery(GET_SALOON_BY_ID , 
+            {
+                variables: {
+                    _id: saloonId
+                } ,
+                // fetchPolicy: 'network-only',
+                context:{
+                    headers:{
+                        authorization:  props.signIn.token
+                    }
+                }
+            }
+        )
+    
+    console.log('Data is >>',data)
+    console.log('Error is >>',error)
+    console.log('loading is >>',loading)
+
+    const getComponent = (val,data) =>{
+        console.log('Data is >>' , data)
         switch (true) {
-            case val == 'Info': return <SaloonInfo />
+            case val == 'Info': return  <SaloonInfo
+                                            stylist={data.salon.serviceProviders}
+                                            services={data.salon.services} 
+                                            portfolioImg={data.salon.portfolioImages}
+                                            navigation={props.navigation}
+                                       />
             case val == 'Offers': return  <View style={{justifyContent:'center',alignItems:'center'}}><Text>Offers</Text></View>
             case val == 'Reviews': return   <View style={{justifyContent:'center',alignItems:'center'}}><Text>Reviews</Text></View>      
             default: return <SaloonInfo />
         }
+    }
+
+    let bannerImg = (data && data.salon.backgroundProfileImage !== 'background.jpg') ? {uri : data.salon.backgroundProfileImage} :
+                    require('../../assets/barber-shave.jpg')
+
+    const handleNavPress = (val) =>{
+        setHighLight(val.name)
     }
   
     return(
         <View style={styles.container}>
             <View style={{flex:3,backgroundColor:'red'}}>
                 <View>
-                    <Image source={require('../../assets/barber-shave.jpg')} style={styles.image}/>
+                    <Image source={bannerImg} style={styles.image}/>
 
                     <View style={{position:'absolute',zIndex:999,width:'100%'}}>
                         <View style={{flexDirection:'row' , justifyContent:'space-between',marginHorizontal:20
@@ -41,7 +106,7 @@ const Saloon = () =>{
                         </View>
                         <View style={{marginTop:0,alignItems:'center'}}>
                             <Text style={{fontSize:30,fontWeight:'bold',color:'#fff'}}>
-                                TONI&GUY
+                               { (data && data.salon.displayName) ? data.salon.displayName : 'TONI&GUY'}
                             </Text>
                         </View>
                     </View>
@@ -52,7 +117,7 @@ const Saloon = () =>{
             <View style={{flex:7.5,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20
                             ,top:-16}}>
                 <View style={{alignItems:'center',height:'35%',backgroundColor:'#fff',width:'100%',
-                borderTopLeftRadius:20,borderTopRightRadius:20,elevation:5}}>
+                borderTopLeftRadius:20,borderTopRightRadius:20,elevation:1}}>
                     <View style={{width:55,height:55,borderRadius:45,backgroundColor:'red',borderWidth:3,
                                         borderColor:'#fff',elevation:5,top:-25}}>
                             <Image source={require('../../assets/mannager.png')} style={styles.imgMannager}/>
@@ -60,15 +125,15 @@ const Saloon = () =>{
                     <Text style={{top:-10,fontWeight:'bold',fontSize:15}}>Stella Mclarren</Text>
                     <Text style={{top:0,color:'grey'}}>Shop Mannager</Text>
                     <View style={{marginTop:5}}></View>
-                    <Rating rating={4.7}/>
+                    <Rating rating={(data && data.salon.rating ) ? data.salon.rating : 4.7}/>
                    
                    <View style={{flexDirection:'row',justifyContent:'space-around',width:'100%',marginTop:5}}>
                        
                        {
                            pages.map((val,index)=>{
                             return(
-                                <View >
-                                    <TouchableOpacity onPress={()=>setHighLight(val.name)} key={index}>
+                                <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}} >
+                                    <TouchableOpacity onPress={()=>handleNavPress(val)} key={index}>
                                         <Text>{val.name}</Text>
                                     </TouchableOpacity>
                                     {val.name == highlight ? 
@@ -83,7 +148,7 @@ const Saloon = () =>{
                 </View>
                 
                 <View style={{marginHorizontal:20}}>
-                    {getComponent(highlight)}
+                    {data !== undefined ? getComponent(highlight,data) : null}
                 </View>
 
 
@@ -92,7 +157,14 @@ const Saloon = () =>{
     )
 }
 
-export default Saloon;
+
+const mapStateToProps = (state) =>{
+    return{
+        signIn: state.loginReducer
+    }
+}
+
+export default connect(mapStateToProps,null)(Saloon);
 
 
 const styles = StyleSheet.create(

@@ -5,12 +5,15 @@ import { Avatar } from 'react-native-elements'
 
 
 const SaloonInfo = (props) =>{
+    console.log('Saloon Info Props >>' , props)
+
+    // const { stylist , services , portfolioImg } = props.route.params
 
     const [selectedCrew,setSelectedCrew] = React.useState('')
     const [selectedService,setSelectedService] = React.useState('')
     
 
-    const crewData = [  {icon:require('../../assets/stylist-1.png'),name:'Matt'},
+    const crewData = [  {icon:require('../../assets/stylist-1.png'),name:'Mattttttttttr dsada ad'},
                         {icon:require('../../assets/stylist-2.png'),name:'Sherry'},
                         {icon:require('../../assets/stylist-3.png'),name:'Linda'},
                         {icon:require('../../assets/stylist-4.png'),name:'Dillan'},
@@ -23,6 +26,15 @@ const SaloonInfo = (props) =>{
                             {icon:require('../../assets/blade-icon.png'),name:'Shave'},
                             {icon:require('../../assets/scisor-icon.png'),name:'Hair Cut'},
                         ]
+    
+    const handleStylistPress = (val)=>{
+        console.log('Stylist is pressed >>',val)
+        setSelectedCrew(val.name)
+        props.navigation.navigate('StylistProfile',{
+            stylist : val ,
+            // portfolioImg : props.portfolioImg                // Portfolio is local images need network img
+        })
+    }
 
     return(
         <View >
@@ -31,22 +43,24 @@ const SaloonInfo = (props) =>{
             
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
-                <View style={{marginTop:15,flexDirection:'row',justifyContent:'space-between'}}>
+                <View style={{marginTop:15,flexDirection:'row'}}>
 
                 {
-                    crewData.map((val,index)=>{
+                    props.stylist.map((val,index)=>{
                         let myColor = val.name == selectedCrew ? '#49D3CE' : null
                         let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
                         return(
 
-                            <TouchableOpacity onPress={()=>setSelectedCrew(val.name)} key={index}>
+                            <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
                                 <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                    <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
+                                    <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
                                     borderWidth:3,borderColor:myBorderColor,elevation:5}}>
-                                        <Image source={val.icon} style={styles.imgMannager}/>
+                                        <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                     </View>
-                                    <Text style={{color:myColor}}>{val.name}</Text>
+                                    <Text style={{color:myColor}}>
+                                        {val.name.length>15 ? val.name.slice(0,12) : val.name}
+                                    </Text>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -66,7 +80,7 @@ const SaloonInfo = (props) =>{
                         <View style={{marginTop:15,flexDirection:'row',justifyContent:'space-between'}}>
 
                         {
-                            serviceData.map((val,index)=>{
+                            props.services.map((val,index)=>{
                                 let myColor = val.name == selectedService ? '#49D3CE' : null
                                 let myBorderColor = val.name == selectedService ? '#49D3CE' : '#fff'
                                 return(
@@ -78,7 +92,9 @@ const SaloonInfo = (props) =>{
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={val.icon} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor}}>{val.name}</Text>
+                                            <Text style={{color:myColor}}>
+                                                {val.name>15 ? val.name.slice(0.13) : val.name}
+                                            </Text>
                                         </View>
                                     </TouchableOpacity>
                                 )

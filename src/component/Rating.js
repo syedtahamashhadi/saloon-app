@@ -52,7 +52,7 @@ const Rating = (props) =>{
                     )
                 })}
             </View>
-            <Text style={{fontSize:16 , color:ratingColor , fontWeight:'bold'}}>{rating}</Text>
+            {rating!==0 && <Text style={{fontSize:15 , color:ratingColor , fontWeight:'bold'}}>{rating}</Text>}
         </View>
     )   
 }
@@ -61,7 +61,7 @@ const styles = StyleSheet.create(
     {
         starsContainer:{
             flexDirection:'row',
-            marginRight:5
+            marginRight:0
         }
     }
 )

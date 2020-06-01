@@ -14,6 +14,8 @@ import SignUp from '../screen/SignUp'
 import ForgotPassword from '../screen/ForgotPassword'
 import Congratgulation from '../screen/Congratgulation'
 import MFA from '../screen/MFA'
+import StylistProfile from '../screen/StylistProfile'
+import SaloonInfo from '../component/SaloonInfo'
 
 
 
@@ -25,7 +27,7 @@ const UserNav = () =>{
 
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn" 
+        <Stack.Navigator initialRouteName="Welcome" 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
@@ -34,6 +36,17 @@ const UserNav = () =>{
             <Stack.Screen name='Welcome' component={Welcome} />
             <Stack.Screen name='SignIn' component={SignIn}/>
             <Stack.Screen name='SignUp' component={SignUp}/>
+            <Stack.Screen name='MFA' component={MFA}/>
+            <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
+            <Stack.Screen name='Map' component={Map}/>
+            <Stack.Screen name='Saloon' component={Saloon}/>
+            <Stack.Screen name='Stylist' component={Stylist}/>
+            <Stack.Screen name='SelectStylist' component={SelectStylist}/>
+            <Stack.Screen name='StylistProfile' component={StylistProfile}/>
+            <Stack.Screen name='SaloonInfo' component={SaloonInfo}/>
+
+
+
             {/* <Stack.Screen name='MFA' component={MFA}/>
             <Stack.Screen name='Map' component={Map}/>
             <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>

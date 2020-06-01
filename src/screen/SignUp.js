@@ -6,7 +6,7 @@ import SocialCard from '../component/SocialCard'
 import gql from 'graphql-tag'
 import {useMutation} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
-import { signUpRequest } from '../redux/authenticate/actions'
+import { signUpSuccess } from '../redux/authenticate/actions'
 
 
 const SIGNUP = gql `mutation abc(
@@ -49,14 +49,21 @@ const SignUp = (props) =>{
     const handleButton = ()=>{
         console.log('Button is pressed')
 
-        signupUser(
+        loading !== true && signupUser(
             {
                 variables:{
-                    userName: name , email: email , password: password , phone: phone
+                    userName: name , email: email , password: password , phone: `${phone}`
                 }
             }
         )
     }
+
+    React.useEffect(()=>{
+        if(data){
+            props.signUp(data),
+            props.navigation.replace('MFA')
+        }
+    },[data])
     const errorBorderColor = error ? 'red' : 'black'
     
     return(
@@ -82,7 +89,7 @@ const SignUp = (props) =>{
                                 borderColor:errorBorderColor}}
                         onChangeText= {val=>setName(val)}
                         value={name}
-                        placeholder='Email'
+                        placeholder='Name'
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -91,7 +98,7 @@ const SignUp = (props) =>{
                         borderColor:errorBorderColor}}
                         onChangeText= {val=>setEmail(val)}
                         value={email}
-                        placeholder='Name'
+                        placeholder='Email'
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -100,7 +107,8 @@ const SignUp = (props) =>{
                         borderColor:errorBorderColor}}
                         onChangeText= {val=>setPassword(val)}
                         value={password}
-                        placeholder='Phone'
+                        placeholder='Password'
+                        // secureTextEntry={true}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -155,14 +163,13 @@ const SignUp = (props) =>{
 //     }
 // }
 
-// const mapDispatchToProps = (dispatch)=>{
-//     return{
-//         signUp: (credential) => dispatch(signUpRequest(credential))
-//     }
-// }
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        signUp: (data) => dispatch(signUpSuccess(data))
+    }
+}
 
-// export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
-export default SignUp
+export default connect(null,mapDispatchToProps)(SignUp);
 
 
 const styles = StyleSheet.create(

@@ -3,19 +3,48 @@ import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image} from 're
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import { connect } from 'react-redux'
-import { forgotPasswordRequest } from '../redux/authenticate/actions'
+import { forgotPasswordSuccess } from '../redux/authenticate/actions'
+import { useMutation } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 
+const FORGOT_PASSWORD= gql `
+    mutation abc($email: String!) {
+        resetPassword(email: $email)
+        {
+        email
+        }  
+    }
+`
 
-const SignUp = (props) =>{
+const ForgotPassword = (props) =>{
     const [email,setEmail] = React.useState('')
 
-    props.forgotPasswordState.isForgotPasswordRequestSuccess == true ? props.navigation.push('SignIn') : null
+    const [forgotPasswordPost,{data,loading,error}]=useMutation(FORGOT_PASSWORD)
+
+    // props.forgotPasswordState.isForgotPasswordRequestSuccess == true ? props.navigation.push('SignIn') : null
 
     const handleButton = () =>{
         console.log('Button is pressed')
         props.forgotPassword({email:email})
         // console.log('Store State is >>', storeState)
+
+        loading !== true && forgotPasswordPost(
+            {
+                variables: {
+                    email: `${email}`
+                }
+            }
+        )
     }
+
+    React.useEffect(()=>{
+        if(data){
+            props.forgotPassword(data)
+            props.navigation.replace('SignIn')
+        }
+    },[data])
+
+    const errorBorderColor = error ? 'red' : 'black'
 
     return(
         <View style={styles.container}>
@@ -36,12 +65,15 @@ const SignUp = (props) =>{
             <View style={{width:'100%',marginTop:20}}>
                 <View style={styles.inputContainer}>
                     <TextInput 
-                        style={{width:'80%',height:40,borderRadius:6,borderWidth:1}}
+                        style={{width:'80%',height:40,borderRadius:6,borderWidth:1,borderColor:errorBorderColor}}
                         onChangeText= {val=>setEmail(val)}
                         value={email}
                         placeholder='Your Email'
                     />
                 </View>
+                {error && <View style={{marginTop:'1%',alignItems:'center'}}>
+                    <Text style={{fontSize:12,fontWeight:'bold'}}>User Does Not Found</Text>
+                </View>}
                 <View style={{marginTop:20}}>
                     <Button title='Reset Password' handleButton={handleButton} 
                             btnColor='#19479c' textSize={14} />
@@ -52,19 +84,19 @@ const SignUp = (props) =>{
     )
 }
 
-const mapStateToProps = (state) =>{
-    return{
-        forgotPasswordState: state.forgotPasswordReducer
-    }
-}
+// const mapStateToProps = (state) =>{
+//     return{
+//         forgotPasswordState: state.forgotPasswordReducer
+//     }
+// }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        forgotPassword: (credentials)=> dispatch(forgotPasswordRequest(credentials))
+        forgotPassword: (data)=> dispatch(forgotPasswordSuccess(data))
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
+export default connect(null,mapDispatchToProps)(ForgotPassword);
 
 const styles = StyleSheet.create(
     {

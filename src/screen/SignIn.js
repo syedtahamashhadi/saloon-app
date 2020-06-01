@@ -3,9 +3,10 @@ import {View , Text , StyleSheet , TextInput, TouchableOpacity ,Image , ScrollVi
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import {connect} from 'react-redux'
-import { loginRequest } from '../redux/authenticate/actions'
+import { loginSuccess } from '../redux/authenticate/actions'
 import gql from 'graphql-tag' 
 import { useMutation, useQuery } from '@apollo/react-hooks'
+// import DeviceInfo from 'react-native-device-info'
 
 
 const SIGNIN = gql `
@@ -20,6 +21,8 @@ const SIGNIN = gql `
             createdAt
           }
           password
+          userName
+          profileImageURL
         }  
       }
     `
@@ -46,12 +49,26 @@ const SignIn = (props) =>{
        loading !== true && loginUser(
             {
                 variables: {
-                    email:  `${email}`, password: `${password}` , deviceId: `1233`
+                    email:  `${email}`, password: `${password}` , deviceId: `${email}`
                 },
             } 
         )
-             
     }
+
+    // React.useEffect(()=>{
+    //    DeviceInfo.getUniqueId().then(deviceInfo =>{
+    //     console.log('Device is is >>' , deviceInfo)
+    //    })
+       
+    // } , [])
+
+    React.useEffect(()=>{
+        if(data){
+            props.signIn(data)
+            props.navigation.replace('Map')
+        }
+    },[data])
+
     const errorBorderColor = error ? 'red' : 'black'
    
     return(
@@ -117,20 +134,13 @@ const SignIn = (props) =>{
     )
 }
 
-// const mapStateToProps = (state) =>{
-//     return{
-//         signInState : state.loginReducer
-//     }
-// }
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        signIn : (data)=> dispatch(loginSuccess(data))
+    }
+}
 
-// const mapDispatchToProps = (dispatch) =>{
-//     return{
-//         signIn : (credential)=> dispatch(loginRequest(credential))
-//     }
-// }
-
-// export default connect(mapStateToProps,mapDispatchToProps)(SignIn);
-export default SignIn ;
+export default connect(null,mapDispatchToProps)(SignIn);
 
 const styles = StyleSheet.create(
     {

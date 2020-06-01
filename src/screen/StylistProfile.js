@@ -5,7 +5,10 @@ import { Avatar } from 'react-native-elements'
 import Rating from '../component/Rating'
 
 
-const StylistProfile = () =>{
+const StylistProfile = (props) =>{
+
+    console.log('Stylist Profile Props >>>' , props)
+    const { stylist } = props.route.params
 
     const handleBackPress = () =>{
         console.log('Back is Pressed')
@@ -19,7 +22,7 @@ const StylistProfile = () =>{
     return(
         <View style={styles.container}>
             
-            <View >
+            <View style={{marginHorizontal:20}}>
                 <View style={{flexDirection:"row",justifyContent:'space-between',top:30}}>
                     <TouchableOpacity onPress={handleBackPress}>
                         <AntIcon name='arrowleft' size={25}/>
@@ -33,18 +36,18 @@ const StylistProfile = () =>{
 
                 <View style={{alignItems:'center'}}>
                     <View style={styles.stylistAvatarContainer}>
-                        <Avatar rounded source={require('../../assets/stylist-1.png')} size={55}/>
+                        <Avatar rounded source={{uri: stylist.profileImageURL}} size={55}/>
                     </View>
-                    <Text style={{marginTop:0 , fontSize:35}}>Matt Perry</Text>
+                        <Text style={{marginTop:5 , fontSize:25 , textAlign:'center'}}>{stylist.name}</Text>
                     <View style={{marginTop:12}}>
-                        <Rating rating={4.5}/>
+                        <Rating rating={stylist.rating}/>
                     </View>
                 </View>
             </View>
 
             
 
-            <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:15}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:15,marginHorizontal:20}}>
                 
                 <View style={{height:230 , flexDirection:'row' ,
                                 justifyContent:'space-between'}}>
@@ -167,7 +170,7 @@ const styles = StyleSheet.create(
     {
         container:{
             flex:1,
-            marginHorizontal:20,
+            // marginHorizontal:20,
             backgroundColor:'#fff'
         },
         heartContainer:{

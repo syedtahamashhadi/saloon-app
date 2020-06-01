@@ -1,4 +1,5 @@
 import React from 'react';
+import {View,Text} from 'react-native'
 import UserNav from './src/navigation/UserNav'
 import { Provider } from 'react-redux'
 import { configureStore } from './src/redux/store';
@@ -12,15 +13,18 @@ export default function App() {
 
   return (
 
-    // <Provider store={store}>
+    <Provider store={store}>
 
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client}> 
       
-      <UserNav />
+      <UserNav /> 
+      {/* <View>
+        <Text>TEst</Text>
+      </View> */}
 
-    </ApolloProvider>
+    </ApolloProvider> 
     
-    // </Provider>
+   </Provider>
   
   );
 }

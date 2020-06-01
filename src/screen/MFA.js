@@ -3,19 +3,64 @@ import {View , Text , TextInput ,StyleSheet , ScrollView} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
-import { mfaRequest } from '../redux/authenticate/actions'
+import { mfaSuccess } from '../redux/authenticate/actions'
+import { useMutation } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+
+const OTP_SIGNIN = gql `
+    mutation abc($email: String! , $code: String! , $deviceId: String!){
+        verifyCode(email: $email, code: $code, deviceId: $deviceId) 
+        {
+        email
+        jwtToken {
+            token
+            createdAt
+        }
+        password 
+        }
+    }
+`
 
 const MFA = (props) =>{
 
     const [otp,setOtp] = React.useState(null)
+    console.log('Props Signin >>>' , props.signIn )
+    console.log('Props SignUp >>>>',props.signUp)
 
-    props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
+
+    const checkOtpCall = props.signIn.isLogin ? OTP_SIGNIN : OTP_SIGNIN
+
+    const [verifyOtp , { data , loading , error}] = useMutation(checkOtpCall)
+
+    // props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
 
     const handleButton=()=>{
-        console.log('Button is Pressed...',props.mfaState)
-        props.mfa({otp:otp})
-    }
+        // console.log('Button is Pressed...',props.mfaState)
 
+        loading !== true && props.signUp.isSignUp && verifyOtp(
+            {
+                variables:{
+                    email: props.signUp.data.signupUser.email , code: `${otp}` , deviceId: props.signUp.data.signupUser.email     //mutaion required email and device id
+                }
+            }
+        )
+
+        loading !== true && props.signIn.isLogin && verifyOtp(
+            {
+                variables:{
+                    email: props.signUp.data.loginUser.email , code: `${otp}` , deviceId: 'abcd1234'     //mutaion required email and device id
+                }
+            }
+        )
+    }
+    console.log('Errorr >>>>>>>>>>',error)
+
+    React.useEffect(()=>{
+        if(data){
+            props.mfa(data)
+            props.navigation.replace('Map') 
+        }
+    },[data])
     return(
         <View style={styles.container}>
             <View style={{width:120,height:100,marginTop:120,alignItems:'center'}}>
@@ -51,13 +96,15 @@ const MFA = (props) =>{
 
 mapStateToProps = (state) =>{
     return{
-        mfaState: state.mfaReducer
+        signIn: state.loginReducer ,
+        signUp: state.signUpReducer
+        // mfaState: state.mfaReducer
     }
 }
 
 mapDispatchToProps = (dispatch) =>{
     return{
-        mfa: (credential) => dispatch(mfaRequest(credential))
+        mfa: (data) => dispatch(mfaSuccess(data))
     }
 }
 

@@ -1,41 +1,40 @@
-import { SIGNUP, SIGNIN, MFA , FORGOT_PASSWORD} from './constants';
+import { SIGNUP, SIGNIN, MFA , FORGOT_PASSWORD , NEAREST_SALOON} from './constants';
 
 
 /******************************** SignUp Reducer ***********************************/
 
 const signUpInitialState={
-    credentials: [],
-    isRequestSent: false,
-    error: null,
-    isSignUp:false
+    // credentials: [],
+    // isRequestSent: false,
+    // error: null,
+    isSignUp:false,
+    data: null
 } 
 
 const signUpReducer = (state = signUpInitialState , action) =>{
     switch (action.type) {
-        case SIGNUP.REQUEST:
-            return{
-                ...state,
-                credentials: [...action.payLoad],
-                isRequestSent: true,
-                error: null,
-                isSignUp:false
-            }
+        // case SIGNUP.REQUEST:
+        //     return{
+        //         ...state,
+        //         credentials: [...action.payLoad],
+        //         isRequestSent: true,
+        //         error: null,
+        //         isSignUp:false
+        //     }
         case SIGNUP.SUCCESS :
             return{
                 ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: null,
-                isSignUp: true
+                isSignUp: true,
+                data: action.payLoad
             }
-        case SIGNUP.FAILURE :
-            return{
-                ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: action.error,
-                isSignUp:false
-            }
+        // case SIGNUP.FAILURE :
+        //     return{
+        //         ...state,
+        //         credentials: state.credentials,
+        //         isRequestSent: false,
+        //         error: action.error,
+        //         isSignUp:false
+        //     }
         default: return state;
     }
 }
@@ -43,38 +42,21 @@ const signUpReducer = (state = signUpInitialState , action) =>{
 /******************************** Login Reducer ***********************************/
 
 const loginInitialState={
-    credentials: [],
-    isRequestSent: false,
-    error: null,
-    isLogin: false
+    isLogin: false,
+    data: null,
+    token: null
 }
 
 const loginReducer = (state= loginInitialState , action)=>{
     switch (action.type) {
-        case SIGNIN.REQUEST:
-            console.log('Payload is >>',action.payLoad)
-            return{
-                ...state,
-                credentials: [action.payLoad],
-                isRequestSent: true,
-                error: null,
-                isLogin: false
-            }
+      
         case SIGNIN.SUCCESS:
             return{
                 ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: null,
-                isLogin: true
-            }
-        case SIGNIN.FAILURE:
-            return{
-                ...state,
-                credentials: state.credentials ,
-                isRequestSent: false,
-                error: action.error,
-                isLogin: false,
+                isLogin: true,
+                data: action.payLoad ,
+                token: action.token
+
             }
         default: return state;
     }
@@ -83,45 +65,23 @@ const loginReducer = (state= loginInitialState , action)=>{
 /******************************** MFA Reducer ***********************************/
 
 const mfaInitialState={
-    credentials: [],
-    isRequestSent: false,
-    error: null,
-    data:[],
-    isAuthenticate: false
+    isAuthenticate: false,
+    data: null,
 }
 
 
 const mfaReducer = (state=mfaInitialState , action) =>{
     switch (action.type) {
-        case MFA.REQUEST:
-            return{
-                ...state,
-                credentials: [action.payLoad],
-                isRequestSent: true,
-                error: null,
-                data:[],
-                isAuthenticate: false
-            }
+       
         case MFA.SUCCESS:
             console.log('MFA SUCCESSS >>>>>')
             return{
                 ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error:null,
-                data: [...action.payLoad],
-                isAuthenticate: true
+                isAuthenticate: true,
+                data: action.payLoad,
+
             }
-        case MFA.FAILURE:
-            return{
-                ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: action.error,
-                data:[],
-                isAuthenticate: false
-            }
-    
+        
         default: return state;
     }
 }
@@ -129,45 +89,45 @@ const mfaReducer = (state=mfaInitialState , action) =>{
 /********************************* FORGOT PASSWORD *************************************/
 
 const forgotPasswordInitialState = {
-    credentials: [],
     isRequestSent: false,
-    error: null,
-    isForgotPasswordRequestSuccess : false
+    data: null
 }
 
 const forgotPasswordReducer = (state= forgotPasswordInitialState , action) =>{
     switch (action.type) {
-        case FORGOT_PASSWORD.REQUEST:
-            return{
-                ...state,
-                credentials: [action.payLoad],
-                isRequestSent: true,
-                error: null,
-                isForgotPasswordRequestSuccess : false
-            }
+      
         case FORGOT_PASSWORD.SUCCESS:
             return{
                 ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: null,
-                isForgotPasswordRequestSuccess : true
+                isForgotPasswordRequestSuccess : true,
+                data: action.payLoad
             }
-        case FORGOT_PASSWORD.FAILURE:
-            return{
-                ...state,
-                credentials: state.credentials,
-                isRequestSent: false,
-                error: action.error,
-                isForgotPasswordRequestSuccess : false
-            }
+       
         default: return state
     }
 }
+
+/************************** Nearest Saloon **************************/
+const nearestSaloonInitialState = {
+    data: null
+}
+
+const nearestSaloonReducer = (state = nearestSaloonInitialState , action)=>{
+    switch (action.type) {
+        case NEAREST_SALOON.SUCCESS:
+           return{
+            ...state,
+            data: action.payLoad
+           } 
+        default: return state ;
+    }
+}
+
 
 export {
     signUpReducer,
     loginReducer,
     mfaReducer,
     forgotPasswordReducer,
+    nearestSaloonReducer,
 }
