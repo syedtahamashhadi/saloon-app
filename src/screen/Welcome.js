@@ -2,6 +2,8 @@ import React from 'react'
 import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
 import Chat from '../component/Chat'
 import Button from '../component/Button'
+import { guestUserSuccess } from '../redux/authenticate/actions'
+import { connect } from 'react-redux'
 
 
 const Welcome = (props) =>{
@@ -9,11 +11,14 @@ const Welcome = (props) =>{
     
     const handleSignIn = () =>{
         console.log('SignIn is Clicked...')
-        props.navigation.navigate('SignIn')
+        props.guestUser(false)
+        props.signIn.isLogin ? props.navigation.navigate('Map') : props.navigation.navigate('SignIn')
     }
 
     const handleGuest = () =>{
         console.log('SignIn is Clicked...')
+        props.guestUser(true)
+        props.navigation.replace('GuestMap')
     }
 
     return(
@@ -35,7 +40,7 @@ const Welcome = (props) =>{
                     <Text style={{fontSize:20,color:'grey' }}>
                         or
                     </Text>
-                    <Button title='Guest' btnColor='#19479c'/>
+                    <Button title='Guest' btnColor='#19479c' handleButton={handleGuest}/>
 
                 </View>
             </View>
@@ -43,7 +48,18 @@ const Welcome = (props) =>{
     )
 }
 
-export default Welcome;
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        guestUser : (data) => dispatch(guestUserSuccess(data))
+    }
+}
+
+const mapStateToProps = state =>{
+    return{
+        signIn: state.loginReducer
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Welcome);
 
 const styles = StyleSheet.create(
     {

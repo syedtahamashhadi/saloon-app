@@ -3,20 +3,24 @@ import {View , Text , TextInput ,StyleSheet , ScrollView} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
-import { mfaSuccess } from '../redux/authenticate/actions'
+import { mfaSuccess , loginSuccess } from '../redux/authenticate/actions'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-const OTP_SIGNIN = gql `
+const OTP = gql `
     mutation abc($email: String! , $code: String! , $deviceId: String!){
         verifyCode(email: $email, code: $code, deviceId: $deviceId) 
         {
-        email
-        jwtToken {
-            token
-            createdAt
-        }
-        password 
+            
+            _id
+            email
+            jwtToken {
+              token
+              createdAt
+            }
+            password
+            userName
+            profileImageURL
         }
     }
 `
@@ -27,38 +31,42 @@ const MFA = (props) =>{
     console.log('Props Signin >>>' , props.signIn )
     console.log('Props SignUp >>>>',props.signUp)
 
+    const { screen } = props.route.params
 
-    const checkOtpCall = props.signIn.isLogin ? OTP_SIGNIN : OTP_SIGNIN
+    // const checkOtpCall = props.signIn.isLogin ? OTP_SIGNIN : OTP_SIGNIN
 
-    const [verifyOtp , { data , loading , error}] = useMutation(checkOtpCall)
+    const [verifyOtp , { data , loading , error}] = useMutation(OTP)
+    console.log('MFA Data >>>>>>>>>>' , data)
 
     // props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
 
+    let email = screen == 'signUp' ? props.signUp.data.signupUser.email  : props.signIn.data.loginUser.email 
     const handleButton=()=>{
         // console.log('Button is Pressed...',props.mfaState)
 
-        loading !== true && props.signUp.isSignUp && verifyOtp(
+        loading !== true && verifyOtp(
             {
                 variables:{
-                    email: props.signUp.data.signupUser.email , code: `${otp}` , deviceId: props.signUp.data.signupUser.email     //mutaion required email and device id
+                    email: email , code: `${otp}` , deviceId: email     //mutaion required email and device id
                 }
             }
         )
 
-        loading !== true && props.signIn.isLogin && verifyOtp(
-            {
-                variables:{
-                    email: props.signUp.data.loginUser.email , code: `${otp}` , deviceId: 'abcd1234'     //mutaion required email and device id
-                }
-            }
-        )
+        // loading !== true && props.signIn.isLogin && verifyOtp(
+        //     {
+        //         variables:{
+        //             email: props.signUp.data.loginUser.email , code: `${otp}` , deviceId: 'abcd1234'     //mutaion required email and device id
+        //         }
+        //     }
+        // )
     }
     console.log('Errorr >>>>>>>>>>',error)
 
     React.useEffect(()=>{
         if(data){
             props.mfa(data)
-            props.navigation.replace('Map') 
+            // props.login(data)
+            screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.replace('Map')
         }
     },[data])
     return(
@@ -73,7 +81,7 @@ const MFA = (props) =>{
                 <Text style={{fontSize:15 , fontWeight:'bold'}}>Please enter the 4 digit code!</Text>
             </View>
 
-            <ScrollView >
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{alignItems:'center'}}>
                     <TextInput 
                         style={styles.inputContainer}
@@ -104,7 +112,8 @@ mapStateToProps = (state) =>{
 
 mapDispatchToProps = (dispatch) =>{
     return{
-        mfa: (data) => dispatch(mfaSuccess(data))
+        mfa: (data) => dispatch(mfaSuccess(data)) ,
+        // login: (data) => dispatch(loginSuccess(data))
     }
 }
 

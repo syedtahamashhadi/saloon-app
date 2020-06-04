@@ -1,4 +1,14 @@
-import { SIGNUP, SIGNIN, MFA , FORGOT_PASSWORD , NEAREST_SALOON} from './constants';
+import { SIGNUP, 
+         SIGNIN, 
+         MFA ,
+         FORGOT_PASSWORD ,
+         NEAREST_SALOON ,
+         SELECTED_SALOON_BOOKING ,
+         SELECTED_STYLIST_BOOKING ,
+         SELECTED_SERVICE_BOOKING ,
+         SELECTED_DATE_TIME_BOOKING ,
+         GUEST_USER ,
+        } from './constants';
 
 
 /******************************** SignUp Reducer ***********************************/
@@ -67,6 +77,7 @@ const loginReducer = (state= loginInitialState , action)=>{
 const mfaInitialState={
     isAuthenticate: false,
     data: null,
+    token: null
 }
 
 
@@ -79,7 +90,7 @@ const mfaReducer = (state=mfaInitialState , action) =>{
                 ...state,
                 isAuthenticate: true,
                 data: action.payLoad,
-
+                token: action.token
             }
         
         default: return state;
@@ -123,6 +134,97 @@ const nearestSaloonReducer = (state = nearestSaloonInitialState , action)=>{
     }
 }
 
+/*********************************** Selected Saloon For Booking ********************/
+
+const selectedSaloonBookingInitialState ={
+    data: null
+}
+
+const selectedSaloonBookingReducer = (state = selectedSaloonBookingInitialState , action) =>{
+    switch (action.type) {
+        case SELECTED_SALOON_BOOKING.SUCCESS:
+            console.log('Reducer is Fired >>' , action.payLoad)
+            return{
+                ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+/****************************** Selected Stylist For Booking *************************************/
+
+const selectedStylistBookingInitialState = {
+    data: null
+}
+
+const selectedStylistBookingReducer = (state= selectedStylistBookingInitialState , action) =>{
+    switch (action.type) {
+        case SELECTED_STYLIST_BOOKING.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+/****************************** Selected Service For Booking *************************************/
+
+const selectedServiceBookingInitialState = {
+    data: null
+}
+
+const selectedServiceBookingReducer = (state= selectedStylistBookingInitialState , action) =>{
+    switch (action.type) {
+        case SELECTED_SERVICE_BOOKING.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+/****************************** Selected Service For Booking *************************************/
+
+const selectedDateTimeBookingInitialState = {
+    data: null
+}
+
+const selectedDateTimeBookingReducer = (state= selectedDateTimeBookingInitialState , action) =>{
+    switch (action.type) {
+        case SELECTED_DATE_TIME_BOOKING.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+/****************************** Guest User *************************************/
+
+const guestUserInitialState = {
+    // data: null
+    isGuestUser: false
+}
+
+const guestUserReducer = (state= guestUserInitialState , action) =>{
+    switch (action.type) {
+        case GUEST_USER.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
 
 export {
     signUpReducer,
@@ -130,4 +232,9 @@ export {
     mfaReducer,
     forgotPasswordReducer,
     nearestSaloonReducer,
+    selectedSaloonBookingReducer,
+    selectedStylistBookingReducer,
+    selectedServiceBookingReducer ,
+    selectedDateTimeBookingReducer ,
+    guestUserReducer ,
 }

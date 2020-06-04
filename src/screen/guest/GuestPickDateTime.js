@@ -1,45 +1,20 @@
-import React , {useEffect} from 'react'
+import React from 'react'
 import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
-import Chat from '../component/Chat'
+import Chat from '../../component/Chat'
 import { Calendar } from 'react-native-calendars'
-import TimeCard from '../component/TimeCard'
-import Button from '../component/Button'
-import { selectedDateTimeSuccess } from '../redux/authenticate/actions'
-import { connect } from 'react-redux'
-import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import TimeCard from '../../component/TimeCard'
+import Button from '../../component/Button'
 
-const ADD_APPOINMENT = gql `
-    mutation abc {
-        addAppointment(salonId:"5e352f43e998cb2157837b28", 
-    serviceProviderId: "5e26e88be89f9d4799fe8378", timeZone: "Karachi", serviceId: "5e935b39bc8f3f00238b1279", cardId: "cfbb", appointmentDateTime: "2025-12-03T10:15:30Z", 
-    price:4.5)
-        {
-        status
-        salon
-        {
-            displayName
-        }
-        }  
-    } 
-`
 
-const PickDate = (props) =>{
-
-    const [addAppointment , {data, loading ,error}] = useMutation(ADD_APPOINMENT)
-
+const GuestPickDateTime = (props) =>{
     const [pageView,setPageView]=React.useState(3)
     const [selectedDate,setSelectedDate] = React.useState(null)
     const [dateErr , setDateErr] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
-    console.log('PicDate Props >>>' , props.signIn.token)
-
-    console.log('Data ' , data)
-    console.log('Loading ' , loading)
-    console.log('Error ' , error)
-
+    console.log('Date Time Props >>',props)
+    console.log('State Date ' , selectedDate)
     let date = new Date() 
     let currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
@@ -54,33 +29,9 @@ const PickDate = (props) =>{
         if(selectedDate && time){
             let dateTime={date:selectedDate,time:time}
             console.log('Button is Pressed....',dateTime)
-            props.selectDateTime(dateTime)
-            props.navigation.navigate('PaymentMethods')
-            // loading !== true && addAppointment(
-            //     {
-            //         context:{
-            //             headers:{
-            //                 authorization: props.signIn.token
-            //             }
-            //         }
-            //     }
-            // )
+            props.navigation.navigate('Welcome')
         }
     }
-
-    // React.useEffect=(()=>{
-    //     if(data){
-    //         console.log('I am Fired >>>')
-    //         // props.navigation.navigate('Saloon')
-    //     }
-    // },[loading])
-
-    useEffect(()=>{
-        if(data){
-            console.log('Action is Fired >>',data)
-            props.navigation.navigate('Saloon')
-        }
-    },[data])
 
     const handleDatePress = async (val) =>{
         setSelectedDate(val.dateString)
@@ -122,6 +73,7 @@ const PickDate = (props) =>{
                             onDayPress={val=>handleDatePress(val)}
                             // minDate={currentDate}
                             // hideExtraDays={true}
+                            
                             theme={{
                                 selectedDayBackgroundColor: '#49D3CE',
                                 selectedDayTextColor:'#fff'
@@ -148,19 +100,8 @@ const PickDate = (props) =>{
     )
 }
 
-const mapStateToProps = (state) =>{
-    return{
-        signIn: state.loginReducer
-    }
-}
 
-const mapDispatchToProps = (dispatch) =>{
-    return{
-        selectDateTime: (data) => dispatch(selectedDateTimeSuccess(data))
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(PickDate);
+export default GuestPickDateTime ;
 
 const styles = StyleSheet.create(
     {

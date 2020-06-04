@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import {View , Text , StyleSheet , TextInput, TouchableOpacity ,Image , ScrollView} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
@@ -62,17 +62,31 @@ const SignIn = (props) =>{
        
     // } , [])
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         if(data){
             props.signIn(data)
-            props.navigation.replace('Map')
+            props.navigation.replace('MFA' , 
+                {
+                    screen: 'signIn'
+                }
+            )
         }
     },[data])
+    // React.useEffect(()=>{
+    //     if(data){
+    //         props.signIn(data)
+    //         props.navigation.replace('Map')
+    //     }
+    // },[data])
 
     const errorBorderColor = error ? 'red' : 'black'
    
     return(
+
+        
         <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+
             <ScrollView showsVerticalScrollIndicator={false} style={{marginHorizontal:20 }}>
 
                 <View style={{marginTop:35}}>
@@ -92,7 +106,7 @@ const SignIn = (props) =>{
                     <View style={styles.inputContainer}>
                         <TextInput 
                             style={{width:'80%',height:40,borderRadius:6,borderWidth:1 ,
-                                borderColor:errorBorderColor}}
+                                borderColor:errorBorderColor , padding:5}}
                             onChangeText= {val=>setEmail(val)}
                             value={email}
                             // autoFocus={true}
@@ -101,15 +115,18 @@ const SignIn = (props) =>{
                             onFocus={()=>console.log('Focused..')}
                             onSubmitEditing={()=>console.log('TEst>>>')}
                             onEndEditing={()=>console.log('Editing is done...')}
+                            fontSize={16}
                         />
                     </View>
                     <View style={styles.inputContainer}>
                         <TextInput 
                             style={{width:'80%',height:40,borderRadius:6,borderWidth:1,
-                                borderColor:errorBorderColor}}
+                                borderColor:errorBorderColor, padding:5}}
                             onChangeText= {val=>setPassword(val)}
                             value={password}
                             placeholder='Password'
+                            secureTextEntry={true}
+                            fontSize={16}
                         />
                     </View>
                     <View style={{marginTop:20}}>
@@ -130,6 +147,8 @@ const SignIn = (props) =>{
                 </View>
 
             </ScrollView>
+            </ScrollView>
+
         </View>
     )
 }

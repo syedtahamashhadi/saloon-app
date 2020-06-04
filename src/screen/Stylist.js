@@ -26,7 +26,7 @@ const Stylist = () =>{
         <View style={{backgroundColor:'#fff' , flex:1}}>
             <View style={{flex:pageView , backgroundColor:'#fff', marginHorizontal:20}}>
                 <View style={{flexDirection:"row" , justifyContent:'space-between' , top:35 }}>
-                        <TouchableOpacity onPress={()=>console.log('Back Button is Pressed...')}>
+                        <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                             <AntIcon name="arrowleft" size={25} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>console.log('Heart is Pressed..')}>

@@ -1,13 +1,26 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import {View , Text , Image , TouchableOpacity , StyleSheet, ScrollView ,TextInput} from 'react-native'
 import {Avatar} from 'react-native-elements'
 import Button from '../component/Button'
 import SocialCard from '../component/SocialCard'
+import gql from 'graphql-tag'
+import {useMutation} from '@apollo/react-hooks'
+import { connect } from 'react-redux'
 
 
-const SetProfileInfo = () =>{
+const UPDATE_USER_PROFILE = gql `
+mutation abc($country:String , $gender: String , $zipCode: String){
+    updateUserProfile(input: {country: $country , gender: $gender , postalCode: $zipCode})
+    {
+        email
+    }  
+  }
+`
 
-   
+const SetProfileInfo = (props) =>{
+
+    const [updateUserProfile , {data , loading , error}] = useMutation(UPDATE_USER_PROFILE)
+
     const [fName , setFName] = React.useState('')
     const [email , setEmail] = React.useState('')
     const [lName , setLName] = React.useState('')
@@ -26,22 +39,40 @@ const SetProfileInfo = () =>{
                             ]
     const handleButton = (val) =>{
         console.log('Button is Pressed',val)
+        updateUserProfile(
+            {
+                variables:{
+                    country: countryState , postalCode: zipCode , gender: gender
+                },
+                context:{
+                    headers:{
+                        authorization: props.token
+                    }
+                }
+            }
+        )
     }
+
+    useEffect(()=>{
+        if(data){
+            props.navigation.replace('Map')
+        }
+    },[data])    
 
     return(
         <View style={styles.container}>
-            <View style={{marginTop:40,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:20}}>Set Profile Info</Text>
+            <View style={{marginTop:'30%',justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontSize:22 , fontWeight:'bold'}}>Fill in Profile Info</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:10}}>
-                <View style={styles.avatarContainer}>
+                {/* <View style={styles.avatarContainer}>
                     <Avatar rounded source={require('../../assets/cat.jpg')} size={65} showEditButton
                         onEditPress={()=>console.log('Edit the avatar')}
                     />
-                </View>
+                </View> */}
                 <View style={{alignItems:'center',marginTop:20}}>
-                    <TextInput 
+                    {/* <TextInput 
                             style={styles.textInput}
                             onChangeText= {val=>setFName(val)}
                             value={fName}
@@ -58,7 +89,47 @@ const SetProfileInfo = () =>{
                             onChangeText= {val=>setEmail(val)}
                             value={email}
                             placeholder='Email'
+                        /> */}
+                       
+                        {/* <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setPhone(val)}
+                            value={phone}
+                            placeholder='Phone number'
+                        /> */}
+                        {/* <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setDob(val)}
+                            value={dob}
+                            placeholder='DOB'
                         />
+                        <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setAddress(val)}
+                            value={address}
+                            placeholder='Address'
+                        /> */}
+                        {/* <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setCity(val)}
+                            value={city}
+                            placeholder='City'
+                        /> */}
+                        <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setCountryState(val)}
+                            value={countryState}
+                            placeholder='Country'
+                            fontSize={16}
+                        />
+                        <TextInput 
+                            style={styles.textInput}
+                            onChangeText= {val=>setZipCode(val)}
+                            value={zipCode}
+                            placeholder='Zip Code'
+                            fontSize={16}
+                        />
+
                         <View style={styles.genderContainer}>
                             {genderData.map((val,index)=>{
                                 let myStyle= val.value == gender ? styles.genderBtnPressed : styles.genderBtn
@@ -73,42 +144,6 @@ const SetProfileInfo = () =>{
                             })}
                     
                         </View>
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setPhone(val)}
-                            value={phone}
-                            placeholder='Phone number'
-                        />
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setDob(val)}
-                            value={dob}
-                            placeholder='DOB'
-                        />
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setAddress(val)}
-                            value={address}
-                            placeholder='Address'
-                        />
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setCity(val)}
-                            value={city}
-                            placeholder='City'
-                        />
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setCountryState(val)}
-                            value={countryState}
-                            placeholder='State'
-                        />
-                        <TextInput 
-                            style={styles.textInput}
-                            onChangeText= {val=>setZipCode(val)}
-                            value={zipCode}
-                            placeholder='Zip Code'
-                        />
                 </View>
                 <View style={{alignItems:'center'}}>
                     <Text style={{fontSize:15}}>Connect</Text>
@@ -122,17 +157,29 @@ const SetProfileInfo = () =>{
                     )}
 
                 </View>
+                
+                <View style={{marginTop:35}}>
+                    <Button title='Continue' textSize={18} btnColor='#19479c' handleButton={handleButton}/>
+
+                </View>
 
                 
             </ScrollView>
 
-            <Button title='Continue' textSize={18} btnColor='#19479c' handleButton={handleButton}/>
             
         </View>
     )   
 }
 
-export default SetProfileInfo
+const mapStateToProps = (state) =>{
+    return{
+        signIn: state.loginReducer,
+        token: state.mfaReducer.token
+
+    }
+}
+
+export default connect(mapStateToProps,null)(SetProfileInfo)
 
 
 const styles = StyleSheet.create(
@@ -165,7 +212,7 @@ const styles = StyleSheet.create(
             height:35,
             borderRadius:10,
             borderWidth:1,
-            marginBottom:15,
+            marginBottom:25,
             backgroundColor:'#fafafa',
             textAlignVertical:'center',
             paddingLeft:10,

@@ -5,13 +5,13 @@ const ConfirmBookingCard = (props) =>{
 
     return(
         // <View style={styles.container}>
-            <View style={{width:'100%',height:250,backgroundColor:'#fff',elevation:5,
+            <View style={{width:'100%',backgroundColor:'#fff',elevation:5,
                     borderTopLeftRadius:10,borderTopRightRadius:10}}>
                 <View style={{marginHorizontal:20,marginTop:20}}>
                     <View>
-                        <Text style={{fontSize:20}}>Toney & Guy</Text>
-                        <Text style={{fontSize:20,marginTop:5}}>16th Street Mall, Denver</Text>
-                        <Text style={{fontSize:20 ,color:'grey'}}>(321) 328-2381</Text>
+                        <Text style={{fontSize:20}}>{props.saloon}</Text>
+                        <Text style={{fontSize:20,marginTop:5}}>{props.address}</Text>
+                        <Text style={{fontSize:20 ,color:'grey'}}>{props.phone}</Text>
                     </View>
 
                     <View style={{borderWidth:0.8,marginVertical:15,borderColor:'grey'}}></View>

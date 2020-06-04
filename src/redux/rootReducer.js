@@ -3,7 +3,13 @@ import { loginReducer,
         signUpReducer ,
         mfaReducer ,
         forgotPasswordReducer ,
-        nearestSaloonReducer } from './authenticate/reducers'
+        nearestSaloonReducer ,
+        selectedSaloonBookingReducer,
+        selectedStylistBookingReducer ,
+        selectedServiceBookingReducer ,
+        selectedDateTimeBookingReducer ,
+        guestUserReducer ,
+    } from './authenticate/reducers'
 
 
 const rootReducer = combineReducers(
@@ -13,6 +19,11 @@ const rootReducer = combineReducers(
         mfaReducer: mfaReducer,
         forgotPasswordReducer: forgotPasswordReducer,
         nearestSaloonReducer: nearestSaloonReducer,
+        selectedSaloonBookingReducer: selectedSaloonBookingReducer,
+        selectedStylistBookingReducer: selectedStylistBookingReducer,
+        selectedServiceBookingReducer: selectedServiceBookingReducer,
+        selectedDateTimeBookingReducer: selectedDateTimeBookingReducer,
+        guestUserReducer: guestUserReducer,
     }
 )
 

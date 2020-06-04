@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , StyleSheet , TextInput, TouchableOpacity,Image} from 'react-native'
+import {View , Text , StyleSheet , TextInput, TouchableOpacity, Image , ScrollView} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import SocialCard from '../component/SocialCard'
@@ -12,13 +12,15 @@ import { signUpSuccess } from '../redux/authenticate/actions'
 const SIGNUP = gql `mutation abc(
     $email: String!
     $password: String!
-    $userName: String!
+    $firstName: String!
+    $lastName: String!
     $phone: String!
   ) {
     signupUser(
         email: $email
         password: $password
-        userName: $userName
+        firstName: $firstName
+        lastName: $lastName
         phone: $phone
       )
     {
@@ -30,7 +32,8 @@ const SignUp = (props) =>{
 
     const [signupUser , {data , loading ,error}] = useMutation(SIGNUP)
 
-    const [name,setName] = React.useState('')
+    const [firstName,setFirstName] = React.useState('')
+    const [lastName,setLastName] = React.useState('')
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
     const [phone,setPhone] = React.useState('')
@@ -47,12 +50,12 @@ const SignUp = (props) =>{
                         ]
 
     const handleButton = ()=>{
-        console.log('Button is pressed')
+        console.log('Button is pressed' , typeof phone)
 
         loading !== true && signupUser(
             {
                 variables:{
-                    userName: name , email: email , password: password , phone: `${phone}`
+                    firstName: firstName , lastName: lastName , email: email , password: password , phone: `${phone}`
                 }
             }
         )
@@ -61,13 +64,19 @@ const SignUp = (props) =>{
     React.useEffect(()=>{
         if(data){
             props.signUp(data),
-            props.navigation.replace('MFA')
+            props.navigation.replace('EmailConfirm',
+                {
+                    screen: 'signUp'
+                }
+            )
         }
     },[data])
     const errorBorderColor = error ? 'red' : 'black'
     
     return(
+        // <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{marginHorizontal:20}}>
             <View style={{marginTop:35}}>
                 <TouchableOpacity onPress={()=>props.navigation.goBack()}>
@@ -87,9 +96,21 @@ const SignUp = (props) =>{
                     <TextInput 
                         style={{width:'80%',height:40,borderRadius:6,borderWidth:1,paddingLeft:10,
                                 borderColor:errorBorderColor}}
-                        onChangeText= {val=>setName(val)}
-                        value={name}
-                        placeholder='Name'
+                        onChangeText= {val=>setFirstName(val)}
+                        value={firstName}
+                        placeholder='First Name'
+                        fontSize={16}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <TextInput 
+                        style={{width:'80%',height:40,borderRadius:6,borderWidth:1,paddingLeft:10,
+                                borderColor:errorBorderColor}}
+                        onChangeText= {val=>setLastName(val)}
+                        value={lastName}
+                        placeholder='Last Name'
+                        fontSize={16}
+
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -99,6 +120,7 @@ const SignUp = (props) =>{
                         onChangeText= {val=>setEmail(val)}
                         value={email}
                         placeholder='Email'
+                        fontSize={16}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -108,7 +130,8 @@ const SignUp = (props) =>{
                         onChangeText= {val=>setPassword(val)}
                         value={password}
                         placeholder='Password'
-                        // secureTextEntry={true}
+                        secureTextEntry={true}
+                        fontSize={16}
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -118,6 +141,7 @@ const SignUp = (props) =>{
                         onChangeText= {val=>setPhone(val)}
                         value={phone}
                         placeholder='Phone'
+                        fontSize={16}
                     />
                 </View>
                 <View style={{alignItems:'center',marginTop:12}}>
@@ -130,7 +154,7 @@ const SignUp = (props) =>{
                         <SocialCard link={val.link} icon={val.icon} bColor={val.bColor} />
                     )}
                 </View> 
-                <View style={{marginTop:60}}>
+                <View style={{marginTop:30}}>
                     <Button title='Sign Up' btnColor='#19479c' handleButton={handleButton}/>
                 </View>
                 {/* <View style={{marginTop:0,flexDirection:'row',justifyContent:'center'}}>  
@@ -141,7 +165,9 @@ const SignUp = (props) =>{
                 </View> */}
             </View>
             </View>
+            </ScrollView>
         </View>
+        // {/* </ScrollView> */}
     )
 }
 

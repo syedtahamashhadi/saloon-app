@@ -6,10 +6,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const SaloonBanner = (props) =>{
 
+    // let backgroundImg = props.backgroundImg
 
     return(
         // <View style={styles.container}>
-                <View style={{width:'100%',height:150,marginTop:20}}>
+                <View style={{width:'100%',height:130,marginTop:20 , backgroundColor:'#fff'}}>
                     <Image source={require('../../assets/barber-shave.jpg') } style={styles.image}/>
                     <View style={styles.imageOverLay}>
                         <View style={{flexDirection:'row',justifyContent:'flex-end',width:'100%'}}>
@@ -22,7 +23,7 @@ const SaloonBanner = (props) =>{
                             <Text  style={{fontSize:25,color:'white',fontWeight:'bold'}}>{props.name}</Text>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',
-                                marginRight:10 ,marginTop:17}}>
+                                marginRight:10 ,marginTop:13}}>
                             <Rating rating={props.rating} textColor='white'/>
                             <View style={{flexDirection:'row',alignItems:'center'}}>
                                 <Icon name="map-marker" size={20} style={styles.searchIcon}/>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create(
             justifyContent:'center',
             alignItems:'center',
             width:85,
-            height:50,
+            height:40,
             backgroundColor:'#FA7268',
             borderRadius:15,
             marginRight:12

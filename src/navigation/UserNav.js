@@ -18,8 +18,19 @@ import StylistProfile from '../screen/StylistProfile'
 import SaloonInfo from '../component/SaloonInfo'
 import BookingSelectStylist from '../screen/BookingSelectStylist'
 import BookingSelectServices from '../screen/BookingSelectServices'
-
-
+import PickDateTime from '../screen/PickDateTime'
+import EmailConfirm  from '../screen/EmailConfirmation' 
+import Congragulation from '../screen/Congratgulation'
+import GuestMap from '../screen/guest/GuestMap'
+import GuestSaloonList from '../screen/guest/GuestSaloonList'
+import GuestSaloon from '../screen/guest/GuestSaloon'
+import GuestStylistProfile from '../screen/guest/GuestStylistProfile'
+import GuestPickDateTime from '../screen/guest/GuestPickDateTime'
+import SetProfileInfo from '../screen/SetProfileInfo'
+import PaymentMethods from '../screen/PaymentMethods'
+import SetBillingDetail from '../screen/SetBillingDetail'
+import UserDetail from '../screen/UserDetail'
+import ConfirmBooking from '../screen/ConfirmBooking'
 
 
 
@@ -29,11 +40,11 @@ const UserNav = () =>{
 
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="BookingSelectServices" 
+        <Stack.Navigator initialRouteName="Welcome" 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
-              }}          
+            }}          
         >   
             <Stack.Screen name='Welcome' component={Welcome} />
             <Stack.Screen name='SignIn' component={SignIn}/>
@@ -48,20 +59,27 @@ const UserNav = () =>{
             <Stack.Screen name='SaloonInfo' component={SaloonInfo}/>
             <Stack.Screen name='BookingSelectStylist' component={BookingSelectStylist} />
             <Stack.Screen name='BookingSelectServices' component={BookingSelectServices} />
-
-
-
-
-            {/* <Stack.Screen name='MFA' component={MFA}/>
-            <Stack.Screen name='Map' component={Map}/>
-            <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
-            <Stack.Screen name='Congragulation' component={Congratgulation}/>
-            <Stack.Screen name='Saloon' component={Saloon}/>
-            <Stack.Screen name='Stylist' component={Stylist}/>
             <Stack.Screen name='SaloonList' component={SaloonList}/>
             <Stack.Screen name='PickDate' component={PickDate}/>
-            <Stack.Screen name='SelectStylist' component={SelectStylist}/>
-            <Stack.Screen name='CurrentBookings' component={CurrentBookings}/> */}
+            <Stack.Screen name='PickDateTime' component={PickDateTime}/>
+            <Stack.Screen name='EmailConfirm' component={EmailConfirm}/>
+            <Stack.Screen name='Congragulation' component={Congragulation}/>
+            <Stack.Screen name='GuestMap' component={GuestMap}/>
+            <Stack.Screen name='GuestSaloonList' component={GuestSaloonList}/> 
+            <Stack.Screen name='GuestSaloon' component={GuestSaloon}/>
+            <Stack.Screen name='GuestStylistProfile' component={GuestStylistProfile}/>
+            <Stack.Screen name='GuestPickDateTime' component={GuestPickDateTime}/>
+            <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/>
+            <Stack.Screen name='PaymentMethods' component={PaymentMethods}/>
+            <Stack.Screen name='SetBillingDetail' component={SetBillingDetail}/>
+            <Stack.Screen name='UserDetail' component={UserDetail}/>
+            <Stack.Screen name='ConfirmBooking' component={ConfirmBooking}/>
+            {/* <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/> */}
+
+
+
+
+           
 
         </Stack.Navigator>
         </NavigationContainer>

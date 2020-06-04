@@ -1,15 +1,24 @@
 import React from 'react'
 import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import { selectedStylistBookingSuccess } from '../redux/authenticate/actions'
+import { connect } from 'react-redux'
 
 import Chat from '../component/Chat'
 
 
 
-const BookingSelectStylist = () =>{
+const BookingSelectStylist = (props) =>{
+
+    const { stylists } = props.route.params
+    const { data } = props.selectedSaloon
+
+    console.log('Selcted Saloon >>' , data)
 
     const [pageView,setPageView] = React.useState(3.5)
     const [selectedCrew,setSelectedCrew] = React.useState('')
+
+    console.log('BookingSelectStylist Props >>' , props)
 
     console.log('Testing >>>>>>>>')
     const crewData = [  {icon:require('../../assets/stylist-1.png'),name:'Mattttttttttr dsada ad'},
@@ -20,7 +29,9 @@ const BookingSelectStylist = () =>{
                     ]
     const handleStylistPress = (val)=>{
         console.log('Stylist is pressed >>',val)
-        // setSelectedCrew(val.name)
+        setSelectedCrew(val.name)
+        props.selectStylist(val)
+        props.navigation.navigate('BookingSelectServices')
         // props.navigation.navigate('StylistProfile',{
         //     stylist : val ,
         //     // portfolioImg : props.portfolioImg                // Portfolio is local images need network img
@@ -38,7 +49,7 @@ const BookingSelectStylist = () =>{
         
                 <View style={{flex:pageView, backgroundColor:'#fff' , marginHorizontal:20}}>
                     <View style={{flexDirection:'row' , marginTop:35 }}>
-                        <TouchableOpacity onPress={()=>{console.log('Back Button is Pressed')}}>
+                        <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                             <AntIcon name='arrowleft' size={25}/>
                         </TouchableOpacity>
                     </View>
@@ -62,7 +73,7 @@ const BookingSelectStylist = () =>{
 
                     <View style={{flexDirection:'row',marginTop:20 ,justifyContent:'space-between'}}>
                             <View style={{marginHorizontal:20,justifyContent:'center'}}>
-                                <Text style={{fontSize:18 , fontWeight:'bold'}}>Toni & Guy Crew</Text>
+                                <Text style={{fontSize:18 , fontWeight:'bold'}}>{data.displayName}</Text>
                             </View>
                             <View style={{justifyContent:'flex-end'}}>
                                 <View style={styles.seprator}>
@@ -75,7 +86,7 @@ const BookingSelectStylist = () =>{
                     <ScrollView horizontal={true}  showsVerticalScrollIndicator={false} >
                         <View style={{flexDirection:'row' , marginTop:25}}>
                             {
-                                crewData.map((val,index)=>{
+                                stylists.map((val,index)=>{
                                     let myColor = val.name == selectedCrew ? '#49D3CE' : null
                                     let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
 
@@ -107,7 +118,17 @@ const BookingSelectStylist = () =>{
     )
 }
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        selectStylist : (data) => dispatch(selectedStylistBookingSuccess(data))
+    }
+}
 
+const mapStateToProps = (state) =>{
+    return{
+        selectedSaloon : state.selectedSaloonBookingReducer
+    }
+}
 
 
 const styles = StyleSheet.create(
@@ -140,4 +161,4 @@ const styles = StyleSheet.create(
     }
 )
 
-export default BookingSelectStylist;
+export default connect(mapStateToProps,mapDispatchToProps)(BookingSelectStylist);

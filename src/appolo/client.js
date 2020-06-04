@@ -4,6 +4,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { configureStore } from '../redux/store'
 import { InMemoryCache } from 'apollo-cache-inmemory';
+// import { connect } from 'react-redux'
 
 // let test = (state) => state.loginReducer
 
@@ -69,5 +70,13 @@ const httpLink = createHttpLink({
         cache: new InMemoryCache()
     }
 )
+
+
+// const mapStateToProps = (state) =>{
+//   return{
+//     mfa : state.mfaReducer
+//   }
+// }
+
 
 export { client }

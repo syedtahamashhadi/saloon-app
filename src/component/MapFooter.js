@@ -4,7 +4,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 
 const MapFooter = (props) =>{
-
+    console.log('Footer Props >>' , props)
     return(
             <View style={styles.container}>
                 <View >
@@ -15,7 +15,7 @@ const MapFooter = (props) =>{
                         </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={()=>props.handleCurrentLoc} style={{marginLeft:20,marginTop:10 }}>
+                    <TouchableOpacity onPress={()=>props.handleBarPress()} style={{marginLeft:20,marginTop:10 }}>
                         <View style={{width:40,height:40,justifyContent:'center',alignItems:'center',
                             borderRadius:40 , backgroundColor:'#fff'}}>
                                 {/* <MaterialIcon name='my-location' size={25}/> */}

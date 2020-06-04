@@ -1,18 +1,20 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import {View , StyleSheet, Text, Dimensions , TextInput ,Image , TouchableOpacity} from 'react-native'
-import MapView , { Marker } from 'react-native-maps'
+import MapView , { Marker  , Callout} from 'react-native-maps'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import MapFooter from '../component/MapFooter'
 import * as Location from 'expo-location'
+import MyCallOut from '../component/MyCallOut'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
-import { nearestSaloonSuccess } from '../redux/authenticate/actions'
+import { nearestSaloonSuccess , selectedSaloonBookingSuccess } from '../redux/authenticate/actions'
 
 import {Ionicons} from '@expo/vector-icons'
 
 const Search = (props) =>{
+    console.log('Search Props >>' , props)
     const [value, onChangeText] = React.useState('');
     const getGreet = (name) =>{
         let hour = new Date().getHours()
@@ -26,6 +28,12 @@ const Search = (props) =>{
         }
     }
 
+    const handleImagePress = ()=>{
+        console.log('Image is Pressed')
+        props.nav.navigation.navigate('SetProfileInfo')
+
+        // props.nav.navigation.navigate('SetProfileInfo')
+    }
     return(
         <View style={styles.overLay}>
             <View style={{marginHorizontal:20}}>
@@ -33,11 +41,11 @@ const Search = (props) =>{
                 <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                 
                     <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet(props.name)}</Text>
-                    
-                    <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
-                        source={{uri : props.imgUri}}
-                    />
-                
+                    <TouchableOpacity onPress={()=>handleImagePress()}>
+                        <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
+                            source={{uri : props.imgUri}}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
                     
@@ -70,8 +78,41 @@ const GET_NEAREST_SALOON = gql `
         getNearestSalons(latitude: $latitude, 
     longitude: $longitude){
         _id
-        status
+        displayName
+        rating
+        backgroundProfileImage
         distance
+        profileImage
+        portfolioImages
+        managerName
+        managerImage
+        status
+        address
+        contactNo
+        services{
+            name
+            _id
+            description
+            approxTime
+            price
+            serviceIcon
+        }
+        serviceProviders{
+            name
+            _id
+            status
+            rating
+            profileImageURL
+            services{
+                _id
+                name
+                approxTime
+                price
+                status
+                description
+                serviceIcon
+            }
+        }
         location{
             type
             coordinates
@@ -94,7 +135,7 @@ const GET_USER_PROFILE = gql`
 
 const Map = (props) =>{
 
-    console.log('Props SignIn >>>>' , props.signIn)
+    console.log('Map Props' , props)
 
     const [userLat,setUserLat] = React.useState(null)
     const [userLng,setUserLng] = React.useState(null)
@@ -107,13 +148,13 @@ const Map = (props) =>{
                 } ,
                 context:{
                     headers:{
-                        authorization: props.signIn.token
+                        authorization: props.token
                     }
                 }
             }
         )
     
-    React.useEffect(()=>{
+    useEffect(()=>{
         if(data){
             console.log('Action is Fired >>',data)
             props.nearestSaloon(data)
@@ -140,27 +181,33 @@ const Map = (props) =>{
         console.log('Current Loc Button is Pressed.....')
     }
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         console.log('Map is Mounted >>>>>>>>>>>>>>>>>>')
         getLoc()
-        // getNearestSalons(
-        //     {
-        //         variables: {
-        //             latitude: 24.929505 , longitude: 67.115988
-        //         }
-        //     }
-        // )
     },[])
 
-    let imgUri = props.signIn.data.loginUser.profileImageURL 
+    const handleBarPress = () =>{
+        console.log('Bar is Pressed')
+        data && props.navigation.navigate('SaloonList',{
+            nearestSaloons:data.getNearestSalons
+        })
+    }
+
+    const handleMarkerPress = (data) =>{
+        console.log('Saloon Data >>' , data)
+        props.selectedSaloon(data)
+        props.navigation.navigate('Saloon')
+    }
+
+    let imgUri = props.mfa.verifyCode.profileImageURL 
                 // {uri : props.signIn.data.loginUser.profileImageURL } : 
                 
-    let name = props.signIn.data.loginUser.userName
+    let name = props.mfa.verifyCode.userName
 
     return(
         <View style={styles.container}>
 
-            <Search name={name} imgUri={imgUri} />
+            <Search name={name} imgUri={imgUri} nav={props}/>
 
             <View style={styles.map}>
                 <MapView 
@@ -177,11 +224,12 @@ const Map = (props) =>{
                     }
                     showsCompass={false}
                     showsUserLocation={true}
+                    showsMyLocationButton={false}
                 >
                  {  data && data.getNearestSalons.map((val,index)=>{
                      let loc = val.location.coordinates 
                     // let loc = val.loc
-                     console.log('Loc is >>',loc)
+                     console.log('Val is >>',val)
                         return(
                         // <View key={index}>
                             <Marker
@@ -192,14 +240,12 @@ const Map = (props) =>{
                                     }
                                 }
                                 pinColor='red'
-                                onPress={()=>{
-                                    console.log('Saloon Id is >>',val._id)
-                                    props.navigation.navigate('Saloon',{
-                                        saloonId: val._id
-                                    })
-                                }}
-                            /> 
-                            // {/* </Marker> */}
+                                // onPress={()=>handleMarkerPress(val)}
+                            > 
+                                <Callout tooltip={true} onPress={()=>handleMarkerPress(val)}>
+                                        <MyCallOut marker={val} />
+                                </Callout>
+                            </Marker>
                         // </View>
                     ) 
                     })
@@ -208,7 +254,9 @@ const Map = (props) =>{
                 </MapView>
             </View>
 
-            <MapFooter />
+            <MapFooter 
+                handleBarPress={handleBarPress}
+            />
            
         </View>
     )
@@ -216,13 +264,16 @@ const Map = (props) =>{
 
 const mapStateToProps = (state) =>{
     return{
-        signIn: state.loginReducer
+        token: state.mfaReducer.token ,
+        mfa: state.mfaReducer.data
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        nearestSaloon: (data) => dispatch(nearestSaloonSuccess(data))
+        nearestSaloon: (data) => dispatch(nearestSaloonSuccess(data)) ,
+        selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data))
+
     }
 }
 

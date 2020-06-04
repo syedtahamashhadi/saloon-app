@@ -18,6 +18,7 @@
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
     "expo": "~37.0.3",
+    "expo-calendar": "^8.1.0",
     "expo-location": "^8.1.0",
     "gql": "^1.1.2",
     "graphql": "^15.0.0",

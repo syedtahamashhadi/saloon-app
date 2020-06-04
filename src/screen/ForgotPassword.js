@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image} from 'react-native'
+import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image ,ScrollView} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import { connect } from 'react-redux'
@@ -12,6 +12,7 @@ const FORGOT_PASSWORD= gql `
         resetPassword(email: $email)
         {
         email
+        userName
         }  
     }
 `
@@ -21,11 +22,16 @@ const ForgotPassword = (props) =>{
 
     const [forgotPasswordPost,{data,loading,error}]=useMutation(FORGOT_PASSWORD)
 
+    console.log('Data >>',data)
+    console.log('Error >>',error)
+    console.log('Loading >>',loading)
+
+
     // props.forgotPasswordState.isForgotPasswordRequestSuccess == true ? props.navigation.push('SignIn') : null
 
     const handleButton = () =>{
         console.log('Button is pressed')
-        props.forgotPassword({email:email})
+        // props.forgotPassword({email:email})
         // console.log('Store State is >>', storeState)
 
         loading !== true && forgotPasswordPost(
@@ -39,7 +45,7 @@ const ForgotPassword = (props) =>{
 
     React.useEffect(()=>{
         if(data){
-            props.forgotPassword(data)
+            // props.forgotPassword(data)
             props.navigation.replace('SignIn')
         }
     },[data])
@@ -48,6 +54,8 @@ const ForgotPassword = (props) =>{
 
     return(
         <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+
             <View style={{marginHorizontal:20}}>
             <View style={{marginTop:35}}>
                 <TouchableOpacity onPress={()=>props.navigation.goBack()}>
@@ -80,6 +88,8 @@ const ForgotPassword = (props) =>{
                 </View>
             </View>
             </View>
+            </ScrollView>
+
         </View>
     )
 }
@@ -96,7 +106,9 @@ const mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(null,mapDispatchToProps)(ForgotPassword);
+// export default connect(null,mapDispatchToProps)(ForgotPassword);
+
+export default ForgotPassword;
 
 const styles = StyleSheet.create(
     {

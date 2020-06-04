@@ -3,13 +3,16 @@ import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image} from 're
 import Button from '../component/Button'
 
 
-const SignUp = () =>{
+const SignUp = (props) =>{
 
-    const handleButtonPressed = () =>{
+    const handleButton = () =>{
         console.log('Button is pressed')
+        props.navigation.navigate('SetProfileInfo')
     }
+
     const handleSkip = () =>{
         console.log('Skip is Pressed')
+        props.navigation.replace('Map')
     }
 
     return(
@@ -24,7 +27,7 @@ const SignUp = () =>{
             </View>
             <View style={{width:'100%',marginTop:80}}>
                 <View style={{marginTop:20}}>
-                    <Button title='Set Up Profile' btnColor='#19479c' textSize={14}/>
+                    <Button title='Set Up Profile' btnColor='#19479c' textSize={14} handleButton={handleButton}/>
                 </View>
             </View>
             <View style={{marginTop:20,flexDirection:'row',justifyContent:'center'}}>  
@@ -44,7 +47,6 @@ const styles = StyleSheet.create(
         container:{
             flex:1,
             backgroundColor:'#fff',
-            marginHorizontal:20
         },
         inputContainer:{
             justifyContent:'center',

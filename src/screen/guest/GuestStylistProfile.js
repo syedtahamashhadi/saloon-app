@@ -2,13 +2,13 @@ import React from 'react'
 import {View ,Text , StyleSheet , TouchableOpacity , Image, ScrollView} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import { Avatar } from 'react-native-elements'
-import Rating from '../component/Rating'
+import Rating from '../../component/Rating'
 
 
-const StylistProfile = (props) =>{
+const GuestStylistProfile = (props) =>{
 
     console.log('Stylist Profile Props >>>' , props)
-    const { stylist } = props.route.params
+    // const { stylist } = props.route.params
 
     const handleBackPress = () =>{
         console.log('Back is Pressed')
@@ -37,11 +37,11 @@ const StylistProfile = (props) =>{
 
                 <View style={{alignItems:'center'}}>
                     <View style={styles.stylistAvatarContainer}>
-                        <Avatar rounded source={{uri: stylist.profileImageURL}} size={55}/>
+                        <Avatar rounded source={require('../../../assets/stylist-1.png')} size={55}/>
                     </View>
-                        <Text style={{marginTop:5 , fontSize:25 , textAlign:'center'}}>{stylist.name}</Text>
+                        <Text style={{marginTop:5 , fontSize:25 , textAlign:'center'}}>Matt Perry</Text>
                     <View style={{marginTop:12}}>
-                        <Rating rating={stylist.rating}/>
+                        <Rating rating={5.0}/>
                     </View>
                 </View>
             </View>
@@ -53,11 +53,11 @@ const StylistProfile = (props) =>{
                 <View style={{height:230 , flexDirection:'row' ,
                                 justifyContent:'space-between'}}>
                     <View style={{backgroundColor:'blue' ,height:'100%', width:'55%' , borderRadius:20}}>
-                        <Image source={require('../../assets/shop-1.png')} style={styles.shopImage}/>
+                        <Image source={require('../../../assets/shop-1.png')} style={styles.shopImage}/>
                     </View>
                     <View style={{width:'43%' , flexDirection:'column' , justifyContent:'space-between'}}>
                         <View style={{backgroundColor:'green' ,height:'48%', width:'100%' , borderRadius:20}}>
-                            <Image source={require('../../assets/shop-2.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/shop-2.png')} style={styles.shopImage}/>
                         </View>
                         <TouchableOpacity onPress={handlePhotoPress} 
                                     style={{height:'48%', width:'100%' , borderRadius:20}}>
@@ -69,7 +69,7 @@ const StylistProfile = (props) =>{
                                     See Photos
                                 </Text>
                             </View>
-                            <Image source={require('../../assets/shop-2.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/shop-2.png')} style={styles.shopImage}/>
                         </TouchableOpacity>
                     </View>
                     
@@ -78,12 +78,12 @@ const StylistProfile = (props) =>{
                 <View style={{flexDirection:'row', marginTop:20 ,alignItems:'center'}}>
                     <View style={styles.avatarsContainer}>
                         <View style={{borderRadius:40,borderWidth:3,borderColor:'white',elevation:5}}>
-                            <Avatar rounded source={require('../../assets/stylist-5.png')}/>
+                            <Avatar rounded source={require('../../../assets/stylist-5.png')}/>
                             
                             <View style={styles.avatarRow}>
-                                <Avatar rounded source={require('../../assets/stylist-3.png')}/>
+                                <Avatar rounded source={require('../../../assets/stylist-3.png')}/>
                                 <View style={styles.avatarRow}>
-                                    <Avatar rounded source={require('../../assets/stylist-4.png')}/>
+                                    <Avatar rounded source={require('../../../assets/stylist-4.png')}/>
                                 </View>
                             </View>
                         </View>
@@ -97,7 +97,7 @@ const StylistProfile = (props) =>{
                 <View style={styles.servicesContainer}>
                     <View style={{flexDirection:"row"}}>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red'}}>
-                            <Image source={require('../../assets/services-icon.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/services-icon.png')} style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
                             <Text style={{fontSize:25}}>Services</Text>
@@ -107,13 +107,13 @@ const StylistProfile = (props) =>{
 
                     <View style={{flexDirection:'row',marginTop:15,marginLeft:55}}>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
-                            <Image source={require('../../assets/scisor-icon.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/scisor-icon.png')} style={styles.shopImage}/>
                         </View>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
-                            <Image source={require('../../assets/blade-icon.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/blade-icon.png')} style={styles.shopImage}/>
                         </View>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
-                            <Image source={require('../../assets/trimmer-icon.png')} style={styles.shopImage}/>
+                            <Image source={require('../../../assets/trimmer-icon.png')} style={styles.shopImage}/>
                         </View>
                     </View>
 
@@ -124,7 +124,7 @@ const StylistProfile = (props) =>{
                 <View style={styles.servicesContainer}>
                     <View style={{flexDirection:"row"}}>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red'}}>
-                            <Image source={require('../../assets/bentalstilk-icon.png')} 
+                            <Image source={require('../../../assets/bentalstilk-icon.png')} 
                                 style={styles.shopImage}/>
 
                         </View>
@@ -143,7 +143,7 @@ const StylistProfile = (props) =>{
                 <View style={styles.servicesContainer}>
                     <View style={{flexDirection:"row"}}>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red'}}>
-                            <Image source={require('../../assets/workingHours-icon.png')} 
+                            <Image source={require('../../../assets/workingHours-icon.png')} 
                                     style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
@@ -165,7 +165,7 @@ const StylistProfile = (props) =>{
     )
 }
 
-export default StylistProfile;
+export default GuestStylistProfile;
 
 const styles = StyleSheet.create(
     {

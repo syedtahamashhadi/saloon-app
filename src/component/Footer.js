@@ -3,12 +3,12 @@ import {View , TouchableOpacity , StyleSheet} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import FontistoIcon from 'react-native-vector-icons/MaterialIcons'
 
-const Footer = () =>{
+const Footer = (props) =>{
 
-
+    console.log('Footer Props >>' , props)
     return(
         <View style={styles.footer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.handLocPress}>
                 <View style={styles.markerContainer}>
                     <Icon name='map-marker' size={30} />
                 </View>

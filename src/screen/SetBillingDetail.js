@@ -21,7 +21,7 @@ const Billing = () =>{
     return(
         <View style={styles.container}>
           
-            <View style={{marginTop:40}}>
+            <View style={{marginTop:15}}>
                 <Text style={{fontSize:20}}>Select Payment Method</Text>
             </View>
            

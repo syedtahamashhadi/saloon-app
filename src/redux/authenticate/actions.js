@@ -1,4 +1,14 @@
-import { SIGNIN , SIGNUP , MFA , FORGOT_PASSWORD , NEAREST_SALOON} from './constants'
+import { SIGNIN , 
+    SIGNUP , 
+    MFA , 
+    FORGOT_PASSWORD , 
+    NEAREST_SALOON ,
+    SELECTED_SALOON_BOOKING ,
+    SELECTED_STYLIST_BOOKING ,
+    SELECTED_SERVICE_BOOKING ,
+    SELECTED_DATE_TIME_BOOKING ,
+    GUEST_USER ,
+} from './constants'
 
 
 /******************************* SignUp ****************************************/
@@ -69,7 +79,8 @@ const loginSuccess = (data) =>{
 const mfaSuccess = (data) =>{
     return{
         type: MFA.SUCCESS,
-        payLoad: data
+        payLoad: data , 
+        token : data.verifyCode.jwtToken.token
     }
 }
 
@@ -113,6 +124,52 @@ const nearestSaloonSuccess = (data) =>{
     }
 }
 
+/****************************** Selected Saloon For Booking *************************************/
+
+const selectedSaloonBookingSuccess = (data) =>{
+    console.log('Booking is Fired >>', data)
+    return{
+        type: SELECTED_SALOON_BOOKING.SUCCESS ,
+        payLoad: data
+    }
+}
+
+/****************************** Selected Stylist For Booking *************************************/
+
+const selectedStylistBookingSuccess = (data) =>{
+    return{
+        type: SELECTED_STYLIST_BOOKING.SUCCESS ,
+        payLoad: data
+    }
+}
+
+/****************************** Selected Service For Booking *************************************/
+
+const selectedServiceBookingSuccess = (data) =>{
+    return{
+        type: SELECTED_SERVICE_BOOKING.SUCCESS ,
+        payLoad: data
+    }
+}
+
+/****************************** Selected DateTime For Booking *************************************/
+
+const selectedDateTimeSuccess = (data) =>{
+    return{
+        type: SELECTED_DATE_TIME_BOOKING.SUCCESS,
+        payLoad: data
+    }
+}
+
+/****************************** Guest User *************************************/
+
+const guestUserSuccess = (data) =>{
+    return{
+        type: GUEST_USER.SUCCESS ,
+        payLoad: data
+    }
+}
+
 
 export {
     signUpSuccess,
@@ -120,4 +177,9 @@ export {
     mfaSuccess,
     forgotPasswordSuccess,
     nearestSaloonSuccess,
+    selectedSaloonBookingSuccess,
+    selectedStylistBookingSuccess,
+    selectedServiceBookingSuccess,
+    selectedDateTimeSuccess,
+    guestUserSuccess ,
 }

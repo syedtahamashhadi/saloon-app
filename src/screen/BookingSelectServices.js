@@ -2,13 +2,23 @@ import React from 'react'
 import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Button from '../component/Button'
+import { selectedServiceBookingSuccess } from '../redux/authenticate/actions'
+import { connect } from 'react-redux'
 
 
 
-const BookingSelectServices = () =>{
+
+const BookingSelectServices = (props) =>{
+
+    console.log('BookingSelectServices Props >>' , props)
+
+    const { data } = props.selectedStylist
+    const { services } = props.selectedStylist.data
 
     const [pageView,setPageView] = React.useState(3.5)
-    const [selectedService,setSelectedService] = React.useState([])
+    // const [selectedService,setSelectedService] = React.useState([])
+    const [selectedService,setSelectedService] = React.useState(null)
+
 
     // let serviceArr = []
 
@@ -19,12 +29,17 @@ const BookingSelectServices = () =>{
 
     const handleNextButton = () =>{
         console.log('Button is Pressed')
+        if(selectedService){
+            props.selectService(selectedService)
+            props.navigation.navigate('PickDate')
+            console.log('TEst Successs ')
+        }
+
     }
 
-    const handleServicetPress = (val) =>{
-        setSelectedService(selectedService.concat(val.name))
+    const handleServicePress = (val) =>{
+        setSelectedService(val)
         console.log('Selected Service is >>',selectedService)
-
     }
 
     const serviceData = [  {icon:require('../../assets/scisor-icon.png'),name:'Hair Cut'},
@@ -37,13 +52,15 @@ const BookingSelectServices = () =>{
         <View style={styles.container}>
 
             <View style={{flex:pageView, backgroundColor:'#fff' }}>
-                <View style={{marginTop:35,marginHorizontal:20}}>
-                    <AntIcon name='arrowleft' size={25}/>
-
-                </View>
+                <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                    <View style={{marginTop:35,marginHorizontal:20}}>
+                        <AntIcon name='arrowleft' size={25}/>
+                    </View>
+                </TouchableOpacity>
+                
                
                 <View style={{flexDirection:'row' , marginTop:30, justifyContent:'space-between' , backgroundColor: '#fff'}}>
-                    <TouchableOpacity onPress={()=>{console.log('Back Button is Pressed')}} style={{justifyContent:'center'}}>
+                    <TouchableOpacity onPress={()=>{}} style={{justifyContent:'center'}}>
                         <View style={{marginLeft:20 , justifyContent:'center'}}>
                             <AntIcon name='arrowleft' size={25}/>
                         </View>
@@ -70,11 +87,11 @@ const BookingSelectServices = () =>{
                     <View style={{backgroundColor:'#fff' ,marginTop:'-12%' , alignItems:'center'}}>
                         <View style={{height:60,width:60,borderRadius:40,backgroundColor:'green',
                                         borderWidth:3,borderColor:'#fff',elevation:5 }}>
-                            <Image source={require('../../assets/stylist-4.png')} style={styles.imgMannager}/>
+                            <Image source={{ uri: data.profileImageURL }} style={styles.imgMannager}/>
                         </View>
                         
-                        <Text style={{fontSize:16,marginTop:10,fontWeight:'bold'}}>Matt Perry</Text>
-                        <Text style={{fontSize:14,marginTop:5}}>5 star / 85 reviews</Text>
+                <Text style={{fontSize:16,marginTop:10,fontWeight:'bold'}}>{data.name}</Text>
+                        <Text style={{fontSize:14,marginTop:5}}>{`${data.rating} star / 85 reviews`}</Text>
 
                     </View>
                 </View>
@@ -93,17 +110,17 @@ const BookingSelectServices = () =>{
                     <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false} >
                         <View style={{flexDirection:'row' , marginTop:25}}>
                             {
-                                serviceData.map((val,index)=>{
-                                    let myColor =  selectedService.includes(val.name) ? '#49D3CE' : null
-                                    let myBorderColor = selectedService.includes(val.name) ? '#49D3CE' : '#fff'
+                                services.map((val,index)=>{
+                                    let myColor =  (selectedService && val.name==selectedService.name) ? '#49D3CE' : null
+                                    let myBorderColor = (selectedService && val.name==selectedService.name) ? '#49D3CE' : '#fff'
 
                                     return(
-                                        <TouchableOpacity onPress={()=>handleServicetPress(val)} key={index}>
+                                        <TouchableOpacity onPress={()=>handleServicePress(val)} key={index}>
 
                                             <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
                                                 <View style={{height:55,width:55,borderRadius:40,backgroundColor:'green',
                                                 borderWidth:3,borderColor: myBorderColor,elevation:5}}>
-                                                    <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
+                                                    <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                                 </View>
                                                 <Text style={{color:myColor}}>
                                                     {val.name.length>15 ? val.name.slice(0,12) : val.name}
@@ -127,6 +144,17 @@ const BookingSelectServices = () =>{
     )
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        selectedStylist: state.selectedStylistBookingReducer
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        selectService: (data) => dispatch(selectedServiceBookingSuccess(data))
+    }
+}
 
 const styles = StyleSheet.create(
     {
@@ -153,4 +181,4 @@ const styles = StyleSheet.create(
     }
 )
 
-export default BookingSelectServices ;
+export default connect(mapStateToProps,mapDispatchToProps)(BookingSelectServices) ;

@@ -1,87 +1,28 @@
 import React from 'react'
 import {View,ScrollView,Text,TouchableOpacity,StyleSheet,Image} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
-import Rating from '../component/Rating'
-import SaloonInfo from '../component/SaloonInfo'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import { connect } from 'react-redux'
+import Rating from '../../component/Rating'
+import GuestSaloonInfo from './GuestSaloonInfo'
 
+const GuestSaloon = (props) =>{
 
-const GET_SALOON_BY_ID = gql `
-    query abc($_id: ID!)
-    {
-        salon(_id: $_id) {
-            displayName
-            backgroundProfileImage
-            rating
-            profileImage
-            portfolioImages
-            services{
-                name
-                _id
-                description
-                approxTime
-                price
-            }
-
-            serviceProviders{
-                name
-                _id
-                status
-                rating
-                profileImageURL
-            }
-        }
-    }
-`
-
-const Saloon = (props) =>{
-
-    // const {saloon} = props.route.params
-    const saloon = props.selectedSaloon.data
-    console.log('ID IS >>>>' , saloon)
 
     const [highlight,setHighLight] = React.useState('Info')
 
     const pages = [{name:'Info'} , {name:'Offers'} , {name:'Reviews'}]
 
-    // const {data , loading , error} = useQuery(GET_SALOON_BY_ID , 
-    //         {
-    //             variables: {
-    //                 _id: saloonId
-    //             } ,
-    //             // fetchPolicy: 'network-only',
-    //             context:{
-    //                 headers:{
-    //                     authorization:  props.signIn.token
-    //                 }
-    //             }
-    //         }
-    //     )
-    
-    // console.log('Data is >>',data)
-    // console.log('Error is >>',error)
-    // console.log('loading is >>',loading)
-
-    const getComponent = (val,saloon) =>{
-        console.log('Data is >>' , saloon)
+    const getComponent = (val) =>{
+        console.log('Data is >>' )
         switch (true) {
-            case val == 'Info': return  <SaloonInfo
-                                            stylist={saloon.serviceProviders}
-                                            services={saloon.services} 
-                                            portfolioImg={saloon.portfolioImages}
-                                            navigation={props.navigation}
-                                       />
+            case val == 'Info': return  <GuestSaloonInfo nav={props}/>
             case val == 'Offers': return  <View style={{justifyContent:'center',alignItems:'center'}}><Text>Offers</Text></View>
             case val == 'Reviews': return   <View style={{justifyContent:'center',alignItems:'center'}}><Text>Reviews</Text></View>      
             default: return <SaloonInfo />
         }
     }
 
-    let bannerImg = (saloon.backgroundProfileImage !== 'background.jpg') ? {uri : saloon.backgroundProfileImage} :
-                    require('../../assets/barber-shave.jpg')
-    let mannagerImg = (saloon.managerImage) ? {uri : saloon.managerImage} : require('../../assets/mannager.png')
+    let bannerImg = require('../../../assets/barber-shave.jpg')
+
     const handleNavPress = (val) =>{
         setHighLight(val.name)
     }
@@ -90,7 +31,7 @@ const Saloon = (props) =>{
         <View style={styles.container}>
             <View style={{flex:3,backgroundColor:'red'}}>
                 <View>
-                    <Image source={require('../../assets/barber-shave.jpg')} style={styles.image}/>
+                    <Image source={require('../../../assets/barber-shave.jpg')} style={styles.image}/>
 
                     <View style={{position:'absolute',zIndex:999,width:'100%'}}>
                         <View style={{flexDirection:'row' , justifyContent:'space-between',marginHorizontal:20
@@ -106,7 +47,7 @@ const Saloon = (props) =>{
                         </View>
                         <View style={{marginTop:0,alignItems:'center'}}>
                             <Text style={{fontSize:30,fontWeight:'bold',color:'#fff'}}>
-                               { saloon.displayName ? saloon.displayName : 'TONI&GUY'}
+                               TONI&GUY
                             </Text>
                         </View>
                     </View>
@@ -120,12 +61,12 @@ const Saloon = (props) =>{
                 borderTopLeftRadius:20,borderTopRightRadius:20,elevation:1}}>
                     <View style={{width:55,height:55,borderRadius:45,backgroundColor:'red',borderWidth:3,
                                         borderColor:'#fff',elevation:5,top:-25}}>
-                            <Image source={mannagerImg} style={styles.imgMannager}/>
+                            <Image source={require('../../../assets/mannager.png')} style={styles.imgMannager}/>
                     </View>
-                    <Text style={{top:-10,fontWeight:'bold',fontSize:15}}>{saloon.managerName}</Text>
+                    <Text style={{top:-10,fontWeight:'bold',fontSize:15}}>Stella McLaren</Text>
                     <Text style={{top:0,color:'grey'}}>Shop Mannager</Text>
                     <View style={{marginTop:5}}></View>
-                    <Rating rating={ saloon.rating ? saloon.rating : 4.7}/>
+                    <Rating rating={4.7}/>
                    
                    <View style={{flexDirection:'row',justifyContent:'space-around',width:'100%',marginTop:5}}>
                        
@@ -148,7 +89,7 @@ const Saloon = (props) =>{
                 </View>
                 
                 <ScrollView showsVerticalScrollIndicator={false} style={{marginHorizontal:20}}>
-                    {getComponent(highlight,saloon)}
+                    {getComponent(highlight)}
                 </ScrollView>
 
 
@@ -158,15 +99,8 @@ const Saloon = (props) =>{
 }
 
 
-const mapStateToProps = (state) =>{
-    console.log('State is >>' , state)
-    return{
-        signIn: state.loginReducer ,
-        selectedSaloon: state.selectedSaloonBookingReducer
-    }
-}
 
-export default connect(mapStateToProps,null)(Saloon);
+export default GuestSaloon;
 
 
 const styles = StyleSheet.create(

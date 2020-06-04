@@ -1,28 +1,27 @@
 {
   "expo": {
-    "name": "Saloon",
-    "slug": "Saloon",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/scisor-icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
+   "name": "Saloon",
+   "icon": "./assets/splash.png",
+   "version": "1.0.0",
+   "slug": "Saloon",
+   "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#fff"
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+   "ios": {
+     "bundleIdentifier": "com.saloonapp.www",
+     "buildNumber": "1.0.0"
+   },
+   "android": {
+     "package": "com.saloonapp.www",
+     "versionCode": 1,
+     "config": {
+      "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" }   
+      }
     }
   }
 }

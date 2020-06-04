@@ -1,5 +1,9 @@
-let markerData = [{loc:["24.930027", "67.113442"]} , {loc:["24.920027", "67.113442"]}]
+let markerData = {
+  btc:{
+    price:4500
+  }
+}
 
-markerData.map((val,index)=>{
-  console.log('Val is >>',val.loc[0])
-})
+let btcPrice = marketData.btc?.price
+
+console.log('BTC PRICE ' , btcPrice)
