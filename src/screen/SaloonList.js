@@ -27,7 +27,7 @@ const SaloonList = (props) =>{
             <View style={{marginHorizontal:20}}>
                 <HomeScreenBanner />
             </View>
-       
+        
             <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:40 , marginHorizontal:20}}>
                 {nearestSaloons.map((val,index)=> 
                     <TouchableOpacity onPress={()=>{handleSaloonPress(val)}}>

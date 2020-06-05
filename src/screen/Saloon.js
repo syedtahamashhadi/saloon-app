@@ -13,7 +13,6 @@ const GET_SALOON_BY_ID = gql `
     {
         salon(_id: $_id) {
             displayName
-            backgroundProfileImage
             rating
             profileImage
             portfolioImages
@@ -79,8 +78,8 @@ const Saloon = (props) =>{
         }
     }
 
-    let bannerImg = (saloon.backgroundProfileImage !== 'background.jpg') ? {uri : saloon.backgroundProfileImage} :
-                    require('../../assets/barber-shave.jpg')
+    // let bannerImg = (saloon.backgroundProfileImage !== 'background.jpg') ? {uri : saloon.backgroundProfileImage} :
+    //                 require('../../assets/barber-shave.jpg')
     let mannagerImg = (saloon.managerImage) ? {uri : saloon.managerImage} : require('../../assets/mannager.png')
     const handleNavPress = (val) =>{
         setHighLight(val.name)
