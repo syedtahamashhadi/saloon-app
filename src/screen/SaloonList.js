@@ -3,6 +3,9 @@ import {View , StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import HomeScreenBanner from '../component/HomeScreenBanner'
 import SaloonBanner from '../component/SaloonBanner'
 import Footer from '../component/Footer'
+import { selectedSaloonBookingSuccess } from '../redux/authenticate/actions'
+import { connect } from 'react-redux'
+
 
 const SaloonList = (props) =>{
     console.log('SaloonList Props' , props)
@@ -14,11 +17,10 @@ const SaloonList = (props) =>{
                         {time:17,name:'Slough Barber',rating:4.7,distance:1.3}
                         ]
 
-    const handleSaloonPress = (val) =>{
+    const handleSaloonPress = (data) =>{
         console.log(`Saloon is pressed`)
-        props.navigation.navigate('Saloon',{
-            saloon: val
-        })
+        props.selectedSaloon(data)
+        props.navigation.navigate('Saloon')
     }
     return(
         <View style={styles.container}>
@@ -52,7 +54,14 @@ const SaloonList = (props) =>{
     )
 }
 
-export default SaloonList
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data))
+
+    }
+}
+
+export default connect(null,mapDispatchToProps)(SaloonList)
 
 const styles = StyleSheet.create(
     {
