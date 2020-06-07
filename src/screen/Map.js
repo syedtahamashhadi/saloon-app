@@ -139,6 +139,9 @@ const Map = (props) =>{
 
     const [userLat,setUserLat] = React.useState(null)
     const [userLng,setUserLng] = React.useState(null)
+    const [currentLat,setCurrentLat] = React.useState(null)
+    const [currentLng,setCurrentLng] = React.useState(null)
+
     const [locError,setLocError] = React.useState('')
 
     const {data , loading , error} = useQuery(GET_NEAREST_SALOON ,
@@ -158,6 +161,10 @@ const Map = (props) =>{
         if(data){
             console.log('Action is Fired >>',data)
             props.nearestSaloon(data)
+            data.getNearestSalons.forEach(val => {
+                setCurrentLat(Number(val.location.coordinates[0]))
+                setCurrentLng(Number(val.location.coordinates[1]))
+            });
         }
     },[data])
        
@@ -214,7 +221,7 @@ const Map = (props) =>{
                     style={styles.map}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
-                    region={
+                    initialRegion={
                         {
                             latitude:userLat,
                             longitude:userLng,
@@ -222,6 +229,14 @@ const Map = (props) =>{
                             longitudeDelta:0.0421
                         }
                     }
+                    region={
+                        { 
+                          latitude: currentLat,
+                          longitude: currentLng,
+                          latitudeDelta: 0.0922,
+                          longitudeDelta: 0.0421,
+                        }
+                      }
                     showsCompass={false}
                     showsUserLocation={true}
                     showsMyLocationButton={false}

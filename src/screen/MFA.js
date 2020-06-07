@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , TextInput ,StyleSheet , ScrollView} from 'react-native'
+import {View , Text , TextInput ,StyleSheet , ScrollView , ActivityIndicator} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
@@ -107,6 +107,8 @@ const MFA = (props) =>{
 
                 <View style={{width:'100%',justifyContent:'center',marginTop:'10%'}}>
                     {error && <Text style={{textAlign:'center', color:'red'}}>Something Went Wrong! TryAgain</Text>}
+                    {loading && <ActivityIndicator size={20} color='#00ff00'/>}
+                    
                 </View>
                 
                 <View style={{marginTop:20}}>

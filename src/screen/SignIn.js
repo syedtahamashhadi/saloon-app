@@ -1,5 +1,6 @@
 import React , {useEffect} from 'react'
-import {View , Text , StyleSheet , TextInput, TouchableOpacity ,Image , ScrollView} from 'react-native'
+import {View , Text , StyleSheet , TextInput, 
+            TouchableOpacity ,Image , ScrollView , ActivityIndicator} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import {connect} from 'react-redux'
@@ -85,7 +86,7 @@ const SignIn = (props) =>{
 
         
         <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            {/* <ScrollView showsVerticalScrollIndicator={false}> */}
 
             <ScrollView showsVerticalScrollIndicator={false} style={{marginHorizontal:20 }}>
 
@@ -94,7 +95,7 @@ const SignIn = (props) =>{
                         <AntIcon name="arrowleft" size={25} />
                     </TouchableOpacity>
                 </View>
-                <View style={{marginTop:30,justifyContent:'center',alignItems:'center'}}>
+                <View style={{marginTop:15,justifyContent:'center',alignItems:'center'}}>
                     <View style={{width:120 , height:140 , backgroundColor:'#fff'}}>
                         <Image source={require('../../assets/signIn-avatar.png')} style={styles.image} />
                     </View>
@@ -102,7 +103,7 @@ const SignIn = (props) =>{
                         <Text style={{fontSize:25 , fontWeight:'bold'}}>Sign In</Text>
                     </View>
                 </View>
-                <View style={{width:'100%',marginTop:20}}>
+                <View style={{width:'100%',marginTop:15}}>
                     <View style={styles.inputContainer}>
                         <TextInput 
                             style={{width:'80%',height:40,borderRadius:6,borderWidth:1 ,
@@ -127,9 +128,16 @@ const SignIn = (props) =>{
                             placeholder='Password'
                             secureTextEntry={true}
                             fontSize={16}
+                            // onSubmitEditing={handleSignIn}
                         />
                     </View>
-                    <View style={{marginTop:20}}>
+                    <View style={{marginTop:'3%' , width:'100%' }}>
+                        {error && <Text style={{color:'red' , textAlign:'center'}}>
+                            Something Went Wrong! TryAgain
+                        </Text> }
+                        {loading && <ActivityIndicator size={20} color='#00ff00'/>}
+                    </View>
+                    <View style={{marginTop:15}}>
                         <Button title='Sign In' btnColor='#19479c' handleButton={handleSignIn}/>
                     </View>
                     <View style={{marginTop:15,flexDirection:'row',justifyContent:'center'}}>  
@@ -147,7 +155,7 @@ const SignIn = (props) =>{
                 </View>
 
             </ScrollView>
-            </ScrollView>
+            {/* </ScrollView> */}
 
         </View>
     )

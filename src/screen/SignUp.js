@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , StyleSheet , TextInput, TouchableOpacity, Image , ScrollView} from 'react-native'
+import {View , Text , StyleSheet , TextInput, TouchableOpacity, Image , ScrollView, ActivityIndicator} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import SocialCard from '../component/SocialCard'
@@ -76,6 +76,11 @@ const SignUp = (props) =>{
     return(
         // <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
+            {loading && <View style={{position:'absolute',width:'100%',zIndex:9999,}}>
+                <View style={{height:'100%',justifyContent:'center',alignItems:'center',marginTop:'50%'}}>
+                    <ActivityIndicator size='large' color='#00ff00'/>
+                </View>
+            </View>}
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{marginHorizontal:20}}>
             <View style={{marginTop:35}}>
@@ -143,6 +148,11 @@ const SignUp = (props) =>{
                         placeholder='Phone'
                         fontSize={16}
                     />
+                </View>
+                <View style={{marginTop:'3%' , width:'100%' }}>
+                        {error && <Text style={{color:'red' , textAlign:'center'}}>
+                            Something Went Wrong! TryAgain
+                        </Text> }
                 </View>
                 <View style={{alignItems:'center',marginTop:12}}>
                     <Text style={{fontSize:15}}>Connect</Text>
