@@ -82,7 +82,9 @@ const PickDate = (props) =>{
         }
     },[data])
 
-    const handleDatePress = async (val) =>{
+
+    const handleDatePress = (val) =>{
+        console.log('Date is >>>>' , val)
         setSelectedDate(val.dateString)
         setPageView(1)
     }

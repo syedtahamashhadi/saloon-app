@@ -1,6 +1,7 @@
 import React from 'react'
 import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Button from '../component/Button'
 import { selectedServiceBookingSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
@@ -62,7 +63,10 @@ const BookingSelectServices = (props) =>{
                 <View style={{flexDirection:'row' , marginTop:30, justifyContent:'space-between' , backgroundColor: '#fff'}}>
                     <TouchableOpacity onPress={()=>{}} style={{justifyContent:'center'}}>
                         <View style={{marginLeft:20 , justifyContent:'center'}}>
-                            <AntIcon name='arrowleft' size={25}/>
+                            <View style={{position:'absolute',width:'100%',zIndex:9999,}}>
+                                <View style={{width:9,height:9,borderRadius:5,backgroundColor:'#49D3CE'}}></View>
+                            </View>
+                            <SimpleIcon name='handbag' size={20}/>
                         </View>
                     </TouchableOpacity>
 
@@ -101,7 +105,7 @@ const BookingSelectServices = (props) =>{
             <View style={{flex:6.5 , borderTopLeftRadius:15,borderTopRightRadius:15,backgroundColor:'#fff' ,elevation:20}}>
 
                     <TouchableOpacity  onPress={()=>handlePageView()}
-                                style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
+                                style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
                         <View style={{height:20,width:60}}>
                             <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                         </View>
@@ -122,7 +126,7 @@ const BookingSelectServices = (props) =>{
                                                 borderWidth:3,borderColor: myBorderColor,elevation:5}}>
                                                     <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                                 </View>
-                                                <Text style={{color:myColor}}>
+                                                <Text style={{color:myColor,marginTop:'2%'}}>
                                                     {val.name.length>15 ? val.name.slice(0,12) : val.name}
                                                 </Text>
                                             </View>

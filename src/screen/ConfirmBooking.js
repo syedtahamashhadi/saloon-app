@@ -115,10 +115,10 @@ const ConfirmBooking = (props) =>{
                     </View>
                 </TouchableOpacity>
 
-                <View style={{marginTop:15,alignItems:'center'}}>
+                <View style={{marginTop:10,alignItems:'center'}}>
                     <Text style={{fontSize:18}}>Confirmed Time:</Text>
 
-                    <View style={{marginTop:20}}>
+                    <View style={{marginTop:15}}>
                         <Text style={{fontSize:18,color:'#49D3CE'}}>Friday March 8, 2020</Text>
                     </View>
                     <Text style={{fontSize:18,color:'#49D3CE'}}>at 10:00 AM</Text>
@@ -137,7 +137,7 @@ const ConfirmBooking = (props) =>{
 
                 </View>
                 
-                <View style={{marginTop:25}}>
+                <View style={{marginTop:15}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
             </View>

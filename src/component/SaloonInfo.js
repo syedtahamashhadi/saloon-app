@@ -11,7 +11,7 @@ const SaloonInfo = (props) =>{
     // const { stylist , services , portfolioImg } = props.route.params
 
     const [selectedCrew,setSelectedCrew] = React.useState('')
-    const [selectedService,setSelectedService] = React.useState('')
+    // const [selectedService,setSelectedService] = React.useState('')
     
 
     const crewData = [  {icon:require('../../assets/stylist-1.png'),name:'Mattttttttttr dsada ad'},
@@ -67,7 +67,7 @@ const SaloonInfo = (props) =>{
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor}}>
+                                            <Text style={{color:myColor,marginTop:'2%'}}>
                                                 {val.name.length>15 ? val.name.slice(0,12) : val.name}
                                             </Text>
                                         </View>
@@ -91,18 +91,18 @@ const SaloonInfo = (props) =>{
 
                         {
                             props.services.map((val,index)=>{
-                                let myColor = val.name == selectedService ? '#49D3CE' : null
-                                let myBorderColor = val.name == selectedService ? '#49D3CE' : '#fff'
+                                // let myColor = val.name == selectedService ? '#49D3CE' : null
+                                // let myBorderColor = val.name == selectedService ? '#49D3CE' : '#fff'
                                 return(
 
-                                    <TouchableOpacity onPress={()=>setSelectedService(val.name)} key={index}>
+                                    <TouchableOpacity  key={index}>
 
                                         <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
                                             <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
-                                            borderWidth:3,borderColor:myBorderColor,elevation:5}}>
+                                            borderWidth:3,borderColor:'#fff',elevation:5}}>
                                                 <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor}}>
+                                            <Text style={{color:'black',marginTop:'2%'}}>
                                                 {val.name>15 ? val.name.slice(0.13) : val.name}
                                             </Text>
                                         </View>

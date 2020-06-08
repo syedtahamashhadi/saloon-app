@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , TextInput ,StyleSheet , ScrollView} from 'react-native'
+import {View , Text , TextInput ,StyleSheet , ScrollView , ActivityIndicator} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
@@ -69,6 +69,9 @@ const MFA = (props) =>{
             screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.replace('Map')
         }
     },[data])
+
+    let myBorder= error ? 'red' : '#fafafa'
+    
     return(
         <View style={styles.container}>
             <View style={{width:120,height:100,marginTop:120,alignItems:'center'}}>
@@ -78,13 +81,22 @@ const MFA = (props) =>{
                 <Text style={{fontSize:35 , fontWeight:'bold'}}>OTP</Text>
             </View>
             <View style={{marginTop:20}}>
-                <Text style={{fontSize:15 , fontWeight:'bold'}}>Please enter the 4 digit code!</Text>
+                <Text style={{fontSize:15 , fontWeight:'bold'}}>Please enter the 6 digit code!</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{alignItems:'center'}}>
                     <TextInput 
-                        style={styles.inputContainer}
+                        style={{
+                            width:120,
+                            height:40,
+                            borderRadius:6,
+                            borderWidth:1,
+                            marginTop:35,
+                            fontSize:20,
+                            backgroundColor:'#fafafa',
+                            borderColor: myBorder
+                        }}
                         onChangeText= {val=>setOtp(val)}
                         value={otp}
                         placeholder='Enter Code'
@@ -92,8 +104,14 @@ const MFA = (props) =>{
                         keyboardType={'numeric'}
                     />
                 </View>
+
+                <View style={{width:'100%',justifyContent:'center',marginTop:'10%'}}>
+                    {error && <Text style={{textAlign:'center', color:'red'}}>Something Went Wrong! TryAgain</Text>}
+                    {loading && <ActivityIndicator size={20} color='#00ff00'/>}
+                    
+                </View>
                 
-                <View style={{marginTop:50}}>
+                <View style={{marginTop:20}}>
                     <Button title='Submit' handleButton={handleButton}/>
                 </View>
             </ScrollView>

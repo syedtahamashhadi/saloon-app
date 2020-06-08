@@ -1,6 +1,7 @@
 import React from 'react'
 import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+
 import { selectedStylistBookingSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
 
@@ -65,7 +66,7 @@ const BookingSelectStylist = (props) =>{
 
 
                     <TouchableOpacity  onPress={()=>handlePageView()}
-                                style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
+                                style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
                                     <View style={{height:20,width:60}}>
                                         <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                                     </View>
@@ -98,7 +99,7 @@ const BookingSelectStylist = (props) =>{
                                                 borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                     <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                                 </View>
-                                                <Text style={{color:myColor}}>
+                                                <Text style={{color:myColor,marginTop:'2%'}}>
                                                     {val.name.length>15 ? val.name.slice(0,12) : val.name}
                                                 </Text>
                                             </View>

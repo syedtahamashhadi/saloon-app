@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image ,ScrollView} from 'react-native'
+import {View , Text , StyleSheet , TextInput, TouchableOpacity , Image ,ScrollView, ActivityIndicator} from 'react-native'
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import { connect } from 'react-redux'
@@ -73,15 +73,18 @@ const ForgotPassword = (props) =>{
             <View style={{width:'100%',marginTop:20}}>
                 <View style={styles.inputContainer}>
                     <TextInput 
-                        style={{width:'80%',height:40,borderRadius:6,borderWidth:1,borderColor:errorBorderColor}}
+                        style={{width:'80%',height:40,borderRadius:6,borderWidth:1,
+                                    borderColor:errorBorderColor , paddingLeft:10}}
                         onChangeText= {val=>setEmail(val)}
                         value={email}
                         placeholder='Your Email'
+                        fontSize={16}
                     />
                 </View>
-                {error && <View style={{marginTop:'1%',alignItems:'center'}}>
-                    <Text style={{fontSize:12,fontWeight:'bold'}}>User Does Not Found</Text>
-                </View>}
+                <View style={{marginTop:'3%',alignItems:'center'}}>
+                    {error && <Text style={{color:'red'}}>User Does Not Found</Text> }
+                    {loading && <ActivityIndicator size='small'/>}
+                </View>
                 <View style={{marginTop:20}}>
                     <Button title='Reset Password' handleButton={handleButton} 
                             btnColor='#19479c' textSize={14} />
