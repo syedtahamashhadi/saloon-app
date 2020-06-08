@@ -1,5 +1,5 @@
 import React , {useEffect , useState} from 'react'
-import { View , Text , TouchableOpacity , StyleSheet } from 'react-native'
+import { View , Text , TouchableOpacity , StyleSheet , ScrollView} from 'react-native'
 import Chat from '../component/Chat'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
@@ -12,13 +12,14 @@ const PaymentMethods = (props) =>{
 
     const [pageView , setPageView] = useState(3.5)
     const [slectedCard , setSelectedCard] = useState('')
-
+    console.log('Testing Props >>>>>' , props)
     const handleCardPress = (val) =>{
         console.log('Button is Pressed....',val.cardId)
         setSelectedCard(val)
         props.navigation.navigate('ConfirmBooking',
             {
-                selectedCard: val
+                selectedCard: val ,
+                ...props.route.params
             }
         )
         
@@ -27,70 +28,71 @@ const PaymentMethods = (props) =>{
     const cardDetail = [{number:'8564' , cardId: "cfbb"},{number:'9387' , cardId: "cfbb"},{number:'6363' , cardId: "cfbb"}]
     return(
 
-        <View style={{flex:1 , backgroundColor:'#fff'}}>
+        <View style={{flex:1 , backgroundColor:'#fff' , }}>
 
-            <View style={{flex:pageView , marginHorizontal:20}}>
-                <View style={{marginTop:35}}>
-                    <TouchableOpacity onPress={()=>{props.navigation.goBack()}}>
-                        <AntIcon name='arrowleft' size={25}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={{marginTop:45}}>
-                    <Chat 
-                        desc= 'How do you want to pay?'
-                    />
-                </View>
-            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{marginHorizontal:20}}>
+                    <View style={{marginTop:35}}>
+                        <TouchableOpacity onPress={()=>{props.navigation.goBack()}}>
+                            <AntIcon name='arrowleft' size={25}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{marginTop:25}}>
+                        <Chat 
+                            desc= 'How do you want to pay?'
+                        />
+                    </View>
+                {/* </View> */}
 
-            <View style={{flex:6.5,borderTopLeftRadius:15,borderTopRightRadius:15 , elevation:30 ,width:'100%',backgroundColor:'#fff'}}>
-                
-                <View style={{alignItems:'center',top:10}}>
-                    <TouchableOpacity  onPress={()=>{pageView==3.5 ? setPageView(1) : setPageView(3.5)}}
-                    style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
-                        <View style={{height:20,width:60}}>
-                            <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+                {/* <View style={{flex:6.5,borderTopLeftRadius:15,borderTopRightRadius:15 , elevation:30 ,width:'100%',backgroundColor:'#fff'}}> */}
+                    
+                    {/* <View style={{alignItems:'center',top:10}}>
+                        <TouchableOpacity  onPress={()=>{pageView==3.5 ? setPageView(1) : setPageView(3.5)}}
+                        style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
+                            <View style={{height:20,width:60}}>
+                                <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
+                            </View>
+                        </TouchableOpacity>
+                    </View> */}
 
-                <View style={{marginTop:15 , justifyContent:'center' , alignItems:'center'}}>
-                    <Text style={{fontSize:18}}>Payment Methods</Text>
-                </View>
+                    <View style={{marginTop:15 , justifyContent:'center' , alignItems:'center'}}>
+                        <Text style={{fontSize:20}}>Payment Methods</Text>
+                    </View>
 
-                <View style={{marginHorizontal:20 , marginTop:35}}>
-                    {
-                        cardDetail.map((val,index)=>{
-                            console.log('Card Details >>' , val)
-                            let myColor = val.number == slectedCard.number ? '#49D3CE' : 'black'
-                            return(
-                                <TouchableOpacity onPress={()=>{handleCardPress(val)}}>
-                                    <View style={styles.card}>
-                                        <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10}}>
-                                            <View>
-                                                <AwsomeIcon name='cc-visa' size={50} color='blue' />
-                                            </View>
-                                            <View style={{justifyContent:'center'}}>
-                                                <Text style={{fontSize:16 , fontWeight:'bold' , color:myColor}}>
-                                                    {`***${val.number}`}
-                                                </Text>
+                    <View style={{marginTop:35}}>
+                        {
+                            cardDetail.map((val,index)=>{
+                                console.log('Card Details >>' , val)
+                                let myColor = val.number == slectedCard.number ? '#49D3CE' : 'black'
+                                return(
+                                    <TouchableOpacity onPress={()=>{handleCardPress(val)}}>
+                                        <View style={styles.card}>
+                                            <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10}}>
+                                                <View>
+                                                    <AwsomeIcon name='cc-visa' size={50} color='blue' />
+                                                </View>
+                                                <View style={{justifyContent:'center'}}>
+                                                    <Text style={{fontSize:16 , fontWeight:'bold' , color:myColor}}>
+                                                        {`***${val.number}`}
+                                                    </Text>
+                                                </View>
                                             </View>
                                         </View>
-                                    </View>
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
+                                    </TouchableOpacity>
+                                )
+                            })
+                        }
 
-                    <View style={styles.addCard}>
-                        <TouchableOpacity onPress={()=>props.navigation.navigate('UserDetail',{
-                            currentScreen: 'Payment Method'
-                        })}>
-                            <AntIcon name='plus' size={50} color='#49D3CE' />
-                        </TouchableOpacity>                            
+                        <View style={styles.addCard}>
+                            <TouchableOpacity onPress={()=>props.navigation.navigate('UserDetail',{
+                                currentScreen: 'Payment Method'
+                            })}>
+                                <AntIcon name='plus' size={50} color='#49D3CE' />
+                            </TouchableOpacity>                            
+                        </View>
                     </View>
-                </View>
-
-            </View>
+                    </View>
+            </ScrollView>
 
         </View>
     )

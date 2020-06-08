@@ -71,6 +71,7 @@ const MFA = (props) =>{
     },[data])
 
     let myBorder= error ? 'red' : '#fafafa'
+    let myErr = (error && error.message) ? error.message.slice(15) : null
     
     return(
         <View style={styles.container}>
@@ -106,7 +107,9 @@ const MFA = (props) =>{
                 </View>
 
                 <View style={{width:'100%',justifyContent:'center',marginTop:'10%'}}>
-                    {error && <Text style={{textAlign:'center', color:'red'}}>Something Went Wrong! TryAgain</Text>}
+                    {error && <Text style={{textAlign:'center', color:'red'}}>
+                        {myErr ? myErr : 'Something Went Wrong! TryAgain'}
+                        </Text>}
                     {loading && <ActivityIndicator size={20} color='#00ff00'/>}
                     
                 </View>

@@ -81,7 +81,9 @@ const SignIn = (props) =>{
     // },[data])
 
     const errorBorderColor = error ? 'red' : 'black'
-   
+    let myErr = (error && error.message) ? error.message.slice(15) : null
+
+    console.log('My Error' , myErr)
     return(
 
         
@@ -133,7 +135,8 @@ const SignIn = (props) =>{
                     </View>
                     <View style={{marginTop:'3%' , width:'100%' }}>
                         {error && <Text style={{color:'red' , textAlign:'center'}}>
-                            Something Went Wrong! TryAgain
+                            
+                            {myErr ? myErr : 'Something Went Wrong! TryAgain'}
                         </Text> }
                         {loading && <ActivityIndicator size={20} color='#00ff00'/>}
                     </View>

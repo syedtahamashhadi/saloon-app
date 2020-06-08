@@ -1,5 +1,5 @@
 import React , {useEffect} from 'react'
-import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
+import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet , ScrollView} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Chat from '../component/Chat'
 import { Calendar } from 'react-native-calendars'
@@ -31,7 +31,7 @@ const PickDate = (props) =>{
 
     const [pageView,setPageView]=React.useState(3)
     const [selectedDate,setSelectedDate] = React.useState(null)
-    const [dateErr , setDateErr] = React.useState(false)
+    const [val , setVal] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
     console.log('PicDate Props >>>' , props.signIn.token)
@@ -50,12 +50,51 @@ const PickDate = (props) =>{
         setTime(val)
     }
 
+    const convertingDay = (day) =>{
+        switch (new Date().getDay(day)) {
+            case 0: return 'Sunday'
+            case 1: return 'Monday'
+            case 2: return 'Tuesday'
+            case 3: return 'Wednesday'
+            case 4: return 'Thursday'
+            case 5: return 'Friday'
+            case 6: return 'Saturday'
+            case 7: return 'Saturday'
+        }
+    }
+
+    const convertingMonth = (month) =>{
+        switch (month) {
+            case 1: return 'Jan'
+            case 2: return 'Feb'
+            case 3: return 'Mar'
+            case 4: return 'Apr'
+            case 5: return 'May'
+            case 6: return 'Jun'
+            case 7: return 'Jul'
+            case 8: return 'Aug'
+            case 9: return 'Sep'
+            case 10: return 'Oct'
+            case 11: return 'Nov'
+            case 12: return 'Dec'
+        }
+    }
     const handleButton = () =>{
         if(selectedDate && time){
             let dateTime={date:selectedDate,time:time}
+            let dateTimeDetail = {
+                time: time,
+                strDay: convertingDay(val.dateString) ,
+                day: val.day , 
+                year: val.year ,
+                month: convertingMonth(val.month)
+            }
+
             console.log('Button is Pressed....',dateTime)
             props.selectDateTime(dateTime)
-            props.navigation.navigate('PaymentMethods')
+            props.navigation.navigate('PaymentMethods',{
+               ...dateTimeDetail
+            })
             // loading !== true && addAppointment(
             //     {
             //         context:{
@@ -86,28 +125,29 @@ const PickDate = (props) =>{
     const handleDatePress = (val) =>{
         console.log('Date is >>>>' , val)
         setSelectedDate(val.dateString)
+        setVal(val)
         setPageView(1)
     }
 
     return(
         <View style={styles.container}>
-            <View style={{flex:pageView,marginHorizontal:20}}>
-                <View style={{marginTop:35}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{marginTop:35,marginHorizontal:20}}>
                     <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                         <AntIcon name='arrowleft' size={25}/>
                     </TouchableOpacity>
                 </View>
 
-                <View style={{marginTop:20}}>
+                <View style={{marginTop:20,marginHorizontal:20}}>
                     <Chat 
                         desc='Choose the date and time for your visit'
                     />
                 </View>
-            </View>
+            {/* </View> */}
 
-            <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}>
+            {/* <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}> */}
                 
-                <View style={{alignItems:'center',top:10}}>
+                {/* <View style={{alignItems:'center',top:10}}>
                   
                     <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
@@ -116,7 +156,7 @@ const PickDate = (props) =>{
                         </View>
                     </TouchableOpacity>
 
-                </View>
+                </View> */}
 
                 <View style={{marginTop:0}}>
                     <View>
@@ -143,7 +183,7 @@ const PickDate = (props) =>{
                 <View style={{marginTop:8}}>
                     <Button title='Next' handleButton={handleButton}/>
                 </View>
-            </View>
+            </ScrollView>
             
 
         </View>

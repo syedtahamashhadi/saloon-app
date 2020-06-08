@@ -3,6 +3,7 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
+    "build-android": "expo build:android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
@@ -19,6 +20,7 @@
     "apollo-link-http": "^1.5.17",
     "expo": "~37.0.3",
     "expo-calendar": "^8.1.0",
+    "expo-cli": "^3.21.5",
     "expo-location": "^8.1.0",
     "gql": "^1.1.2",
     "graphql": "^15.0.0",
