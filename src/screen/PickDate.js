@@ -31,6 +31,7 @@ const PickDate = (props) =>{
 
     const [pageView,setPageView]=React.useState(3)
     const [selectedDate,setSelectedDate] = React.useState(null)
+    const [selectedDateMark,setSelectedDateMark] = React.useState(null)
     const [val , setVal] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
@@ -41,8 +42,9 @@ const PickDate = (props) =>{
     console.log('Error ' , error)
 
     let date = new Date() 
-    let currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
+    let currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`
+    console.log('Current Date >>' , currentDate , '>>>>>' , date.getMonth())
     const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},]
     const [time,setTime] = React.useState(false)
 
@@ -51,7 +53,7 @@ const PickDate = (props) =>{
     }
 
     const convertingDay = (day) =>{
-        switch (new Date().getDay(day)) {
+        switch (new Date(day).getDay()) {
             case 0: return 'Sunday'
             case 1: return 'Monday'
             case 2: return 'Tuesday'
@@ -82,6 +84,7 @@ const PickDate = (props) =>{
     const handleButton = () =>{
         if(selectedDate && time){
             let dateTime={date:selectedDate,time:time}
+            console.log('Str Day is >>' , convertingDay(val.dateString))
             let dateTimeDetail = {
                 time: time,
                 strDay: convertingDay(val.dateString) ,
@@ -123,16 +126,25 @@ const PickDate = (props) =>{
 
 
     const handleDatePress = (val) =>{
-        console.log('Date is >>>>' , val)
+        console.log('Date is >>>>' , val)       
+        // const myObj = {  }
+        // myObj[val.dateString]={selected: true, marked: true, selectedColor: '#49D3CE' }
+        setSelectedDateMark(
+            // myObj
+            {
+                [val.dateString]:{selected: true, marked: true, selectedColor: '#49D3CE' }
+            }
+        )
         setSelectedDate(val.dateString)
         setVal(val)
         setPageView(1)
     }
-
+    
     return(
         <View style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{marginTop:35,marginHorizontal:20}}>
+            
+            <View style={{flex:pageView , marginHorizontal:20}}>
+                <View style={{flexDirection:'row',marginTop:35}}>
                     <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                         <AntIcon name='arrowleft' size={25}/>
                     </TouchableOpacity>
@@ -143,11 +155,11 @@ const PickDate = (props) =>{
                         desc='Choose the date and time for your visit'
                     />
                 </View>
-            {/* </View> */}
+            </View>
 
-            {/* <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}> */}
+            <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}> 
                 
-                {/* <View style={{alignItems:'center',top:10}}>
+                <View style={{alignItems:'center',top:10}}>
                   
                     <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
@@ -156,25 +168,29 @@ const PickDate = (props) =>{
                         </View>
                     </TouchableOpacity>
 
-                </View> */}
+                </View>
 
                 <View style={{marginTop:0}}>
                     <View>
                         <Calendar 
                             onDayPress={val=>handleDatePress(val)}
+                            // onDayLongPress={false}
                             // minDate={currentDate}
                             // hideExtraDays={true}
+                            markedDates={ selectedDateMark ? selectedDateMark : null}
                             theme={{
-                                selectedDayBackgroundColor: '#49D3CE',
-                                selectedDayTextColor:'#fff'
+                                selectedDayBackgroundColor: '#00A700',
+                                selectedDayTextColor:'red',
+                                // backgroundColor:'red',
+                                // arrowColor: 'red',
+                                // indicatorColor:'red',
                             }}
                         />
                     </View>
                     
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
-                        <Text style={{fontSize:20}}>Pick a time</Text>
-                        
+                    <Text style={{fontSize:20}}>Pick a time</Text>
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
                     <TimeCard timeData={timeData} getTime={getTime} time={time}/>
@@ -182,9 +198,8 @@ const PickDate = (props) =>{
 
                 <View style={{marginTop:8}}>
                     <Button title='Next' handleButton={handleButton}/>
-                </View>
-            </ScrollView>
-            
+                </View>            
+            </View>            
 
         </View>
     )

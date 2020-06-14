@@ -39,7 +39,7 @@ const ConfirmBooking = (props) =>{
 
     const [pageView,setPageView] = React.useState(3)
 
-    const {selectedCard , time , strDay , day , month ,year}= props.route.params
+    const {selectedCard , time , strDay , day , month ,year} = props.route.params
 
     let newDateTime = `${props.dateTime.data.date}T10:${props.dateTime.data.time}Z`
     let saloonId = props.saloon.data._id
@@ -84,12 +84,16 @@ const ConfirmBooking = (props) =>{
     },[data])
     return(
         <View style={styles.container}>
-            <ScrollView style={{backgroundColor:'#fff'}} showsVerticalScrollIndicator={false}>
-                <View style={{marginTop:25,marginHorizontal:20}}>
-                    <TouchableOpacity onPress={()=>props.navigation.goBack()}>
-                        <AntIcon name="arrowleft" size={25} />
-                    </TouchableOpacity>
-
+           
+            {/* <ScrollView style={{backgroundColor:'#fff', marginTop:35}} showsVerticalScrollIndicator={false}> */}
+                <View style={{flex:pageView,marginHorizontal:20 }}>
+                   
+                    <View style={{flexDirection:'row',marginTop:35}}>
+                        <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                            <AntIcon name="arrowleft" size={25} />
+                        </TouchableOpacity>
+                    </View>
+                   
                     <View style={{flexDirection:'row' ,justifyContent:'space-between',marginTop:40,alignItems:'center'}}>
                         {/* <View style={{width:65,height:45,backgroundColor:'blue',borderRadius:6,elevation:5}}>
                         </View> */}
@@ -103,20 +107,20 @@ const ConfirmBooking = (props) =>{
                 </View>
 
             {/* </View> */}
-            {/* <View style={{flex:6.5,backgroundColor:'#fff', elevation:25 }}> */}
-                {/* <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
-                    style={{flexDirection:'row', justifyContent:'center',marginTop:7}}>
+            <View style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}>
+                <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
+                    style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
                    
                     <View style={{height:20,width:60}}>
                         <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                     </View>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
 
                 <View style={{marginTop:10,alignItems:'center'}}>
                     <Text style={{fontSize:18}}>Confirmed Time:</Text>
 
                     <View style={{marginTop:15}}>
-                <Text style={{fontSize:18,color:'#49D3CE'}}>{`${strDay} ${month}, ${year}`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE'}}>{`${strDay} ${day} ${month}, ${year}`}</Text>
                     </View>
                 <Text style={{fontSize:18,color:'#49D3CE'}}>{`at ${time} AM`}</Text>
                 </View>
@@ -137,7 +141,8 @@ const ConfirmBooking = (props) =>{
                 <View style={{marginTop:15}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
-            </ScrollView>
+            </View>
+
         </View>
     )
 }
@@ -158,7 +163,7 @@ const styles = StyleSheet.create(
     {
         container:{
             flex:1,
-            backgroundColor:'#fff'
+            backgroundColor:'#fff',
         }
     }
 )

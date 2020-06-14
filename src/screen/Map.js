@@ -30,7 +30,7 @@ const Search = (props) =>{
 
     const handleImagePress = ()=>{
         console.log('Image is Pressed')
-        props.nav.navigation.navigate('SetProfileInfo')
+        props.nav.navigation.navigate('EditProfile')
 
         // props.nav.navigation.navigate('SetProfileInfo')
     }

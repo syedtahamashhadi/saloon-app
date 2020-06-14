@@ -1,32 +1,51 @@
 import React from 'react'
 import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
+import { useFonts } from '@use-expo/font'
 import Chat from '../component/Chat'
 import Button from '../component/Button'
 import { guestUserSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
+import { AppLoading } from 'expo'
+
 
 
 const Welcome = (props) =>{
     console.log('Welcome Props >>',props)
-    
+
+    // const [fontLoaded] = useFonts(
+    //     {
+    //         AbrilFatFace : require('../../assets/fonts/AbrilFatface-Regular.ttf'),
+    //         ExoRegular : require('../../assets/fonts/Exo-Regular.ttf'),
+    //         ExoBold : require('../../assets/fonts/Exo-Bold.ttf'),
+    //     }
+    // )
+    // const myFont = fontLoaded ? 'AbrilFatFace' : null
+
     const handleSignIn = () =>{
         console.log('SignIn is Clicked...')
         props.guestUser(false)
-        props.signIn.isLogin ? props.navigation.navigate('Map') : props.navigation.navigate('SignIn')
+        props.token ? props.navigation.navigate('Map') : props.navigation.navigate('SignIn')
     }
 
     const handleGuest = () =>{
         console.log('SignIn is Clicked...')
         props.guestUser(true)
         props.navigation.replace('GuestMap')
+        // props.navigation.replace('GuestSlider')
     }
+
+    // if(!fontLoaded){
+    //     return <AppLoading />
+    // }
 
     return(
         <View style={styles.container}>
             <View style={{marginHorizontal:20}}>
                 <View style={{marginTop:60}}>
-                    <Text style={{fontSize:25}}>WELCOME TO</Text>
-                    <Text style={{fontSize:60 , fontWeight:'bold' ,color:'#FFA800'}}>Slough</Text>
+                    <Text style={{fontSize:24,color:'#1D194D',fontFamily:'ExoRegular'}}>WELCOME TO</Text>
+                    <Text style={{fontSize:66  ,color:'#FFA800',fontFamily:'AbrilFatFace'}}>
+                        Slough
+                    </Text>
                 </View>
 
                 <View style={{marginTop:30}}>
@@ -40,7 +59,8 @@ const Welcome = (props) =>{
                     <Text style={{fontSize:20,color:'grey' }}>
                         or
                     </Text>
-                    <Button title='Guest' btnColor='#19479c' handleButton={handleGuest}/>
+                    <Button title='Guest' btnColor='#1D194D' handleButton={handleGuest}/> 
+                       {/* {oldColor:'#19479c'} */}
 
                 </View>
             </View>
@@ -56,7 +76,9 @@ const mapDispatchToProps = (dispatch) =>{
 
 const mapStateToProps = state =>{
     return{
-        signIn: state.loginReducer
+        signIn: state.loginReducer ,
+        token: state.mfaReducer.token ,
+
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Welcome);

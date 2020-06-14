@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
+import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Chat from '../../component/Chat'
 import { Calendar } from 'react-native-calendars'
@@ -29,7 +29,7 @@ const GuestPickDateTime = (props) =>{
         if(selectedDate && time){
             let dateTime={date:selectedDate,time:time}
             console.log('Button is Pressed....',dateTime)
-            props.navigation.navigate('Welcome')
+            props.navigation.navigate('GuestPaymentMethods')
         }
     }
 
@@ -76,7 +76,7 @@ const GuestPickDateTime = (props) =>{
                             
                             theme={{
                                 selectedDayBackgroundColor: '#49D3CE',
-                                selectedDayTextColor:'#fff'
+                                selectedDayTextColor:'green'
                             }}
                         />
                     </View>

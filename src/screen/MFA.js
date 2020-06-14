@@ -28,6 +28,8 @@ const OTP = gql `
 const MFA = (props) =>{
 
     const [otp,setOtp] = React.useState(null)
+    const [fieldErr,setFieldErr] = React.useState(null)
+
     console.log('Props Signin >>>' , props.signIn )
     console.log('Props SignUp >>>>',props.signUp)
 
@@ -43,14 +45,20 @@ const MFA = (props) =>{
     let email = screen == 'signUp' ? props.signUp.data.signupUser.email  : props.signIn.data.loginUser.email 
     const handleButton=()=>{
         // console.log('Button is Pressed...',props.mfaState)
+        if(otp == null || otp.length < 6 ){
+            setFieldErr('Enter 6 digit Code !')
+        }else{
+            setFieldErr(null)
 
-        loading !== true && verifyOtp(
-            {
-                variables:{
-                    email: email , code: `${otp}` , deviceId: email     //mutaion required email and device id
+            loading !== true && verifyOtp(
+                {
+                    variables:{
+                        email: email , code: `${otp}` , deviceId: email     //mutaion required email and device id
+                    }
                 }
-            }
-        )
+            )
+        }
+        
 
         // loading !== true && props.signIn.isLogin && verifyOtp(
         //     {
@@ -64,14 +72,19 @@ const MFA = (props) =>{
 
     React.useEffect(()=>{
         if(data){
+            // setFiledErr(null)
             props.mfa(data)
             // props.login(data)
             screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.replace('Map')
+        }else if(error && error.message){
+            setFieldErr(error.message.slice(15))
+        }else if(error){
+            setFieldErr('Something Went Wrong! TryAgain')
         }
-    },[data])
+    },[data,error])
 
-    let myBorder= error ? 'red' : '#fafafa'
-    let myErr = (error && error.message) ? error.message.slice(15) : null
+    let myBorder= fieldErr ? 'red' : '#fafafa'
+    // let myErr = (error && error.message) ? error.message.slice(15) : null
     
     return(
         <View style={styles.container}>
@@ -107,8 +120,8 @@ const MFA = (props) =>{
                 </View>
 
                 <View style={{width:'100%',justifyContent:'center',marginTop:'10%'}}>
-                    {error && <Text style={{textAlign:'center', color:'red'}}>
-                        {myErr ? myErr : 'Something Went Wrong! TryAgain'}
+                    {fieldErr && <Text style={{textAlign:'center', color:'red'}}>
+                        {fieldErr}
                         </Text>}
                     {loading && <ActivityIndicator size={20} color='#00ff00'/>}
                     

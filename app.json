@@ -1,9 +1,9 @@
 {
   "expo": {
-   "name": "Saloon",
+   "name": "Comb",
    "icon": "./assets/splash.png",
    "version": "1.0.0",
-   "slug": "Saloon",
+   "slug": "Comb",
    "splash": {
     "image": "./assets/splash.png",
     "resizeMode": "contain",
@@ -13,11 +13,11 @@
     "**/*"
   ],
    "ios": {
-     "bundleIdentifier": "com.saloonapp.www",
+     "bundleIdentifier": "com.combapp.www",
      "buildNumber": "1.0.0"
    },
    "android": {
-     "package": "com.saloonapp.www",
+     "package": "com.combapp.www",
      "versionCode": 1,
      "config": {
       "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" }   

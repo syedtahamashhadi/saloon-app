@@ -31,6 +31,10 @@ import PaymentMethods from '../screen/PaymentMethods'
 import SetBillingDetail from '../screen/SetBillingDetail'
 import UserDetail from '../screen/UserDetail'
 import ConfirmBooking from '../screen/ConfirmBooking'
+import GuestConfirmBooking from '../screen/guest/GuestConfirmBooking'
+import GuestPaymentMethods from '../screen/guest/GuestPaymentMethods'
+import EditProfile from '../screen/EditProfile'
+// import GuestSlider from '../screen/guest/GuestSlider'
 
 
 
@@ -69,11 +73,16 @@ const UserNav = () =>{
             <Stack.Screen name='GuestSaloon' component={GuestSaloon}/>
             <Stack.Screen name='GuestStylistProfile' component={GuestStylistProfile}/>
             <Stack.Screen name='GuestPickDateTime' component={GuestPickDateTime}/>
+            <Stack.Screen name='GuestPaymentMethods' component={GuestPaymentMethods}/>
+            <Stack.Screen name='GuestConfirmBooking' component={GuestConfirmBooking}/>
             <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/>
             <Stack.Screen name='PaymentMethods' component={PaymentMethods}/>
             <Stack.Screen name='SetBillingDetail' component={SetBillingDetail}/>
             <Stack.Screen name='UserDetail' component={UserDetail}/>
             <Stack.Screen name='ConfirmBooking' component={ConfirmBooking}/>
+            <Stack.Screen name='EditProfile' component={EditProfile}/>
+
+            {/* <Stack.screen name='GuestSlider' component={GuestSlider} /> */}
             {/* <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/> */}
 
 

@@ -48,11 +48,13 @@ const SaloonInfo = (props) =>{
         <View >
             {/* <View > */}
                 <View>
-                    <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Crew</Text>
+                    <Text style={{marginTop:15,fontSize:25,fontFamily:'AbrilFatFace'}}>
+                        Our Crew
+                    </Text>
                     
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
 
-                        <View style={{marginTop:15,flexDirection:'row'}}>
+                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
 
                         {
                             props.stylist.map((val,index)=>{
@@ -62,7 +64,7 @@ const SaloonInfo = (props) =>{
 
                                     <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
-                                        <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
+                                        <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center',marginTop:15}}>
                                             <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
@@ -79,15 +81,15 @@ const SaloonInfo = (props) =>{
 
                         </View>
 
-                    </ScrollView>
+                    {/* </ScrollView> */}
                 </View>
                     
                 <View >
-                    <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Service</Text>
+                    <Text style={{marginTop:15,fontSize:25,fontFamily:'AbrilFatFace'}}>Our Service</Text>
                     
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
 
-                        <View style={{marginTop:15,flexDirection:'row',justifyContent:'space-between'}}>
+                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
 
                         {
                             props.services.map((val,index)=>{
@@ -95,18 +97,18 @@ const SaloonInfo = (props) =>{
                                 // let myBorderColor = val.name == selectedService ? '#49D3CE' : '#fff'
                                 return(
 
-                                    <TouchableOpacity  key={index}>
+                                    // <TouchableOpacity  key={index}>
 
-                                        <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
-                                            borderWidth:3,borderColor:'#fff',elevation:5}}>
-                                                <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
-                                            </View>
-                                            <Text style={{color:'black',marginTop:'2%'}}>
-                                                {val.name>15 ? val.name.slice(0.13) : val.name}
-                                            </Text>
+                                    <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center',marginTop:15,}}>
+                                        <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
+                                        borderWidth:3,borderColor:'#fff',elevation:5}}>
+                                            <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                         </View>
-                                    </TouchableOpacity>
+                                        <Text style={{color:'black',marginTop:'2%'}}>
+                                            {val.name>15 ? val.name.slice(0.13) : val.name}
+                                        </Text>
+                                    </View>
+                                    // </TouchableOpacity>
                                 )
                             })
 
@@ -114,7 +116,7 @@ const SaloonInfo = (props) =>{
 
                         </View>
 
-                    </ScrollView>
+                    {/* </ScrollView> */}
                     
                 </View>
                     

@@ -34,6 +34,9 @@ const SignIn = (props) =>{
 
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
+    const [fieldErr,setFieldErr] = React.useState(null)
+    // const [pswdFieldErr,setPswdFieldErr] = React.useState(null)
+
        
     data ? props.navigation.replace('Welcome') : null
 
@@ -46,14 +49,24 @@ const SignIn = (props) =>{
 
     const handleSignIn = () =>{
         console.log('SignIn is Pressed' , email , password )
+        if(email == '' && password == ''){
+            setFieldErr('Enter Your Email and Password !')
+        }else if(email == ''){
+            setFieldErr('Enter Your Email !')
+        }else if(password == ''){
+            setFieldErr('Enter Your Password !')
+        }else{
+            setFieldErr(null)
+            loading !== true && loginUser(
+                {
+                    variables: {
+                        email:  `${email}`, password: `${password}` , deviceId: `${email}`
+                    },
+                } 
+            )
+        }
         
-       loading !== true && loginUser(
-            {
-                variables: {
-                    email:  `${email}`, password: `${password}` , deviceId: `${email}`
-                },
-            } 
-        )
+       
     }
 
     // React.useEffect(()=>{
@@ -65,14 +78,21 @@ const SignIn = (props) =>{
 
     useEffect(()=>{
         if(data){
+            // setFieldErr(null)
+            // console.log('Data is Fired >>>>>>>>>')
             props.signIn(data)
             props.navigation.replace('MFA' , 
                 {
                     screen: 'signIn'
                 }
             )
+        }else if(error && error.message){
+            // let reqErr = (error && error.message) ? error.message.slice(15)  : null
+            setFieldErr(error.message.slice(15))
+        }else if(error){
+            setFieldErr('Something Went Wrong! TryAgain')
         }
-    },[data])
+    },[data,error])
     // React.useEffect(()=>{
     //     if(data){
     //         props.signIn(data)
@@ -80,10 +100,10 @@ const SignIn = (props) =>{
     //     }
     // },[data])
 
-    const errorBorderColor = error ? 'red' : 'black'
-    let myErr = (error && error.message) ? error.message.slice(15) : null
+    const errorBorderColor = fieldErr ? 'red' : 'black'
+    let reqErr = (error && error.message) ? error.message.slice(15)  : null
 
-    console.log('My Error' , myErr)
+    console.log('My Error' , reqErr)
     return(
 
         
@@ -134,10 +154,13 @@ const SignIn = (props) =>{
                         />
                     </View>
                     <View style={{marginTop:'3%' , width:'100%' }}>
-                        {error && <Text style={{color:'red' , textAlign:'center'}}>
+                        {fieldErr && <Text style={{color:'red' , textAlign:'center'}}>
+                                {fieldErr}
+                            </Text>}
+                        {/* {error && <Text style={{color:'red' , textAlign:'center'}}>
                             
-                            {myErr ? myErr : 'Something Went Wrong! TryAgain'}
-                        </Text> }
+                            {reqErr ? reqErr : 'Something Went Wrong! TryAgain'}
+                        </Text> } */}
                         {loading && <ActivityIndicator size={20} color='#00ff00'/>}
                     </View>
                     <View style={{marginTop:15}}>

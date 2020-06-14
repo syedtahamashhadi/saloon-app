@@ -53,11 +53,13 @@ const BookingSelectServices = (props) =>{
         <View style={styles.container}>
 
             <View style={{flex:pageView, backgroundColor:'#fff' }}>
-                <TouchableOpacity onPress={()=>props.navigation.goBack()}>
-                    <View style={{marginTop:35,marginHorizontal:20}}>
-                        <AntIcon name='arrowleft' size={25}/>
-                    </View>
-                </TouchableOpacity>
+                
+                <View style={{flexDirection:'row',marginTop:35,marginHorizontal:20}}>
+                    <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                            <AntIcon name='arrowleft' size={25}/>
+                    </TouchableOpacity>
+                </View>
+
                 
                
                 <View style={{flexDirection:'row' , marginTop:30, justifyContent:'space-between' , backgroundColor: '#fff'}}>

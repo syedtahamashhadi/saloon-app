@@ -1,6 +1,6 @@
 import React , {useEffect , useState} from 'react'
 import { View , Text , TouchableOpacity , StyleSheet , ScrollView} from 'react-native'
-import Chat from '../component/Chat'
+import Chat from '../../component/Chat'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 
@@ -8,7 +8,7 @@ import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 
 
 
-const PaymentMethods = (props) =>{
+const GuestPaymentMethods = (props) =>{
 
     const [pageView , setPageView] = useState(3)
     const [slectedCard , setSelectedCard] = useState('')
@@ -16,12 +16,9 @@ const PaymentMethods = (props) =>{
     const handleCardPress = (val) =>{
         console.log('Button is Pressed....',val.cardId)
         setSelectedCard(val)
-        props.navigation.navigate('ConfirmBooking',
-            {
-                selectedCard: val ,
-                ...props.route.params
-            }
-        )
+        props.navigation.navigate('GuestConfirmBooking', {
+            slectedCard: val
+        })
         
     }
 
@@ -85,11 +82,11 @@ const PaymentMethods = (props) =>{
                         }
 
                         <View style={styles.addCard}>
-                            <TouchableOpacity onPress={()=>props.navigation.navigate('UserDetail',{
+                            {/* <TouchableOpacity onPress={()=>props.navigation.navigate('UserDetail',{
                                 currentScreen: 'Payment Method'
-                            })}>
+                            })}> */}
                                 <AntIcon name='plus' size={50} color='#49D3CE' />
-                            </TouchableOpacity>                            
+                            {/* </TouchableOpacity>                             */}
                         </View>
                     </View>
                 </View>
@@ -125,4 +122,4 @@ const styles = StyleSheet.create(
 )
 
 
-export default PaymentMethods;
+export default GuestPaymentMethods;

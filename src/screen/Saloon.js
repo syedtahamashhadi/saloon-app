@@ -121,8 +121,8 @@ const Saloon = (props) =>{
                                         borderColor:'#fff',elevation:5,top:-25}}>
                             <Image source={mannagerImg} style={styles.imgMannager}/>
                     </View>
-                    <Text style={{top:-10,fontWeight:'bold',fontSize:15}}>{saloon.managerName}</Text>
-                    <Text style={{top:0,color:'grey'}}>Shop Mannager</Text>
+                    <Text style={{top:-10,fontFamily:'AbrilFatFace',fontSize:18}}>{saloon.managerName}</Text>
+                    <Text style={{top:0,color:'grey',fontSize:12}}>Shop Mannager</Text>
                     <View style={{marginTop:5}}></View>
                     <Rating rating={ saloon.rating ? saloon.rating : 4.7}/>
                    

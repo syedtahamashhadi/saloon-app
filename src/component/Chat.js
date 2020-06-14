@@ -16,7 +16,7 @@ const Chat = (props) =>{
             </View>
             
             <View style={styles.messageContainer}>
-                <Text style={{marginVertical:18,marginHorizontal:20 , fontSize:18}}>
+                <Text style={{marginVertical:18,marginHorizontal:20,fontSize:18,color:'#1D194D', }}>
                    {props.desc}
                 </Text>
             </View>
