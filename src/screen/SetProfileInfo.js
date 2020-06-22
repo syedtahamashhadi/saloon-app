@@ -62,7 +62,7 @@ const SetProfileInfo = (props) =>{
     return(
         <View style={styles.container}>
             <View style={{marginTop:'30%',justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:22 , fontWeight:'bold'}}>Fill in Profile Info</Text>
+                <Text style={{fontSize:22 , fontFamily:'AbrilFatFace'}}>Fill in Profile Info</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:10}}>
@@ -137,7 +137,9 @@ const SetProfileInfo = (props) =>{
                                 return(
                                     <TouchableOpacity onPress={()=>setGender(val.value)} key={index}>
                                         <View style={myStyle}>
-                                            <Text style={{fontSize:17 , color:textColor}}>{val.value}</Text>
+                                            <Text style={{fontSize:17 ,fontFamily:'ExoBold', color:textColor}}>
+                                                {val.value}
+                                            </Text>
                                         </View>
                                     </TouchableOpacity>
                                 )
@@ -146,7 +148,7 @@ const SetProfileInfo = (props) =>{
                         </View>
                 </View>
                 <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize:15}}>Connect</Text>
+                    <Text style={{fontSize:15,fontFamily:'ExoBold'}}>Connect</Text>
                 </View>
 
                 <View style={{marginTop:10,flexDirection:'row',flex:1,justifyContent:'space-around',

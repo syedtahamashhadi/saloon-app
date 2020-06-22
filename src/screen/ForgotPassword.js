@@ -46,7 +46,7 @@ const ForgotPassword = (props) =>{
     React.useEffect(()=>{
         if(data){
             // props.forgotPassword(data)
-            props.navigation.replace('SignIn')
+            props.navigation.replace('UpdatePasswords')
         }
     },[data])
 
@@ -67,7 +67,9 @@ const ForgotPassword = (props) =>{
                     <Image source={require('../../assets/unlock-forgot-password.png')} style={styles.image} />
                 </View>
                 <View style={{marginTop:40}}>
-                    <Text style={{fontSize:25 , fontWeight:'bold'}}>Forgot Password?</Text>
+                    <Text style={{fontSize:25 , fontFamily:'AbrilFatFace'}}>
+                        Forgot Password?
+                    </Text>
                 </View>
             </View>
             <View style={{width:'100%',marginTop:20}}>

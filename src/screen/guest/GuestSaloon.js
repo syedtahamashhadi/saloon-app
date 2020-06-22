@@ -58,13 +58,13 @@ const GuestSaloon = (props) =>{
             <View style={{flex:7.5,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20
                             ,top:-16}}>
                 <View style={{alignItems:'center',height:'35%',backgroundColor:'#fff',width:'100%',
-                borderTopLeftRadius:20,borderTopRightRadius:20,elevation:1}}>
-                    <View style={{width:55,height:55,borderRadius:45,backgroundColor:'red',borderWidth:3,
+                borderTopLeftRadius:20,borderTopRightRadius:20,elevation:0}}>
+                    <View style={{width:55,height:55,borderRadius:45,backgroundColor:'#fff',borderWidth:3,
                                         borderColor:'#fff',elevation:5,top:-25}}>
                             <Image source={require('../../../assets/mannager.png')} style={styles.imgMannager}/>
                     </View>
-                    <Text style={{top:-10,fontWeight:'bold',fontSize:15}}>Stella McLaren</Text>
-                    <Text style={{top:0,color:'grey'}}>Shop Mannager</Text>
+                    <Text style={{top:-10,fontFamily:'AbrilFatFace',fontSize:15}}>Stella McLaren</Text>
+                    <Text style={{top:0,color:'grey',fontFamily:'ExoRegular'}}>Shop Mannager</Text>
                     <View style={{marginTop:5}}></View>
                     <Rating rating={4.7}/>
                    
@@ -75,7 +75,7 @@ const GuestSaloon = (props) =>{
                             return(
                                 <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}} >
                                     <TouchableOpacity onPress={()=>handleNavPress(val)} key={index}>
-                                        <Text>{val.name}</Text>
+                                        <Text style={{fontFamily:'ExoBold'}}>{val.name}</Text>
                                     </TouchableOpacity>
                                     {val.name == highlight ? 
                                             <View style={{height:3,width:'100%' ,backgroundColor:'#49D3CE'}}></View> :

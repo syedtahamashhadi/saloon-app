@@ -13,12 +13,14 @@ const Search = (props) =>{
     const getGreet = (name) =>{
         let hour = new Date().getHours()
         switch(true){
-            case (hour>8 && hour <12):
-                return `Good Morning ${name}`
-            case (hour>12 && hour<17):
-                return `Good Afternoon ${name}`
+            case (hour >= 1 && hour <12):
+                return `Good Morning! ${name}`
+            case (hour >= 12 && hour<17):
+                return `Good Afternoon! ${name}`
+            case (hour >= 17 && hour <= 24):
+                return `Good Evening! ${name}`
             default:
-                return `Good Evening ${name}`
+                return `Good Evening! ${name}`
         }
     }
 
@@ -27,7 +29,7 @@ const Search = (props) =>{
             <View style={{marginHorizontal:20}}>
 
                 <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
-                    <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet('Spawden')}</Text>
+                    <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>{getGreet('Spawden')}</Text>
                     
                     <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
                         source={require('../../../assets/user.png')}

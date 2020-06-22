@@ -122,12 +122,12 @@ const GuestConfirmBooking = (props) =>{
                 </TouchableOpacity>
 
                 <View style={{marginTop:10,alignItems:'center'}}>
-                    <Text style={{fontSize:18}}>Confirmed Time:</Text>
+                    <Text style={{fontSize:18,fontFamily:'ExoBold'}}>Confirmed Time:</Text>
 
                     <View style={{marginTop:15}}>
-                <Text style={{fontSize:18,color:'#49D3CE'}}>{`Monday 14 8, 2020`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`Monday 14 8, 2020`}</Text>
                     </View>
-                <Text style={{fontSize:18,color:'#49D3CE'}}>{`at 10:30 AM`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`at 10:30 AM`}</Text>
                 </View>
 
                 <View style={{marginHorizontal:20,marginTop:25}}>

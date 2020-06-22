@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js upgrade react-native-calender
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-svg
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2\;C:\Users\spawn\AppData\Local\Android\Sdk\tools\bin;C:\Users\spawn\AppData\Local\Microsoft\WindowsApps;C:\Users\spawn\AppData\Roaming\npm;C:\Users\spawn\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\spawn\AppData\Local\Yarn\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'E:\test-taha\test-react-native\saloon-native\saloon\node_modules\@babel\compat-data\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'E:\test-taha\test-react-native\saloon-native\saloon\node_modules\@babel\helper-compilation-targets\node_modules\.bin'
 
 npm manifest: 
   {
@@ -29,9 +29,12 @@ npm manifest:
     },
     "dependencies": {
       "@apollo/react-hooks": "^3.1.5",
+      "@expo-google-fonts/inter": "^0.1.0",
+      "@react-native-community/async-storage": "^1.11.0",
       "@react-native-community/masked-view": "0.1.6",
       "@react-navigation/native": "^5.3.2",
       "@react-navigation/stack": "^5.3.5",
+      "@use-expo/font": "^2.0.0",
       "apollo-boost": "^0.4.9",
       "apollo-cache-inmemory": "^1.6.6",
       "apollo-client": "^2.6.10",
@@ -40,22 +43,26 @@ npm manifest:
       "expo": "~37.0.3",
       "expo-calendar": "^8.1.0",
       "expo-cli": "^3.21.5",
+      "expo-font": "^8.1.1",
       "expo-location": "^8.1.0",
       "gql": "^1.1.2",
       "graphql": "^15.0.0",
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
+      "react-native-app-intro-slider": "^4.0.4",
       "react-native-calendars": "^1.265.0",
       "react-native-device-info": "^5.6.1",
       "react-native-elements": "^1.2.7",
       "react-native-gesture-handler": "^1.6.1",
       "react-native-maps": "^0.27.1",
       "react-native-reanimated": "~1.7.0",
+      "react-native-remote-svg": "^2.0.6",
       "react-native-safe-area-context": "0.7.3",
       "react-native-screens": "~2.2.0",
       "react-native-vector-icons": "^6.6.0",
       "react-native-web": "~0.11.7",
+      "react-native-webview": "^10.3.1",
       "react-redux": "^7.2.0",
       "redux": "^4.0.5",
       "redux-devtools-extension": "^2.13.8",
@@ -1220,6 +1227,11 @@ Lockfile:
     dependencies:
       "@types/hammerjs" "^2.0.36"
   
+  "@expo-google-fonts/inter@^0.1.0":
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/@expo-google-fonts/inter/-/inter-0.1.0.tgz#399f068437824fcbf6aa3da5fcf490dba2af85a3"
+    integrity sha512-Y6GCqsUX6JwexQ2wmBkMiJBY6M2GpNQRTczzIGbBGhXWQxqGmP5awRcf0ZJV+OlLeJcKAzas/TW45ZLdpG3yzA==
+  
   "@expo/babel-preset-cli@0.2.16":
     version "0.2.16"
     resolved "https://registry.yarnpkg.com/@expo/babel-preset-cli/-/babel-preset-cli-0.2.16.tgz#64102032ae9b6cb931c80d8b6371dd08f2f5e748"
@@ -2205,6 +2217,13 @@ Lockfile:
       node-gyp "^6.1.0"
       read-package-json-fast "^1.1.3"
   
+  "@react-native-community/async-storage@^1.11.0":
+    version "1.11.0"
+    resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.11.0.tgz#bf81b8813080846f150c67f531987c429b442166"
+    integrity sha512-Pq9LlmvtCEKAGdkyrgTcRxNh2fnHFykEj2qnRYijOl1pDIl2MkD5IxaXu5eOL0wgOtAl4U//ff4z40Td6XR5rw==
+    dependencies:
+      deep-assign "^3.0.0"
+  
   "@react-native-community/cli-debugger-ui@^3.0.0":
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-3.0.0.tgz#d01d08d1e5ddc1633d82c7d84d48fff07bd39416"
@@ -2774,6 +2793,11 @@ Lockfile:
       invariant "^2.2.4"
       lodash "^4.5.0"
       prop-types "^15.6.1"
+  
+  "@use-expo/font@^2.0.0":
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/@use-expo/font/-/font-2.0.0.tgz#09b56d626e5b0c83cd0116f5bb69ad6d612d677f"
+    integrity sha512-oOJ2uaRyZNQg7PnQviz7nBcdrRL38zxScab4ktgtI4asa6G0dHW9wg307uJJmn0sHS04Yqtw+m0EOjDcGw3iWg==
   
   "@webassemblyjs/ast@1.9.0":
     version "1.9.0"
@@ -5773,6 +5797,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
     integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   
+  escape-string-regexp@2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+    integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
+  
   escape-string-regexp@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
@@ -6011,7 +6040,7 @@ Lockfile:
     dependencies:
       uuid "^3.4.0"
   
-  expo-font@~8.1.0:
+  expo-font@^8.1.1, expo-font@~8.1.0:
     version "8.1.1"
     resolved "https://registry.yarnpkg.com/expo-font/-/expo-font-8.1.1.tgz#40de629d7332887bdafae4756741f6979fc0043e"
     integrity sha512-z6008K7YSA7wpJ1mNyG2eSYUhEoFVjdL2uAbwaHFpsqwxDS4tcdKHoWkanIUiEnsjtHK7Uk0ywKJ8MRzmCaklw==
@@ -11254,6 +11283,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
   
+  react-native-app-intro-slider@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-4.0.4.tgz#fa5cda7057db62c448ac975ffd2ba0cff94cc8d8"
+    integrity sha512-Zkjaol6X3BbZkHUpVDj2LjdidpS6rCgKi0fx80xgGKa0pHxBRd4swWTv2bHnnvu5k1/HXwYk0mY2TbK+2jHl5w==
+  
   react-native-calendars@^1.265.0:
     version "1.265.0"
     resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.265.0.tgz#4144408254afaebc97213708e3c7d911dc73a335"
@@ -11318,6 +11352,11 @@ Lockfile:
     dependencies:
       fbjs "^1.0.0"
   
+  react-native-remote-svg@^2.0.6:
+    version "2.0.6"
+    resolved "https://registry.yarnpkg.com/react-native-remote-svg/-/react-native-remote-svg-2.0.6.tgz#5f8bc7cefc18f4d37cf02f8158d6b2a9f534891d"
+    integrity sha512-tQbDL+gtfGgG9Evz5TOn5Odmrn/EYsmsLqVZ0Do0VMJevfLBuQRioLiwRsI/BCgOHu1oQLZIIE5p7V/lN9jLrw==
+  
   react-native-safe-area-context@0.7.3:
     version "0.7.3"
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.7.3.tgz#ad6bd4abbabe195332c53810e4ce5851eb21aa2a"
@@ -11364,6 +11403,14 @@ Lockfile:
       normalize-css-color "^1.0.2"
       prop-types "^15.6.0"
       react-timer-mixin "^0.13.4"
+  
+  react-native-webview@^10.3.1:
+    version "10.3.1"
+    resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.3.1.tgz#04a2b17a37daf04575b3abd10b1fb29d2c154c6f"
+    integrity sha512-Ac0v4lFaJl5P/haLook+UIKMW4Ru5xg0+AdxD2oJRB2TPgdqoATziYNU0LBMjntlxDp+DVzdr3fVDuLMdox0tg==
+    dependencies:
+      escape-string-regexp "2.0.0"
+      invariant "2.2.4"
   
   "react-native@https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz":
     version "0.61.4"

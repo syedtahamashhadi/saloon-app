@@ -83,7 +83,8 @@ const SignIn = (props) =>{
             props.signIn(data)
             props.navigation.replace('MFA' , 
                 {
-                    screen: 'signIn'
+                    screen: 'signIn',
+                    name:'taha'
                 }
             )
         }else if(error && error.message){
@@ -122,7 +123,7 @@ const SignIn = (props) =>{
                         <Image source={require('../../assets/signIn-avatar.png')} style={styles.image} />
                     </View>
                     <View style={{marginTop:20}}>
-                        <Text style={{fontSize:25 , fontWeight:'bold'}}>Sign In</Text>
+                        <Text style={{fontSize:25 ,fontFamily:'AbrilFatFace'}}>Sign In</Text>
                     </View>
                 </View>
                 <View style={{width:'100%',marginTop:15}}>
@@ -169,13 +170,14 @@ const SignIn = (props) =>{
                     <View style={{marginTop:15,flexDirection:'row',justifyContent:'center'}}>  
                         
                         <TouchableOpacity onPress={()=>props.navigation.navigate('ForgotPassword')}>
-                            <Text style={{fontSize:15}}>Forget Password</Text>
+                            <Text style={{fontSize:15,fontFamily:'ExoBold'}}>Forgot Password</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{marginTop:15,flexDirection:'row',justifyContent:'center'}}>  
-                        <Text style={{fontSize:15 , color:'grey'}}>Don't have an Account ? </Text>
+                        <Text style={{fontSize:15 , color:'grey',fontFamily:'ExoRegular'}}>
+                            Don't have an Account ? </Text>
                         <TouchableOpacity onPress={()=>props.navigation.navigate('SignUp')}>
-                            <Text style={{fontSize:15}}>Sign Up</Text>
+                            <Text style={{fontSize:15,fontFamily:'ExoBold'}}>Sign Up</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -1,9 +1,9 @@
 {
   "expo": {
-   "name": "Comb",
+   "name": "Komb",
    "icon": "./assets/splash.png",
    "version": "1.0.0",
-   "slug": "Comb",
+   "slug": "Komb",
    "splash": {
     "image": "./assets/splash.png",
     "resizeMode": "contain",
@@ -13,11 +13,11 @@
     "**/*"
   ],
    "ios": {
-     "bundleIdentifier": "com.combapp.www",
+     "bundleIdentifier": "com.kombapp.www",
      "buildNumber": "1.0.0"
    },
    "android": {
-     "package": "com.combapp.www",
+     "package": "com.kombapp.www",
      "versionCode": 1,
      "config": {
       "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" }   

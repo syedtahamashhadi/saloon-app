@@ -39,7 +39,7 @@ const GuestStylistProfile = (props) =>{
                     <View style={styles.stylistAvatarContainer}>
                         <Avatar rounded source={require('../../../assets/stylist-1.png')} size={55}/>
                     </View>
-                        <Text style={{marginTop:5 , fontSize:25 , textAlign:'center'}}>Matt Perry</Text>
+                        <Text style={{marginTop:5 ,fontFamily:'AbrilFatFace', fontSize:25 , textAlign:'center'}}>Matt Perry</Text>
                     <View style={{marginTop:12}}>
                         <Rating rating={5.0}/>
                     </View>
@@ -100,7 +100,7 @@ const GuestStylistProfile = (props) =>{
                             <Image source={require('../../../assets/services-icon.png')} style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Services</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Services</Text>
                         </View>
                     </View>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -129,7 +129,7 @@ const GuestStylistProfile = (props) =>{
 
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Bentastic Ben</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Bentastic Ben</Text>
                         </View>
                     </View>
                     <View style={{marginTop:15,marginLeft:55}}>
@@ -147,7 +147,7 @@ const GuestStylistProfile = (props) =>{
                                     style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Working Hours</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Working Hours</Text>
                         </View>
                     </View>
                     <View style={{marginTop:15,marginLeft:55}}>

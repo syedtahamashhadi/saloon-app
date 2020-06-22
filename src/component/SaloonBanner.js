@@ -15,19 +15,19 @@ const SaloonBanner = (props) =>{
                     <View style={styles.imageOverLay}>
                         <View style={{flexDirection:'row',justifyContent:'flex-end',width:'100%'}}>
                             <View style={styles.timeCard}>
-                                <Text style={{fontSize:12,color:'white'}}>Available At</Text>
-                                <Text style={{fontSize:15,color:'white'}}>{props.time} mins</Text>
+                                <Text style={{fontSize:12,color:'white',fontFamily:'ExoRegular'}}>Available At</Text>
+                                <Text style={{fontSize:15,color:'white',fontFamily:'ExoRegular'}}>{props.time} mins</Text>
                             </View>
                         </View>
                         <View style={{marginTop:5}}>
-                            <Text  style={{fontSize:25,color:'white',fontWeight:'bold'}}>{props.name}</Text>
+                            <Text  style={{fontSize:25,color:'white',fontWeight:'bold',fontFamily:'AbrilFatFace'}}>{props.name}</Text>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',
                                 marginRight:10 ,marginTop:13}}>
                             <Rating rating={props.rating} textColor='white'/>
                             <View style={{flexDirection:'row',alignItems:'center'}}>
                                 <Icon name="map-marker" size={20} style={styles.searchIcon}/>
-                                <Text style={{fontSize:12 , color:'#fff'}}>
+                                <Text style={{fontSize:12 , color:'#fff',fontFamily:'ExoRegular'}}>
                                     {props.distance} m to your location
                                 </Text>
                             </View>

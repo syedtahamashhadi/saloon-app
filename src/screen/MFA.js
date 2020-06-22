@@ -20,6 +20,8 @@ const OTP = gql `
             }
             password
             userName
+            firstName
+            lastName
             profileImageURL
         }
     }
@@ -92,10 +94,10 @@ const MFA = (props) =>{
                 <Icon name='onepassword' size={100} color='#49D3CE'/>
             </View>
             <View style={{marginTop:30}}>
-                <Text style={{fontSize:35 , fontWeight:'bold'}}>OTP</Text>
+                <Text style={{fontSize:35 , fontFamily:'AbrilFatFace'}}>OTP</Text>
             </View>
             <View style={{marginTop:20}}>
-                <Text style={{fontSize:15 , fontWeight:'bold'}}>Please enter the 6 digit code!</Text>
+                <Text style={{fontSize:15 , fontFamily:'ExoBold'}}>Please enter the 6 digit code!</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>

@@ -37,6 +37,7 @@ const SignUp = (props) =>{
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
     const [phone,setPhone] = React.useState('')
+    const [fieldErr,setFieldErr] = React.useState(null)
 
     // props.signUpState.isSignUp == true ? props.navigation.replace('SignIn') : null 
     console.log('Loading is >> ',loading)
@@ -51,17 +52,64 @@ const SignUp = (props) =>{
 
     const handleButton = ()=>{
         console.log('Button is pressed' , typeof phone)
-
-        loading !== true && signupUser(
-            {
-                variables:{
-                    firstName: firstName , lastName: lastName , email: email , password: password , phone: `${phone}`
-                }
-            }
-        )
+        switch (true) {
+            case (firstName == '' && lastName == '' && email == '' && password == '' && phone == ''):
+                setFieldErr('All fields are empty !')
+                break;
+            case (firstName == ''):
+                setFieldErr('Enter Your First-Name !')
+                break;
+            case (lastName == ''):
+                setFieldErr('Enter Your Last-Name !')
+                break;
+            case (email == ''):
+                setFieldErr('Enter Your Email !')
+                break;
+            case (password == ''):
+                setFieldErr('Enter Your Password !')
+                break;
+            case (phone == ''):
+                setFieldErr('Enter Your Contact Number !')
+                break;
+           
+            default:
+                loading !== true && signupUser(
+                    {
+                        variables:{
+                            firstName: firstName , lastName: lastName , email: email , password: password , phone: `${phone}`
+                        }
+                    }
+                )
+                break;
+        }
+        // if(firstName == '' && lastName == '' && email == '' && password == '' && phone == ''){
+        //     setFieldErr('All fields are empty !')
+        // }else if(firstName == ''){
+        //     setFieldErr('Enter Your First-Name !')
+        // }else if(lastName == '' ){
+        //     console.log('Last Name')
+        //     setFieldErr('Enter Your Last-Name !')
+        // }else if(email == ''){
+        //     setFieldErr('Enter Your Email !')
+        // }else if(password == ''){
+        //     setFieldErr('Enter Your Password !')
+        // }else if(phone == ''){
+        //     setFieldErr('Enter Your Contact Number !')
+        // }else if(email.includes('@') == false){
+        //     setFieldErr('Email Format is not Correct !')
+        // }else{
+        //     loading !== true && signupUser(
+        //         {
+        //             variables:{
+        //                 firstName: firstName , lastName: lastName , email: email , password: password , phone: `${phone}`
+        //             }
+        //         }
+        //     )
+        // }
     }
 
     React.useEffect(()=>{
+        
         if(data){
             props.signUp(data),
             props.navigation.replace('EmailConfirm',
@@ -69,9 +117,15 @@ const SignUp = (props) =>{
                     screen: 'signUp'
                 }
             )
+        }else if(error && error.message){
+            setFieldErr(error.message.slice(15))
+        }else if(error){
+            setFieldErr('Something Went Wrong! TryAgain')
         }
-    },[data])
-    const errorBorderColor = error ? 'red' : 'black'
+    },[data,error])
+    const errorBorderColor = fieldErr ? 'red' : 'black'
+
+    console.log('Border color >>' , errorBorderColor , fieldErr , data)
     
     return(
         // <ScrollView showsVerticalScrollIndicator={false}>
@@ -93,7 +147,7 @@ const SignUp = (props) =>{
                     <Image source={require('../../assets/create-account-badge.png')} style={styles.image} />
                 </View>
                 <View style={{marginTop:15}}>
-                    <Text style={{fontSize:25 , fontWeight:'bold'}}>Create an Account</Text>
+                    <Text style={{fontSize:25 , fontFamily:'AbrilFatFace'}}>Create an Account</Text>
                 </View>
             </View>
             <View style={{width:'100%',marginTop:5}}>
@@ -150,8 +204,8 @@ const SignUp = (props) =>{
                     />
                 </View>
                 <View style={{marginTop:'3%' , width:'100%' }}>
-                        {error && <Text style={{color:'red' , textAlign:'center'}}>
-                            Something Went Wrong! TryAgain
+                        {fieldErr && <Text style={{color:'red' , textAlign:'center'}}>
+                                {fieldErr}
                         </Text> }
                 </View>
                 <View style={{alignItems:'center',marginTop:12}}>
@@ -164,6 +218,8 @@ const SignUp = (props) =>{
                         <SocialCard link={val.link} icon={val.icon} bColor={val.bColor} />
                     )}
                 </View> 
+
+                
                 <View style={{marginTop:30}}>
                     <Button title='Sign Up' btnColor='#19479c' handleButton={handleButton}/>
                 </View>

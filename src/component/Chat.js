@@ -1,6 +1,8 @@
 import React from 'react'
 import {View , Text , StyleSheet, ShadowPropTypesIOS, Image} from 'react-native'
+import AnimatedText from './AnimatedText'
 import { Avatar } from 'react-native-elements'
+import Animated from 'react-native-reanimated'
 
 
 const Chat = (props) =>{
@@ -16,11 +18,14 @@ const Chat = (props) =>{
             </View>
             
             <View style={styles.messageContainer}>
-                <Text style={{marginVertical:18,marginHorizontal:20,fontSize:18,color:'#1D194D', }}>
+                {/* <Text style={{marginVertical:18,marginHorizontal:20,
+                                fontSize:18,color:'#1D194D',fontFamily:'ExoBold'}}>
                    {props.desc}
-                </Text>
+                </Text> */}
+                <View style={{marginVertical:18,marginHorizontal:20,}}>
+                    <AnimatedText desc={props.desc}/>
+                </View>
             </View>
-        
         </View>
     )
 }

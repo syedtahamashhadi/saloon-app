@@ -1,5 +1,6 @@
 import React from 'react'
-import {View , Text , StyleSheet , ScrollView ,TouchableOpacity,Image} from 'react-native'
+import {View , Text , StyleSheet , ScrollView ,TouchableOpacity} from 'react-native'
+import Image from 'react-native-remote-svg'
 import Heading from './Heading'
 import { Avatar } from 'react-native-elements'
 import Button from './Button'
@@ -30,7 +31,7 @@ const SaloonInfo = (props) =>{
     
     const handleStylistPress = (val)=>{
         console.log('Stylist is pressed >>',val)
-        setSelectedCrew(val.name)
+        setSelectedCrew(val.firstName)
         props.navigation.navigate('StylistProfile',{
             stylist : val ,
             // portfolioImg : props.portfolioImg                // Portfolio is local images need network img
@@ -54,23 +55,23 @@ const SaloonInfo = (props) =>{
                     
                     {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
 
-                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
+                        <View style={{flexDirection:'row',flexWrap:'wrap',marginHorizontal:-20,alignItems:'flex-start'}}>
 
                         {
                             props.stylist.map((val,index)=>{
-                                let myColor = val.name == selectedCrew ? '#49D3CE' : null
-                                let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
+                                let myColor = val.firstName == selectedCrew ? '#49D3CE' : null
+                                let myBorderColor = val.firstName == selectedCrew ? '#49D3CE' : '#fff'
                                 return(
 
                                     <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
                                         <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center',marginTop:15}}>
-                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
+                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#fff',
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor,marginTop:'2%'}}>
-                                                {val.name.length>15 ? val.name.slice(0,12) : val.name}
+                                            <Text style={{color:myColor,marginTop:'2%',fontFamily:'ExoRegular'}}>
+                                                {val.firstName.length>15 ? val.firstName.slice(0,12) : val.firstName}
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
@@ -89,7 +90,7 @@ const SaloonInfo = (props) =>{
                     
                     {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
 
-                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
+                        <View style={{flexDirection:'row',marginHorizontal:-20,flexWrap:'wrap',alignItems:'flex-start'}}>
 
                         {
                             props.services.map((val,index)=>{
@@ -100,11 +101,11 @@ const SaloonInfo = (props) =>{
                                     // <TouchableOpacity  key={index}>
 
                                     <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center',marginTop:15,}}>
-                                        <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
+                                        <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#F1F3F8',
                                         borderWidth:3,borderColor:'#fff',elevation:5}}>
                                             <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                         </View>
-                                        <Text style={{color:'black',marginTop:'2%'}}>
+                                        <Text style={{color:'black',marginTop:'2%',fontFamily:'ExoRegular'}}>
                                             {val.name>15 ? val.name.slice(0.13) : val.name}
                                         </Text>
                                     </View>

@@ -8,6 +8,7 @@ import { SIGNUP,
          SELECTED_SERVICE_BOOKING ,
          SELECTED_DATE_TIME_BOOKING ,
          GUEST_USER ,
+         SET_TAB_HEADER ,
         } from './constants';
 
 
@@ -211,7 +212,7 @@ const selectedDateTimeBookingReducer = (state= selectedDateTimeBookingInitialSta
 
 const guestUserInitialState = {
     // data: null
-    isGuestUser: false
+    isGuestUser: false ,
 }
 
 const guestUserReducer = (state= guestUserInitialState , action) =>{
@@ -219,6 +220,24 @@ const guestUserReducer = (state= guestUserInitialState , action) =>{
         case GUEST_USER.SUCCESS:
             return{
                 ...state,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+/******************************** Set Tab Header  **************************/
+
+const headerInitialState = {
+    data : null
+}
+
+const setHeaderReducer = (state = headerInitialState , action) =>{
+    switch (action.type) {
+        case SET_TAB_HEADER.SUCCESS:
+            return{
+                ...state ,
                 data: action.payLoad
             }
     
@@ -237,4 +256,6 @@ export {
     selectedServiceBookingReducer ,
     selectedDateTimeBookingReducer ,
     guestUserReducer ,
+    setHeaderReducer
+    // setHeaderReducer ,
 }

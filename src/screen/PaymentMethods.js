@@ -57,7 +57,7 @@ const PaymentMethods = (props) =>{
                     </View>
 
                     <View style={{marginTop:15 , justifyContent:'center' , alignItems:'center'}}>
-                        <Text style={{fontSize:20}}>Payment Methods</Text>
+                        <Text style={{fontSize:20 , fontFamily:'AbrilFatFace'}}>Payment Methods</Text>
                     </View>
 
                     <View style={{marginTop:35,marginHorizontal:20}}>

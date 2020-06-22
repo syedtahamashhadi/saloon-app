@@ -87,7 +87,7 @@ const Saloon = (props) =>{
   
     return(
         <View style={styles.container}>
-            <View style={{flex:3,backgroundColor:'red'}}>
+            <View style={{flex:3,backgroundColor:'#fff'}}>
                 <View>
                     <Image source={require('../../assets/barber-shave.jpg')} style={styles.image}/>
 
@@ -116,27 +116,27 @@ const Saloon = (props) =>{
             <View style={{flex:7.5,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20
                             ,top:-16}}>
                 <View style={{alignItems:'center',height:'35%',backgroundColor:'#fff',width:'100%',
-                borderTopLeftRadius:20,borderTopRightRadius:20,elevation:1}}>
+                borderTopLeftRadius:20,borderTopRightRadius:20}}>
                     <View style={{width:55,height:55,borderRadius:45,backgroundColor:'red',borderWidth:3,
                                         borderColor:'#fff',elevation:5,top:-25}}>
                             <Image source={mannagerImg} style={styles.imgMannager}/>
                     </View>
                     <Text style={{top:-10,fontFamily:'AbrilFatFace',fontSize:18}}>{saloon.managerName}</Text>
-                    <Text style={{top:0,color:'grey',fontSize:12}}>Shop Mannager</Text>
+                    <Text style={{top:0,color:'grey',fontSize:12,fontFamily:'ExoRegular'}}>Shop Mannager</Text>
                     <View style={{marginTop:5}}></View>
                     <Rating rating={ saloon.rating ? saloon.rating : 4.7}/>
                    
-                   <View style={{flexDirection:'row',justifyContent:'space-around',width:'100%',marginTop:5}}>
+                   <View style={{flexDirection:'row',justifyContent:'space-around',width:'100%',marginTop:'0.5%'}}>
                        
                        {
                            pages.map((val,index)=>{
                             return(
-                                <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}} >
+                                <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}}>
                                     <TouchableOpacity onPress={()=>handleNavPress(val)} key={index}>
-                                        <Text>{val.name}</Text>
+                                        <Text style={{fontFamily:'AbrilFatFace'}}>{val.name}</Text>
                                     </TouchableOpacity>
                                     {val.name == highlight ? 
-                                            <View style={{height:3,width:'100%' ,backgroundColor:'#49D3CE'}}></View> :
+                                            <View style={{height:2,width:'100%' ,backgroundColor:'#49D3CE'}}></View> :
                                         null}
                                 </View>
                             )

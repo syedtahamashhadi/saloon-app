@@ -15,9 +15,9 @@ export default function App() {
 
   const [fontLoaded] = useFonts(
     {
-        AbrilFatFace : require('./assets/fonts/AbrilFatface-Regular.ttf'),
-        ExoRegular : require('./assets/fonts/Exo-Regular.ttf'),
-        ExoBold : require('./assets/fonts/Exo-Bold.ttf'),
+      AbrilFatFace : require('./assets/fonts/AbrilFatface-Regular.ttf'),
+      ExoRegular : require('./assets/fonts/Exo-Regular.ttf'),
+      ExoBold : require('./assets/fonts/Exo-Bold.ttf'),
     }
   )
   

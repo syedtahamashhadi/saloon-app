@@ -1,0 +1,148 @@
+import React from 'react'
+import { SvgXml } from "react-native-svg";
+
+
+const SvgHelpCenter = (props) =>{
+
+    const svg = `
+    <?xml version="1.0" encoding="utf-8"?>
+    <!-- Generator: Adobe Illustrator 24.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 13.3 13.3" style="enable-background:new 0 0 13.3 13.3;" xml:space="preserve">
+    <style type="text/css">
+        .st0{clip-path:url(#SVGID_2_);}
+        .st1{fill:#54ECE6;}
+        .st2{fill:#FFEBD2;}
+        .st3{fill:#FFF3E4;}
+        .st4{fill:#49D3CE;}
+        .st5{fill:#AE8164;}
+        .st6{fill:#A2785D;}
+        .st7{fill:#AC8164;}
+        .st8{fill:#A47C61;}
+        .st9{fill:#333333;}
+        .st10{fill:#77A0D4;}
+        .st11{fill:none;stroke:#333333;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st12{fill:none;stroke:#333333;stroke-width:1.4;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st13{fill:#77A0D4;stroke:#333333;stroke-width:1.4;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st14{fill:#1D194D;}
+        .st15{clip-path:url(#Mask-2_1_);fill:url(#);stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+        .st16{fill:#1D1B4C;}
+        .st17{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+        .st18{fill:none;stroke:#FFFFFF;stroke-width:3;stroke-miterlimit:10;}
+        .st19{fill:#221F1F;}
+        .st20{fill:#464A51;}
+        .st21{fill:#FFFFFF;}
+        .st22{fill:#323643;}
+        .st23{fill:#32A562;}
+        .st24{fill:#1D1C1C;}
+        .st25{fill:#0B2031;}
+        .st26{opacity:0.2;fill:#4C4B5E;}
+        .st27{fill:#1C1C1C;}
+        .st28{fill:none;stroke:#1C1C1C;stroke-width:0.13;stroke-miterlimit:10;}
+        .st29{fill:#2F2B2B;}
+        .st30{fill:none;stroke:#000000;stroke-width:0.13;stroke-miterlimit:10;}
+        .st31{fill:#272323;}
+        .st32{fill:none;stroke:#1C1C1C;stroke-width:0.33;stroke-miterlimit:10;}
+        .st33{fill:#54FEBD;}
+        .st34{fill:none;stroke:#1D194D;stroke-width:0.17;stroke-miterlimit:10;}
+        .st35{fill:#F0F3F8;}
+        .st36{fill:#1B2749;}
+        .st37{opacity:0.8745;fill:#49D3CE;}
+        .st38{fill:#48D0CB;}
+        .st39{fill:none;stroke:#1B2749;stroke-width:3.000000e-02;stroke-miterlimit:10;}
+        .st40{fill:#FCD3AC;}
+        .st41{fill:#FCBC85;}
+        .st42{fill:#3B2519;}
+        .st43{fill:#F7945E;}
+        .st44{fill:#F9AA8D;}
+        .st45{fill:#FA7268;}
+        .st46{fill:#35A8A3;}
+        .st47{fill:#35A7A3;}
+        .st48{opacity:0.302;fill:#F7B500;}
+        .st49{fill:#F0D217;}
+        .st50{clip-path:url(#SVGID_6_);}
+        .st51{clip-path:url(#SVGID_10_);}
+        .st52{fill:none;stroke:#1D194D;stroke-width:0.33;stroke-miterlimit:10;}
+        .st53{fill:#FDB3CB;}
+        .st54{fill:none;stroke:#1D194D;stroke-width:0.67;stroke-miterlimit:10;}
+        .st55{fill:#F9596C;}
+        .st56{fill:#1F1B4E;}
+        .st57{fill:#F1F3F8;}
+        .st58{clip-path:url(#SVGID_14_);}
+        .st59{clip-path:url(#SVGID_18_);}
+        .st60{fill:#06090C;}
+        .st61{fill:none;stroke:#000000;stroke-width:0.19;stroke-miterlimit:10;}
+        .st62{clip-path:url(#SVGID_22_);}
+        .st63{fill:#D4A07F;}
+        .st64{fill:#C09478;}
+        .st65{fill:#D1A080;}
+        .st66{fill:#E0B08F;}
+        .st67{fill:#D93939;}
+        .st68{fill:none;stroke:#333333;stroke-width:0.67;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st69{fill:none;stroke:#333333;stroke-width:0.67;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st70{fill:#3B5998;}
+        .st71{fill:#FBBB00;}
+        .st72{fill:#518EF8;}
+        .st73{fill:#28B446;}
+        .st74{fill:#F14336;}
+        .st75{fill:#00ACED;}
+        .st76{fill:#2C2862;}
+        .st77{fill:none;stroke:#49D3CE;stroke-width:0.13;stroke-miterlimit:10;}
+        .st78{fill:#D8D8D8;}
+        .st79{fill:none;stroke:#FE7289;stroke-width:0.33;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st80{clip-path:url(#SVGID_28_);}
+        .st81{clip-path:url(#SVGID_32_);}
+        .st82{clip-path:url(#SVGID_36_);}
+        .st83{clip-path:url(#SVGID_40_);}
+        .st84{clip-path:url(#SVGID_44_);}
+        .st85{clip-path:url(#SVGID_48_);}
+        .st86{clip-path:url(#SVGID_52_);}
+        .st87{clip-path:url(#SVGID_56_);}
+        .st88{clip-path:url(#SVGID_60_);}
+        .st89{clip-path:url(#SVGID_64_);}
+        .st90{fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+        .st91{fill:url(#SVGID_67_);}
+        .st92{fill:url(#SVGID_68_);}
+        .st93{fill:url(#SVGID_69_);}
+        .st94{fill:#475993;}
+        .st95{fill:#F61C0D;}
+        .st96{opacity:0.149;fill:#FA7268;}
+        .st97{opacity:0.149;fill:#00BF4B;}
+        .st98{fill:#00BF4B;}
+        .st99{fill:#8886A0;}
+    </style>
+    <path class="st36" d="M5.8,4.2c-0.4,0-0.7,0.3-0.7,0.7h0.4c0-0.1,0.1-0.2,0.2-0.2C5.9,4.7,6,4.8,6,4.9h0.4C6.4,4.5,6.1,4.2,5.8,4.2z
+        "/>
+    <path class="st36" d="M7.5,4.2c-0.4,0-0.7,0.3-0.7,0.7h0.4c0-0.1,0.1-0.2,0.2-0.2s0.2,0.1,0.2,0.2h0.5C8.2,4.5,7.9,4.2,7.5,4.2z"/>
+    <path class="st36" d="M6.7,11.6c-0.2,0-0.4-0.2-0.4-0.4c0-0.2,0.2-0.4,0.4-0.4c0.3,0,0.5,0.2,0.5,0.4C7.1,11.4,6.9,11.6,6.7,11.6z
+         M6.7,10.2c-0.5,0-0.9,0.4-0.9,0.9c0,0.5,0.4,0.9,0.9,0.9s0.9-0.4,0.9-0.9C7.5,10.6,7.1,10.2,6.7,10.2z"/>
+    <path class="st36" d="M11.5,12.9h-0.7V10c0-0.6-0.5-1.1-1.1-1.1H7.9l0.9-1.8c1.5,0.1,2.8,1.3,2.8,2.9V12.9z M10.4,12.9H2.9V10
+        c0-0.4,0.3-0.7,0.7-0.7h2.2h0.9h0.9h2.2c0.4,0,0.7,0.3,0.7,0.7V12.9z M2.4,10v2.9H1.8V10c0-1.5,1.2-2.8,2.8-2.9l0.9,1.8H3.5
+        C2.9,8.9,2.4,9.4,2.4,10z M7.9,7.1h0.4L7.4,8.9H7L7.9,7.1z M6.3,8.9H5.9L5,7.1h0.4L6.3,8.9z M6,7.2c0.2,0.1,0.4,0.1,0.7,0.1
+        c0.2,0,0.5,0,0.7-0.1L6.7,8.6L6,7.2z M4.4,4.7V3.8C5.1,3.7,5.7,3.4,6,2.9C6.5,3.5,7.6,4,8.9,4v0.7c0,0.5-0.2,1-0.5,1.3H6.7v0.4H8
+        C7.9,6.5,7.7,6.6,7.6,6.7C7,7,6.3,7,5.8,6.7C5,6.3,4.4,5.6,4.4,4.7z M8.9,3.5C7.3,3.5,6.2,2.8,6.2,2.2C6.2,2.1,6.1,2,6,2
+        C5.9,2,5.8,2.1,5.8,2.2c0,0.6-0.6,1-1.3,1.1c0.1-1.1,1.1-2,2.2-2C7.9,1.3,8.9,2.3,8.9,3.5z M3.9,3.1c0,0-0.1,0-0.1,0
+        c0.1-1.5,1.4-2.7,2.9-2.7c1.5,0,2.8,1.2,2.9,2.7c0,0-0.1,0-0.1,0H9.3C9.1,1.8,8,0.9,6.7,0.9c-1.3,0-2.4,1-2.6,2.2H3.9z M4,4.7H3.9
+        c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6H4V4.7z M10,4.1c0,0.3-0.3,0.6-0.6,0.6H9.3V3.6h0.1C9.8,3.6,10,3.8,10,4.1z M9.5,5.3
+        C9.5,5.7,9.3,6,9,6c0.2-0.3,0.3-0.6,0.3-0.9h0.2c0,0,0.1,0,0.1,0V5.3z M12,12.9V10c0-1.8-1.5-3.3-3.3-3.3H8.4
+        c0.1-0.1,0.2-0.2,0.2-0.2h0.2C9.5,6.4,10,6,10,5.3V4.9c0.3-0.2,0.4-0.5,0.4-0.8c0-0.4-0.2-0.7-0.4-0.8C10,1.5,8.5,0,6.7,0
+        C4.8,0,3.4,1.5,3.3,3.3C3.1,3.5,2.9,3.8,2.9,4.1c0,0.5,0.4,1,1,1H4c0.1,0.6,0.4,1.2,0.9,1.6H4.7c-1.8,0-3.3,1.5-3.3,3.3v2.9H0v0.4
+        h1.5h1.1h8h1.1h1.6v-0.4H12z"/>
+    <rect x="9.5" y="10.9" class="st36" width="0.5" height="1.6"/>
+    <rect x="9.5" y="10" class="st36" width="0.5" height="0.4"/>
+    <rect x="11.5" y="2" class="st36" width="0.5" height="0.4"/>
+    <rect x="11.5" y="2.9" class="st36" width="0.5" height="0.4"/>
+    <rect x="11.5" y="3.8" class="st36" width="0.5" height="0.4"/>
+    <rect x="1.3" y="4.7" class="st36" width="0.4" height="0.4"/>
+    <rect x="1.3" y="5.6" class="st36" width="0.4" height="0.4"/>
+    <rect x="1.3" y="6.4" class="st36" width="0.4" height="0.4"/>
+    </svg>
+    
+    
+    `
+
+    const HelpCenter = () => <SvgXml xml={svg} width='100%' height='100%' fill='#1D194D'/>
+    return <HelpCenter />
+}
+
+export default SvgHelpCenter;

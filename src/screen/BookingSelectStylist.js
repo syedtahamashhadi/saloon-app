@@ -30,7 +30,7 @@ const BookingSelectStylist = (props) =>{
                     ]
     const handleStylistPress = (val)=>{
         console.log('Stylist is pressed >>',val)
-        setSelectedCrew(val.name)
+        setSelectedCrew(val.firstName)
         props.selectStylist(val)
         props.navigation.navigate('BookingSelectServices')
         // props.navigation.navigate('StylistProfile',{
@@ -74,33 +74,37 @@ const BookingSelectStylist = (props) =>{
 
                     <View style={{flexDirection:'row',marginTop:20 ,justifyContent:'space-between'}}>
                             <View style={{marginHorizontal:20,justifyContent:'center'}}>
-                                <Text style={{fontSize:18 , fontWeight:'bold'}}>{data.displayName}</Text>
+                                <Text style={{fontSize:18 , fontFamily:'AbrilFatFace'}}>
+                                    {data.displayName}
+                                </Text>
                             </View>
                             <View style={{justifyContent:'flex-end'}}>
                                 <View style={styles.seprator}>
-                                    <Text style={{fontWeight:'bold' , color:'#fff'}}>22 mins</Text>
+                                    <Text style={{fontFamily:'ExoBold' , color:'#fff'}}>22 mins</Text>
                                 </View>
                             </View>
                     </View>
-                    <Text style={{fontSize:13, color:'grey',marginTop:0,marginHorizontal:20}}>Book and experience our stylist</Text>
+                    <Text style={{fontSize:13,fontFamily:'ExoRegular', color:'grey',marginTop:0,marginHorizontal:20}}>
+                        Book and experience our stylist
+                    </Text>
                     
                     <ScrollView horizontal={true}  showsVerticalScrollIndicator={false} >
-                        <View style={{flexDirection:'row' , marginTop:25}}>
+                        <View style={{flexDirection:'row' , width:'100%' , marginTop:25}}>
                             {
                                 stylists.map((val,index)=>{
-                                    let myColor = val.name == selectedCrew ? '#49D3CE' : null
-                                    let myBorderColor = val.name == selectedCrew ? '#49D3CE' : '#fff'
+                                    let myColor = val.firstName == selectedCrew ? '#49D3CE' : null
+                                    let myBorderColor = val.firstName == selectedCrew ? '#49D3CE' : '#fff'
 
                                     return(
                                         <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
                                             <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                                <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
+                                                <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#F1F3F8',
                                                 borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                     <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                                 </View>
-                                                <Text style={{color:myColor,marginTop:'2%'}}>
-                                                    {val.name.length>15 ? val.name.slice(0,12) : val.name}
+                                                <Text style={{color:myColor,marginTop:'2%',fontFamily:'ExoRegular'}}>
+                                                    {val.firstName.length>15 ? val.firstName.slice(0,12) : val.firstName}
                                                 </Text>
                                             </View>
                                         </TouchableOpacity>

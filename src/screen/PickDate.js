@@ -181,6 +181,10 @@ const PickDate = (props) =>{
                             theme={{
                                 selectedDayBackgroundColor: '#00A700',
                                 selectedDayTextColor:'red',
+                                // monthTextColor: 'blue',
+                                textMonthFontFamily:'AbrilFatFace',
+                                textDayHeaderFontFamily:'ExoRegular',
+                                textDayFontFamily:'ExoRegular',
                                 // backgroundColor:'red',
                                 // arrowColor: 'red',
                                 // indicatorColor:'red',
@@ -190,7 +194,7 @@ const PickDate = (props) =>{
                     
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
-                    <Text style={{fontSize:20}}>Pick a time</Text>
+                    <Text style={{fontSize:20,fontFamily:'AbrilFatFace'}}>Pick a time</Text>
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
                     <TimeCard timeData={timeData} getTime={getTime} time={time}/>

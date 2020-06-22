@@ -1,5 +1,6 @@
 import React from 'react'
-import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image } from 'react-native'
+import { View , Text ,StyleSheet , TouchableOpacity , ScrollView } from 'react-native'
+import Image from 'react-native-remote-svg'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Button from '../component/Button'
@@ -21,6 +22,7 @@ const BookingSelectServices = (props) =>{
     const [selectedService,setSelectedService] = React.useState(null)
 
 
+
     // let serviceArr = []
 
 
@@ -39,6 +41,9 @@ const BookingSelectServices = (props) =>{
     }
 
     const handleServicePress = (val) =>{
+        // let newselectedService = selectedService;
+        // newselectedService.push(val);
+        // setSelectedService(newselectedService)
         setSelectedService(val)
         console.log('Selected Service is >>',selectedService)
     }
@@ -83,7 +88,7 @@ const BookingSelectServices = (props) =>{
 
                     <View style={{ justifyContent:'center'}}>
                         <View style={styles.seprator}>
-                            <Text style={{fontWeight:'bold' , color:'#fff'}}>22 mins</Text>
+                            <Text style={{fontFamily:'ExoBold' , color:'#fff'}}>22 mins</Text>
                         </View>
                     </View>
 
@@ -91,13 +96,17 @@ const BookingSelectServices = (props) =>{
                 <View style={{flexDirection:'row',justifyContent:'center' , alignItems:'center'}}>
                     {/* <Text style={{marginTop:'-10%'}}>Test</Text> */}
                     <View style={{backgroundColor:'#fff' ,marginTop:'-12%' , alignItems:'center'}}>
-                        <View style={{height:60,width:60,borderRadius:40,backgroundColor:'green',
+                        <View style={{height:60,width:60,borderRadius:40,backgroundColor:'#F1F3F8',
                                         borderWidth:3,borderColor:'#fff',elevation:5 }}>
                             <Image source={{ uri: data.profileImageURL }} style={styles.imgMannager}/>
                         </View>
                         
-                <Text style={{fontSize:16,marginTop:10,fontWeight:'bold'}}>{data.name}</Text>
-                        <Text style={{fontSize:14,marginTop:5}}>{`${data.rating} star / 85 reviews`}</Text>
+                        <Text style={{fontSize:16,marginTop:10,fontFamily:'ExoBold'}}>
+                            {`${data.firstName} ${data.lastName}`}
+                        </Text>
+                        <Text style={{fontSize:14,marginTop:5,fontFamily:'ExoRegular'}}>
+                            {`${data.rating.toFixed(1)} star / ${data.ratingCounter} reviews`}
+                        </Text>
 
                     </View>
                 </View>
@@ -124,7 +133,7 @@ const BookingSelectServices = (props) =>{
                                         <TouchableOpacity onPress={()=>handleServicePress(val)} key={index}>
 
                                             <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                                <View style={{height:55,width:55,borderRadius:40,backgroundColor:'green',
+                                                <View style={{height:55,width:55,borderRadius:40,backgroundColor:'#F1F3F8',
                                                 borderWidth:3,borderColor: myBorderColor,elevation:5}}>
                                                     <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                                 </View>

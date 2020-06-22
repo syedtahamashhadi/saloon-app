@@ -5,8 +5,12 @@ import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 
 const Rating = (props) =>{
     
+    console.log('Ratig Props >>' , props)
     let rating = props.rating ? props.rating : 0
     let ratingColor = props.textColor ? props.textColor : 'black'
+    let starSize = props.starSize ? props.starSize : 16
+    let textSize = props.textSize ? props.textSize : 16 
+
 
     console.log('Rating is >>',props.rating)
     const getStars = (rating)=>{
@@ -44,15 +48,17 @@ const Rating = (props) =>{
         <View style={{flexDirection:'row' , justifyContent:'center',alignItems:'center' }}>
             <View style={styles.starsContainer}>
                 {getStars(rating).map( (val,index) =>{
-                    // console.log('Star Value is >>',val)
+                    console.log('Star Value is >>',starSize)
                     return(
                         <View key={index} style={{paddingHorizontal:3}}>
-                            <AwsomeIcon name={val} size={16} color='#FFA800'/>
+                            <AwsomeIcon name={val} size={starSize} color='#FFA800'/>
                         </View>
                     )
                 })}
             </View>
-            {rating!==0 && <Text style={{fontSize:15 , color:ratingColor , fontWeight:'bold'}}>{rating}</Text>}
+            {rating!==0 && <Text style={{fontSize:textSize , color:ratingColor ,fontFamily:'ExoBold'}}>
+                {rating.toFixed(1)}
+            </Text>}
         </View>
     )   
 }
@@ -61,7 +67,7 @@ const styles = StyleSheet.create(
     {
         starsContainer:{
             flexDirection:'row',
-            marginRight:0
+            marginRight:2
         }
     }
 )

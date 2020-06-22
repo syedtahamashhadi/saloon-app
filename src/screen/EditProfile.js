@@ -1,6 +1,15 @@
 import React from 'react'
-import { View , Text , TouchableOpacity , StyleSheet } from 'react-native'
+import { View , Text , TouchableOpacity , StyleSheet , ScrollView } from 'react-native'
 import Button from '../component/Button'
+import SvgBookings from '../../MySvg/SvgBookings'
+import SvgFavourites from '../../MySvg/SvgFavourites'
+import SvgMoments from '../../MySvg/SvgMoments'
+import SvgHelpCenter from '../../MySvg/SvgHelpCenter'
+import SvgRewards from '../../MySvg/SvgRewards'
+import SvgPromoCode from '../../MySvg/SvgPromoCode'
+import SvgSettings from '../../MySvg/SvgSettings'
+import SvgTransactions from '../../MySvg/SvgTransactions'
+import SvgWhatsNew from '../../MySvg/SvgWhatsNew'
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux'
 
@@ -8,53 +17,68 @@ import { connect } from 'react-redux'
 
 const EditProfile = (props) =>{
 
-    const [storageErr,setStorageErr] = React.useState('')
+    // const [storageErr,setStorageErr] = React.useState('')
 
-    const storeData = async (value) => {        //https://react-native-community.github.io/async-storage/docs/usage
-        try {
-          await AsyncStorage.setItem('@storage_Key', value)
-        } catch (err) {
-          // saving error
-          console.log('Error Accured >>>')
-            setStorageErr(err)
-        }
-    }
+    // const storeData = async (value) => {        //https://react-native-community.github.io/async-storage/docs/usage
+    //     try {
+    //       await AsyncStorage.setItem('@storage_Key', value)
+    //     } catch (err) {
+    //       // saving error
+    //       console.log('Error Accured >>>')
+    //         setStorageErr(err)
+    //     }
+    // }
 
     
-    const getData = async () => {
-        try {
-        const value = await AsyncStorage.getItem('@storage_Key')
-        if(value !== null) {
-            // value previously stored
-            console.log('Stored Value is >>' , value)
-        }
-        } catch(e) {
-        // error reading value
-        console.log('Error Accured >>>')
-        setStorageErr(err)
-        }
-    }
+    // const getData = async () => {
+    //     try {
+    //     const value = await AsyncStorage.getItem('@storage_Key')
+    //     if(value !== null) {
+    //         // value previously stored
+    //         console.log('Stored Value is >>' , value)
+    //     }
+    //     } catch(e) {
+    //     // error reading value
+    //     console.log('Error Accured >>>')
+    //     setStorageErr(err)
+    //     }
+    // }
+
+    console.log('Edit Profile Props >>' , props)
+
+    const [selectedCard,setSelectedCard] = React.useState(null)
+    const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'CurrentBookings'},
+                        {img:<SvgWhatsNew /> , desc:`What's New` , nav:'WhatsNew'},
+    {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},{img:<SvgMoments /> , desc:`Moment's`},{img:<SvgRewards /> , desc:'Reward Credits'},
+    {img:<SvgPromoCode /> , desc:'Promocode'},{img:<SvgTransactions /> , desc:'Transaction History'},
+    {img:<SvgSettings /> , desc:'Settings'},{img:<SvgHelpCenter /> , desc:'Help Center'},]
   
     const handleButton=()=>{
         console.log('Handle Button is Pressed >>')
-        storeData('testing328')
+        // storeData('testing328')
+
+    }
+ 
+    const handleSelectedCard = (val)=>{
+        setSelectedCard(val.desc)
+        props.navigation.navigate(val.nav)
 
     }
 
-    React.useEffect(()=>{
-        getData()
-    },[])
-    const myColor = storageErr ? 'red' : '#fff'
+    // React.useEffect(()=>{
+    //     getData()
+    // },[])
+    // const myColor = storageErr ? 'red' : '#fff'
     return(
         <View style={styles.container}>
 
             <View style={styles.upperScreen}>
 
                 <View style={{marginHorizontal:20}}>
-
+                   
                     <View style={{marginTop:35,flexDirection:'row',justifyContent:'flex-end'}}>
                         <TouchableOpacity onPress={()=>console.log('Edit is Pressed')}>
-                            <Text style={{color:myColor,fontSize:16}}>Edit</Text>
+                            <Text style={{color:'#fff',fontSize:16}}>Edit</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -64,7 +88,7 @@ const EditProfile = (props) =>{
 
                         </View>
                         <Text style={{marginTop:3,color:'#fff',fontFamily:'AbrilFatFace',fontSize:15}}>
-                            Jake
+                            Jake{/* {props.mfa.verifyCode.firstName} */}
                         </Text>
                         <Text style={{marginTop:0,marginBottom:15,color:'#fff',fontFamily:'AbrilFatFace'}}>
                             testing328@yopmail.com
@@ -77,61 +101,43 @@ const EditProfile = (props) =>{
             </View>
 
             <View style={styles.lowerScreen}>
+                <ScrollView>
 
                 <View style={{marginHorizontal:20}}>
                     
                     <View style={styles.cardsContainer}>
-                        
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
+                    {
+                        cardData.map((val,index)=>{
+                            const cardTextColor = selectedCard == val.desc ? '#49D3CE' : 'grey'
 
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={()=>console.log('Card is Pressed')}>
-                            <View style={styles.card}></View>
-                        </TouchableOpacity>
-                        
-
-                        
-
+                            return(
+                                <TouchableOpacity key={index} onPress={()=>handleSelectedCard(val)}>
+                                    <View style={styles.card}>
+                                        <View style={styles.contentCard}>
+                                            {val.img}
+                                            <Text style={[{color: cardTextColor}, styles.cardContentText]}>
+                                                {val.desc}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }                      
 
                     </View>
 
                     <TouchableOpacity onPress={()=>console.log('Tos Is Pressed')}>
                         <Text style={styles.tos}> Terms and Privacy Policy </Text>
                     </TouchableOpacity>
-
-                    <Button title='Log out' handleButton={handleButton} textSize={18}/>
+                   
+                    <View style={{marginTop:'4%'}}>
+                        <Button title='Log out' handleButton={handleButton} textSize={18}/>
+                    </View>
 
                 </View>
+                </ScrollView>
 
             </View>
 
@@ -160,7 +166,7 @@ const styles = StyleSheet.create(
             backgroundColor:'#fff'
         },
         cardsContainer:{
-            marginTop:20,
+            marginTop:'5%',
             // backgroundColor:'red',
             width:'100%',
             // height:350,
@@ -168,24 +174,47 @@ const styles = StyleSheet.create(
             flexWrap:'wrap',
             justifyContent:'space-between'
         },
+        contentCard:{
+            width:'100%',
+            height:'40%',
+            marginTop:12,
+            alignItems:'center',
+            backgroundColor:'#fff'
+        },
+        cardContentText:{
+            marginTop:9,
+            textAlign:'center',
+            fontSize:11,
+            // color:'grey',
+            fontFamily:'ExoRegular'
+        },
         card:{
             width:90,
-            height:85,
+            height:100,
             backgroundColor:'#fff',
             borderRadius:5,
             elevation:10,
             marginBottom:10,
+            // justifyContent:'center',
+            alignItems:'center'
         },
         tos:{
             fontFamily:'AbrilFatFace',
             fontSize:15,
             textAlign:'center',
-            marginTop:10,
+            marginTop:'5%',
             textDecorationLine:'underline'
         },
 
     }
 )
 
+const mapStateToProps = (state) =>{
+    return{
+        token: state.mfaReducer.token ,
+        mfa: state.mfaReducer.data
+    }
+}
 
-export default EditProfile;
+
+export default connect(mapStateToProps,null)(EditProfile);

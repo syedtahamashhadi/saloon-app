@@ -5,7 +5,9 @@ import {View , Text , StyleSheet , TouchableOpacity} from 'react-native'
 const Button = (props) =>{  
 
     let btnColor = props.btnColor ? props.btnColor : '#49D3CE'
-    let textSize = props.textSize ? props.textSize : 22
+    // let textSize = props.textSize ? props.textSize : 22
+    let textSize = 22
+
     console.log('Props is >>',props)
     const styles = {
         container:{
@@ -15,7 +17,8 @@ const Button = (props) =>{
             width:200,
             backgroundColor:btnColor,
             borderRadius:20,
-            elevation:4
+            elevation:4,
+            alignItems:'center'
         },
         touchableContainer:{
             width:'100%',
@@ -26,9 +29,9 @@ const Button = (props) =>{
 
         <TouchableOpacity style={styles.touchableContainer} onPress={()=>props.handleButton()}>
             <View style={styles.container}>
-                <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
-                    <Text style={{fontSize:textSize,color:'#fff'}}>{props.title}</Text>
-                </View>
+                <Text style={{fontSize:textSize,color:'#fff',fontFamily:'ExoBold'}}>
+                    {props.title}
+                </Text>
             </View>
         </TouchableOpacity>
     )

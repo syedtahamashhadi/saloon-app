@@ -1,5 +1,6 @@
 import React from 'react'
-import {View ,Text , StyleSheet , TouchableOpacity , Image, ScrollView} from 'react-native'
+import {View ,Text , StyleSheet , TouchableOpacity , ScrollView} from 'react-native'
+import  Image from 'react-native-remote-svg'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import { Avatar } from 'react-native-elements'
 import Rating from '../component/Rating'
@@ -39,7 +40,9 @@ const StylistProfile = (props) =>{
                     <View style={styles.stylistAvatarContainer}>
                         <Avatar rounded source={{uri: stylist.profileImageURL}} size={55}/>
                     </View>
-                        <Text style={{marginTop:5 , fontSize:25 , textAlign:'center'}}>{stylist.name}</Text>
+                        <Text style={{marginTop:5 ,fontFamily:'AbrilFatFace', fontSize:25 , textAlign:'center'}}>
+                            {`${stylist.firstName} ${stylist.lastName}`}
+                        </Text>
                     <View style={{marginTop:12}}>
                         <Rating rating={stylist.rating}/>
                     </View>
@@ -90,7 +93,7 @@ const StylistProfile = (props) =>{
                         
                     </View>
                     <View style={{marginHorizontal:75}}>
-                        <Text style={{fontSize:15,color:'grey'}}>like this stylist</Text>
+                        <Text style={{fontSize:15,color:'grey',fontFamily:'ExoRegular'}}>like this stylist</Text>
                     </View>
                 </View>
 
@@ -100,12 +103,24 @@ const StylistProfile = (props) =>{
                             <Image source={require('../../assets/services-icon.png')} style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Services</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Services</Text>
                         </View>
                     </View>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        <View style={{flexDirection:'row',marginTop:15,marginLeft:55}}>
 
-                    <View style={{flexDirection:'row',marginTop:15,marginLeft:55}}>
+                        {
+                            stylist.services.map((val,index)=>{
+                                console.log('Icons >>',val.serviceIcon)
+                                return(
+                                    <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
+                                        <Image source={{uri : val.serviceIcon}} style={styles.shopImage}/>
+                                    </View>
+                                )
+                            })
+                        }
+                        </View>
+                    {/* <View style={{flexDirection:'row',marginTop:15,marginLeft:55}}>
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
                             <Image source={require('../../assets/scisor-icon.png')} style={styles.shopImage}/>
                         </View>
@@ -115,7 +130,7 @@ const StylistProfile = (props) =>{
                         <View style={{height:45,width:45,borderRadius:40,backgroundColor:'red',marginRight:20}}>
                             <Image source={require('../../assets/trimmer-icon.png')} style={styles.shopImage}/>
                         </View>
-                    </View>
+                    </View> */}
 
                     </ScrollView>
                     
@@ -129,7 +144,7 @@ const StylistProfile = (props) =>{
 
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Bentastic Ben</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Bentastic Ben</Text>
                         </View>
                     </View>
                     <View style={{marginTop:15,marginLeft:55}}>
@@ -147,7 +162,7 @@ const StylistProfile = (props) =>{
                                     style={styles.shopImage}/>
                         </View>
                         <View style={{alignItems:'center',justifyContent:'center' ,marginLeft:10}}>
-                            <Text style={{fontSize:25}}>Working Hours</Text>
+                            <Text style={{fontSize:25,fontFamily:'ExoBold'}}>Working Hours</Text>
                         </View>
                     </View>
                     <View style={{marginTop:15,marginLeft:55}}>

@@ -12,16 +12,21 @@ import {connect} from 'react-redux'
 
 const ADD_APPOINMENT = gql `
     mutation abc($salonId: String! , $serviceProviderId: String! , 
-            $timeZone: String! , $serviceId: String! , $cardId: String! , $appointmentDateTime: DateTime! ,
+            $timeZone: String! , $services: [String] , $cardId: String! , $appointmentDateTime: DateTime! ,
             $price: Float!) {
         addAppointment(salonId:$salonId, 
     serviceProviderId: $serviceProviderId , timeZone: $timeZone, 
-        serviceId: $serviceId, cardId: $cardId, appointmentDateTime: $appointmentDateTime, price:$price)
+        services: $services, cardId: $cardId, appointmentDateTime: $appointmentDateTime, price:$price)
         {
         status
         salon
         {
             displayName
+        }
+        services{
+            _id
+            name
+            description
         }
         }  
     } 
@@ -47,7 +52,7 @@ const ConfirmBooking = (props) =>{
     let contactNo = props.saloon.data.contactNo
     let saloonAddress = props.saloon.data.address
     let stylistId= props.stylist.data._id
-    let stylistName = props.stylist.data.name
+    let stylistName = `${props.stylist.data.firstName} ${props.stylist.data.lastName}`
     let serviceId = props.service.data._id
     let serviceName = props.service.data.name
     let servicePrice = props.service.data.price
@@ -63,7 +68,7 @@ const ConfirmBooking = (props) =>{
             {
                 variables:{
                     salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
-                    , serviceId: serviceId , cardId: selectedCard.cardId , appointmentDateTime: newDateTime ,
+                    , services: [serviceId] , cardId: selectedCard.cardId , appointmentDateTime: newDateTime ,
                     price: servicePrice
                 },
                 context:{
@@ -117,12 +122,12 @@ const ConfirmBooking = (props) =>{
                 </TouchableOpacity>
 
                 <View style={{marginTop:10,alignItems:'center'}}>
-                    <Text style={{fontSize:18}}>Confirmed Time:</Text>
+                    <Text style={{fontSize:18,fontFamily:'ExoBold'}}>Confirmed time:</Text>
 
                     <View style={{marginTop:15}}>
-                <Text style={{fontSize:18,color:'#49D3CE'}}>{`${strDay} ${day} ${month}, ${year}`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`${strDay} ${day} ${month}, ${year}`}</Text>
                     </View>
-                <Text style={{fontSize:18,color:'#49D3CE'}}>{`at ${time} AM`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`at ${time} AM`}</Text>
                 </View>
 
                 <View style={{marginHorizontal:20,marginTop:25}}>
@@ -133,7 +138,7 @@ const ConfirmBooking = (props) =>{
                         service={serviceName}
                         duration={duration}
                         staff={stylistName}
-                        total={`$ ${servicePrice}`}
+                        total={`£ ${servicePrice}`}
                     />
 
                 </View>

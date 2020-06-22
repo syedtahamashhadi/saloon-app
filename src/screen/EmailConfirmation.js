@@ -69,7 +69,7 @@ const EmailConfirm = (props) =>{
                     <Image source={require('../../assets/email-confirmation.png')}  style={styles.image} />
                 </View>
                 <View style={{marginTop:40,alignSelf:'center' }}>
-                    <Text style={{fontSize:30 , fontWeight:'bold',textAlign:'center'}}>
+                    <Text style={{fontSize:30 ,fontFamily:'AbrilFatFace',textAlign:'center'}}>
                         Please Confirm your email address
                     </Text>
                 </View>
@@ -82,13 +82,13 @@ const EmailConfirm = (props) =>{
                     </TouchableOpacity>
                 </View>
                 <View style={{marginTop:20,flexDirection:'row',justifyContent:'center'}}>  
-                    <Text style={{fontSize:15 , color:'grey'}}>Don't get an email ?</Text>
+                    <Text style={{fontSize:15 , color:'grey',fontFamily:'ExoRegular'}}>Don't get an email ?</Text>
                     <TouchableOpacity onPress={()=> handleResend()}>
-                        <Text style={{fontSize:15}}>Resend</Text>
+                        <Text style={{fontSize:15,fontFamily:'ExoBold'}}>Resend</Text>
                     </TouchableOpacity>
                 </View>
                 { data && <View style={{justifyContent:'center',marginTop:10}}>
-                    <Text style={{textAlign:'center', color:'green'}}>
+                    <Text style={{textAlign:'center', color:'green',fontFamily:'ExoRegular'}}>
                         Your OTP code has been sent to you
                     </Text>
                 </View>}

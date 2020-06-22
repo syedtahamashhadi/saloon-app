@@ -22,7 +22,7 @@ const SignUp = (props) =>{
                     <Image source={require('../../assets/congrats-check.png')} style={styles.image} />
                 </View>
                 <View style={{marginTop:40}}>
-                    <Text style={{fontSize:25 , fontWeight:'bold'}}>Congratulations!</Text>
+                    <Text style={{fontSize:25 , fontFamily:'AbrilFatFace'}}>Congratulations!</Text>
                 </View>
             </View>
             <View style={{width:'100%',marginTop:80}}>
@@ -32,7 +32,7 @@ const SignUp = (props) =>{
             </View>
             <View style={{marginTop:20,flexDirection:'row',justifyContent:'center'}}>  
                     <TouchableOpacity onPress={()=>handleSkip()}>
-                        <Text style={{fontSize:15}}>Skip</Text>
+                        <Text style={{fontSize:15 ,fontFamily:'ExoRegular'}}>Skip</Text>
                     </TouchableOpacity>
             </View>
         </View>

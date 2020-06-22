@@ -46,6 +46,10 @@ const GUEST_USER = {
     SUCCESS: 'GUEST_USER_SUCCESS'
 }
 
+const SET_TAB_HEADER = {
+    SUCCESS : 'SET_TAB_HEADER_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -56,5 +60,6 @@ export {SIGNUP ,
         SELECTED_SERVICE_BOOKING ,
         SELECTED_DATE_TIME_BOOKING ,
         GUEST_USER ,
+        SET_TAB_HEADER,
     }
 

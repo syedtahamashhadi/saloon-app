@@ -17,7 +17,7 @@ const MyCallOut = ()=>{
                 <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:5,
                                 marginVertical:3 }}>
                     <View style={{justifyContent:'center'}}>
-                        <Text style={{fontSize:22,fontWeight:'bold',color:'#fff'}}>{name}</Text>
+                        <Text style={{fontSize:22,fontFamily:'AbrilFatFace',color:'#fff'}}>{name}</Text>
                     </View>
                     <View style={{width:60,height:20,borderRadius:10,
                             backgroundColor:'#FA7268',justifyContent:'center',alignItems:'center',

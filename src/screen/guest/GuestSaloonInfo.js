@@ -14,7 +14,7 @@ const GuestSaloonInfo = (props) =>{
     const [selectedService,setSelectedService] = React.useState('')
     
 
-    const crewData = [  {icon:require('../../../assets/stylist-1.png'),name:'Mattttttttttr dsada ad'},
+    const crewData = [  {icon:require('../../../assets/stylist-1.png'),name:'Matt'},
                         {icon:require('../../../assets/stylist-2.png'),name:'Sherry'},
                         {icon:require('../../../assets/stylist-3.png'),name:'Linda'},
                         {icon:require('../../../assets/stylist-4.png'),name:'Dillan'},
@@ -36,18 +36,18 @@ const GuestSaloonInfo = (props) =>{
 
     const handleBooking = () =>{
         console.log('Booking is Pressed')
-        props.nav.navigation.navigate('GuestPickDateTime')
+        props.nav.navigation.navigate('GuestBookingSelectStylist')
     }
 
     return(
         <View style={{width:'100%'}}>
             {/* <View > */}
                 <View>
-                    <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Crew</Text>
+                    <Text style={{marginTop:15,fontSize:25,fontFamily:'AbrilFatFace'}}>Our Crew</Text>
                     
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
-                        <View style={{marginTop:15,flexDirection:'row'}}>
+                        <View style={{marginTop:15,flexDirection:'row',marginHorizontal:-20}}>
 
                         {
                             crewData.map((val,index)=>{
@@ -58,11 +58,11 @@ const GuestSaloonInfo = (props) =>{
                                     <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
                                         <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'green',
+                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#C5C8D8',
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={val.icon} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor}}>
+                                            <Text style={{color:myColor,fontFamily:'ExoRegular'}}>
                                                 {val.name.length>15 ? val.name.slice(0,12) : val.name}
                                             </Text>
                                         </View>
@@ -78,30 +78,30 @@ const GuestSaloonInfo = (props) =>{
                 </View>
                     
                 <View >
-                    <Text style={{marginTop:15,fontSize:25,fontWeight:'bold'}}>Our Service</Text>
+                    <Text style={{marginTop:15,fontSize:25,fontFamily:'AbrilFatFace'}}>Our Service</Text>
                     
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
-                        <View style={{marginTop:15,flexDirection:'row',justifyContent:'space-between'}}>
+                        <View style={{marginTop:15,flexDirection:'row',marginHorizontal:-20,justifyContent:'space-between'}}>
 
                         {
                             serviceData.map((val,index)=>{
-                                let myColor = val.name == selectedService ? '#49D3CE' : null
-                                let myBorderColor = val.name == selectedService ? '#49D3CE' : '#fff'
+                                let myColor = null
+                                let myBorderColor = '#fff'
                                 return(
 
-                                    <TouchableOpacity onPress={()=>setSelectedService(val.name)} key={index}>
+                                    // <TouchableOpacity onPress={()=>setSelectedService(val.name)} key={index}>
 
                                         <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'red',
+                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#C5C8D8',
                                             borderWidth:3,borderColor:myBorderColor,elevation:5}}>
                                                 <Image source={val.icon} style={styles.imgMannager}/>
                                             </View>
-                                            <Text style={{color:myColor}}>
+                                            <Text style={{color:myColor,fontFamily:'ExoRegular'}}>
                                                 {val.name>15 ? val.name.slice(0.13) : val.name}
                                             </Text>
                                         </View>
-                                    </TouchableOpacity>
+                                    // </TouchableOpacity>
                                 )
                             })
 
@@ -141,7 +141,7 @@ const styles = StyleSheet.create(
             height:53,
             width:53,
             borderRadius:40,
-            backgroundColor:'red',
+            backgroundColor:'#C5C8D8',
             marginRight:27,
             marginVertical:20,
             // marginEnd:0,

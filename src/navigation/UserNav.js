@@ -34,6 +34,17 @@ import ConfirmBooking from '../screen/ConfirmBooking'
 import GuestConfirmBooking from '../screen/guest/GuestConfirmBooking'
 import GuestPaymentMethods from '../screen/guest/GuestPaymentMethods'
 import EditProfile from '../screen/EditProfile'
+import ReferToFriends from '../screen/ReferToFriends'
+import Favourites from '../screen/Favourites'
+import UpdatePasswords from '../screen/UpdatePasswords'
+import BookingDetail from '../screen/BookingDetail'
+import WhatsNew from '../screen/WhatsNew'
+import FaqsDescription from '../screen/FaqsDescription'
+import GuestBookingSelectStylist from '../screen/guest/GuestBookingSelectStylist'
+import GuestBookingSelectServices from '../screen/guest/GuestBookingSelectServices'
+// import TransactionHistoryCard from '../component/TransactionHistoryCard'
+import PaymentNavigation from '../screen/TabsNavigations/Payment/PaymentNavigation'
+// import AnimatedText from '../component/AnimatedText'
 // import GuestSlider from '../screen/guest/GuestSlider'
 
 
@@ -44,7 +55,7 @@ const UserNav = () =>{
 
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome" 
+        <Stack.Navigator initialRouteName="GuestPaymentMethods" 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
@@ -81,7 +92,19 @@ const UserNav = () =>{
             <Stack.Screen name='UserDetail' component={UserDetail}/>
             <Stack.Screen name='ConfirmBooking' component={ConfirmBooking}/>
             <Stack.Screen name='EditProfile' component={EditProfile}/>
-
+            <Stack.Screen name='ReferToFriends' component={ReferToFriends}/>
+            <Stack.Screen name='Favourites' component={Favourites}/>
+            <Stack.Screen name='UpdatePasswords' component={UpdatePasswords}/>
+            <Stack.Screen name='CurrentBookings' component={CurrentBookings}/>
+            <Stack.Screen name='BookingDetail' component={BookingDetail}/>
+            <Stack.Screen name='WhatsNew' component={WhatsNew}/>
+            <Stack.Screen name='FaqsDescription' component={FaqsDescription}/>
+            <Stack.Screen name='GuestBookingSelectServices' component={GuestBookingSelectServices}/>
+            <Stack.Screen name='GuestBookingSelectStylist' component={GuestBookingSelectStylist}/>
+            <Stack.Screen name='PaymentNavigation' component={PaymentNavigation}/>
+            {/* <Stack.Screen name='TransactionHistoryCard' component={TransactionHistoryCard}/> */}
+            {/* <Stack.Screen name='UpdatePasswords' component={UpdatePasswords}/> */}
+            {/* <Stack.Screen name='AnimatedText' component={AnimatedText} /> */}
             {/* <Stack.screen name='GuestSlider' component={GuestSlider} /> */}
             {/* <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/> */}
 

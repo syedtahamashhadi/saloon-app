@@ -10,6 +10,8 @@ import Button from '../../component/Button'
 const GuestPickDateTime = (props) =>{
     const [pageView,setPageView]=React.useState(3)
     const [selectedDate,setSelectedDate] = React.useState(null)
+    const [selectedDateMark,setSelectedDateMark] = React.useState(null)
+
     const [dateErr , setDateErr] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
@@ -34,6 +36,13 @@ const GuestPickDateTime = (props) =>{
     }
 
     const handleDatePress = async (val) =>{
+
+        setSelectedDateMark(
+            // myObj
+            {
+                [val.dateString]:{selected: true, marked: true, selectedColor: '#49D3CE' }
+            }
+        )
         setSelectedDate(val.dateString)
         setPageView(1)
     }
@@ -73,17 +82,21 @@ const GuestPickDateTime = (props) =>{
                             onDayPress={val=>handleDatePress(val)}
                             // minDate={currentDate}
                             // hideExtraDays={true}
+                            markedDates={ selectedDateMark ? selectedDateMark : null}
                             
                             theme={{
                                 selectedDayBackgroundColor: '#49D3CE',
-                                selectedDayTextColor:'green'
+                                selectedDayTextColor:'green',
+                                textMonthFontFamily:'ExoRegular',
+                                textDayHeaderFontFamily:'ExoRegular',
+                                textDayFontFamily:'ExoRegular',
                             }}
                         />
                     </View>
                     
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
-                        <Text style={{fontSize:20}}>Pick a time</Text>
+                        <Text style={{fontSize:20,fontFamily:'AbrilFatFace'}}>Pick a time</Text>
                         
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>

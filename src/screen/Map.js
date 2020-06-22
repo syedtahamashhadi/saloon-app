@@ -18,13 +18,16 @@ const Search = (props) =>{
     const [value, onChangeText] = React.useState('');
     const getGreet = (name) =>{
         let hour = new Date().getHours()
+        console.log('Hour is >>' , hour)
         switch(true){
-            case (hour>8 && hour <12):
-                return `Good Morning ${name}`
-            case (hour>12 && hour<17):
-                return `Good Afternoon ${name}`
+            case (hour >= 1 && hour <12):
+                return `Good Morning! ${name}`
+            case (hour >= 12 && hour<17):
+                return `Good Afternoon! ${name}`
+            case (hour >= 17 && hour <= 24):
+                return `Good Evening! ${name}`
             default:
-                return `Good Evening ${name}`
+                return `Good Evening! ${name}`
         }
     }
 
@@ -40,7 +43,9 @@ const Search = (props) =>{
 
                 <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                 
-                    <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet(props.name)}</Text>
+                    <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>
+                        {getGreet(props.name)}
+                    </Text>
                     <TouchableOpacity onPress={()=>handleImagePress()}>
                         <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
                             source={{uri : props.imgUri}}
@@ -98,11 +103,13 @@ const GET_NEAREST_SALOON = gql `
             serviceIcon
         }
         serviceProviders{
-            name
+            firstName
+            lastName
             _id
             status
             rating
             profileImageURL
+            ratingCounter
             services{
                 _id
                 name
@@ -214,7 +221,7 @@ const Map = (props) =>{
     return(
         <View style={styles.container}>
 
-            <Search name={name} imgUri={imgUri} nav={props}/>
+            <Search name={props.mfa.verifyCode.firstName} imgUri={imgUri} nav={props}/>
 
             <View style={styles.map}>
                 <MapView 
@@ -288,7 +295,6 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         nearestSaloon: (data) => dispatch(nearestSaloonSuccess(data)) ,
         selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data))
-
     }
 }
 
