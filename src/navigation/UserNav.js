@@ -51,6 +51,7 @@ import RewardsNavigation from '../screen/TabsNavigations/Rewards/RewardsNavigati
 import Moments from '../screen/Moments'
 import SaloonNavigation from '../screen/TabsNavigations/Saloon/SaloonNavigation'
 import FooterBar from '../component/FooterBar'
+import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
 // import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
 // import AnimatedText from '../component/AnimatedText'
 // import GuestSlider from '../screen/guest/GuestSlider'
@@ -117,7 +118,7 @@ const UserNav = () =>{
             <Stack.Screen name='Moments' component={Moments}/>
             <Stack.Screen name='SaloonNavigation' component={SaloonNavigation}/>
             <Stack.Screen name='FooterBar' component={FooterBar}/>         
-
+            <Stack.Screen name= 'TosPpNavigation' component={TosPpNavigation}/>
         </Stack.Navigator>
         </NavigationContainer>
     );

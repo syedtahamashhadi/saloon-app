@@ -42,6 +42,7 @@ const Saloon = (props) =>{
     console.log('ID IS >>>>' , saloon)
 
     const [highlight,setHighLight] = React.useState('Info')
+    const [favPressed,setFavPressed] = React.useState(false)
 
     const pages = [{name:'Info'} , {name:'Offers'} , {name:'Reviews'}]
 
@@ -84,7 +85,11 @@ const Saloon = (props) =>{
     const handleNavPress = (val) =>{
         setHighLight(val.name)
     }
-  
+    
+    let heartBackgroundColor = favPressed ? '#FA7268' : '#fff'
+    let heartColor = favPressed ? 'green' : '#FA7268'
+
+
     return(
         <View style={styles.container}>
             <View style={{flex:3,backgroundColor:'#fff'}}>
@@ -97,9 +102,9 @@ const Saloon = (props) =>{
                             <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                                 <AntIcon name="arrowleft" size={25} color="white"/>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>console.log('Heart is Pressed..')}>
+                            <TouchableOpacity onPress={()=>setFavPressed(!favPressed)}>
                                 <View style={styles.heartIcon}>
-                                    <AntIcon name="hearto" size={22} color="#FA7268" style={{padding:9}}/>
+                                    <AntIcon name="hearto" size={22} color={heartColor} style={{padding:9}}/>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -189,7 +194,7 @@ const styles = StyleSheet.create(
             width:40,
             height:40,
             borderRadius:40,
-            backgroundColor:'#fff',
+            // backgroundColor:'#fff',
             elevation:5,
         }
     }

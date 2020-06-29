@@ -2,25 +2,29 @@ import React from 'react'
 import {View , Text , Image , TextInput , StyleSheet , TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import { connect } from 'react-redux'
 
-const HomeScreenBanner = () =>{
+const HomeScreenBanner = (props) =>{
+    console.log('HomeScreen Banner >>' , props)
     const [value, onChangeText] = React.useState('');
     const getGreet = (name) =>{
         let hour = new Date().getHours()
         switch(true){
-            case (hour>8 && hour <12):
-                return `Good Morning ${name}`
-            case (hour>12 && hour<17):
-                return `Good Afternoon ${name}`
+            case (hour >= 1 && hour <12):
+                return `Good Morning! ${name}`
+            case (hour >= 12 && hour<17):
+                return `Good Afternoon! ${name}`
+            case (hour >= 17 && hour <= 24):
+                return `Good Evening! ${name}`
             default:
-                return `Good Evening ${name}`
+                return `Good Evening! ${name}`
         }
     }
     return(
         <View style={{marginTop:35}}>
             <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                
-                <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet("Taha")}</Text>
+                <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet(props.mfa.verifyCode.firstName)}</Text>
                 
                 <View style={{borderRadius:40,borderWidth:2,borderColor:'#fff',elevation:5}}>
                     <Image style={{borderRadius:38,height:38,width:40}}
@@ -58,7 +62,16 @@ const HomeScreenBanner = () =>{
     )
 }
 
-export default HomeScreenBanner;
+
+const mapStateToProps = (state) =>{
+
+    return{
+        mfa: state.mfaReducer.data
+    }
+}
+
+
+export default connect(mapStateToProps,null)(HomeScreenBanner);
 
 const styles = StyleSheet.create(
     {

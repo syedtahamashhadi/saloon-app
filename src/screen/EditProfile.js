@@ -117,7 +117,7 @@ const EditProfile = (props) =>{
                             const cardTextColor = selectedCard == val.desc ? '#49D3CE' : 'grey'
 
                             return(
-                                <TouchableOpacity activeOpacity={0.6} key={index} onPress={()=>handleSelectedCard(val)}>
+                                <TouchableOpacity activeOpacity={0.9} key={index} onPress={()=>handleSelectedCard(val)}>
                                     <View style={styles.card}>
                                         <View style={styles.contentCard}>
                                             {val.img}
@@ -133,7 +133,7 @@ const EditProfile = (props) =>{
 
                     </View>
 
-                    <TouchableOpacity onPress={()=>console.log('Tos Is Pressed')}>
+                    <TouchableOpacity onPress={()=>props.navigation.navigate('TosPpNavigation')}>
                         <Text style={styles.tos}> Terms and Privacy Policy </Text>
                     </TouchableOpacity>
                    

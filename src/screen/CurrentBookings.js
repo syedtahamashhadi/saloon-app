@@ -109,7 +109,8 @@ const CurrentBookings = (props) =>{
                         return(
                             // {component}
                             // <Text>test</Text>
-                            val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
+                            // val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
+                            <CurrentBookingCard detail={val} nav={props.navigation}/>
                         )
 
                     })

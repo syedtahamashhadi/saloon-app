@@ -22,6 +22,8 @@ mutation abc($id: String! , $status:  Boolean!) {
 const Saloon = (props) =>{
 
     const [setFavSaloon , { data , loading , error }] = useMutation(SET_FAV_SALOON)
+  
+    const [favPressed,setFavPressed] = React.useState(false)
     
     const saloon = props.selectedSaloon.data
     console.log('ID IS >>>>' , saloon)
@@ -51,6 +53,9 @@ const Saloon = (props) =>{
             console.log('Fav Saloon Error >>' , error)
         }
     },[data,error])
+
+    let heartBackgroundColor = favPressed ? '#FA7268' : '#fff'
+    let heartColor = favPressed ? '#fff' : '#FA7268'
     
     return(
         <View style={styles.container}>
@@ -64,9 +69,14 @@ const Saloon = (props) =>{
                             <TouchableOpacity onPress={()=>props.nav.goBack()}>
                                 <AntIcon name="arrowleft" size={25} color="white"/>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>handleHeartPress()}>
+                            {/* <TouchableOpacity onPress={()=>handleHeartPress()}>
                                 <View style={styles.heartIcon}>
                                     <AntIcon name="hearto" size={22} color="#FA7268" style={{padding:9}}/>
+                                </View>
+                            </TouchableOpacity> */}
+                             <TouchableOpacity onPress={()=>setFavPressed(!favPressed)}>
+                                <View style={[{backgroundColor:heartBackgroundColor},styles.heartIcon]}>
+                                    <AntIcon name="hearto" size={22} color={heartColor}  style={{padding:9}}/>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -137,7 +147,7 @@ const styles = StyleSheet.create(
             width:40,
             height:40,
             borderRadius:40,
-            backgroundColor:'#fff',
+            // backgroundColor:'#fff',
             elevation:5,
         }
     }
