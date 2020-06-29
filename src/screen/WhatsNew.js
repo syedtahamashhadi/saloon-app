@@ -22,20 +22,20 @@ const GET_ALL_OFFERS = gql `
 
 const WhatsNew = (props) =>{
 
-    const {data , loading , error} = useQuery(GET_ALL_OFFERS,
-        {
-            context:{
-                headers:{
-                    authorization: props.token,
-                }
-            },
-            fetchPolicy:'network-only'  
-        },
-    )
+    // const {data , loading , error} = useQuery(GET_ALL_OFFERS,
+    //     {
+    //         context:{
+    //             headers:{
+    //                 authorization: props.token,
+    //             }
+    //         },
+    //         fetchPolicy:'network-only'  
+    //     },
+    // )
 
-        console.log('Data >>' , data)
-        console.log('Loading >>' , loading)
-        console.log('Error >>' , error)
+    //     console.log('Data >>' , data)
+    //     console.log('Loading >>' , loading)
+    //     console.log('Error >>' , error)
 
     console.log("token >>" , props.token)
     return(

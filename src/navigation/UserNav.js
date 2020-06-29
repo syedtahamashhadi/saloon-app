@@ -15,7 +15,7 @@ import ForgotPassword from '../screen/ForgotPassword'
 import Congratgulation from '../screen/Congratgulation'
 import MFA from '../screen/MFA'
 import StylistProfile from '../screen/StylistProfile'
-import SaloonInfo from '../component/SaloonInfo'
+// import SaloonInfo from '../component/SaloonInfo'
 import BookingSelectStylist from '../screen/BookingSelectStylist'
 import BookingSelectServices from '../screen/BookingSelectServices'
 import PickDateTime from '../screen/PickDateTime'
@@ -44,6 +44,14 @@ import GuestBookingSelectStylist from '../screen/guest/GuestBookingSelectStylist
 import GuestBookingSelectServices from '../screen/guest/GuestBookingSelectServices'
 // import TransactionHistoryCard from '../component/TransactionHistoryCard'
 import PaymentNavigation from '../screen/TabsNavigations/Payment/PaymentNavigation'
+import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
+import PromoCode from '../screen/PromoCode'
+import PostpondPickDate from '../screen/PostpondPickDate'
+import RewardsNavigation from '../screen/TabsNavigations/Rewards/RewardsNavigation'
+import Moments from '../screen/Moments'
+import SaloonNavigation from '../screen/TabsNavigations/Saloon/SaloonNavigation'
+import FooterBar from '../component/FooterBar'
+// import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
 // import AnimatedText from '../component/AnimatedText'
 // import GuestSlider from '../screen/guest/GuestSlider'
 
@@ -55,7 +63,7 @@ const UserNav = () =>{
 
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="GuestPaymentMethods" 
+        <Stack.Navigator initialRouteName="Welcome" 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
@@ -71,7 +79,7 @@ const UserNav = () =>{
             <Stack.Screen name='Stylist' component={Stylist}/>
             <Stack.Screen name='SelectStylist' component={SelectStylist}/>
             <Stack.Screen name='StylistProfile' component={StylistProfile}/>
-            <Stack.Screen name='SaloonInfo' component={SaloonInfo}/>
+            {/* <Stack.Screen name='SaloonInfo' component={SaloonInfo}/> */}
             <Stack.Screen name='BookingSelectStylist' component={BookingSelectStylist} />
             <Stack.Screen name='BookingSelectServices' component={BookingSelectServices} />
             <Stack.Screen name='SaloonList' component={SaloonList}/>
@@ -102,16 +110,13 @@ const UserNav = () =>{
             <Stack.Screen name='GuestBookingSelectServices' component={GuestBookingSelectServices}/>
             <Stack.Screen name='GuestBookingSelectStylist' component={GuestBookingSelectStylist}/>
             <Stack.Screen name='PaymentNavigation' component={PaymentNavigation}/>
-            {/* <Stack.Screen name='TransactionHistoryCard' component={TransactionHistoryCard}/> */}
-            {/* <Stack.Screen name='UpdatePasswords' component={UpdatePasswords}/> */}
-            {/* <Stack.Screen name='AnimatedText' component={AnimatedText} /> */}
-            {/* <Stack.screen name='GuestSlider' component={GuestSlider} /> */}
-            {/* <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/> */}
-
-
-
-
-           
+            <Stack.Screen name='HelpCenterNavigation' component={HelpCenterNavigation}/>
+            <Stack.Screen name='PromoCode' component={PromoCode}/>
+            <Stack.Screen name='PostpondPickDate' component={PostpondPickDate}/>
+            <Stack.Screen name='RewardsNavigation' component={RewardsNavigation}/>
+            <Stack.Screen name='Moments' component={Moments}/>
+            <Stack.Screen name='SaloonNavigation' component={SaloonNavigation}/>
+            <Stack.Screen name='FooterBar' component={FooterBar}/>         
 
         </Stack.Navigator>
         </NavigationContainer>

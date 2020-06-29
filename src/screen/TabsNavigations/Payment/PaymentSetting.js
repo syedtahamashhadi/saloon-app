@@ -20,6 +20,7 @@ const PaymentSetting= () =>{
 
     return(
         <View style={styles.container}>
+            <View style={{alignItems:'center'}}>
           
             <View style={{marginTop:15}}>
                 <Text style={{fontSize:20}}>Select Payment Method</Text>
@@ -68,7 +69,9 @@ const PaymentSetting= () =>{
                     />
                 </View>
             </View>
-            <View style={{marginTop:10}}>
+           
+            </View>
+            <View style={{marginTop:10 , marginHorizontal:20 }}>
                 <Button title='Apply Changes' textSize={18} handleButton={handleButton}/>
             </View>
         </View>
@@ -83,7 +86,7 @@ const styles = StyleSheet.create(
         container:{
             flex:1,
             backgroundColor:'#fff',
-            alignItems:'center'
+            // alignItems:'center'
         },
         cardsContainer:{
             marginTop:20,

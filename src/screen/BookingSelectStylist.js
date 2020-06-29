@@ -74,7 +74,7 @@ const BookingSelectStylist = (props) =>{
 
                     <View style={{flexDirection:'row',marginTop:20 ,justifyContent:'space-between'}}>
                             <View style={{marginHorizontal:20,justifyContent:'center'}}>
-                                <Text style={{fontSize:18 , fontFamily:'AbrilFatFace'}}>
+                                <Text style={{fontSize:18 , fontFamily:'DosisExtraBold' , color:'#4C4F63'}}>
                                     {data.displayName}
                                 </Text>
                             </View>

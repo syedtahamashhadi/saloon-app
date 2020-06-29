@@ -20,7 +20,7 @@ const SaloonList = (props) =>{
     const handleSaloonPress = (data) =>{
         console.log(`Saloon is pressed`)
         props.selectedSaloon(data)
-        props.navigation.navigate('Saloon')
+        props.navigation.navigate('SaloonNavigation')
     }
     return(
         <View style={styles.container}>

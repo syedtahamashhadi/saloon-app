@@ -1,5 +1,5 @@
 import React from 'react'
-import { View , Text , TouchableOpacity , StyleSheet , ScrollView } from 'react-native'
+import { View , Text , TouchableOpacity , StyleSheet , Image , ScrollView } from 'react-native'
 import Button from '../component/Button'
 import SvgBookings from '../../MySvg/SvgBookings'
 import SvgFavourites from '../../MySvg/SvgFavourites'
@@ -10,8 +10,10 @@ import SvgPromoCode from '../../MySvg/SvgPromoCode'
 import SvgSettings from '../../MySvg/SvgSettings'
 import SvgTransactions from '../../MySvg/SvgTransactions'
 import SvgWhatsNew from '../../MySvg/SvgWhatsNew'
+import FooterBar from '../component/FooterBar'
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux'
+
 
 
 
@@ -49,9 +51,10 @@ const EditProfile = (props) =>{
     const [selectedCard,setSelectedCard] = React.useState(null)
     const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'CurrentBookings'},
                         {img:<SvgWhatsNew /> , desc:`What's New` , nav:'WhatsNew'},
-    {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},{img:<SvgMoments /> , desc:`Moment's`},{img:<SvgRewards /> , desc:'Reward Credits'},
-    {img:<SvgPromoCode /> , desc:'Promocode'},{img:<SvgTransactions /> , desc:'Transaction History'},
-    {img:<SvgSettings /> , desc:'Settings'},{img:<SvgHelpCenter /> , desc:'Help Center'},]
+    {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},
+    {img:<SvgMoments /> , desc:`Moment's` , nav:'Moments'},{img:<SvgRewards /> , desc:'Reward Credits' , nav:'RewardsNavigation'},
+    {img:<SvgPromoCode /> , desc:'Promocode' , nav: 'PromoCode'},{img:<SvgTransactions /> , desc:'Transaction History' , nav:'PaymentNavigation'},
+    {img:<SvgSettings /> , desc:'Settings'},{img:<SvgHelpCenter /> , desc:'Help Center' , nav:'HelpCenterNavigation'},]
   
     const handleButton=()=>{
         console.log('Handle Button is Pressed >>')
@@ -62,7 +65,6 @@ const EditProfile = (props) =>{
     const handleSelectedCard = (val)=>{
         setSelectedCard(val.desc)
         props.navigation.navigate(val.nav)
-
     }
 
     // React.useEffect(()=>{
@@ -85,13 +87,16 @@ const EditProfile = (props) =>{
                     <View style={{marginTop:5,width:'100%',justifyContent:'center',alignItems:'center',}}>
                         <View style={{width:60,height:60,backgroundColor:'green',borderRadius:40,
                                         borderWidth:3,borderColor:'#fff'}}>
-
+                            <Image source={{uri : props.mfa.verifyCode.profileImageURL }}
+                                    style={{width:'100%',height:'100%',resizeMode:'cover' , borderRadius:40}}/>
                         </View>
                         <Text style={{marginTop:3,color:'#fff',fontFamily:'AbrilFatFace',fontSize:15}}>
-                            Jake{/* {props.mfa.verifyCode.firstName} */}
+                            {/* Jake */}
+                            {props.mfa.verifyCode.firstName}
                         </Text>
                         <Text style={{marginTop:0,marginBottom:15,color:'#fff',fontFamily:'AbrilFatFace'}}>
-                            testing328@yopmail.com
+                            {/* testing328@yopmail.com */}
+                            {props.mfa.verifyCode.email}
                         </Text>
 
                     </View>
@@ -112,7 +117,7 @@ const EditProfile = (props) =>{
                             const cardTextColor = selectedCard == val.desc ? '#49D3CE' : 'grey'
 
                             return(
-                                <TouchableOpacity key={index} onPress={()=>handleSelectedCard(val)}>
+                                <TouchableOpacity activeOpacity={0.6} key={index} onPress={()=>handleSelectedCard(val)}>
                                     <View style={styles.card}>
                                         <View style={styles.contentCard}>
                                             {val.img}
@@ -136,6 +141,9 @@ const EditProfile = (props) =>{
                         <Button title='Log out' handleButton={handleButton} textSize={18}/>
                     </View>
 
+                </View>
+                <View style={{marginBottom:10}}>
+                    <FooterBar />
                 </View>
                 </ScrollView>
 

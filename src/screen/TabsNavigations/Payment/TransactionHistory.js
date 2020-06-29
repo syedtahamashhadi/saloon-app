@@ -31,19 +31,27 @@ const GET_TRANSACTION_HISTORY = gql `
 const TransactionHistory = (props) =>{
     console.log('Props History' , props)
 
-    // const { data , loading , error } = useQuery(GET_TRANSACTION_HISTORY , 
-    //         {
-    //             context:{
-    //                 headers:{
-    //                     authorization: props.token
-    //                 }
-    //             }
-    //         }
-    //     )
+    const { data , loading , error } = useQuery(GET_TRANSACTION_HISTORY , 
+            {
+                context:{
+                    headers:{
+                        authorization: props.token
+                    }
+                }
+            }
+        )
 
-    // console.log('Data is >>' , data)
-    // console.log('Data is >>' , loading)
-    // console.log('Data is >>' , error)
+    console.log('Data is >>' , data)
+    console.log('Loading is >>' , loading)
+    console.log('Error is >>' , error)
+
+    React.useEffect(()=>{
+        if(data){
+            console.log('API CALL DATA' , data)
+        }else if(error){
+            console.log('API CALL Error' , error)
+        }
+    },[data,error])
 
     // React.useEffect(()=>{
     //     console.log('I am Mounted >>>')
@@ -51,7 +59,7 @@ const TransactionHistory = (props) =>{
 
     return(
         <View style={styles.container}>
-            <View style={{marginTop:60,width:'100%'}}>
+            <View style={{marginTop:30,width:'100%'}}>
                 <View style={{marginHorizontal:20,paddingHorizontal:20,height:100,borderTopRightRadius:10,borderTopLeftRadius:10,
                                 paddingVertical:10,elevation:5,backgroundColor:'#fff'}}>
                     <Text style={{fontSize:18 , fontFamily:'AbrilFatFace'}}>
@@ -87,6 +95,12 @@ const styles= StyleSheet.create(
     }
 )
 
+const mapStateToProps = (state) =>{
+    return{
+        token: state.mfaReducer.token
+    }
+}
+
 // const mapDispatchToProps = (dispatch) =>{
 //     return{
 //         header: (data) => dispatch(setTabHeaderSuccess(data))
@@ -94,5 +108,5 @@ const styles= StyleSheet.create(
 // }
 
 
-export default TransactionHistory;
+export default connect(mapStateToProps,null)(TransactionHistory);
 

@@ -67,7 +67,7 @@ const ForgotPassword = (props) =>{
                     <Image source={require('../../assets/unlock-forgot-password.png')} style={styles.image} />
                 </View>
                 <View style={{marginTop:40}}>
-                    <Text style={{fontSize:25 , fontFamily:'AbrilFatFace'}}>
+                    <Text style={{fontSize:25 , fontFamily:'AbrilFatFace' ,}}>
                         Forgot Password?
                     </Text>
                 </View>
@@ -89,7 +89,7 @@ const ForgotPassword = (props) =>{
                 </View>
                 <View style={{marginTop:20}}>
                     <Button title='Reset Password' handleButton={handleButton} 
-                            btnColor='#19479c' textSize={14} />
+                            btnColor='#1D194D' textSize={14} />
                 </View>
             </View>
             </View>

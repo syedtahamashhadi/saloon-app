@@ -26,7 +26,7 @@ const SignUp = (props) =>{
                 </View>
             </View>
             <View style={{width:'100%',marginTop:80}}>
-                <View style={{marginTop:20}}>
+                <View style={{marginTop:20,marginHorizontal:20}}>
                     <Button title='Set Up Profile' btnColor='#19479c' textSize={14} handleButton={handleButton}/>
                 </View>
             </View>

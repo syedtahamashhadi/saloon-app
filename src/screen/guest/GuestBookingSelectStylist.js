@@ -61,8 +61,8 @@ const GuestBookingSelectStylist = (props) =>{
                     </TouchableOpacity>
 
                     <View style={{flexDirection:'row',marginTop:20 ,justifyContent:'space-between'}}>
-                            <View style={{marginHorizontal:20,justifyContent:'center'}}>
-                                <Text style={{fontSize:18 , fontFamily:'AbrilFatFace'}}>
+                            <View style={{marginHorizontal:20,justifyContent:'center',marginTop:-2}}>
+                                <Text style={{fontSize:18 , fontFamily:'DosisExtraBold' , color:'#4C4F63'}}>
                                     Toney & Guy Crew
                                 </Text>
                             </View>
@@ -72,7 +72,7 @@ const GuestBookingSelectStylist = (props) =>{
                                 </View>
                             </View>
                     </View>
-                    <Text style={{fontSize:13,fontFamily:'ExoRegular', color:'grey',marginTop:0,marginHorizontal:20}}>
+                    <Text style={{fontSize:13,fontFamily:'ExoRegular', color:'grey',marginTop:-1,marginHorizontal:20}}>
                         Book and experience our stylist
                     </Text>
                     

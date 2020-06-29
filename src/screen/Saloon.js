@@ -117,7 +117,7 @@ const Saloon = (props) =>{
                             ,top:-16}}>
                 <View style={{alignItems:'center',height:'35%',backgroundColor:'#fff',width:'100%',
                 borderTopLeftRadius:20,borderTopRightRadius:20}}>
-                    <View style={{width:55,height:55,borderRadius:45,backgroundColor:'red',borderWidth:3,
+                    <View style={{width:55,height:55,borderRadius:45,backgroundColor:'#fff',borderWidth:3,
                                         borderColor:'#fff',elevation:5,top:-25}}>
                             <Image source={mannagerImg} style={styles.imgMannager}/>
                     </View>
@@ -133,7 +133,7 @@ const Saloon = (props) =>{
                             return(
                                 <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}}>
                                     <TouchableOpacity onPress={()=>handleNavPress(val)} key={index}>
-                                        <Text style={{fontFamily:'AbrilFatFace'}}>{val.name}</Text>
+                                        <Text style={{fontFamily:'ExoRegular'}}>{val.name}</Text>
                                     </TouchableOpacity>
                                     {val.name == highlight ? 
                                             <View style={{height:2,width:'100%' ,backgroundColor:'#49D3CE'}}></View> :

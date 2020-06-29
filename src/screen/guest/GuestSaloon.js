@@ -75,7 +75,7 @@ const GuestSaloon = (props) =>{
                             return(
                                 <View style={{width:80 , backgroundColor:'#fff',alignItems:'center'}} >
                                     <TouchableOpacity onPress={()=>handleNavPress(val)} key={index}>
-                                        <Text style={{fontFamily:'ExoBold'}}>{val.name}</Text>
+                                        <Text style={{fontFamily:'ExoRegular'}}>{val.name}</Text>
                                     </TouchableOpacity>
                                     {val.name == highlight ? 
                                             <View style={{height:3,width:'100%' ,backgroundColor:'#49D3CE'}}></View> :

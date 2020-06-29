@@ -143,7 +143,7 @@ const GuestConfirmBooking = (props) =>{
 
                 </View>
                 
-                <View style={{marginTop:15}}>
+                <View style={{marginTop:15 , marginHorizontal:20}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
             </View>

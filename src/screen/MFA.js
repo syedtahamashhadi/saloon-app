@@ -50,6 +50,7 @@ const MFA = (props) =>{
         if(otp == null || otp.length < 6 ){
             setFieldErr('Enter 6 digit Code !')
         }else{
+            console.log('Credentials >>>>' , email ,' >> ' , otp , ' >> ' , email)
             setFieldErr(null)
 
             loading !== true && verifyOtp(
@@ -90,13 +91,17 @@ const MFA = (props) =>{
     
     return(
         <View style={styles.container}>
-            <View style={{width:120,height:100,marginTop:120,alignItems:'center'}}>
-                <Icon name='onepassword' size={100} color='#49D3CE'/>
+            <View style={{alignItems:'center'}}>
+                <View style={{width:120,height:100,marginTop:120 ,backgroundColor:'#fff', alignItems:'center'}}>
+                    <Icon name='onepassword' size={100} color='#49D3CE' />
+                    {/* <Text>Test</Text> */}
+                </View>
             </View>
-            <View style={{marginTop:30}}>
+           
+            <View style={{marginTop:30 , alignItems:'center'}}>
                 <Text style={{fontSize:35 , fontFamily:'AbrilFatFace'}}>OTP</Text>
             </View>
-            <View style={{marginTop:20}}>
+            <View style={{marginTop:20, alignItems:'center'}}>
                 <Text style={{fontSize:15 , fontFamily:'ExoBold'}}>Please enter the 6 digit code!</Text>
             </View>
 
@@ -121,7 +126,7 @@ const MFA = (props) =>{
                     />
                 </View>
 
-                <View style={{width:'100%',justifyContent:'center',marginTop:'10%'}}>
+                <View style={{width:'100%',justifyContent:'center',marginTop:'10%' , alignItems:'center'}}>
                     {fieldErr && <Text style={{textAlign:'center', color:'red'}}>
                         {fieldErr}
                         </Text>}
@@ -129,7 +134,7 @@ const MFA = (props) =>{
                     
                 </View>
                 
-                <View style={{marginTop:20}}>
+                <View style={{marginTop:20, marginHorizontal:20}}>
                     <Button title='Submit' handleButton={handleButton}/>
                 </View>
             </ScrollView>
@@ -160,7 +165,7 @@ const styles = StyleSheet.create(
         container:{
             flex:1,
             backgroundColor:'#fff',
-            alignItems:'center',
+            // alignItems:'center',
         },
         inputContainer:{
             width:120,

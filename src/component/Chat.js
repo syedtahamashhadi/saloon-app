@@ -3,6 +3,7 @@ import {View , Text , StyleSheet, ShadowPropTypesIOS, Image} from 'react-native'
 import AnimatedText from './AnimatedText'
 import { Avatar } from 'react-native-elements'
 import Animated from 'react-native-reanimated'
+import SvgTopChatMen from '../../MySvg/SvgTopChatMen'
 
 
 const Chat = (props) =>{
@@ -11,9 +12,14 @@ const Chat = (props) =>{
         <View style={{flexDirection:'row'}}>
             
             <View style={{justifyContent:'flex-end',marginRight:10}}>
-                <View style={{height:50,width:50,borderRadius:40,backgroundColor:'#fff',elevation:5,}}>
-                    <Image source={require(`../../assets/bot-1.png`)} style={{
-                        width:'100%',height:'100%',resizeMode:'cover',borderRadius:40}}/>
+                <View style={{height:50,width:50,borderRadius:40,backgroundColor:'#fff',elevation:5,
+                                alignItems:'center' , justifyContent:'center'}}>
+                    {/* <Image source={require(`../../assets/bot-1.png`)} style={{
+                        width:'100%',height:'100%',resizeMode:'cover',borderRadius:40}}/> */}
+                        <View style={{width:'100%',height:'80%' ,
+                                    backgroundColor:'#fff' , borderRadius:40}}>
+                            <SvgTopChatMen/>
+                        </View>
                 </View>
             </View>
             

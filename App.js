@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import {View,Text} from 'react-native'
 import { useFonts } from '@use-expo/font'
 import { AppLoading } from 'expo'
@@ -7,6 +7,8 @@ import { Provider } from 'react-redux'
 import { configureStore } from './src/redux/store';
 import { ApolloProvider } from '@apollo/react-hooks'
 import { client } from './src/appolo/client'
+import { Notifications } from 'expo'
+import * as Permissions from 'expo-permissions'
 
 
 const store = configureStore()
@@ -18,6 +20,7 @@ export default function App() {
       AbrilFatFace : require('./assets/fonts/AbrilFatface-Regular.ttf'),
       ExoRegular : require('./assets/fonts/Exo-Regular.ttf'),
       ExoBold : require('./assets/fonts/Exo-Bold.ttf'),
+      DosisExtraBold : require('./assets/fonts/Dosis-ExtraBold.ttf')
     }
   )
   
@@ -29,16 +32,16 @@ export default function App() {
 
     <Provider store={store}>
 
-    <ApolloProvider client={client}> 
-      
-      <UserNav /> 
-      {/* <View>
-        <Text>TEst</Text>
-      </View> */}
+      <ApolloProvider client={client}> 
+        
+        <UserNav /> 
+        {/* <View>
+          <Text>TEst</Text>
+        </View> */}
 
-    </ApolloProvider> 
+      </ApolloProvider> 
     
-   </Provider>
+    </Provider>
   
   );
 }

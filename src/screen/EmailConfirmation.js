@@ -76,7 +76,7 @@ const EmailConfirm = (props) =>{
             </View>
             <View style={{width:'100%',marginTop:20}}>
                
-                <View style={{marginTop:20}}>
+                <View style={{marginTop:20,marginHorizontal:20}}>
                     <TouchableOpacity onPress={()=>{setDidIt(true)}}>
                         <Button title='I did it' btnColor='#19479c' handleButton={handleButton}/>
                     </TouchableOpacity>

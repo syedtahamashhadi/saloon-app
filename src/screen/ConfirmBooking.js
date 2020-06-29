@@ -83,7 +83,7 @@ const ConfirmBooking = (props) =>{
     React.useEffect(()=>{
         if(data){
             console.log('Appointment is added >>' , data)
-            props.navigation.replace('Saloon')
+            props.navigation.replace('SaloonNavigation')
         // props.navigation.navigate('')
         }
     },[data])
@@ -143,7 +143,7 @@ const ConfirmBooking = (props) =>{
 
                 </View>
                 
-                <View style={{marginTop:15}}>
+                <View style={{marginTop:15 , marginHorizontal:20}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
             </View>

@@ -32,7 +32,7 @@ const PaymentNavigation = (props) =>{
     return (
         // <SafeAreaProvider>
         <View style={{flex:1}}>
-            <TransactionHeader/>
+            <TransactionHeader nav={props.navigation}/>
 
             <Tab.Navigator
                 initialRouteName="TransactionHistory"
@@ -45,12 +45,12 @@ const PaymentNavigation = (props) =>{
                 },
                 labelStyle: {
                     textTransform: 'none',
-                    fontSize: 15,
+                    fontSize: 14,
                     margin: 0,
-
-
+                    fontFamily:'ExoBold'
                     // paddingVertical: 10,
                 },
+               
                 }}>
                 <Tab.Screen options={{ tabBarLabel: 'Transaction history'}}
                             name="TransactionHistory"

@@ -86,7 +86,7 @@ const GuestPickDateTime = (props) =>{
                             
                             theme={{
                                 selectedDayBackgroundColor: '#49D3CE',
-                                selectedDayTextColor:'green',
+                                selectedDayTextColor:'#fff',
                                 textMonthFontFamily:'ExoRegular',
                                 textDayHeaderFontFamily:'ExoRegular',
                                 textDayFontFamily:'ExoRegular',
@@ -96,14 +96,15 @@ const GuestPickDateTime = (props) =>{
                     
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
-                        <Text style={{fontSize:20,fontFamily:'AbrilFatFace'}}>Pick a time</Text>
-                        
+                    <Text style={{fontSize:20,fontFamily:'ExoBold'}}>
+                        Pick a time
+                    </Text>
                 </View>
                 <View style={{marginTop:15,marginHorizontal:20}}>
                     <TimeCard timeData={timeData} getTime={getTime} time={time}/>
                 </View>
 
-                <View style={{marginTop:8}}>
+                <View style={{marginTop:8 , marginHorizontal:20}}>
                     <Button title='Next' handleButton={handleButton}/>
                 </View>
             </View>

@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import { loginSuccess } from '../redux/authenticate/actions'
 import gql from 'graphql-tag' 
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
 // import DeviceInfo from 'react-native-device-info'
 
 
@@ -120,7 +121,8 @@ const SignIn = (props) =>{
                 </View>
                 <View style={{marginTop:15,justifyContent:'center',alignItems:'center'}}>
                     <View style={{width:120 , height:140 , backgroundColor:'#fff'}}>
-                        <Image source={require('../../assets/signIn-avatar.png')} style={styles.image} />
+                        {/* <Image source={require('../../assets/signIn-avatar.png')} style={styles.image} /> */}
+                        <SvgSignInIcon/>
                     </View>
                     <View style={{marginTop:20}}>
                         <Text style={{fontSize:25 ,fontFamily:'AbrilFatFace'}}>Sign In</Text>
@@ -165,7 +167,7 @@ const SignIn = (props) =>{
                         {loading && <ActivityIndicator size={20} color='#00ff00'/>}
                     </View>
                     <View style={{marginTop:15}}>
-                        <Button title='Sign In' btnColor='#19479c' handleButton={handleSignIn}/>
+                        <Button title='Sign In' btnColor='#1D194D' handleButton={handleSignIn}/>
                     </View>
                     <View style={{marginTop:15,flexDirection:'row',justifyContent:'center'}}>  
                         

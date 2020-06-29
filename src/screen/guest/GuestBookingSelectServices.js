@@ -148,7 +148,7 @@ const GuestBookingSelectServices = (props) =>{
                         </View>
                     </ScrollView>
 
-                    <View style={{marginTop:20}}>
+                    <View style={{marginTop:20 , marginHorizontal:20}}>
                         <Button title='Next' btnColor='#49D3CE' handleButton={handleNextButton}/>
                     </View>
 

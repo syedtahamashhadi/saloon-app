@@ -80,8 +80,10 @@ const UpdatePasswords = (props) =>{
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{marginHorizontal:20}}>
-                <View style={{marginTop:35}}>
-                    <AntIcon name='arrowleft' size={25}/>
+                <View style={{marginTop:35 , flexDirection:'row'}}>
+                    <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                        <AntIcon name='arrowleft' size={25}/>
+                    </TouchableOpacity>
                 </View>
                 <View style={{width:'100%',justifyContent:'center',alignItems:'center'}}>
                         <MaterialIcon name='onepassword' size={100} color='#49D3CE' />
@@ -171,7 +173,7 @@ const UpdatePasswords = (props) =>{
                 </View>
                
                 <View style={{marginTop:5}}>
-                    <Button title='Sign In' btnColor='#19479c' handleButton={handleButton}/>
+                    <Button title='Confirm' btnColor='#1D194D' handleButton={handleButton}/>
                 </View>
 
             </View>

@@ -10,15 +10,13 @@ import EntIcon from 'react-native-vector-icons/Entypo'
 
 
 
-const ReferToFriends = () =>{
+const ReferToFriends = (props) =>{
 
-    const socialList = [    {icon: AwsomeIcon , icon_name:'facebook' , name:'facebook'},
+    const socialList = [    {icon: AwsomeIcon , icon_name:'facebook' , name:'Facebook'},
                             {icon: Awsome5Icon , icon_name:'facebook-messenger' , name: 'Messenger'},
                             {icon: AwsomeIcon , icon_name:'whatsapp' , name: 'WhatsApp'},
                             {icon: AntIcon , icon_name:'twitter' , name: 'Twitter'},
                             {icon: EntIcon , icon_name:'dots-three-horizontal' , name: 'Other'},
-
-
                         ]
 
     return(
@@ -26,7 +24,7 @@ const ReferToFriends = () =>{
             {/* <View style={{marginHorizontal:20}}> */}
 
                 <View style={styles.backContainer}>
-                    <TouchableOpacity onPress={()=>console.log('Back is Pressed >>')}>
+                    <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                         <AntIcon name='arrowleft' size={25} color='black'/>
                     </TouchableOpacity>
                 </View>
@@ -87,13 +85,15 @@ const styles = StyleSheet.create(
         backContainer:{
             marginTop:35,
             marginHorizontal:20,
+            flexDirection:'row'
         },
         heading:{
             marginTop:15,
             // fontFamily:''
             fontSize:25,
             marginHorizontal:20,
-            fontWeight:'bold'
+            // fontWeight:'bold'
+            fontFamily:'AbrilFatFace'
         },
         socialMainContainer:{
             marginTop:40,
@@ -124,7 +124,8 @@ const styles = StyleSheet.create(
         },
         socialText:{
             fontSize:15,
-            marginLeft:20
+            marginLeft:20,
+            fontFamily:'ExoRegular'
             // justifyContent:'center',
             // alignItems:'center',
             // flex:1

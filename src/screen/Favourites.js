@@ -31,7 +31,7 @@ const Favourites = (props) =>{
         )
     
         console.log('Data >>' , data)
-        console.log('Data >>' , loading)
+        console.log('Loading >>' , loading)
         console.log('Error >>' , error)
 
 
@@ -39,7 +39,7 @@ const Favourites = (props) =>{
         <View style={styles.container}>
 
             <View style={styles.backContaier}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                     <AntIcon name='arrowleft' size={25} />
                 </TouchableOpacity>
             </View>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create(
         backContaier:{
             marginTop:35,
             marginHorizontal:20,
+            flexDirection:'row'
             // backgroundColor:'red'
         },
         header:{

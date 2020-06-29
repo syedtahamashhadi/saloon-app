@@ -71,7 +71,9 @@ const SignUp = (props) =>{
             case (phone == ''):
                 setFieldErr('Enter Your Contact Number !')
                 break;
-           
+            case (phone.length < 12):
+                setFieldErr('Format of Contact Number is wrong !')
+                break;
             default:
                 loading !== true && signupUser(
                     {
@@ -221,7 +223,7 @@ const SignUp = (props) =>{
 
                 
                 <View style={{marginTop:30}}>
-                    <Button title='Sign Up' btnColor='#19479c' handleButton={handleButton}/>
+                    <Button title='Sign Up' btnColor='#1D194D' handleButton={handleButton}/>
                 </View>
                 {/* <View style={{marginTop:0,flexDirection:'row',justifyContent:'center'}}>  
                     <Text style={{fontSize:15 , color:'grey'}}>Already Signed Up ? </Text>

@@ -210,7 +210,19 @@ const Map = (props) =>{
     const handleMarkerPress = (data) =>{
         console.log('Saloon Data >>' , data)
         props.selectedSaloon(data)
-        props.navigation.navigate('Saloon')
+        props.navigation.navigate('SaloonNavigation')
+    }
+
+    const handleCurrentLoc =() =>{
+        console.log('Loc is Pressed >>>' , userLng , userLat)
+        setCurrentLat(userLat)
+        setCurrentLng(userLng)
+    }
+
+    const handleRegionChanged = (region) =>{
+        console.log('Region Changed >>',region)
+        // setCurrentLat(region.latitude)
+        // setCurrentLng(region.longitude)
     }
 
     let imgUri = props.mfa.verifyCode.profileImageURL 
@@ -227,7 +239,7 @@ const Map = (props) =>{
                 <MapView 
                     style={styles.map}
                     showsUserLocation={true}
-                    showsMyLocationButton={true}
+                    showsMyLocationButton={false}
                     initialRegion={
                         {
                             latitude:userLat,
@@ -247,6 +259,13 @@ const Map = (props) =>{
                     showsCompass={false}
                     showsUserLocation={true}
                     showsMyLocationButton={false}
+                    onRegionChangeComplete={(region)=>{
+                       
+                        handleRegionChanged(region)
+                        // setCurrentLat(region.latitude)
+                        // setCurrentLng(region.longitude)
+                    }
+                    }
                 >
                  {  data && data.getNearestSalons.map((val,index)=>{
                      let loc = val.location.coordinates 
@@ -262,6 +281,7 @@ const Map = (props) =>{
                                     }
                                 }
                                 pinColor='red'
+                                // liteMode={true}
                                 // onPress={()=>handleMarkerPress(val)}
                             > 
                                 <Callout tooltip={true} onPress={()=>handleMarkerPress(val)}>
@@ -278,6 +298,7 @@ const Map = (props) =>{
 
             <MapFooter 
                 handleBarPress={handleBarPress}
+                handleCurrentLoc={handleCurrentLoc}
             />
            
         </View>

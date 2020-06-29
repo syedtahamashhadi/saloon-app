@@ -8,7 +8,7 @@ const MapFooter = (props) =>{
     return(
             <View style={styles.container}>
                 <View >
-                    <TouchableOpacity onPress={()=>props.handleCurrentLoc} style={{marginLeft:20}}>
+                    <TouchableOpacity onPress={()=>props.handleCurrentLoc()} style={{marginLeft:20}}>
                         <View style={{width:40,height:40,justifyContent:'center',alignItems:'center',
                             borderRadius:40 , backgroundColor:'#fff'}}>
                                 <MaterialIcon name='my-location' size={25}/>

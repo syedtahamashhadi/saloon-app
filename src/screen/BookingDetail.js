@@ -8,9 +8,19 @@ import { connect } from 'react-redux'
 
 
 const CANCEL_APPOINMENT = gql `
-    mutation abc($id: String) {
-        cancelAppointment(appointmentId:"5ea1d104c1eccc1b5c4fad42") {
+    mutation abc($id: String!) {
+        cancelAppointment(appointmentId:$id) {
             status
+        }  
+    }
+`
+
+const POSTPOND_APPOINMENT = gql `
+    mutation abc {
+        postpondAppointment(
+            appointmentId:"5eef7edd2b08c30010725d7c", appointmentDateTime: "2035-12-03T10:15:30Z")
+        {
+            _id
         }  
     }
 `
@@ -19,27 +29,32 @@ const CANCEL_APPOINMENT = gql `
 
 const BookingDetail = (props) =>{
 
+    console.log('Detail Props >>' , props)
+
     const [cancelAppoinment , {data , loading , error}] = useMutation(CANCEL_APPOINMENT)
 
+    const { amount , appointmentId , dateTime , style , salon , stylist} = props.route.params
+
     const handleCancel = () => {
-        alert('Handle Cancel')
-        // loading !== true && cancelAppoinment(
-        //     {
-        //         variables:{
-        //             id: ''
-        //         },
-        //         context:{
-        //             headers:{
-        //                 aouthorization: props.token
-        //             }
-        //         }
-        //     }
-        // )
+        console.log('ID and Token >>' , appointmentId , props.token)
+        // alert('Handle Cancel')
+        loading !== true && cancelAppoinment(
+            {
+                variables:{
+                    id: appointmentId
+                },
+                context:{
+                    headers:{
+                        authorization: props.token
+                    }
+                }
+            }
+        )
     };
 
     console.log('Data >>',data)
-    console.log('Data >>',loading)
-    console.log('Data >>',error)
+    console.log('Loading >>',loading)
+    console.log('Error >>',error)
 
 
     const handleDelete = () => {
@@ -48,14 +63,17 @@ const BookingDetail = (props) =>{
     
     React.useEffect(()=>{
         if(data){
-            props.navigation.goBack()
+            // alert('Cenceled >>>>')
+            props.navigation.navigate('EditProfile')
+        }else if(error){
+            alert('Something Went Wrong Try Again !')
         }
-    },[data])
+    },[data,error])
     return(
         <View style={styles.container}>
             <View style={{marginHorizontal:20}}>
             <View style={{marginTop:35,flexDirection:'row'}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>props.navigation.goBack()}>
                     <Icon name='arrowleft' size={25}/>
                 </TouchableOpacity>
             </View>
@@ -67,18 +85,22 @@ const BookingDetail = (props) =>{
                         </View>
                         <View style={{flex:1}}>
                             <View style={{flexDirection:'row',paddingTop:5,justifyContent:'space-between'}}>
-                                <Text style={{fontSize:17,fontFamily:'ExoBold'}}>Hair Cut</Text>
-                                <Text style={{fontSize:17,fontFamily:'ExoBold'}}>$ 24.9</Text>
+                                <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{style}</Text>
+                                <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${amount}`}</Text>
                             </View>
                             <View style={{flexDirection:'row',paddingTop:1,justifyContent:'space-between'}}>
-                                <Text style={{fontSize:13,fontFamily:'ExoRegular'}}>Matt Perry</Text>
+                                <Text style={{fontSize:13,fontFamily:'ExoRegular'}}>
+                                    {`${stylist.firstName} ${stylist.lastName}`}
+                                </Text>
                                 <View style={{flexDirection:'row'}}>
                                     <Icon
                                         style={{color: 'gray', marginRight: 5,marginTop:2,}}
                                         size={15}
                                         name="clockcircleo"
                                     />
-                                    <Text style={{fontSize:13,fontFamily:'ExoBold',opacity:0.6}}>22 Oct, 10:30 AM</Text>
+                                    <Text style={{fontSize:13,fontFamily:'ExoBold',opacity:0.6}}>
+                                        {dateTime}
+                                    </Text>
                                 </View>
                             </View>
                         
@@ -91,12 +113,12 @@ const BookingDetail = (props) =>{
 
                     <View style={styles.rowFlex}>
                         <View style={styles.rowFlex}>
-                                <Text style={{fontFamily:'ExoBold',fontSize:17,opacity:0.6}}>Tony & Guy</Text>
+                            <Text style={{fontFamily:'ExoBold',fontSize:17,opacity:0.6}}>{salon.displayName}</Text>
                         </View>
                         <View style={{alignItems: 'flex-end'}}>
                             <Text style={{fontFamily:'ExoBold',fontSize:13}}>16th Street Mall Denver</Text>
                             <Text style={{fontFamily:'ExoBold',fontSize:13,color:'grey'}}>
-                                (321) 382-2381
+                                {salon.contactNo}
                             </Text>
                         </View>
                     </View>
@@ -122,7 +144,11 @@ const BookingDetail = (props) =>{
             </View>
 
                 <View style={styles.bottom}>
-                    <Text style={[styles.fontSize_18_bold, styles.underline]}>Postpond</Text>
+                    <TouchableOpacity onPress={
+                                ()=>props.navigation.navigate('PostpondPickDate',{appointmentId:appointmentId})
+                                }>
+                        <Text style={[styles.fontSize_18_bold, styles.underline]}>Postpond</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -221,4 +247,3 @@ const mapStateToProps = (state) =>{
 }
 
 export default connect(mapStateToProps,null)(BookingDetail);
-

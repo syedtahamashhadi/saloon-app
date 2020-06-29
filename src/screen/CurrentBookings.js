@@ -1,5 +1,5 @@
 import React , {useEffect} from 'react'
-import {View , Text , StyleSheet ,ScrollView , TouchableOpacity , Image} from 'react-native'
+import {View , Text , StyleSheet ,ScrollView , TouchableOpacity } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import CurrentBookingCard from '../component/CurrentBookingCard'
 import gql from 'graphql-tag'
@@ -15,6 +15,7 @@ const GET_USER_BOOKING = gql `
             email
         }
         appointmentDateTime
+        _id
         treatment
         status
         timeZone
@@ -28,6 +29,8 @@ const GET_USER_BOOKING = gql `
         salon{
             _id
             displayName
+            address
+            contactNo
         }
         serviceProvider{
             _id
@@ -47,7 +50,7 @@ const GET_USER_BOOKING = gql `
 
 const CurrentBookings = (props) =>{
 
-    console.log('Current Bookings Props >>' , props.token)
+    console.log('Current Bookings Taha >>' ,props.mfa._id ,'  ' , props.token)
 
    
 
@@ -69,7 +72,9 @@ const CurrentBookings = (props) =>{
             console.log('Component is Mounted >>>>')
         },[])
         console.log('Loading Appoinment >>' , loading)
-        console.log('Loading Appoinment >>' , data)
+        console.log('Data Appoinment >>' , data)
+        console.log('Error Appoinment >>' , error)
+
 
     
     useEffect(()=>{
@@ -93,18 +98,24 @@ const CurrentBookings = (props) =>{
                 Bookings
                 </Text>
             
-            <ScrollView style={{marginHorizontal:20}} showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                
                {/* <CurrentBookingCard />
                <CurrentBookingCard /> */}
-               {
-                   data && data.getUserAppointment.map((val,index)=>{
-                       return(
-                        <CurrentBookingCard />
-                       )
+               <View style={{marginHorizontal:20 , marginTop:5}}>
+                {
+                    data && data.getUserAppointment.map((val,index)=>{
+                        //   let component =  val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
+                        return(
+                            // {component}
+                            // <Text>test</Text>
+                            val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
+                        )
 
-                   })
-               }
+                    })
+                }
+               </View>
+               
 
             </ScrollView>
             {/* </View> */}
@@ -126,7 +137,7 @@ const styles = StyleSheet.create(
     {
         container:{
             flex:1,
-            backgroundColor:'#fff',
+            backgroundColor:'#fcfcfc',
             // marginHorizontal:20
         },
       
