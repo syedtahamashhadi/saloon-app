@@ -1,24 +1,36 @@
 import React from 'react'
-import {View , TouchableOpacity , StyleSheet} from 'react-native'
+import {View , TouchableOpacity , StyleSheet, Text} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import FontistoIcon from 'react-native-vector-icons/MaterialIcons'
+import FooterBar from './FooterBar'
 
 const Footer = (props) =>{
 
     console.log('Footer Props >>' , props)
+
+    const  [markerVisible,setMarkerVisible] = React.useState(true)
+
+    const setLeftVisiblity = (val) =>{
+        setMarkerVisible(val)
+        // alert('Test')
+        console.log('I am fired >>>')
+    }
+
     return(
-        <View style={styles.footer}>
-            <TouchableOpacity onPress={props.handLocPress}>
-                <View style={styles.markerContainer}>
-                    <Icon name='map-marker' size={30} />
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <View style={styles.nextPage}>
-                    <FontistoIcon name='compare-arrows' size={40} style={{color:'#fff',fontWeight:'bold'}}/>
-                </View>
-            </TouchableOpacity>
-        </View>
+        // <View style={{width:'100%'}}>
+            <View style={styles.footer}>
+                <TouchableOpacity onPress={props.handLocPress}>
+                    {markerVisible ? <View style={styles.markerContainer}>
+                        <Icon name='map-marker' size={30} />
+                    </View> : null }
+                </TouchableOpacity> 
+            
+                    <View style={{alignItems:'flex-end'}}>
+                        <FooterBar setLeftVisiblity={setLeftVisiblity}/>
+                        {/* <Text>TEst</Text> */}
+                    </View>
+            </View>
+        // {/* </View> */}
 
     )
 }
@@ -42,6 +54,7 @@ const styles = StyleSheet.create(
             justifyContent:'space-between',
             marginVertical:20,
             marginLeft:20,
+            alignItems:'center'
         },
         markerContainer:{
             borderRadius:40 , 
@@ -51,6 +64,8 @@ const styles = StyleSheet.create(
             justifyContent:'center',
             alignItems:'center',
             elevation:5,
+            
+            // backgroundColor:'red'
         },
         
     }

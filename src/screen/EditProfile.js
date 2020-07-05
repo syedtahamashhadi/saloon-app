@@ -165,7 +165,7 @@ const EditProfile = (props) =>{
                     </View>
 
                 </View>
-                <View style={{marginBottom:10}}>
+                <View style={{marginBottom:10 , alignItems:'flex-end'}}>
                     <FooterBar />
                 </View>
                 </ScrollView>

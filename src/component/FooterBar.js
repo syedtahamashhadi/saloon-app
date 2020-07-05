@@ -12,7 +12,7 @@ if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental)
     UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
-const FooterBar = () =>{
+const FooterBar = (props) =>{
 
     // const [fullView,setFullView] = React.useState(false)
     const [expanded, setExpanded] = React.useState(false);
@@ -25,20 +25,39 @@ const FooterBar = () =>{
     const handleFooterPress = (val) =>{
         console.log('Selected Value >>>' , val)
         setSelectedFooter(val)
+
     }
+
+    const handleExpand = () =>{
+        setExpanded(!expanded);
+        // expanded == true ? props.setLeftVisiblity() : null
+
+    }
+        
+    React.useEffect(()=>{
+        if(props.setLeftVisiblity){
+            if(expanded == true){
+                props.setLeftVisiblity(false)
+            }else if(expanded == false){
+                props.setLeftVisiblity(true)
+            }
+        }
+        
+    },[expanded])
+    
     return(
         // <View style={{flex:1 , marginTop:150}}>
-            <View>
+            // <View>
 
                 
-            <View style={{alignItems:'flex-end',marginTop:0}}>
+            <View style={{marginTop:0}}>
 
                 {!expanded ? <View style={{width:65,height:60,backgroundColor:'#1D194D',justifyContent:'center',
                     borderTopLeftRadius:30,borderBottomLeftRadius:30,paddingLeft:15,paddingVertical:5}}>
                             <TouchableOpacity 
                                 onPress={() => {
                                     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-                                    setExpanded(!expanded);
+                                    handleExpand()
                                 }}
                             >
                                 {/* <Text>TEst</Text> */}
@@ -114,7 +133,7 @@ const FooterBar = () =>{
             </View>
 
 
-            </View>
+            // </View>
         // </View>
     )    
    

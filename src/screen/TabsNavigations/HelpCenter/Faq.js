@@ -63,14 +63,20 @@ const Faq = (props) =>{
                 {
                     data && data.getHelpTopic.map((val,index)=>{
                         return(
-                            <View style={{marginBottom:18 ,backgroundColor:'#fff',  flexDirection:'row' , justifyContent:'space-between'}}>
-                                <Text style={{fontSize:16 , fontFamily:'ExoRegular'}}>
-                                    {`${val.title}`}
-                                </Text>
-                                <View style={{justifyContent:'flex-end'}}>
-                                    <AntIcon name='right' size={16} />
+                            <TouchableOpacity>
+
+                                <View style={{marginBottom:18 ,backgroundColor:'#fff',  flexDirection:'row' , 
+                                        justifyContent:'space-between'}}>
+                                    <Text style={{fontSize:16 , fontFamily:'ExoRegular'}}>
+                                        {`${val.title}`}
+                                    </Text>
+                                    <View style={{justifyContent:'flex-end'}}>
+                                        <AntIcon name='right' size={16} />
+                                    </View>
                                 </View>
-                            </View>
+
+                            </TouchableOpacity>
+                           
                         )
                     })
                 }

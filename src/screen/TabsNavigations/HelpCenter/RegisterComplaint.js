@@ -1,7 +1,7 @@
 import React from 'react'
 import {View , Text , TouchableOpacity , TextInput , StyleSheet , Picker} from 'react-native'
 import { connect } from 'react-redux'
-import { State } from 'react-native-gesture-handler'
+import { State, ScrollView } from 'react-native-gesture-handler'
 import Button from '../../../component/Button'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
@@ -76,6 +76,7 @@ const RegisterComplaint = (props) =>{
 
     React.useEffect(()=>{
         if(data){
+            setComplainDesc('')
             alert('Your Complain Has Been Registered Thanks...')
         }else if(error){
             alert('Something Went Wrong Try Again !')
@@ -85,6 +86,7 @@ const RegisterComplaint = (props) =>{
     return(
         <View style={styles.container}>
             <View style={{marginHorizontal:20}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginTop:40}}>
                     {/* <Text style={{fontSize:18}}>
                         Register Complaint
@@ -139,10 +141,12 @@ const RegisterComplaint = (props) =>{
                                 // alignItems: 'flex-start'
                                 textAlignVertical:'top',
                                 fontSize:18
+                                
                             }}
                             onChangeText={ text => setComplainDesc(text)}
                             value={complainDesc}
                             placeholder='Description'
+                            multiline = {true}
                             // placeholderTextColor='red'
                         />
                     </View>
@@ -152,6 +156,7 @@ const RegisterComplaint = (props) =>{
                     </View>
 
                 </View>
+                </ScrollView>
             </View>
         </View>
     )
