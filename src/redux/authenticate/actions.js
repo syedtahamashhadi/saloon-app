@@ -9,6 +9,7 @@ import { SIGNIN ,
     SELECTED_DATE_TIME_BOOKING ,
     GUEST_USER ,
     SET_TAB_HEADER,
+    SET_USER_DETAIL,
 } from './constants'
 
 
@@ -179,6 +180,16 @@ const setTabHeaderSuccess = (data) =>{
     }
 }
 
+/************************** Set USer Detail *******************/
+const setUserDetailSuccess = (data) =>{
+    return{
+        type: SET_USER_DETAIL.SUCCESS,
+        payLoad: data
+    }
+}
+
+
+
 export {
     signUpSuccess,
     loginSuccess,
@@ -191,4 +202,5 @@ export {
     selectedDateTimeSuccess,
     guestUserSuccess ,
     setTabHeaderSuccess ,
+    setUserDetailSuccess ,
 }

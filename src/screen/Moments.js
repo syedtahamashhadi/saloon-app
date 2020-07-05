@@ -6,12 +6,33 @@ import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 // import before1 from '../../../assets/before1.jpg'
+//https://medium.com/@ifeoluwaking24/how-to-upload-an-image-in-expo-react-native-to-firebase-using-cloudinary-24aac981c87
 // import after1 from '../../../assets/after1.jpg'
 import MomentsCard from "../component/MomentsCard";
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
+import AsyncStorage from '@react-native-community/async-storage';
+
+
+const ADD_MOMENTS = gql `
+mutation abc($beforeUrl: String! , $afterUrl:String!) {
+    addMoments(salonId:"5e352f43e998cb2157837b28", beforeImageURL:$beforeUrl , afterImageURL:$afterUrl)
+    {
+      _id
+    }  
+  }
+`
 
 export default function Moments(props) {
     const [beforeImage, setBeforeImage] = useState(null);
     const [afterImage, setAfterImage] = useState(null);
+    const [images,setImages] = useState(['false','false'])
+    const [beforeImageUrl,setBeforeImageUrl] = useState(null)
+    const [afterImageUrl,setAfterImageUrl] = useState(null)
+
+
+
+    const [addMoments , { data , loading , error  }] = useMutation(ADD_MOMENTS)
 
     useEffect(() => {
         (async () => {
@@ -27,7 +48,28 @@ export default function Moments(props) {
 
     const handleShare = () => {
         props.navigation.navigate('ReferToFriends')
-        // console.log('Share...')
+    }
+
+    const getToken = async()=>{
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            if(token !== null){
+                addMoments(
+                    {
+                        variables:{
+                            beforeUrl : beforeImageUrl , afterUrl : afterImageUrl
+                        },
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+            }
+        } catch (error) {
+            console.log('Error >>' , error)
+        }
     }
 
     const pickBeforeImage = async () => {
@@ -36,27 +78,102 @@ export default function Moments(props) {
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
+            base64: true
         });
         console.log(result);
 
         if (!result.cancelled) {
-            setBeforeImage(result.uri);
+            console.log('Moments URI >>' , result)
+            setBeforeImage(result);
+            let temp = images
+            temp[0]=result.base64
+            setImages(temp)
+            // dx2md0gy6
+            //oazxudm0
+
         }
     }
 
     const pickAfterImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [10, 8],
-            quality: 1,
-        });
-        console.log(result);
+        if(beforeImage !== null){
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.All,
+                allowsEditing: true,
+                aspect: [10, 8],
+                quality: 1,
+                base64:true
+            });
+            console.log(result);
+            if (!result.cancelled) {
+                setAfterImage(result);
+                let temp = images
+                temp[1]= result.base64
+                setImages(temp)
+            }
+        }else{
+            alert('Kindly Upload your Before Image first')
+        }
+       
 
-        if (!result.cancelled) {
-            setAfterImage(result.uri);
+      
+    }
+
+      
+    const handleUpload = () =>{
+
+        if(beforeImage && afterImage){
+            
+            let apiUrl = 'https://api.cloudinary.com/v1_1/dx2md0gy6/image/upload';
+    
+            images.map( async (val,index)=>{
+                console.log('Images >>>' , val)
+                let data = {
+                    "file": `data:image/jpg;base64,${val}`,
+                    "upload_preset": "oazxudm0",
+                  }
+            
+                try {
+                    const uploadData = await fetch( apiUrl , 
+                        {
+                            body: JSON.stringify(data),
+                            headers: {
+                            'content-type': 'application/json'
+                            },
+                            method: 'POST',
+                        }
+                    )
+                    const response = await uploadData.json()
+                
+                    index == 0 ? setBeforeImageUrl(response.secure_url) : setAfterImageUrl(response.secure_url)
+                
+                } catch (error) {
+                    console.log('Error on Upload >>',err)
+                }
+            })
+
+            // let apiUrl = 'https://api.cloudinary.com/v1_1/dx2md0gy6/image/upload';
+
         }
     }
+
+     useEffect(()=>{
+
+            if(beforeImageUrl !== null && afterImageUrl !== null){
+                console.log('Image Url >>',beforeImageUrl , '  ' , afterImageUrl)
+                getToken()
+            }
+
+    },[beforeImageUrl,afterImageUrl])
+
+
+    useEffect(()=>{
+        if(data){
+            alert('Moment has been added')
+        }else if(error){
+            alert('Something Went Wrong Try Again !')
+        }
+    },[data,error])
+    
 
     return (
         <View style={{flex: 1 , backgroundColor:'#fff'}}>
@@ -72,7 +189,7 @@ export default function Moments(props) {
                     <Text style={styles.fontSize_40}>Moments</Text>
                     <Text style={styles.fontSize_20}>Before & After Selfies</Text>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>handleUpload()}>
                     <Icon style={styles.cameraIcon} size={20} name='camera'/>
                 </TouchableOpacity>
             </View>

@@ -2,9 +2,10 @@ import React from 'react'
 import {View , Text , StyleSheet , ScrollView} from 'react-native'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import { setTabHeaderSuccess } from '../../../redux/authenticate/actions'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const GET_TRANSACTION_HISTORY = gql `
@@ -31,19 +32,33 @@ const GET_TRANSACTION_HISTORY = gql `
 const TransactionHistory = (props) =>{
     console.log('Props History' , props)
 
-    const { data , loading , error } = useQuery(GET_TRANSACTION_HISTORY , 
-            {
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
-                }
-            }
-        )
+    const [getTransactionHistoryQuery,{ data , loading , error }] = useLazyQuery(GET_TRANSACTION_HISTORY)
 
     console.log('Data is >>' , data)
     console.log('Loading is >>' , loading)
     console.log('Error is >>' , error)
+
+    React.useEffect(()=>{
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                    getTransactionHistoryQuery(
+                        {
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getToken()
+    },[])
 
     React.useEffect(()=>{
         if(data){

@@ -6,6 +6,7 @@ import Rating from '../component/Rating'
 import gql from 'graphql-tag'
 import {useQuery , useLazyQuery} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const GET_FAVOURITE_SALOON = gql `
@@ -20,20 +21,34 @@ const GET_FAVOURITE_SALOON = gql `
 
 const Favourites = (props) =>{
 
-    const { data , loading , error } = useQuery(GET_FAVOURITE_SALOON ,
-            {
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
-                }
-            }
-        )
+    const [getFavoriteSalonsQuey ,{ data , loading , error }] = useLazyQuery(GET_FAVOURITE_SALOON)
     
         console.log('Data >>' , data)
         console.log('Loading >>' , loading)
         console.log('Error >>' , error)
 
+
+    React.useEffect(()=>{
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                    getFavoriteSalonsQuey(
+                        {
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getToken()
+    },[])
 
     return(
         <View style={styles.container}>

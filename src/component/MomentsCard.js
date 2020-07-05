@@ -32,7 +32,7 @@ export default function MomentsCard (props){
                             {beforeImage ?
                                 <Image
                                     style={styles.image}
-                                    Image source={{ uri: beforeImage }}
+                                    Image source={{ uri: beforeImage.uri }}
                                 /> :
                                 <Text style={styles.imageText}>Before</Text>}
                         </View>
@@ -43,7 +43,7 @@ export default function MomentsCard (props){
                         {afterImage ?
                         <Image
                             style={styles.image}
-                            Image source={{ uri: afterImage }}
+                            Image source={{ uri: afterImage.uri }}
                         /> :
                             <Text style={styles.imageText}>After</Text>}
                         </View>

@@ -12,41 +12,29 @@ import SvgTransactions from '../../MySvg/SvgTransactions'
 import SvgWhatsNew from '../../MySvg/SvgWhatsNew'
 import FooterBar from '../component/FooterBar'
 import AsyncStorage from '@react-native-community/async-storage';
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 
+
+const LOGOUT = gql `
+    mutation abc($deviceId: String!) {
+    logout(deviceId: $deviceId)
+    {
+     _id
+     email
+    }  
+  }
+  
+
+`
 
 
 
 const EditProfile = (props) =>{
 
-    // const [storageErr,setStorageErr] = React.useState('')
+    const [logOut , { data , loading , error }] = useMutation(LOGOUT)
 
-    // const storeData = async (value) => {        //https://react-native-community.github.io/async-storage/docs/usage
-    //     try {
-    //       await AsyncStorage.setItem('@storage_Key', value)
-    //     } catch (err) {
-    //       // saving error
-    //       console.log('Error Accured >>>')
-    //         setStorageErr(err)
-    //     }
-    // }
-
-    
-    // const getData = async () => {
-    //     try {
-    //     const value = await AsyncStorage.getItem('@storage_Key')
-    //     if(value !== null) {
-    //         // value previously stored
-    //         console.log('Stored Value is >>' , value)
-    //     }
-    //     } catch(e) {
-    //     // error reading value
-    //     console.log('Error Accured >>>')
-    //     setStorageErr(err)
-    //     }
-    // }
-
-    console.log('Edit Profile Props >>' , props)
 
     const [selectedCard,setSelectedCard] = React.useState(null)
     const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'CurrentBookings'},
@@ -54,23 +42,58 @@ const EditProfile = (props) =>{
     {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},
     {img:<SvgMoments /> , desc:`Moment's` , nav:'Moments'},{img:<SvgRewards /> , desc:'Reward Credits' , nav:'RewardsNavigation'},
     {img:<SvgPromoCode /> , desc:'Promocode' , nav: 'PromoCode'},{img:<SvgTransactions /> , desc:'Transaction History' , nav:'PaymentNavigation'},
-    {img:<SvgSettings /> , desc:'Settings'},{img:<SvgHelpCenter /> , desc:'Help Center' , nav:'HelpCenterNavigation'},]
+    {img:<SvgSettings /> , desc:'Settings' , nav:'Map'},{img:<SvgHelpCenter /> , desc:'Help Center' , nav:'HelpCenterNavigation'},]
   
-    const handleButton=()=>{
-        console.log('Handle Button is Pressed >>')
-        // storeData('testing328')
 
-    }
- 
     const handleSelectedCard = (val)=>{
         setSelectedCard(val.desc)
         props.navigation.navigate(val.nav)
     }
 
-    // React.useEffect(()=>{
-    //     getData()
-    // },[])
-    // const myColor = storageErr ? 'red' : '#fff'
+    const handleLogOut = () =>{
+        console.log('LogOut is Pressed >>>')
+
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                loading !== true && logOut(
+                    {
+                        variables:{
+                            deviceId: props.mfa.verifyCode.email
+                        },
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+            } catch (error) {
+                null
+            }
+
+        }
+        getToken()
+    }
+
+    const removeKey = async () =>{
+        try {
+            await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
+                props.navigation.replace('SignIn')
+            })
+        } catch (error) {
+            console.log('Error >>>' , error)
+        }
+    }
+
+    React.useEffect(()=>{
+        if(data){
+            removeKey()
+        }else if(error){
+            alert('Something Went Wrong TryAgain....')
+        }
+    },[data,error])
+
     return(
         <View style={styles.container}>
 
@@ -138,7 +161,7 @@ const EditProfile = (props) =>{
                     </TouchableOpacity>
                    
                     <View style={{marginTop:'4%'}}>
-                        <Button title='Log out' handleButton={handleButton} textSize={18}/>
+                        <Button title='Log out' handleButton={handleLogOut} textSize={18}/>
                     </View>
 
                 </View>

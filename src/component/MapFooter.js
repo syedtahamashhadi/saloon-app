@@ -1,6 +1,7 @@
 import React from 'react'
 import {View ,Text,Image , StyleSheet,TouchableOpacity} from 'react-native'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import SvgSaloonListViewBar from '../../MySvg/SvgSaloonListViewBar'
 
 
 const MapFooter = (props) =>{
@@ -19,8 +20,10 @@ const MapFooter = (props) =>{
                         <View style={{width:40,height:40,justifyContent:'center',alignItems:'center',
                             borderRadius:40 , backgroundColor:'#fff'}}>
                                 {/* <MaterialIcon name='my-location' size={25}/> */}
-                                <Image source={require('../../assets/bar.png')}/>
-
+                                {/* <Image source={require('../../assets/bar.png')}/> */}
+                                <View style={{width:20,height:20}}>
+                                    <SvgSaloonListViewBar />
+                                </View>
                         </View>
                     </TouchableOpacity>
 

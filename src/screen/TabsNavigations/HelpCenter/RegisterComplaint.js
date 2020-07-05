@@ -5,6 +5,7 @@ import { State } from 'react-native-gesture-handler'
 import Button from '../../../component/Button'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import AsyncStorage from '@react-native-community/async-storage'
 // import { Picker } from '@react-native-community/picker'
 
 
@@ -24,25 +25,47 @@ const RegisterComplaint = (props) =>{
     const [complainDesc , setComplainDesc] = React.useState('')
     console.log('Selected Saloon is  >>' , selectedSaloon)
 
-    const [sendComplain , { data , loading , error }] = useMutation(SEND_COMPLAIN)
+    const [sendComplainMutation , { data , loading , error }] = useMutation(SEND_COMPLAIN)
 
     const handleButton = () =>{
         console.log('Saloon id >>' , typeof selectedSaloon , ' Discription >> ' , typeof complainDesc , 'token >>' , props.token)
-        
-        if(selectedSaloon != '' && complainDesc != ''){
-            loading !== true && sendComplain(
-                {
-                    variables:{
-                        id: selectedSaloon , desc: complainDesc
-                    },
-                    context:{
-                        headers:{
-                            authorization: props.token
+       
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null && loading !== true){
+                    sendComplainMutation(
+                        {
+                            variables:{
+                                id: selectedSaloon , desc: complainDesc
+                            },
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }   
                         }
-                    }
+                    )
                 }
-            )
+            } catch (error) {
+                console.log(error)
+            }
         }
+        getToken()
+        // if(selectedSaloon != '' && complainDesc != ''){
+        //     loading !== true && sendComplain(
+        //         {
+        //             variables:{
+        //                 id: selectedSaloon , desc: complainDesc
+        //             },
+        //             context:{
+        //                 headers:{
+        //                     authorization: props.token
+        //                 }
+        //             }
+        //         }
+        //     )
+        // }
         
     }
 

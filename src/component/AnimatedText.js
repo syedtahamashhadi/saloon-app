@@ -38,7 +38,6 @@ export default class AnimatedText extends React.Component {
     return (
       <View style={styles.textWrapper}>
         {this.textArr.map((word, index) => {
-            console.log('Each Word >>>' , word)
           return (
             <Animated.Text
               key={`${word}-${index}`}

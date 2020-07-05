@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import AsyncStorage from '@react-native-community/async-storage'
 import Welcome from '../screen/Welcome'
 import SignIn from '../screen/SignIn'
 import Map from '../screen/Map'
@@ -52,6 +53,9 @@ import Moments from '../screen/Moments'
 import SaloonNavigation from '../screen/TabsNavigations/Saloon/SaloonNavigation'
 import FooterBar from '../component/FooterBar'
 import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
+import NotificationSettings from '../screen/NotificationSettings'
+import Testing from '../screen/Testing'
+
 // import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
 // import AnimatedText from '../component/AnimatedText'
 // import GuestSlider from '../screen/guest/GuestSlider'
@@ -61,10 +65,11 @@ import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
 const Stack = createStackNavigator();
 
 const UserNav = () =>{
-
+// 
+    // const initialRoute = 'Welcome'
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome" 
+        <Stack.Navigator initialRouteName='Welcome' 
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
@@ -119,6 +124,9 @@ const UserNav = () =>{
             <Stack.Screen name='SaloonNavigation' component={SaloonNavigation}/>
             <Stack.Screen name='FooterBar' component={FooterBar}/>         
             <Stack.Screen name= 'TosPpNavigation' component={TosPpNavigation}/>
+            <Stack.Screen name='NotificationSettings' component={NotificationSettings}/>
+            <Stack.Screen name= 'Testing' component={Testing}/>
+
         </Stack.Navigator>
         </NavigationContainer>
     );

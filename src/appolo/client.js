@@ -4,22 +4,36 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { configureStore } from '../redux/store'
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import AsyncStorage from '@react-native-community/async-storage'
 // import { connect } from 'react-redux'
 
-// let test = (state) => state.loginReducer
 
-// console.log('LoginReducer State is >>' , test)
+// let myFunc = (state)=>{console.log('Testing >>>>>>>>>>>>>>>>',state.loginReducer.data.loginUser.jwtToken.token)}
+// const store = configureStore()
+// let state = store.getState()
+
+// console.log('My State >>>>>>>' , state)
 
 
-// console.log('My State is ', myState)
-// let myState = store.getState()
-
-let myFunc = (state)=>{console.log('Testing >>>>>>>>>>>>>>>>',state.loginReducer.data.loginUser.jwtToken.token)}
-const store = configureStore()
-let state = store.getState()
-
-console.log('My State >>>>>>>' , state)
-
+const getToken = async()=>{
+  console.log('Async Fired >>>>')
+  try {
+      const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+      if(token !== null){
+          console.log('Async storage token is >>>', token)
+          // setToken(token)
+          return token
+      }else{
+          console.log('Testing Async')
+          return null
+      }
+      
+  } catch (error) {
+      console.log('Error Getting AssyncStorage Token >>' , error)
+      return null
+      
+  }
+}
 
 const defaultOptions={
   watchQuery: {
@@ -35,10 +49,11 @@ const httpLink = createHttpLink({
   
   const authLink = setContext((_, { headers }) => {
    
-    console.log('Header Are >>',headers)
+    console.log('Header Are >>',headers )
     return {
       headers: {  
         ...headers,
+        // authorization: getToken ? getToken : ''
         // authorization: token ? token : "",
       }
     }

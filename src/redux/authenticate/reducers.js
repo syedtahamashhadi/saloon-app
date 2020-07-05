@@ -9,6 +9,7 @@ import { SIGNUP,
          SELECTED_DATE_TIME_BOOKING ,
          GUEST_USER ,
          SET_TAB_HEADER ,
+         SET_USER_DETAIL,
         } from './constants';
 
 
@@ -245,6 +246,25 @@ const setHeaderReducer = (state = headerInitialState , action) =>{
     }
 }
 
+/*************************** Set User Detail **********************/
+
+const userDetailInitialState = {
+    data: null
+}
+
+const setuserDetailReducer = (state = userDetailInitialState , action) =>{
+    switch (action.type) {
+        case SET_USER_DETAIL.SUCCESS:
+            return{
+                ...state ,
+                data: action.payLoad
+            }
+    
+        default: return state ;
+    }
+}
+
+
 export {
     signUpReducer,
     loginReducer,
@@ -256,6 +276,7 @@ export {
     selectedServiceBookingReducer ,
     selectedDateTimeBookingReducer ,
     guestUserReducer ,
-    setHeaderReducer
+    setHeaderReducer ,
+    setuserDetailReducer ,
     // setHeaderReducer ,
 }

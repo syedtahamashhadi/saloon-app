@@ -4,6 +4,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign'
 import gql from 'graphql-tag'
 import {useQuery , useLazyQuery} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const GET_HELP_TOPICS = gql `
@@ -19,20 +20,34 @@ const GET_HELP_TOPICS = gql `
 const Faq = (props) =>{
 
     console.log('Props  >> ' , props)
-    const {data , loading , error} = useQuery(GET_HELP_TOPICS , 
-            {
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
-                }
-            }
-        )
+    const [helpTopicQuery,{data , loading , error}] = useLazyQuery(GET_HELP_TOPICS)
 
     console.log('Data >>',data)
     console.log('Loading >>',loading)
     console.log('Data >>',error)
 
+    React.useEffect(()=>{
+        
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                    helpTopicQuery(
+                        {
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getToken()
+    },[])
 
     return(
         <View style={styles.container}>

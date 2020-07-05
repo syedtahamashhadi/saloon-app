@@ -1,5 +1,6 @@
 import React , {useEffect} from 'react'
-import {View , StyleSheet, Text, Dimensions , TextInput ,Image , TouchableOpacity} from 'react-native'
+import {View , StyleSheet, Text, Dimensions , TextInput ,Image , TouchableOpacity ,
+        UIManager , LayoutAnimation} from 'react-native'
 import MapView , { Marker  , Callout} from 'react-native-maps'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
@@ -9,75 +10,15 @@ import MyCallOut from '../component/MyCallOut'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
-import { nearestSaloonSuccess , selectedSaloonBookingSuccess } from '../redux/authenticate/actions'
-
+import { nearestSaloonSuccess , selectedSaloonBookingSuccess ,setUserDetailSuccess } from '../redux/authenticate/actions'
+import SvgMapScisorMarker from '../../MySvg/SvgMapScisorMarker'
 import {Ionicons} from '@expo/vector-icons'
+import MapMarker from '../component/MapMarker'
+import AdvanceFilter from '../component/AdvanceFilter'
+import AsyncStorage from '@react-native-community/async-storage'
+import MapHeader from '../component/MapHeader'
 
-const Search = (props) =>{
-    console.log('Search Props >>' , props)
-    const [value, onChangeText] = React.useState('');
-    const getGreet = (name) =>{
-        let hour = new Date().getHours()
-        console.log('Hour is >>' , hour)
-        switch(true){
-            case (hour >= 1 && hour <12):
-                return `Good Morning! ${name}`
-            case (hour >= 12 && hour<17):
-                return `Good Afternoon! ${name}`
-            case (hour >= 17 && hour <= 24):
-                return `Good Evening! ${name}`
-            default:
-                return `Good Evening! ${name}`
-        }
-    }
 
-    const handleImagePress = ()=>{
-        console.log('Image is Pressed')
-        props.nav.navigation.navigate('EditProfile')
-
-        // props.nav.navigation.navigate('SetProfileInfo')
-    }
-    return(
-        <View style={styles.overLay}>
-            <View style={{marginHorizontal:20}}>
-
-                <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
-                
-                    <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>
-                        {getGreet(props.name)}
-                    </Text>
-                    <TouchableOpacity onPress={()=>handleImagePress()}>
-                        <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
-                            source={{uri : props.imgUri}}
-                        />
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:"row" , justifyContent:'space-between' , top:20}}>
-                    
-                    <View style={styles.searchContainer}>
-                        <Icon name="map-marker" size={25} style= {styles.searchIcon} />
-                        
-                        <TextInput
-                            onChangeText={text => onChangeText(text)}
-                            placeholder="Whats your style for today"
-                            value={value}
-                            underlineColorAndroid="transparent"
-                        />
-                    </View>
-                    <TouchableOpacity onPress={()=>console.log("Filter is pressed")}>
-                        <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
-                            <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
-                        </View>
-                    </TouchableOpacity>
-                   
-                </View>
-            </View>
-        
-        </View>
-
-    )
-}
-// query getNearestSalons($latitude: Float! , $longitude: Float!)
 const GET_NEAREST_SALOON = gql `
     query abc($latitude: Float! , $longitude: Float!){
         getNearestSalons(latitude: $latitude, 
@@ -135,10 +76,26 @@ const GET_USER_PROFILE = gql`
         _id
         email
         password
-        status
+        jwtToken{
+            token
+        }
+        firstName
+        lastName
+        phone
+        profileImageURL
+        gender
+        country
+        city
+        dateOfBirth
+        language
     }
 }
 `
+
+
+if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental){
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+}
 
 const Map = (props) =>{
 
@@ -148,36 +105,38 @@ const Map = (props) =>{
     const [userLng,setUserLng] = React.useState(null)
     const [currentLat,setCurrentLat] = React.useState(null)
     const [currentLng,setCurrentLng] = React.useState(null)
-
+    const [filterView,setFilterView] = React.useState(false)
     const [locError,setLocError] = React.useState('')
 
-    const {data , loading , error} = useQuery(GET_NEAREST_SALOON ,
-            {
-                variables: { 
-                    latitude: 24.929505 , longitude: 67.115988    //changing to current pos of user
-                } ,
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
-                }
-            }
-        )
+    const [nearestSaloonQuery,{data : dataNearestSaloon , 
+                loading , error }] = useLazyQuery(GET_NEAREST_SALOON)
     
+    const [userDetailQuery , { data: dataUserDetail , error : errorUserDetail , 
+                        loading : loadingUserDetail}] = useLazyQuery(GET_USER_PROFILE)
+
     useEffect(()=>{
-        if(data){
-            console.log('Action is Fired >>',data)
-            props.nearestSaloon(data)
-            data.getNearestSalons.forEach(val => {
+        if(dataNearestSaloon){
+            console.log('Action is Fired >>',dataNearestSaloon)
+            props.nearestSaloon(dataNearestSaloon) 
+            dataNearestSaloon.getNearestSalons.forEach(val => {
                 setCurrentLat(Number(val.location.coordinates[0]))
                 setCurrentLng(Number(val.location.coordinates[1]))
             });
         }
-    },[data])
+    },[dataNearestSaloon])
        
-    console.log('Data is >>' , data)
-    console.log('Error is >>' , error)
-    console.log('Loading is >>' , loading)
+    useEffect(()=>{
+        if(dataUserDetail){
+            console.log('Data USer Detail Action is Fired >>',dataUserDetail)
+            props.userDetail(dataUserDetail)
+        }else if(errorUserDetail){
+            console.log('User Detail Error >>' , errorUserDetail)
+        }
+    },[dataUserDetail,errorUserDetail])
+
+    // console.log('Data is >>' , dataNearestSaloon)
+    // console.log('Error is >>' , error)
+    // console.log('Loading is >>' , loading)
 
 
     const getLoc = async() =>{
@@ -191,19 +150,56 @@ const Map = (props) =>{
         setUserLat(coords.latitude) ; setUserLng(coords.longitude)
     }
 
-    const handleLocButton = () =>{
-        console.log('Current Loc Button is Pressed.....')
+    const getToken = async()=>{
+        console.log('Async Fired >>>>')
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            if(token !== null){
+                console.log('Async storage token is >>>', token)
+                nearestSaloonQuery(
+                    {
+                        variables: { 
+                            latitude: 24.929505 , longitude: 67.115988    //changing to current pos of user
+                        } ,
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+                userDetailQuery(
+                    {
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+                // setToken(token)
+            }else{
+                console.log('Testing Async')
+            }
+        } catch (error) {
+            console.log('Error Getting AssyncStorage Token >>' , error)
+        }
     }
 
     useEffect(()=>{
         console.log('Map is Mounted >>>>>>>>>>>>>>>>>>')
         getLoc()
+        getToken()
     },[])
 
+    const handleFilterPress = () =>{
+        setFilterView(!filterView)
+    }
+
     const handleBarPress = () =>{
-        console.log('Bar is Pressed')
-        data && props.navigation.navigate('SaloonList',{
-            nearestSaloons:data.getNearestSalons
+        // console.log('Bar is Pressed')
+        dataNearestSaloon && props.navigation.navigate('SaloonList',{
+            nearestSaloons:dataNearestSaloon.getNearestSalons
         })
     }
 
@@ -224,16 +220,18 @@ const Map = (props) =>{
         // setCurrentLat(region.latitude)
         // setCurrentLng(region.longitude)
     }
+    // props.mfa.verifyCode.profileImageURL 
 
-    let imgUri = props.mfa.verifyCode.profileImageURL 
+    let imgUri = dataUserDetail && dataUserDetail.getUserProfile.profileImageURL
                 // {uri : props.signIn.data.loginUser.profileImageURL } : 
                 
-    let name = props.mfa.verifyCode.userName
+    let name = dataUserDetail ? dataUserDetail.getUserProfile.firstName : ''
 
     return(
         <View style={styles.container}>
 
-            <Search name={props.mfa.verifyCode.firstName} imgUri={imgUri} nav={props}/>
+            <MapHeader name={name} imgUri={imgUri} nav={props} 
+                handleFilterPress={handleFilterPress}/>
 
             <View style={styles.map}>
                 <MapView 
@@ -267,7 +265,7 @@ const Map = (props) =>{
                     }
                     }
                 >
-                 {  data && data.getNearestSalons.map((val,index)=>{
+                 {  dataNearestSaloon && dataNearestSaloon.getNearestSalons.map((val,index)=>{
                      let loc = val.location.coordinates 
                     // let loc = val.loc
                      console.log('Val is >>',val)
@@ -280,10 +278,15 @@ const Map = (props) =>{
                                         longitude:Number(loc[1])
                                     }
                                 }
-                                pinColor='red'
+                                // tracksViewChanges={false}
+                                // pinColor='red'
                                 // liteMode={true}
-                                // onPress={()=>handleMarkerPress(val)}
+                                onPress={(e)=>console.log('Marker is Pressed >>>>',e.nativeEvent)}
                             > 
+                                {/* <View style={{width:50,height:35}}>
+                                    <SvgMapScisorMarker/>
+                                </View> */}
+                                <MapMarker />
                                 <Callout tooltip={true} onPress={()=>handleMarkerPress(val)}>
                                         <MyCallOut marker={val} />
                                 </Callout>
@@ -300,7 +303,9 @@ const Map = (props) =>{
                 handleBarPress={handleBarPress}
                 handleCurrentLoc={handleCurrentLoc}
             />
-           
+
+            {filterView && <AdvanceFilter handleFilterPress={handleFilterPress}/>}
+                
         </View>
     )
 }
@@ -315,7 +320,8 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         nearestSaloon: (data) => dispatch(nearestSaloonSuccess(data)) ,
-        selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data))
+        selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data)) ,
+        userDetail: (data) => dispatch(setUserDetailSuccess(data))
     }
 }
 

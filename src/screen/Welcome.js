@@ -3,6 +3,7 @@ import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'r
 import { useFonts } from '@use-expo/font'
 import Chat from '../component/Chat'
 import Button from '../component/Button'
+import AsyncStorage from '@react-native-community/async-storage'
 import { guestUserSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
@@ -37,6 +38,27 @@ const Welcome = (props) =>{
     // if(!fontLoaded){
     //     return <AppLoading />
     // }
+
+    // React.useEffect(()=>{
+    //     async function checkToken(){
+    //         console.log('Welcome Mounted >> ')
+    //         let keys=[]
+    //         try {
+    //             keys = await AsyncStorage.getAllKeys()
+    //             console.log('Keys >>',keys)
+    //             // keys.includes('@KOMB_JWT_TOKEN') == true ? setInitialRoute = 'Map' : setInitialRoute = 'Welcome'
+    //             if(keys.includes('@KOMB_JWT_TOKEN')==true){
+    //                 console.log('Checking Route')
+    //                 // setInitialRoute('SignIn')
+    //                 // return 'Map'
+    //                 props.navigation.replace('SignIn' )
+    //             }
+    //         } catch (error) {
+    //             null
+    //         }
+    //     }
+    //     checkToken() //https://mymai91.github.io/reactnative/2018/03/12/reactnative-initialRouteName-by-asyncStorage.html
+    // },[])
 
     return(
         <View style={styles.container}>

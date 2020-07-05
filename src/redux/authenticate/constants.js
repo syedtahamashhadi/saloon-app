@@ -50,6 +50,10 @@ const SET_TAB_HEADER = {
     SUCCESS : 'SET_TAB_HEADER_SUCCESS'
 }
 
+const SET_USER_DETAIL = {
+    SUCCESS: 'SET_USER_DETAIL_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -61,5 +65,6 @@ export {SIGNUP ,
         SELECTED_DATE_TIME_BOOKING ,
         GUEST_USER ,
         SET_TAB_HEADER,
+        SET_USER_DETAIL,
     }
 

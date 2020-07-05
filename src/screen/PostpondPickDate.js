@@ -93,19 +93,41 @@ const PostpondPickDate = (props) =>{
 
             let apiDateTime = `${dateTime.date}T10:${dateTime.time}Z`
 
-            console.log('Date Time >>' , apiDateTime , appointmentId , props.token )
-            loading !== true && rescheduleAppointment(
-                {
-                    variables:{
-                       id: appointmentId , dateTime: apiDateTime
-                    },
-                    context:{
-                        headers:{
-                            authorization: props.token
-                        }
+            async function getToken(){
+                try {
+                    const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                    if(token !== null){
+                        loading !== true && rescheduleAppointment(
+                            {
+                                variables:{
+                                    id: appointmentId , dateTime: apiDateTime
+                                 },
+                                 context:{
+                                     headers:{
+                                         authorization: props.token
+                                     }
+                                 }
+                            }
+                        )
                     }
+                } catch (error) {
+                    console.log(error)
                 }
-            )
+            }
+            getToken()
+            console.log('Date Time >>' , apiDateTime , appointmentId , props.token )
+            // loading !== true && rescheduleAppointment(
+            //     {
+            //         variables:{
+            //            id: appointmentId , dateTime: apiDateTime
+            //         },
+            //         context:{
+            //             headers:{
+            //                 authorization: props.token
+            //             }
+            //         }
+            //     }
+            // )
         }
     }
 

@@ -9,7 +9,8 @@ import { loginReducer,
         selectedServiceBookingReducer ,
         selectedDateTimeBookingReducer ,
         guestUserReducer ,
-        setHeaderReducer
+        setHeaderReducer ,
+        setuserDetailReducer
     } from './authenticate/reducers'
 
 
@@ -25,8 +26,8 @@ const rootReducer = combineReducers(
         selectedServiceBookingReducer: selectedServiceBookingReducer,
         selectedDateTimeBookingReducer: selectedDateTimeBookingReducer,
         guestUserReducer: guestUserReducer,
-        setHeaderReducer: setHeaderReducer
-
+        setHeaderReducer: setHeaderReducer ,
+        setuserDetailReducer : setuserDetailReducer ,
     }
 )
 

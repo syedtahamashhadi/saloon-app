@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
 import { mfaSuccess , loginSuccess } from '../redux/authenticate/actions'
+import AsyncStorage from '@react-native-community/async-storage'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
@@ -62,20 +63,49 @@ const MFA = (props) =>{
             )
         }
         
-
-        // loading !== true && props.signIn.isLogin && verifyOtp(
-        //     {
-        //         variables:{
-        //             email: props.signUp.data.loginUser.email , code: `${otp}` , deviceId: 'abcd1234'     //mutaion required email and device id
-        //         }
-        //     }
-        // )
     }
+
     console.log('Errorr >>>>>>>>>>',error)
+
+    const setNotification = async (val) =>{
+        console.log('I am Fired >>')
+        try {
+            await AsyncStorage.setItem('@KOMB_NOTIFICATION',val)
+        } catch (error) {
+            // null
+            console.log('TEsting Error',error)
+        }
+    }
+
+    const checkKey = async ()=>{
+        let keys=[]
+        try {
+            keys = await AsyncStorage.getAllKeys()
+            console.log('Keys >>',keys)
+            keys.includes('@KOMB_NOTIFICATION')== false ? setNotification('allowed') : null
+        } catch (error) {
+            null
+        }
+    }
+    React.useEffect(()=>{
+        console.log('Check >>>')
+        checkKey()
+    },[] )
+
+    const storeData = async (value) =>{
+        console.log('Store Data Fired >>' , value)
+        try {
+            await AsyncStorage.setItem('@KOMB_JWT_TOKEN',value)
+            // await AsyncStorage.setItem('@KOMB_NOTIFICATIONS','')
+        } catch (error) {
+            console.log('Error AsyncStorage >>' , error)
+        }
+    }
 
     React.useEffect(()=>{
         if(data){
             // setFiledErr(null)
+            storeData(data.verifyCode.jwtToken.token)
             props.mfa(data)
             // props.login(data)
             screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.replace('Map')

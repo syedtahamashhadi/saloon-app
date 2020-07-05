@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const CANCEL_APPOINMENT = gql `
@@ -14,18 +15,6 @@ const CANCEL_APPOINMENT = gql `
         }  
     }
 `
-
-const POSTPOND_APPOINMENT = gql `
-    mutation abc {
-        postpondAppointment(
-            appointmentId:"5eef7edd2b08c30010725d7c", appointmentDateTime: "2035-12-03T10:15:30Z")
-        {
-            _id
-        }  
-    }
-`
-
-
 
 const BookingDetail = (props) =>{
 
@@ -37,19 +26,45 @@ const BookingDetail = (props) =>{
 
     const handleCancel = () => {
         console.log('ID and Token >>' , appointmentId , props.token)
-        // alert('Handle Cancel')
-        loading !== true && cancelAppoinment(
-            {
-                variables:{
-                    id: appointmentId
-                },
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
+
+        async function getToken(){
+            console.log('Fired>>>>')
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                   console.log('Fired>>>> 2')
+
+                    loading !== true && cancelAppoinment(
+                        {
+                            variables:{
+                                id: appointmentId
+                            },
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
                 }
+            } catch (error) {
+                console.log(error)
             }
-        )
+        }
+        getToken()
+        // alert('Handle Cancel')
+        // loading !== true && cancelAppoinment(
+        //     {
+        //         variables:{
+        //             id: appointmentId
+        //         },
+        //         context:{
+        //             headers:{
+        //                 authorization: props.token
+        //             }
+        //         }
+        //     }
+        // )
     };
 
     console.log('Data >>',data)

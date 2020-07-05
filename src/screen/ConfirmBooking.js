@@ -7,6 +7,7 @@ import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import {connect} from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 
@@ -64,20 +65,46 @@ const ConfirmBooking = (props) =>{
     const handleButton = () =>{
         console.log('Button is Pressed....')
 
-        loading !== true && addAppointment(
-            {
-                variables:{
-                    salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
-                    , services: [serviceId] , cardId: selectedCard.cardId , appointmentDateTime: newDateTime ,
-                    price: servicePrice
-                },
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
+        async function getToken(){
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+
+                if(token !== null){
+                    loading !== true && addAppointment(
+                        {
+                            variables:{
+                                salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
+                                , services: [serviceId] , cardId: selectedCard.cardId , 
+                                appointmentDateTime: newDateTime , price: servicePrice
+                            },
+                            context:{
+                                headers:{
+                                    authorization: props.token
+                                }
+                            }
+                        }
+                    )
                 }
+            } catch (error) {
+                console.log(error)
             }
-        )
+        }
+        getToken()
+
+        // loading !== true && addAppointment(
+        //     {
+        //         variables:{
+        //             salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
+        //             , services: [serviceId] , cardId: selectedCard.cardId , appointmentDateTime: newDateTime ,
+        //             price: servicePrice
+        //         },
+        //         context:{
+        //             headers:{
+        //                 authorization: props.token
+        //             }
+        //         }
+        //     }
+        // )
     }
    
     React.useEffect(()=>{

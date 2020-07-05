@@ -5,7 +5,7 @@ import CurrentBookingCard from '../component/CurrentBookingCard'
 import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
-
+import AsyncStorage from '@react-native-community/async-storage'
 
 const GET_USER_BOOKING = gql `
 
@@ -54,23 +54,33 @@ const CurrentBookings = (props) =>{
 
    
 
-    const {data , loading , error} = useQuery(GET_USER_BOOKING,
-            {
-                variables:{
-                    userId: props.mfa._id
-                },
-                context:{
-                    headers:{
-                        authorization: props.token,
-                    }
-                },
-                // fetchPolicy: 'cache-and-network' 
-            },
-        )
+    const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(GET_USER_BOOKING)
     
         React.useEffect(()=>{
-            console.log('Component is Mounted >>>>')
+            async function getToken(){
+                try {
+                    const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                    if(token !== null){
+                        getUserBookingQuery(
+                            {
+                                variables:{
+                                    userId: props.mfa._id
+                                },
+                                context:{
+                                    headers:{
+                                        authorization: token,
+                                    }
+                                },
+                            }
+                        )
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            getToken()
         },[])
+
         console.log('Loading Appoinment >>' , loading)
         console.log('Data Appoinment >>' , data)
         console.log('Error Appoinment >>' , error)
