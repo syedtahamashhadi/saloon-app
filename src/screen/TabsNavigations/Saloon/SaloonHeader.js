@@ -2,9 +2,11 @@ import React from 'react'
 import {View,ScrollView,Text,TouchableOpacity,StyleSheet,Image} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Rating from '../../../component/Rating'
+import { setFavSaloonSuccess } from '../../../redux/authenticate/actions'
 import gql from 'graphql-tag'
-import { useQuery , useMutation } from '@apollo/react-hooks'
+import { useQuery , useMutation, useLazyQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const SET_FAV_SALOON = gql `
@@ -14,15 +16,29 @@ mutation abc($id: String! , $status:  Boolean!) {
      email
      favoriteSalon{
          displayName
+         _id
      }
     }  
   }
 `
 
+const GET_FAV_SALOON = gql `
+  {
+    getFavoriteSalons{
+        favoriteSalon{
+            _id
+        }
+    }
+  }
+
+`
+
 const Saloon = (props) =>{
 
-    const [setFavSaloon , { data , loading , error }] = useMutation(SET_FAV_SALOON)
-  
+    const [setFavSaloon , { data:dataSetFavSaloon , loading , error:errFavSaloon }] = useMutation(SET_FAV_SALOON)
+    
+    const [getFavSaloon , { data:dataGetFavSaloon , loading: loadingGetFavSaloon , error: errGetFavSaloon }] = useLazyQuery(GET_FAV_SALOON)
+
     const [favPressed,setFavPressed] = React.useState(false)
     
     const saloon = props.selectedSaloon.data
@@ -30,29 +46,64 @@ const Saloon = (props) =>{
 
     let mannagerImg = (saloon.managerImage) ? {uri : saloon.managerImage} : require('../../../../assets/mannager.png')
     
-    const handleHeartPress = () =>{
-        console.log('Heart is Presses')
-        loading !== true && setFavSaloon(
-            {
-                variables:{
-                    id: saloon._id , status: 'true'
-                },
-                context:{
-                    headers:{
-                        authorization: props.token
-                    }
-                }
-            }
-        )
-    }
 
     React.useEffect(()=>{
-        if(data){
-            console.log('Fav Saloon Data >>' , data)
-        }else if(error){
-            console.log('Fav Saloon Error >>' , error)
+        (async()=>{
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                    getFavSaloon(
+                        {
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
+                }
+            } catch (error) {
+                console.log('Token Errr >>' , error)
+            }
+        })()
+    },[])
+
+    const getToken = async() =>{
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            if(token !== null){
+                setFavSaloon(
+                    {
+                        variables:{
+                            id : saloon._id , status : true
+                        } , 
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+            }
+        } catch (error) {
+            console.log('Token Error >>' , error)
         }
-    },[data,error])
+    }
+
+
+
+    // React.useEffect(()=>{
+    // if(data){
+    //     console.log('Fav Saloon Data >>' , data)
+    // }else if(error){
+    //     console.log('Fav Saloon Error >>' , error)
+    // }
+    // },[data,error])
+
+    React.useEffect(()=>{
+        // if(dataGetFavSaloon)
+    },[dataGetFavSaloon,errGetFavSaloon])
+
 
     let heartBackgroundColor = favPressed ? '#FA7268' : '#fff'
     let heartColor = favPressed ? '#fff' : '#FA7268'

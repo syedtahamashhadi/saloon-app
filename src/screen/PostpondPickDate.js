@@ -5,24 +5,16 @@ import Chat from '../component/Chat'
 import { Calendar } from 'react-native-calendars'
 import TimeCard from '../component/TimeCard'
 import Button from '../component/Button'
+import AsyncStorage from '@react-native-community/async-storage'
 import { selectedDateTimeSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import Mutations from '../appolo/mutations'
 
-const RESCHEDULE_APPOINTMENT = gql `
-mutation abc($id: String! , $dateTime: DateTime!) {
-    postpondAppointment(
-  appointmentId:$id, appointmentDateTime: $dateTime)
-    {
-     _id
-    }  
-  }
-`
 
 const PostpondPickDate = (props) =>{
 
-    const [rescheduleAppointment , {data, loading ,error}] = useMutation(RESCHEDULE_APPOINTMENT)
+    const [rescheduleAppointment , {data, loading ,error}] = useMutation(Mutations.RESCHEDULE_APPOINTMENT)
 
     const { appointmentId } = props.route.params
 
@@ -97,16 +89,18 @@ const PostpondPickDate = (props) =>{
                 try {
                     const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
                     if(token !== null){
+                        console.log('Get Token >>>>>>>>>>>>>>>>>>>>>>>>>')
+
                         loading !== true && rescheduleAppointment(
                             {
                                 variables:{
                                     id: appointmentId , dateTime: apiDateTime
                                  },
-                                 context:{
-                                     headers:{
-                                         authorization: props.token
-                                     }
-                                 }
+                                context:{
+                                    headers:{
+                                        authorization: token
+                                    }
+                                }
                             }
                         )
                     }
@@ -115,28 +109,9 @@ const PostpondPickDate = (props) =>{
                 }
             }
             getToken()
-            console.log('Date Time >>' , apiDateTime , appointmentId , props.token )
-            // loading !== true && rescheduleAppointment(
-            //     {
-            //         variables:{
-            //            id: appointmentId , dateTime: apiDateTime
-            //         },
-            //         context:{
-            //             headers:{
-            //                 authorization: props.token
-            //             }
-            //         }
-            //     }
-            // )
+
         }
     }
-
-    // React.useEffect=(()=>{
-    //     if(data){
-    //         console.log('I am Fired >>>')
-    //         // props.navigation.navigate('Saloon')
-    //     }
-    // },[loading])
 
     useEffect(()=>{
         if(data){

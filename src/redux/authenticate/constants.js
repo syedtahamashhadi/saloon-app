@@ -54,6 +54,14 @@ const SET_USER_DETAIL = {
     SUCCESS: 'SET_USER_DETAIL_SUCCESS'
 }
 
+const SET_FAV_SALOON = {
+    SUCCESS: 'SET_FAV_SALOON_SUCCESS'
+}
+
+const SET_IS_LOGIN = {
+    SUCCESS: 'SET_IS_LOGIN_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -66,5 +74,7 @@ export {SIGNUP ,
         GUEST_USER ,
         SET_TAB_HEADER,
         SET_USER_DETAIL,
+        SET_FAV_SALOON ,
+        SET_IS_LOGIN ,
     }
 

@@ -5,7 +5,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign'
 import AsyncStorage from '@react-native-community/async-storage'
 
 
-const NotificationSettings = () =>{
+const NotificationSettings = (props) =>{
 
     const [value,setValue] = React.useState(false)
 
@@ -38,7 +38,9 @@ const NotificationSettings = () =>{
     return(
         <View style={{flex:1,backgroundColor:'#fff'}}>
             <View style={{flexDirection:'row' , marginHorizontal:20 , marginTop:35}}>
-                <AntIcon name='arrowleft' size={25}/>
+                <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                    <AntIcon name='arrowleft' size={25}/>
+                </TouchableOpacity>
             </View>
 
             <View style={{marginTop:20 , marginHorizontal:20}}>

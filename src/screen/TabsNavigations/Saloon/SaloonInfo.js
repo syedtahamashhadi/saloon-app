@@ -57,8 +57,8 @@ const SaloonInfo = (props) =>{
                     </Text>
                     
                     {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
-
-                        <View style={{flexDirection:'row',flexWrap:'wrap',marginHorizontal:-20,alignItems:'flex-start'}}>
+                            {/* //marginHorizontal:-20 */}
+                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
 
                         {
                             props.stylist.map((val,index)=>{
@@ -93,7 +93,7 @@ const SaloonInfo = (props) =>{
                     
                     {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
 
-                        <View style={{flexDirection:'row',marginHorizontal:-20,flexWrap:'wrap',alignItems:'flex-start'}}>
+                        <View style={{flexDirection:'row',flexWrap:'wrap',alignItems:'flex-start'}}>
 
                         {
                             props.services.map((val,index)=>{

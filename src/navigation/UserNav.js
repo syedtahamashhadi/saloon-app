@@ -2,6 +2,8 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-community/async-storage'
+import { setIsLogin } from '../redux/authenticate/actions'
+import { connect } from 'react-redux'
 import Welcome from '../screen/Welcome'
 import SignIn from '../screen/SignIn'
 import Map from '../screen/Map'
@@ -43,7 +45,6 @@ import WhatsNew from '../screen/WhatsNew'
 import FaqsDescription from '../screen/FaqsDescription'
 import GuestBookingSelectStylist from '../screen/guest/GuestBookingSelectStylist'
 import GuestBookingSelectServices from '../screen/guest/GuestBookingSelectServices'
-// import TransactionHistoryCard from '../component/TransactionHistoryCard'
 import PaymentNavigation from '../screen/TabsNavigations/Payment/PaymentNavigation'
 import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
 import PromoCode from '../screen/PromoCode'
@@ -54,28 +55,121 @@ import SaloonNavigation from '../screen/TabsNavigations/Saloon/SaloonNavigation'
 import FooterBar from '../component/FooterBar'
 import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
 import NotificationSettings from '../screen/NotificationSettings'
-import Testing from '../screen/Testing'
+import Notifications from '../screen/Notifications'
+// import Testing from '../screen/Testing'
 
-// import HelpCenterNavigation from '../screen/TabsNavigations/HelpCenter/HelpCenterNavigation'
-// import AnimatedText from '../component/AnimatedText'
-// import GuestSlider from '../screen/guest/GuestSlider'
 
 
 
 const Stack = createStackNavigator();
 
-const UserNav = () =>{
-// 
-    // const initialRoute = 'Welcome'
+const UserNav = (props) =>{
+    
+    const [isLogin,setIsLogin] = React.useState(false)
+
+    const getToken = async () =>{
+        console.log('Get Token is Fired >>>>>>>>>>>')
+        try {
+            let token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            if(token !== null){
+                console.log('Token is >>>>>>>>' , token)
+                props.setIsLogin(true)
+            }else{
+                props.setIsLogin(false)
+            }
+        } catch (error) {
+            props.setIsLogin(false)
+        }
+    }
+
+    React.useEffect(()=>{
+        console.log('User Nav Is Fired >>>>')
+        getToken()
+    } )
+
+    // console.log('Initial Route Props >>>' , props.isLogin)
     return(
         <NavigationContainer>
-        <Stack.Navigator initialRouteName='Welcome' 
+        <Stack.Navigator 
+            // initialRouteName={props.initialRoute}
             screenOptions={{                            //https://reactnavigation.org/docs/screen-options
                 headerShown: false, 
                 // headerBackground:'#fff'
             }}          
         >   
-            <Stack.Screen name='Welcome' component={Welcome} />
+            {
+                props.isLogin ? (
+                    <React.Fragment>
+                        <Stack.Screen name='Map' component={Map}/>
+                        <Stack.Screen name='Saloon' component={Saloon}/>
+                        <Stack.Screen name='Stylist' component={Stylist}/>
+                        <Stack.Screen name='SelectStylist' component={SelectStylist}/>
+                        <Stack.Screen name='StylistProfile' component={StylistProfile}/>
+                        <Stack.Screen name='BookingSelectStylist' component={BookingSelectStylist} />
+                        <Stack.Screen name='BookingSelectServices' component={BookingSelectServices} />
+                        <Stack.Screen name='SaloonList' component={SaloonList}/>
+                        <Stack.Screen name='PickDate' component={PickDate}/>
+                        <Stack.Screen name='PickDateTime' component={PickDateTime}/>
+                        <Stack.Screen name='Congragulation' component={Congragulation}/>
+                        
+                        <Stack.Screen name='SetProfileInfo' component={SetProfileInfo}/>
+                        <Stack.Screen name='PaymentMethods' component={PaymentMethods}/>
+                        <Stack.Screen name='SetBillingDetail' component={SetBillingDetail}/>
+                        <Stack.Screen name='UserDetail' component={UserDetail}/>
+                        <Stack.Screen name='ConfirmBooking' component={ConfirmBooking}/>
+                        <Stack.Screen name='EditProfile' component={EditProfile}/>
+                        <Stack.Screen name='ReferToFriends' component={ReferToFriends}/>
+                        <Stack.Screen name='Favourites' component={Favourites}/>
+                        <Stack.Screen name='CurrentBookings' component={CurrentBookings}/>
+                        <Stack.Screen name='BookingDetail' component={BookingDetail}/>
+                        <Stack.Screen name='WhatsNew' component={WhatsNew}/>
+                        <Stack.Screen name='FaqsDescription' component={FaqsDescription}/>
+                       
+                        <Stack.Screen name='PaymentNavigation' component={PaymentNavigation}/>
+                        <Stack.Screen name='HelpCenterNavigation' component={HelpCenterNavigation}/>
+                        <Stack.Screen name='PromoCode' component={PromoCode}/>
+                        <Stack.Screen name='PostpondPickDate' component={PostpondPickDate}/>
+                        <Stack.Screen name='RewardsNavigation' component={RewardsNavigation}/>
+                        <Stack.Screen name='Moments' component={Moments}/>
+                        <Stack.Screen name='SaloonNavigation' component={SaloonNavigation}/>
+                        <Stack.Screen name='FooterBar' component={FooterBar}/>         
+                        <Stack.Screen name= 'TosPpNavigation' component={TosPpNavigation}/>
+                        <Stack.Screen name='NotificationSettings' component={NotificationSettings}/>
+                        <Stack.Screen name='Notifications' component={Notifications}/>
+
+                    </React.Fragment>
+
+                ) : (
+                    <React.Fragment>
+                        <Stack.Screen name='Welcome' component={Welcome} />
+                        <Stack.Screen name='SignIn' component={SignIn}
+                            options={
+                                {
+                                    title: 'Sign in' ,
+                                    animationTypeForReplace: props.isLogin ? "push" : "pop"
+                                }
+                            }
+                        />
+                        <Stack.Screen name='SignUp' component={SignUp}/>
+                        <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
+                        <Stack.Screen name='UpdatePasswords' component={UpdatePasswords}/>
+                        <Stack.Screen name='MFA' component={MFA}/>
+                        <Stack.Screen name='EmailConfirm' component={EmailConfirm}/>
+
+                        <Stack.Screen name='GuestMap' component={GuestMap}/>
+                        <Stack.Screen name='GuestSaloonList' component={GuestSaloonList}/> 
+                        <Stack.Screen name='GuestSaloon' component={GuestSaloon}/>
+                        <Stack.Screen name='GuestStylistProfile' component={GuestStylistProfile}/>
+                        <Stack.Screen name='GuestPickDateTime' component={GuestPickDateTime}/>
+                        <Stack.Screen name='GuestPaymentMethods' component={GuestPaymentMethods}/>
+                        <Stack.Screen name='GuestConfirmBooking' component={GuestConfirmBooking}/>
+                        <Stack.Screen name='GuestBookingSelectServices' component={GuestBookingSelectServices}/>
+                        <Stack.Screen name='GuestBookingSelectStylist' component={GuestBookingSelectStylist}/>
+                    </React.Fragment>
+                )
+            }
+            
+            {/* <Stack.Screen name='Welcome' component={Welcome} />
             <Stack.Screen name='SignIn' component={SignIn}/>
             <Stack.Screen name='SignUp' component={SignUp}/>
             <Stack.Screen name='MFA' component={MFA}/>
@@ -85,7 +179,6 @@ const UserNav = () =>{
             <Stack.Screen name='Stylist' component={Stylist}/>
             <Stack.Screen name='SelectStylist' component={SelectStylist}/>
             <Stack.Screen name='StylistProfile' component={StylistProfile}/>
-            {/* <Stack.Screen name='SaloonInfo' component={SaloonInfo}/> */}
             <Stack.Screen name='BookingSelectStylist' component={BookingSelectStylist} />
             <Stack.Screen name='BookingSelectServices' component={BookingSelectServices} />
             <Stack.Screen name='SaloonList' component={SaloonList}/>
@@ -124,12 +217,24 @@ const UserNav = () =>{
             <Stack.Screen name='SaloonNavigation' component={SaloonNavigation}/>
             <Stack.Screen name='FooterBar' component={FooterBar}/>         
             <Stack.Screen name= 'TosPpNavigation' component={TosPpNavigation}/>
-            <Stack.Screen name='NotificationSettings' component={NotificationSettings}/>
-            <Stack.Screen name= 'Testing' component={Testing}/>
+            <Stack.Screen name='NotificationSettings' component={NotificationSettings}/> */}
 
         </Stack.Navigator>
         </NavigationContainer>
     );
 }
 
-export default UserNav;
+const mapStateToProps = (state) =>{
+    return{
+        isLogin : state.setIsLoginReducer.data
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        setIsLogin : (data) => dispatch(setIsLogin(data))
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserNav);

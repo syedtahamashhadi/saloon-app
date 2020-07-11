@@ -3,34 +3,15 @@ import {View , Text , StyleSheet , TextInput, TouchableOpacity, Image , ScrollVi
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import SocialCard from '../component/SocialCard'
-import gql from 'graphql-tag'
 import {useMutation} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import { signUpSuccess } from '../redux/authenticate/actions'
+import Mutations from '../appolo/mutations'
 
-
-const SIGNUP = gql `mutation abc(
-    $email: String!
-    $password: String!
-    $firstName: String!
-    $lastName: String!
-    $phone: String!
-  ) {
-    signupUser(
-        email: $email
-        password: $password
-        firstName: $firstName
-        lastName: $lastName
-        phone: $phone
-      )
-    {
-     email
-    }  
-  }`
 
 const SignUp = (props) =>{
 
-    const [signupUser , {data , loading ,error}] = useMutation(SIGNUP)
+    const [signupUser , {data , loading ,error}] = useMutation(Mutations.SIGNUP)
 
     const [firstName,setFirstName] = React.useState('')
     const [lastName,setLastName] = React.useState('')

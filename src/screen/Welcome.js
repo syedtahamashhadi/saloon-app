@@ -7,25 +7,20 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { guestUserSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
+import Helpers from '../Helpers'
 
 
 
 const Welcome = (props) =>{
     console.log('Welcome Props >>',props)
 
-    // const [fontLoaded] = useFonts(
-    //     {
-    //         AbrilFatFace : require('../../assets/fonts/AbrilFatface-Regular.ttf'),
-    //         ExoRegular : require('../../assets/fonts/Exo-Regular.ttf'),
-    //         ExoBold : require('../../assets/fonts/Exo-Bold.ttf'),
-    //     }
-    // )
-    // const myFont = fontLoaded ? 'AbrilFatFace' : null
+    Helpers.test('Testing328')
 
     const handleSignIn = () =>{
         console.log('SignIn is Clicked...')
         props.guestUser(false)
-        props.token ? props.navigation.navigate('Map') : props.navigation.navigate('SignIn')
+        props.navigation.navigate('SignIn')
+        // props.token ? props.navigation.navigate('Map') : props.navigation.navigate('SignIn')
     }
 
     const handleGuest = () =>{
@@ -35,31 +30,7 @@ const Welcome = (props) =>{
         // props.navigation.replace('GuestSlider')
     }
 
-    // if(!fontLoaded){
-    //     return <AppLoading />
-    // }
-
-    // React.useEffect(()=>{
-    //     async function checkToken(){
-    //         console.log('Welcome Mounted >> ')
-    //         let keys=[]
-    //         try {
-    //             keys = await AsyncStorage.getAllKeys()
-    //             console.log('Keys >>',keys)
-    //             // keys.includes('@KOMB_JWT_TOKEN') == true ? setInitialRoute = 'Map' : setInitialRoute = 'Welcome'
-    //             if(keys.includes('@KOMB_JWT_TOKEN')==true){
-    //                 console.log('Checking Route')
-    //                 // setInitialRoute('SignIn')
-    //                 // return 'Map'
-    //                 props.navigation.replace('SignIn' )
-    //             }
-    //         } catch (error) {
-    //             null
-    //         }
-    //     }
-    //     checkToken() //https://mymai91.github.io/reactnative/2018/03/12/reactnative-initialRouteName-by-asyncStorage.html
-    // },[])
-
+   
     return(
         <View style={styles.container}>
             <View style={{marginHorizontal:20}}>

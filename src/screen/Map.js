@@ -8,89 +8,16 @@ import MapFooter from '../component/MapFooter'
 import * as Location from 'expo-location'
 import MyCallOut from '../component/MyCallOut'
 import { connect } from 'react-redux'
-import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
-import { nearestSaloonSuccess , selectedSaloonBookingSuccess ,setUserDetailSuccess } from '../redux/authenticate/actions'
+import { nearestSaloonSuccess , selectedSaloonBookingSuccess ,
+         setUserDetailSuccess , favSaloonSuccess } from '../redux/authenticate/actions'
 import SvgMapScisorMarker from '../../MySvg/SvgMapScisorMarker'
 import {Ionicons} from '@expo/vector-icons'
 import MapMarker from '../component/MapMarker'
-import AdvanceFilter from '../component/AdvanceFilter'
+import AdvanceFilters from '../component/AdvanceFilters'
 import AsyncStorage from '@react-native-community/async-storage'
 import MapHeader from '../component/MapHeader'
-
-
-const GET_NEAREST_SALOON = gql `
-    query abc($latitude: Float! , $longitude: Float!){
-        getNearestSalons(latitude: $latitude, 
-    longitude: $longitude){
-        _id
-        displayName
-        rating
-        backgroundProfileImage
-        distance
-        profileImage
-        portfolioImages
-        managerName
-        managerImage
-        status
-        address
-        contactNo
-        services{
-            name
-            _id
-            description
-            approxTime
-            price
-            serviceIcon
-        }
-        serviceProviders{
-            firstName
-            lastName
-            _id
-            status
-            rating
-            profileImageURL
-            ratingCounter
-            services{
-                _id
-                name
-                approxTime
-                price
-                status
-                description
-                serviceIcon
-            }
-        }
-        location{
-            type
-            coordinates
-        }
-        }
-    }
-`
-
-
-const GET_USER_PROFILE = gql`
-{
-    getUserProfile{
-        _id
-        email
-        password
-        jwtToken{
-            token
-        }
-        firstName
-        lastName
-        phone
-        profileImageURL
-        gender
-        country
-        city
-        dateOfBirth
-        language
-    }
-}
-`
+import Queries from '../appolo/queries'
 
 
 if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental){
@@ -109,10 +36,25 @@ const Map = (props) =>{
     const [locError,setLocError] = React.useState('')
 
     const [nearestSaloonQuery,{data : dataNearestSaloon , 
-                loading , error }] = useLazyQuery(GET_NEAREST_SALOON)
+                loading , error }] = useLazyQuery(Queries.GET_NEAREST_SALOON)
     
     const [userDetailQuery , { data: dataUserDetail , error : errorUserDetail , 
-                        loading : loadingUserDetail}] = useLazyQuery(GET_USER_PROFILE)
+                        loading : loadingUserDetail}] = useLazyQuery(Queries.GET_USER_PROFILE)
+
+    /***************************** Exit  ***********************************/
+
+    // const removeKey = async () =>{
+    //     try {
+    //         await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
+    //             // props.setIsLogin(false)                
+    //             props.navigation.navigate('SignIn')
+    //         })
+    //     } catch (error) {
+    //         console.log('Error >>>' , error)
+    //     }
+    // }
+    // removeKey()
+    /***************************************************************************/
 
     useEffect(()=>{
         if(dataNearestSaloon){
@@ -129,6 +71,7 @@ const Map = (props) =>{
         if(dataUserDetail){
             console.log('Data USer Detail Action is Fired >>',dataUserDetail)
             props.userDetail(dataUserDetail)
+            // props.favSaloon(dataUserDetail.getUserProfile.favouriteSaloon)
         }else if(errorUserDetail){
             console.log('User Detail Error >>' , errorUserDetail)
         }
@@ -304,7 +247,7 @@ const Map = (props) =>{
                 handleCurrentLoc={handleCurrentLoc}
             />
 
-            {filterView && <AdvanceFilter handleFilterPress={handleFilterPress}/>}
+            {filterView && <AdvanceFilters handleFilterPress={handleFilterPress}/>}
                 
         </View>
     )
@@ -321,7 +264,8 @@ const mapDispatchToProps = (dispatch) =>{
     return{
         nearestSaloon: (data) => dispatch(nearestSaloonSuccess(data)) ,
         selectedSaloon: (data) => dispatch(selectedSaloonBookingSuccess(data)) ,
-        userDetail: (data) => dispatch(setUserDetailSuccess(data))
+        userDetail: (data) => dispatch(setUserDetailSuccess(data)) ,
+        // favSaloon: (data) => dispatch(favSaloonSuccess(data))
     }
 }
 

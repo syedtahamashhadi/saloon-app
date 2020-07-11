@@ -1,23 +1,23 @@
 import React from 'react'
-import { View , Text , ScrollView, StyleSheet } from 'react-native'
-import AntIcon from 'react-native-vector-icons'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View , Text , ScrollView, StyleSheet , TouchableOpacity } from 'react-native'
+import AntIcon from 'react-native-vector-icons/AntDesign'
+import FooterBar from '../component/FooterBar'
+// import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 const Notifications = (props) =>{
-
 
     return(
         <View style={styles.container}>
 
             <View style={{marginHorizontal:20 , marginTop:50}}>
 
-                <View style={{flexDirection:'row' , justifyContent:'space-between'}}>
-                    <Text style={{fontFamily:'AbrilFatFace' , fontSize:30}}>
+                <View style={{flexDirection:'row' , justifyContent:'space-between' , backgroundColor:'#fff' , alignItems:'center'}}>
+                    <Text style={{fontFamily:'AbrilFatFace' , fontSize:30 }}>
                         Notifications
                     </Text>
                     <View style={styles.settingIconContainer}>
-                        <TouchableOpacity onPress={()=>console.log('Settings is Pressed...')}>
+                        <TouchableOpacity onPress={()=>props.navigation.navigate('NotificationSettings')}>
                             <AntIcon name='setting' size={20}/>
                         </TouchableOpacity>
                     </View>
@@ -28,7 +28,14 @@ const Notifications = (props) =>{
 
                     </ScrollView>
                 </View>
+               
+                
 
+            </View>
+            <View style={{marginTop:'100%'}}>
+                <View style={{alignItems:'flex-end'}}>
+                    <FooterBar nav={props.navigation}/>
+                </View>
             </View>
 
         </View>

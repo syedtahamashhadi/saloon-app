@@ -89,7 +89,7 @@ const BookingSelectStylist = (props) =>{
                     </Text>
                     
                     <ScrollView horizontal={true}  showsVerticalScrollIndicator={false} >
-                        <View style={{flexDirection:'row' , width:'100%' , marginTop:25}}>
+                        <View style={{flexDirection:'row' , width:'100%' , marginTop:25 , height:67}}>
                             {
                                 stylists.map((val,index)=>{
                                     let myColor = val.firstName == selectedCrew ? '#49D3CE' : null
@@ -98,16 +98,19 @@ const BookingSelectStylist = (props) =>{
                                     return(
                                         <TouchableOpacity onPress={()=>handleStylistPress(val)} key={index}>
 
-                                            <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
-                                                <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#F1F3F8',
-                                                borderWidth:3,borderColor:myBorderColor,elevation:5}}>
-                                                    <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
-                                                </View>
-                                                <Text style={{color:myColor,marginTop:'2%',fontFamily:'ExoRegular'}}>
-                                                    {val.firstName.length>15 ? val.firstName.slice(0,12) : val.firstName}
-                                                </Text>
+                                        <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
+
+                                            <View style={{height:48,width:48,borderRadius:40,backgroundColor:'#F1F3F8',
+                                            borderWidth:3,borderColor:myBorderColor,elevation:5}}>
+                                                <Image source={{uri : val.profileImageURL}} style={styles.imgMannager}/>
                                             </View>
+                                            <Text style={{color:myColor,marginTop:'2%',fontFamily:'ExoRegular'}}>
+                                                {val.firstName.length>15 ? val.firstName.slice(0,12) : val.firstName}
+                                            </Text>
+
+                                        </View>
                                         </TouchableOpacity>
+
                                     )
                                 })
                             }

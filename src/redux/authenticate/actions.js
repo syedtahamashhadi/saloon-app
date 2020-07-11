@@ -10,6 +10,8 @@ import { SIGNIN ,
     GUEST_USER ,
     SET_TAB_HEADER,
     SET_USER_DETAIL,
+    SET_FAV_SALOON,
+    SET_IS_LOGIN ,
 } from './constants'
 
 
@@ -188,6 +190,22 @@ const setUserDetailSuccess = (data) =>{
     }
 }
 
+/*************************** Set Fav Saloon *******************/
+
+const setFavSaloonSuccess = (data) =>{
+    return{
+        type: SET_FAV_SALOON.SUCCESS ,
+        payLoad: data
+    }
+}
+
+const setIsLogin = (data) =>{
+    console.log('Set is Login Action is Fired >>>>' , data)
+    return{
+        type: SET_IS_LOGIN.SUCCESS ,
+        payLoad: data
+    }
+}
 
 
 export {
@@ -203,4 +221,6 @@ export {
     guestUserSuccess ,
     setTabHeaderSuccess ,
     setUserDetailSuccess ,
+    setFavSaloonSuccess ,
+    setIsLogin ,
 }

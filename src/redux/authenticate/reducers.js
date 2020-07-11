@@ -10,6 +10,8 @@ import { SIGNUP,
          GUEST_USER ,
          SET_TAB_HEADER ,
          SET_USER_DETAIL,
+         SET_FAV_SALOON ,
+         SET_IS_LOGIN
         } from './constants';
 
 
@@ -264,6 +266,40 @@ const setuserDetailReducer = (state = userDetailInitialState , action) =>{
     }
 }
 
+/********************************* Set Fav Saloon  ***************************/
+
+const favSaloonInitialState = {
+    data : null
+}
+
+const setFavSaloonReducer = (state = favSaloonInitialState , action) =>{
+    switch(action.type){
+        case SET_FAV_SALOON.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default : return state
+    }
+}
+
+/******************************* Set Is Login ****************************/
+
+const isLoginInitialState = {
+    data : null
+}
+
+const setIsLoginReducer = (state = isLoginInitialState , action) =>{
+    switch(action.type){
+        case SET_IS_LOGIN.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default : return state
+    }
+}
+
 
 export {
     signUpReducer,
@@ -278,5 +314,7 @@ export {
     guestUserReducer ,
     setHeaderReducer ,
     setuserDetailReducer ,
+    setFavSaloonReducer ,
+    setIsLoginReducer ,
     // setHeaderReducer ,
 }

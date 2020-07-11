@@ -24,12 +24,16 @@ const HomeScreenBanner = (props) =>{
         <View style={{marginTop:35}}>
             <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                
-                <Text style={{fontSize:20 ,fontWeight:'bold'}}>{getGreet(props.mfa.verifyCode.firstName)}</Text>
+                <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>
+                    {getGreet(props.userDetail.getUserProfile.firstName)}
+                </Text>
                 
                 <View style={{borderRadius:40,borderWidth:2,borderColor:'#fff',elevation:5}}>
-                    <Image style={{borderRadius:38,height:38,width:40}}
-                        source={require('../../assets/user.png')}
-                    />
+                    <TouchableOpacity onPress={()=>{props.nav.navigate('EditProfile')}}>
+                        <Image style={{borderRadius:38,height:38,width:40}}
+                            source={require('../../assets/user.png')}
+                        />
+                    </TouchableOpacity>
                 </View>
                 
             
@@ -66,7 +70,8 @@ const HomeScreenBanner = (props) =>{
 const mapStateToProps = (state) =>{
 
     return{
-        mfa: state.mfaReducer.data
+        // mfa: state.mfaReducer.data
+        userDetail: state.setuserDetailReducer.data
     }
 }
 

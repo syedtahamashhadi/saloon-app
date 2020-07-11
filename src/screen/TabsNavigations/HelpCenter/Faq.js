@@ -1,26 +1,16 @@
 import React from 'react'
 import { View , StyleSheet , Text , Touchable , TouchableOpacity , ScrollView } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
-import gql from 'graphql-tag'
 import {useQuery , useLazyQuery} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
-
-
-const GET_HELP_TOPICS = gql `
-{
-    getHelpTopic {
-        title
-        description
-    }
-  }
-`
+import Queries from '../../../appolo/queries'
 
 
 const Faq = (props) =>{
 
     console.log('Props  >> ' , props)
-    const [helpTopicQuery,{data , loading , error}] = useLazyQuery(GET_HELP_TOPICS)
+    const [helpTopicQuery,{data , loading , error}] = useLazyQuery(Queries.GET_HELP_TOPICS)
 
     console.log('Data >>',data)
     console.log('Loading >>',loading)

@@ -3,30 +3,10 @@ import {View , Text , TextInput ,StyleSheet , ScrollView , ActivityIndicator} fr
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
-import { mfaSuccess , loginSuccess } from '../redux/authenticate/actions'
+import { mfaSuccess , loginSuccess , setIsLogin } from '../redux/authenticate/actions'
 import AsyncStorage from '@react-native-community/async-storage'
 import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-
-const OTP = gql `
-    mutation abc($email: String! , $code: String! , $deviceId: String!){
-        verifyCode(email: $email, code: $code, deviceId: $deviceId) 
-        {
-            
-            _id
-            email
-            jwtToken {
-              token
-              createdAt
-            }
-            password
-            userName
-            firstName
-            lastName
-            profileImageURL
-        }
-    }
-`
+import Mutations from '../appolo/mutations'
 
 const MFA = (props) =>{
 
@@ -40,7 +20,7 @@ const MFA = (props) =>{
 
     // const checkOtpCall = props.signIn.isLogin ? OTP_SIGNIN : OTP_SIGNIN
 
-    const [verifyOtp , { data , loading , error}] = useMutation(OTP)
+    const [verifyOtp , { data , loading , error}] = useMutation(Mutations.OTP)
     console.log('MFA Data >>>>>>>>>>' , data)
 
     // props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
@@ -82,7 +62,7 @@ const MFA = (props) =>{
         try {
             keys = await AsyncStorage.getAllKeys()
             console.log('Keys >>',keys)
-            keys.includes('@KOMB_NOTIFICATION')== false ? setNotification('allowed') : null
+            keys.includes('@KOMB_NOTIFICATION') == false ? setNotification('allowed') : null
         } catch (error) {
             null
         }
@@ -95,8 +75,12 @@ const MFA = (props) =>{
     const storeData = async (value) =>{
         console.log('Store Data Fired >>' , value)
         try {
-            await AsyncStorage.setItem('@KOMB_JWT_TOKEN',value)
-            // await AsyncStorage.setItem('@KOMB_NOTIFICATIONS','')
+            await AsyncStorage.setItem('@KOMB_JWT_TOKEN',value , ()=>{
+                props.setIsLogin(true)
+                props.mfa(data)
+                // props.navigation.navigate('Map')
+                screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.navigate('Map')
+            })
         } catch (error) {
             console.log('Error AsyncStorage >>' , error)
         }
@@ -104,11 +88,7 @@ const MFA = (props) =>{
 
     React.useEffect(()=>{
         if(data){
-            // setFiledErr(null)
             storeData(data.verifyCode.jwtToken.token)
-            props.mfa(data)
-            // props.login(data)
-            screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.replace('Map')
         }else if(error && error.message){
             setFieldErr(error.message.slice(15))
         }else if(error){
@@ -124,7 +104,6 @@ const MFA = (props) =>{
             <View style={{alignItems:'center'}}>
                 <View style={{width:120,height:100,marginTop:120 ,backgroundColor:'#fff', alignItems:'center'}}>
                     <Icon name='onepassword' size={100} color='#49D3CE' />
-                    {/* <Text>Test</Text> */}
                 </View>
             </View>
            
@@ -176,7 +155,8 @@ const MFA = (props) =>{
 mapStateToProps = (state) =>{
     return{
         signIn: state.loginReducer ,
-        signUp: state.signUpReducer
+        signUp: state.signUpReducer ,
+        isLogin: state.setIsLoginReducer
         // mfaState: state.mfaReducer
     }
 }
@@ -184,6 +164,8 @@ mapStateToProps = (state) =>{
 mapDispatchToProps = (dispatch) =>{
     return{
         mfa: (data) => dispatch(mfaSuccess(data)) ,
+        setIsLogin : (data) => dispatch(setIsLogin(data)) ,
+
         // login: (data) => dispatch(loginSuccess(data))
     }
 }

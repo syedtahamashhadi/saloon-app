@@ -4,39 +4,18 @@ import AntIcon from 'react-native-vector-icons/AntDesign'
 import ConfirmBookingCard from '../component/ConfirmBookingCard'
 import Button from '../component/Button'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import {connect} from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
+import Mutations from '../appolo/mutations'
 
 
 
-const ADD_APPOINMENT = gql `
-    mutation abc($salonId: String! , $serviceProviderId: String! , 
-            $timeZone: String! , $services: [String] , $cardId: String! , $appointmentDateTime: DateTime! ,
-            $price: Float!) {
-        addAppointment(salonId:$salonId, 
-    serviceProviderId: $serviceProviderId , timeZone: $timeZone, 
-        services: $services, cardId: $cardId, appointmentDateTime: $appointmentDateTime, price:$price)
-        {
-        status
-        salon
-        {
-            displayName
-        }
-        services{
-            _id
-            name
-            description
-        }
-        }  
-    } 
-`
 const ConfirmBooking = (props) =>{
 
     console.log('Date Time Props' , props)
 
-    const [addAppointment , {data, loading ,error}] = useMutation(ADD_APPOINMENT)
+    const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
 
     console.log('Data is >>' , data)
     console.log('Loading is >>' , loading)
@@ -61,9 +40,10 @@ const ConfirmBooking = (props) =>{
 
 
     console.log('Card id is >>' , newDateTime )
+    console.log('Button is Pressed....',serviceId)
 
     const handleButton = () =>{
-        console.log('Button is Pressed....')
+        console.log('Button is Pressed....',serviceId)
 
         async function getToken(){
             try {
@@ -79,7 +59,7 @@ const ConfirmBooking = (props) =>{
                             },
                             context:{
                                 headers:{
-                                    authorization: props.token
+                                    authorization: token
                                 }
                             }
                         }
@@ -87,6 +67,7 @@ const ConfirmBooking = (props) =>{
                 }
             } catch (error) {
                 console.log(error)
+                alert('Error')
             }
         }
         getToken()

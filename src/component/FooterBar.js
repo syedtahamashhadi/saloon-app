@@ -19,13 +19,15 @@ const FooterBar = (props) =>{
 
     const [selectedFooter , setSelectedFooter] = React.useState('')
 
-    const footerData = [{name:'Discover' , svg:<SvgFooterBarDiscover height={30} width={25}/>} , {name:'Map' , svg:<SvgFooterBarMap height={30} width={25}/>} , 
-                        {name:'Notifications' , svg:<SvgFooterBarBell height={30} width={25}/>} , {name:'Profile' , svg:<SvgFooterBarProfile height={30} width={25}/>} ]
+    const footerData = [{name:'Discover' , svg:<SvgFooterBarDiscover height={30} width={25} /> , nav:'Discover'} , 
+                        {name:'Map' , svg:<SvgFooterBarMap height={30} width={25} /> , nav:'Map'} , 
+                        {name:'Notifications' , svg:<SvgFooterBarBell height={30} width={25} /> , nav:'Notifications'} , 
+                        {name:'Profile' , svg:<SvgFooterBarProfile height={30} width={25} /> , nav:'EditProfile'} ]
 
     const handleFooterPress = (val) =>{
         console.log('Selected Value >>>' , val)
         setSelectedFooter(val)
-
+        val.nav == 'EditProfile' ? props.nav.push(val.nav) : props.nav.navigate(val.nav)
     }
 
     const handleExpand = () =>{

@@ -3,6 +3,7 @@ import { View , Text , StyleSheet , TouchableOpacity , TextInput , Image } from 
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import Helpers from '../Helpers'
 
 
 
@@ -10,20 +11,20 @@ const MapHeader = (props) =>{
 
     const [value, onChangeText] = React.useState('');
    
-    const getGreet = (name) =>{
-        let hour = new Date().getHours()
-        console.log('Hour is >>' , hour)
-        switch(true){
-            case (hour >= 1 && hour <12):
-                return `Good Morning! ${name}`
-            case (hour >= 12 && hour<17):
-                return `Good Afternoon! ${name}`
-            case (hour >= 17 && hour <= 24):
-                return `Good Evening! ${name}`
-            default:
-                return `Good Evening! ${name}`
-        }
-    }
+    // const getGreet = (name) =>{
+    //     let hour = new Date().getHours()
+    //     console.log('Hour is >>' , hour)
+    //     switch(true){
+    //         case (hour >= 1 && hour <12):
+    //             return `Good Morning! ${name}`
+    //         case (hour >= 12 && hour<17):
+    //             return `Good Afternoon! ${name}`
+    //         case (hour >= 17 && hour <= 24):
+    //             return `Good Evening! ${name}`
+    //         default:
+    //             return `Good Evening! ${name}`
+    //     }
+    // }
 
     const handleImagePress = ()=>{
         console.log('Image is Pressed')
@@ -38,7 +39,7 @@ const MapHeader = (props) =>{
                 <View style={{flexDirection:"row" , justifyContent:'space-between'}}>
                 
                     <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>
-                        {getGreet(props.name)}
+                        {Helpers.getGreet(props.name)}
                     </Text>
                     <TouchableOpacity onPress={()=>handleImagePress()}>
                         <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}

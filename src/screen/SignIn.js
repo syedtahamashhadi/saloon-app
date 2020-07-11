@@ -8,30 +8,13 @@ import { loginSuccess } from '../redux/authenticate/actions'
 import gql from 'graphql-tag' 
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
+import Mutations from '../appolo/mutations'
 // import DeviceInfo from 'react-native-device-info'
 
 
-const SIGNIN = gql `
-    mutation abc ($email: String!, $password: String!, $deviceId: String!){
-        loginUser(email: $email, 
-      password: $password, deviceId: $deviceId)
-        {
-         _id
-          email
-          jwtToken {
-            token
-            createdAt
-          }
-          password
-          userName
-          profileImageURL
-        }  
-      }
-    `
-
 const SignIn = (props) =>{
 
-    const [loginUser , {data , loading , error}] = useMutation(SIGNIN)
+    const [loginUser , {data , loading , error}] = useMutation(Mutations.SIGNIN)
 
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')

@@ -3,26 +3,13 @@ import { View , Text , ScrollView , TextInput , StyleSheet , ActivityIndicator, 
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
-
-import gql from 'graphql-tag' 
 import { useMutation } from '@apollo/react-hooks'
-
-
-const UPDATE_PASSWORD=gql`
-mutation abc($email:String! , $code:String! , $newPassword:String! , $reenterPassword:String!) {
-    updatePassword(email: $email,
-   code: $code, newPassword: $newPassword, 
-  reenterPassword: $reenterPassword)
-    {
-     email
-    }  
-  }
-`
+import Mutations from '../appolo/mutations'
 
 
 const UpdatePasswords = (props) =>{
 
-    const [updatePassword , {data , loading , error}] = useMutation(UPDATE_PASSWORD)
+    const [updatePassword , {data , loading , error}] = useMutation(Mutations.UPDATE_PASSWORD)
 
     const [email,setEmail] = React.useState('')
     const [code,setCode] = React.useState('')

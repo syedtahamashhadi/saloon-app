@@ -2,59 +2,17 @@ import React , {useEffect} from 'react'
 import {View , Text , StyleSheet ,ScrollView , TouchableOpacity } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import CurrentBookingCard from '../component/CurrentBookingCard'
-import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
+import Queries from '../appolo/queries'
 
-const GET_USER_BOOKING = gql `
-
-    query abc($userId: String){
-        getUserAppointment(userId: $userId){
-        user{
-            email
-        }
-        appointmentDateTime
-        _id
-        treatment
-        status
-        timeZone
-        price
-        isReward
-        isPromoCode
-        createdAt
-        appointmentDateTime
-        appointmentTriggerTime
-        serviceId
-        salon{
-            _id
-            displayName
-            address
-            contactNo
-        }
-        serviceProvider{
-            _id
-            firstName
-            lastName
-        }
-        services{
-            _id
-            name
-            description
-            serviceIcon
-            price
-        }
-        }
-}
-`
 
 const CurrentBookings = (props) =>{
 
-    console.log('Current Bookings Taha >>' ,props.mfa._id ,'  ' , props.token)
+    console.log('Current Bookings Taha >>' , props.token)
 
-   
-
-    const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(GET_USER_BOOKING)
+    const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(Queries.GET_USER_BOOKING)
     
         React.useEffect(()=>{
             async function getToken(){
@@ -64,7 +22,7 @@ const CurrentBookings = (props) =>{
                         getUserBookingQuery(
                             {
                                 variables:{
-                                    userId: props.mfa._id
+                                    userId: props.userDetial.getUserProfile._id
                                 },
                                 context:{
                                     headers:{
@@ -94,6 +52,7 @@ const CurrentBookings = (props) =>{
             console.log('User Appoinment Error >>' , error)
         }
     },[data,error])
+    
     return(
         <View style={styles.container}>
             {/* <View style={{marginHorizontal:20}}> */}
@@ -137,7 +96,8 @@ const CurrentBookings = (props) =>{
 const mapStateToProps = (state) =>{
     return{
         token: state.mfaReducer.token,
-        mfa: state.mfaReducer.data.verifyCode
+        // mfa: state.mfaReducer.data.verifyCode,
+        userDetial: state.setuserDetailReducer.data
     }
 }
 export default connect(mapStateToProps,null)(CurrentBookings);

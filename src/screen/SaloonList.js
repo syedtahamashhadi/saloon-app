@@ -27,7 +27,7 @@ const SaloonList = (props) =>{
             
             
             <View style={{marginHorizontal:20}}>
-                <HomeScreenBanner />
+                <HomeScreenBanner nav={props.navigation}/>
             </View>
         
             <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:40 , marginHorizontal:20}}>
@@ -48,6 +48,7 @@ const SaloonList = (props) =>{
             <Footer 
                 // handleLoc = {()=>props.navigate.goBack()}
                 handLocPress = {()=>{props.navigation.goBack()}}
+                nav={props.navigation}
             />
            
         </View>

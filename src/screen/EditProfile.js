@@ -12,28 +12,16 @@ import SvgTransactions from '../../MySvg/SvgTransactions'
 import SvgWhatsNew from '../../MySvg/SvgWhatsNew'
 import FooterBar from '../component/FooterBar'
 import AsyncStorage from '@react-native-community/async-storage';
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
-
-
-const LOGOUT = gql `
-    mutation abc($deviceId: String!) {
-    logout(deviceId: $deviceId)
-    {
-     _id
-     email
-    }  
-  }
-  
-
-`
-
+import { setIsLogin } from '../redux/authenticate/actions'
+import Helpers from '../Helpers'
+import Mutations from '../appolo/mutations'
 
 
 const EditProfile = (props) =>{
 
-    const [logOut , { data , loading , error }] = useMutation(LOGOUT)
+    const [logOut , { data , loading , error }] = useMutation(Mutations.LOGOUT)
 
 
     const [selectedCard,setSelectedCard] = React.useState(null)
@@ -53,42 +41,68 @@ const EditProfile = (props) =>{
     const handleLogOut = () =>{
         console.log('LogOut is Pressed >>>')
 
-        async function getToken(){
+        // const token = Helpers.getToken('@KOMB_JWT_TOKEN')
+        // if(token && loading !== true){
+        //     console.log('lOgOuT>>>>')
+        //     logOut(
+        //         {
+        //             variables:{
+        //                 deviceId: props.userDetail.getUserProfile.email
+        //             },
+        //             context:{
+        //                 headers:{
+        //                     authorization: token
+        //                 }
+        //             }
+        //         }
+        //     )
+        // }
+
+        async function getToken (){
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
-                loading !== true && logOut(
-                    {
-                        variables:{
-                            deviceId: props.mfa.verifyCode.email
-                        },
-                        context:{
-                            headers:{
-                                authorization: token
+                if(token !== null){
+                    loading !== true && logOut(
+                        {
+                            variables:{
+                                deviceId: props.userDetail.getUserProfile.email
+                            },
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                }
+                
             } catch (error) {
                 null
             }
-
         }
         getToken()
     }
 
-    const removeKey = async () =>{
-        try {
-            await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
-                props.navigation.replace('SignIn')
-            })
-        } catch (error) {
-            console.log('Error >>>' , error)
-        }
-    }
+    // const removeKey = async () =>{
+    //     try {
+    //         await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
+    //             props.setIsLogin(false)                
+    //             props.navigation.navigate('SignIn')
+    //         })
+    //     } catch (error) {
+    //         console.log('Error >>>' , error)
+    //     }
+    // }
+
+    
 
     React.useEffect(()=>{
         if(data){
-            removeKey()
+            // removeKey()
+            Helpers.removeKey('@KOMB_JWT_TOKEN',()=>{
+                props.setIsLogin(false)                
+                props.navigation.navigate('SignIn')
+            })
         }else if(error){
             alert('Something Went Wrong TryAgain....')
         }
@@ -110,16 +124,16 @@ const EditProfile = (props) =>{
                     <View style={{marginTop:5,width:'100%',justifyContent:'center',alignItems:'center',}}>
                         <View style={{width:60,height:60,backgroundColor:'green',borderRadius:40,
                                         borderWidth:3,borderColor:'#fff'}}>
-                            <Image source={{uri : props.mfa.verifyCode.profileImageURL }}
+                            <Image source={{uri : props.userDetail.getUserProfile.profileImageURL }}
                                     style={{width:'100%',height:'100%',resizeMode:'cover' , borderRadius:40}}/>
                         </View>
                         <Text style={{marginTop:3,color:'#fff',fontFamily:'AbrilFatFace',fontSize:15}}>
                             {/* Jake */}
-                            {props.mfa.verifyCode.firstName}
+                            {props.userDetail.getUserProfile.firstName}
                         </Text>
                         <Text style={{marginTop:0,marginBottom:15,color:'#fff',fontFamily:'AbrilFatFace'}}>
                             {/* testing328@yopmail.com */}
-                            {props.mfa.verifyCode.email}
+                            {props.userDetail.getUserProfile.email}
                         </Text>
 
                     </View>
@@ -166,7 +180,7 @@ const EditProfile = (props) =>{
 
                 </View>
                 <View style={{marginBottom:10 , alignItems:'flex-end'}}>
-                    <FooterBar />
+                    <FooterBar nav={props.navigation}/>
                 </View>
                 </ScrollView>
 
@@ -243,9 +257,18 @@ const styles = StyleSheet.create(
 const mapStateToProps = (state) =>{
     return{
         token: state.mfaReducer.token ,
-        mfa: state.mfaReducer.data
+        mfa: state.mfaReducer.data , 
+        userDetail : state.setuserDetailReducer.data , 
+        isLogin : state.setIsLoginReducer.data ,
+
     }
 }
 
 
-export default connect(mapStateToProps,null)(EditProfile);
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        setIsLogin : (data) => dispatch(setIsLogin(data)) ,
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditProfile);

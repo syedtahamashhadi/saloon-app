@@ -3,20 +3,10 @@ import {View , Text , TouchableOpacity , TextInput , StyleSheet , Picker} from '
 import { connect } from 'react-redux'
 import { State, ScrollView } from 'react-native-gesture-handler'
 import Button from '../../../component/Button'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import AsyncStorage from '@react-native-community/async-storage'
 // import { Picker } from '@react-native-community/picker'
-
-
-const SEND_COMPLAIN = gql `
-mutation abc($id: String! , $desc: String!) {
-    addComplaints(salonId: $id, discription: $desc)
-    {
-      _id
-    }  
-  }
-`
+import Mutations from '../../../appolo/mutations'
 
 
 const RegisterComplaint = (props) =>{
@@ -25,7 +15,7 @@ const RegisterComplaint = (props) =>{
     const [complainDesc , setComplainDesc] = React.useState('')
     console.log('Selected Saloon is  >>' , selectedSaloon)
 
-    const [sendComplainMutation , { data , loading , error }] = useMutation(SEND_COMPLAIN)
+    const [sendComplainMutation , { data , loading , error }] = useMutation(Mutations.SEND_COMPLAIN)
 
     const handleButton = () =>{
         console.log('Saloon id >>' , typeof selectedSaloon , ' Discription >> ' , typeof complainDesc , 'token >>' , props.token)

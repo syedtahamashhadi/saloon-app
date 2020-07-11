@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { forgotPasswordSuccess } from '../redux/authenticate/actions'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import Mutations from '../appolo/mutations'
 
 const FORGOT_PASSWORD= gql `
     mutation abc($email: String!) {
@@ -20,7 +21,7 @@ const FORGOT_PASSWORD= gql `
 const ForgotPassword = (props) =>{
     const [email,setEmail] = React.useState('')
 
-    const [forgotPasswordPost,{data,loading,error}]=useMutation(FORGOT_PASSWORD)
+    const [forgotPasswordPost,{data,loading,error}]=useMutation(Mutations.FORGOT_PASSWORD)
 
     console.log('Data >>',data)
     console.log('Error >>',error)

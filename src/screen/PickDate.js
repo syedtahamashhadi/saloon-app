@@ -139,7 +139,7 @@ const PickDate = (props) =>{
         setVal(val)
         setPageView(1)
     }
-    
+    console.log('Current Date >>>>>>>>>>>>>>>>>>>>>>' , currentDate)
     return(
         <View style={styles.container}>
             

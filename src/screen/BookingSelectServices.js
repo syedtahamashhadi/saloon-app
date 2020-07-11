@@ -123,26 +123,27 @@ const BookingSelectServices = (props) =>{
                     </TouchableOpacity>
 
                     <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false} >
-                        <View style={{flexDirection:'row' , marginTop:25}}>
+                        <View style={{flexDirection:'row' , marginTop:25,marginHorizontal:10 , height:77}}>
                             {
                                 services.map((val,index)=>{
                                     let myColor =  (selectedService && val.name==selectedService.name) ? '#49D3CE' : null
                                     let myBorderColor = (selectedService && val.name==selectedService.name) ? '#49D3CE' : '#fff'
 
                                     return(
-                                        <TouchableOpacity onPress={()=>handleServicePress(val)} key={index}>
+                                        <TouchableOpacity onPress={()=>handleServicePress(val)} key={index} >
 
-                                            <View style={{height:67,width:90,backgroundColor:'#fff',alignItems:'center'}}>
+                                        <View style={{height:77,width:90,backgroundColor:'#fff',alignItems:'center'}}>
                                                 <View style={{height:55,width:55,borderRadius:40,backgroundColor:'#F1F3F8',
                                                 borderWidth:3,borderColor: myBorderColor,elevation:5}}>
                                                     <Image source={{uri : val.serviceIcon}} style={styles.imgMannager}/>
                                                 </View>
-                                                <Text style={{color:myColor,marginTop:'2%'}}>
+                                                <Text style={{color:myColor,marginTop:'4%'}}>
                                                     {val.name.length>15 ? val.name.slice(0,12) : val.name}
                                                 </Text>
-                                            </View>
-
+                                        </View>
                                         </TouchableOpacity>
+
+
                                     )
                                 })
                             }

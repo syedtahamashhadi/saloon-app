@@ -1,5 +1,13 @@
-let myArr = [3,5,8]
+// let myArr = [{id:'3',name:'test3'},{id:'4',name:'test4'},{id:'5',name:'test5'}]
 
-myArr[1]=6
 
-console.log('My Arr >>',myArr)
+// myArr.includes()
+
+
+// import moment from 'moment'
+var moment = require('moment');
+
+// console.log(moment().format())
+
+let myTime = moment.utc().format()
+console.log(myTime)

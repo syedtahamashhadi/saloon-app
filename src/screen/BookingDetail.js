@@ -2,25 +2,17 @@ import React from 'react'
 import {View , Text , TouchableOpacity , StyleSheet , Image } from 'react-native'
 import scissor from '../../assets/scissor-icon.png'
 import Icon from 'react-native-vector-icons/AntDesign'
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
+import Mutations from '../appolo/mutations'
 
-
-const CANCEL_APPOINMENT = gql `
-    mutation abc($id: String!) {
-        cancelAppointment(appointmentId:$id) {
-            status
-        }  
-    }
-`
 
 const BookingDetail = (props) =>{
 
     console.log('Detail Props >>' , props)
 
-    const [cancelAppoinment , {data , loading , error}] = useMutation(CANCEL_APPOINMENT)
+    const [cancelAppoinment , {data , loading , error}] = useMutation(Mutations.CANCEL_APPOINMENT)
 
     const { amount , appointmentId , dateTime , style , salon , stylist} = props.route.params
 
@@ -162,7 +154,7 @@ const BookingDetail = (props) =>{
                     <TouchableOpacity onPress={
                                 ()=>props.navigation.navigate('PostpondPickDate',{appointmentId:appointmentId})
                                 }>
-                        <Text style={[styles.fontSize_18_bold, styles.underline]}>Postpond</Text>
+                        <Text style={[styles.fontSize_18_bold, styles.underline]}>Postponed</Text>
                     </TouchableOpacity>
                 </View>
             </View>

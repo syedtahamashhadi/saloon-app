@@ -26,7 +26,7 @@ const Footer = (props) =>{
                 </TouchableOpacity> 
             
                     <View style={{alignItems:'flex-end'}}>
-                        <FooterBar setLeftVisiblity={setLeftVisiblity}/>
+                        <FooterBar setLeftVisiblity={setLeftVisiblity} nav={props.nav}/>
                         {/* <Text>TEst</Text> */}
                     </View>
             </View>

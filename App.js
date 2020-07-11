@@ -7,8 +7,10 @@ import { Provider } from 'react-redux'
 import { configureStore } from './src/redux/store';
 import { ApolloProvider } from '@apollo/react-hooks'
 import { client } from './src/appolo/client'
+// import AsyncStorage from '@react-native-community/async-storage'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
+// import { isAirplaneModeSync } from 'react-native-device-info';
 
 
 const store = configureStore()
@@ -35,9 +37,6 @@ export default function App() {
       <ApolloProvider client={client}> 
         
         <UserNav /> 
-        {/* <View>
-          <Text>TEst</Text>
-        </View> */}
 
       </ApolloProvider> 
     

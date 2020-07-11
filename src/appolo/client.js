@@ -63,7 +63,7 @@ const httpLink = createHttpLink({
     {
         link: authLink.concat(httpLink),
         cache: new InMemoryCache(),
-        // defaultOptions:defaultOptions
+        defaultOptions:defaultOptions
     }
 )
 
