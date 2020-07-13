@@ -67,6 +67,17 @@ const httpLink = createHttpLink({
     }
 )
 
+const httpKombLink = createHttpLink({
+  uri: 'http://15.165.108.170:8081/user/graphql',
+});
+
+const clientKomb = new ApolloClient(
+  {
+      link: authLink.concat(httpKombLink),
+      cache: new InMemoryCache(),
+      defaultOptions:defaultOptions
+  }
+)
 
 // const mapStateToProps = (state) =>{
 //   return{
@@ -75,4 +86,4 @@ const httpLink = createHttpLink({
 // }
 
 
-export { client }
+export { client , clientKomb }

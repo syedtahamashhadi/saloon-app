@@ -1,6 +1,6 @@
 {
   "expo": {
-   "name": "Komb",
+   "name": "KombT",
    "icon": "./assets/splash.png",
    "version": "1.0.0",
    "slug": "Komb",
@@ -13,11 +13,11 @@
     "**/*"
   ],
    "ios": {
-     "bundleIdentifier": "com.kombapp.www",
+     "bundleIdentifier": "com.kombapptest.www",
      "buildNumber": "1.0.0"
    },
    "android": {
-     "package": "com.kombapp.www",
+     "package": "com.kombapptest.www",
      "versionCode": 1,
      "config": {
       "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" }   

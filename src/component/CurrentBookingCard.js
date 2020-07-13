@@ -36,7 +36,8 @@ const CurrentBookingCard = (props) =>{
                                                                 dateTime: `${date.slice(2,4)} ${convertingMonth(month)}, ${time} PM`,
                                                                 stylist: props.detail.serviceProvider,
                                                                 salon: props.detail.salon,
-                                                                appointmentId: props.detail._id
+                                                                appointmentId: props.detail._id ,
+                                                                serviceIcon: props.detail.services[0].serviceIcon
                                                             }
                                                             )}>
 

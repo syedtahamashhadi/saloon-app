@@ -1,5 +1,6 @@
 import React from 'react'
-import {View , Text , TouchableOpacity , StyleSheet , Image } from 'react-native'
+import {View , Text , TouchableOpacity , StyleSheet} from 'react-native'
+import Image from 'react-native-remote-svg'
 import scissor from '../../assets/scissor-icon.png'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { useMutation } from '@apollo/react-hooks'
@@ -14,7 +15,7 @@ const BookingDetail = (props) =>{
 
     const [cancelAppoinment , {data , loading , error}] = useMutation(Mutations.CANCEL_APPOINMENT)
 
-    const { amount , appointmentId , dateTime , style , salon , stylist} = props.route.params
+    const { amount , appointmentId , dateTime , style , salon , stylist , serviceIcon} = props.route.params
 
     const handleCancel = () => {
         console.log('ID and Token >>' , appointmentId , props.token)
@@ -66,6 +67,7 @@ const BookingDetail = (props) =>{
 
     const handleDelete = () => {
         alert('Handle Delete')
+        console.log('Service Icon >>' , serviceIcon)
     }
     
     React.useEffect(()=>{
@@ -87,8 +89,8 @@ const BookingDetail = (props) =>{
             <View style={styles.card}>
                 <View style={styles.columnFlex}>
                     <View style={{backgroundColor:'#fff',flexDirection:'row',flex:1}}>
-                        <View style={{justifyContent:'center',paddingRight:5}}>
-                            <Image source={scissor} />
+                        <View style={{justifyContent:'center',paddingRight:5 ,width:60,borderRadius:45 }}>
+                            <Image source={{uri : serviceIcon}}  style={{width:'100%',height:'100%',resizeMode:'cover'}}/>
                         </View>
                         <View style={{flex:1}}>
                             <View style={{flexDirection:'row',paddingTop:5,justifyContent:'space-between'}}>

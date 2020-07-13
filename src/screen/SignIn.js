@@ -9,6 +9,7 @@ import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
 import Mutations from '../appolo/mutations'
+// import { clientKomb } from '../appolo/mutations'
 // import DeviceInfo from 'react-native-device-info'
 
 

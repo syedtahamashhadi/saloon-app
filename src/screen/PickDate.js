@@ -43,7 +43,11 @@ const PickDate = (props) =>{
 
     let date = new Date() 
 
-    let currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`
+    let month = `${date.getMonth()}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
+
+    let currentDate = `${date.getFullYear()}-${ month }-${date.getDate()}`
+    console.log('Current date >>' ,`${date.getMonth()+1}`)
+
     console.log('Current Date >>' , currentDate , '>>>>>' , date.getMonth())
     const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},]
     const [time,setTime] = React.useState(false)
@@ -175,8 +179,9 @@ const PickDate = (props) =>{
                         <Calendar 
                             onDayPress={val=>handleDatePress(val)}
                             // onDayLongPress={false}
-                            // minDate={currentDate}
-                            // hideExtraDays={true}
+                            minDate={currentDate}
+                            // minDate={'2020-07-13'}
+                            hideExtraDays={true}
                             markedDates={ selectedDateMark ? selectedDateMark : null}
                             theme={{
                                 selectedDayBackgroundColor: '#00A700',

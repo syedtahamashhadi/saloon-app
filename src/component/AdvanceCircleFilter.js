@@ -42,7 +42,7 @@ export default function AdvanceCircleFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={120}
+                // swipeSpeedMultiplier={120}
             />
         
         )
