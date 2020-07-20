@@ -62,6 +62,10 @@ const SET_IS_LOGIN = {
     SUCCESS: 'SET_IS_LOGIN_SUCCESS'
 }
 
+const SET_FILTER_VIEW = {
+    SUCCESS: 'SET_FILTER_VIEW'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -76,5 +80,6 @@ export {SIGNUP ,
         SET_USER_DETAIL,
         SET_FAV_SALOON ,
         SET_IS_LOGIN ,
+        SET_FILTER_VIEW
     }
 

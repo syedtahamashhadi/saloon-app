@@ -73,7 +73,7 @@ const CurrentBookings = (props) =>{
                <CurrentBookingCard /> */}
                <View style={{marginHorizontal:20 , marginTop:5}}>
                 {
-                    data && data.getUserAppointment.map((val,index)=>{
+                    data && data.getUserAppointment.reverse().map((val,index)=>{
                         //   let component =  val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
                         return(
                             // {component}

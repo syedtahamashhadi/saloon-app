@@ -13,6 +13,7 @@ import { loginReducer,
         setuserDetailReducer ,
         setFavSaloonReducer ,
         setIsLoginReducer ,
+        setIsFilterViewReducer ,
     } from './authenticate/reducers'
 
 
@@ -32,6 +33,7 @@ const rootReducer = combineReducers(
         setuserDetailReducer : setuserDetailReducer ,
         setFavSaloonReducer : setFavSaloonReducer ,
         setIsLoginReducer : setIsLoginReducer ,
+        setIsFilterViewReducer : setIsFilterViewReducer ,
     }
 )
 

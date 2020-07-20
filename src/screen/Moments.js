@@ -9,19 +9,10 @@ import Constants from 'expo-constants';
 //https://medium.com/@ifeoluwaking24/how-to-upload-an-image-in-expo-react-native-to-firebase-using-cloudinary-24aac981c87
 // import after1 from '../../../assets/after1.jpg'
 import MomentsCard from "../component/MomentsCard";
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import AsyncStorage from '@react-native-community/async-storage';
+import Mutations from '../appolo/mutations'
 
-
-const ADD_MOMENTS = gql `
-mutation abc($beforeUrl: String! , $afterUrl:String!) {
-    addMoments(salonId:"5e352f43e998cb2157837b28", beforeImageURL:$beforeUrl , afterImageURL:$afterUrl)
-    {
-      _id
-    }  
-  }
-`
 
 export default function Moments(props) {
     const [beforeImage, setBeforeImage] = useState(null);
@@ -32,7 +23,7 @@ export default function Moments(props) {
 
 
 
-    const [addMoments , { data , loading , error  }] = useMutation(ADD_MOMENTS)
+    const [addMoments , { data , loading , error  }] = useMutation(Mutations.ADD_MOMENTS)
 
     useEffect(() => {
         (async () => {
@@ -76,7 +67,7 @@ export default function Moments(props) {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
+            aspect: [4, 3], 
             quality: 1,
             base64: true
         });
@@ -158,10 +149,10 @@ export default function Moments(props) {
 
      useEffect(()=>{
 
-            if(beforeImageUrl !== null && afterImageUrl !== null){
-                console.log('Image Url >>',beforeImageUrl , '  ' , afterImageUrl)
-                getToken()
-            }
+        if(beforeImageUrl !== null && afterImageUrl !== null){
+            console.log('Image Url >>',beforeImageUrl , '  ' , afterImageUrl)
+            getToken()
+        }
 
     },[beforeImageUrl,afterImageUrl])
 

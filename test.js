@@ -11,3 +11,20 @@ var moment = require('moment');
 
 let myTime = moment.utc().format()
 console.log(myTime)
+
+
+const myArr = [3,2,1,0]
+
+myArr.reverse().map((val,index)=>{
+    console.log('Reverese Val is >>>' , val)
+})
+
+
+const data = {
+    info:{
+        name:'Mark'
+    },
+    age:28
+}
+
+console.log('Data is >>' ,data.info.name)

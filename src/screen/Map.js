@@ -64,6 +64,8 @@ const Map = (props) =>{
                 setCurrentLat(Number(val.location.coordinates[0]))
                 setCurrentLng(Number(val.location.coordinates[1]))
             });
+        }else if(error){
+            console.log('Map Errror >>>>>>>>>>>>>>>' , error)
         }
     },[dataNearestSaloon])
        
@@ -86,7 +88,8 @@ const Map = (props) =>{
         let { status } = await Location.requestPermissionsAsync() ;
         if(status !== 'granted'){
             setLocError('Permision To Access Location is Denied')
-            setUserLat(0.0922) ; setUserLng(0.0421)
+            // setUserLat(0.0922) ; setUserLng(0.0421)
+            setUserLat(51.5074) ; setUserLng(0.1278)
         }
 
         let { coords } = await Location.getCurrentPositionAsync({});
@@ -136,7 +139,10 @@ const Map = (props) =>{
     },[])
 
     const handleFilterPress = () =>{
-        setFilterView(!filterView)
+        // console.log('Filter View Current State >>>' , filterView)
+        // setFilterView(!filterView)
+        // filterView == false ? setFilterView(true) : setFilterView(false)
+        props.filterView == false ? props.setIsFilterView(true) : props.setIsFilterView(false) 
     }
 
     const handleBarPress = () =>{
@@ -174,7 +180,8 @@ const Map = (props) =>{
         <View style={styles.container}>
 
             <MapHeader name={name} imgUri={imgUri} nav={props} 
-                handleFilterPress={handleFilterPress}/>
+                handleFilterPress={handleFilterPress}
+                />
 
             <View style={styles.map}>
                 <MapView 
@@ -198,8 +205,8 @@ const Map = (props) =>{
                         }
                       }
                     showsCompass={false}
-                    showsUserLocation={true}
-                    showsMyLocationButton={false}
+                    // showsUserLocation={true}
+                    // showsMyLocationButton={false}
                     onRegionChangeComplete={(region)=>{
                        
                         handleRegionChanged(region)
@@ -245,9 +252,12 @@ const Map = (props) =>{
             <MapFooter 
                 handleBarPress={handleBarPress}
                 handleCurrentLoc={handleCurrentLoc}
+                handleFilterPress={handleFilterPress}
             />
 
-            {filterView && <AdvanceFilters handleFilterPress={handleFilterPress}/>}
+            {props.filterView == true ? <AdvanceFilters  handleFilterPress={handleFilterPress}/> : null}
+            {/* {props.filterView == true ? <Text>Testing</Text> : null} */}
+
                 
         </View>
     )
@@ -256,7 +266,8 @@ const Map = (props) =>{
 const mapStateToProps = (state) =>{
     return{
         token: state.mfaReducer.token ,
-        mfa: state.mfaReducer.data
+        mfa: state.mfaReducer.data ,
+        filterView : state.setIsFilterViewReducer.data ,
     }
 }
 

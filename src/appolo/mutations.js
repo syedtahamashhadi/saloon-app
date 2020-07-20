@@ -137,6 +137,7 @@ const Mutations = {
                             }
     ` ,
 
+    
     RESCHEDULE_APPOINTMENT : gql `
                                 mutation abc($id: String! , $dateTime: DateTime!) {
                                     postpondAppointment(
@@ -147,6 +148,15 @@ const Mutations = {
                                 }
     ` ,
 
+
+    ADD_MOMENTS : gql `
+                    mutation abc($beforeUrl: String! , $afterUrl:String!) {
+                        addMoments(salonId:"5e352f43e998cb2157837b28", beforeImageURL:$beforeUrl , afterImageURL:$afterUrl)
+                        {
+                        _id
+                        }  
+                    }
+    ` ,
 
 } 
 

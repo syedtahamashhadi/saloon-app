@@ -12,6 +12,7 @@ import { SIGNIN ,
     SET_USER_DETAIL,
     SET_FAV_SALOON,
     SET_IS_LOGIN ,
+    SET_FILTER_VIEW ,
 } from './constants'
 
 
@@ -207,6 +208,14 @@ const setIsLogin = (data) =>{
     }
 }
 
+const setIsFilterView = (data) =>{
+    console.log('Set is Filter View Action is Fired >>>>' , data)
+    return{
+        type: SET_FILTER_VIEW.SUCCESS ,
+        payLoad: data
+    }
+}
+
 
 export {
     signUpSuccess,
@@ -223,4 +232,5 @@ export {
     setUserDetailSuccess ,
     setFavSaloonSuccess ,
     setIsLogin ,
+    setIsFilterView ,
 }

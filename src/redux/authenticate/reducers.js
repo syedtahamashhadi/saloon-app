@@ -11,7 +11,8 @@ import { SIGNUP,
          SET_TAB_HEADER ,
          SET_USER_DETAIL,
          SET_FAV_SALOON ,
-         SET_IS_LOGIN
+         SET_IS_LOGIN ,
+         SET_FILTER_VIEW ,
         } from './constants';
 
 
@@ -300,6 +301,23 @@ const setIsLoginReducer = (state = isLoginInitialState , action) =>{
     }
 }
 
+/******************************* Set Filter View ****************************/
+
+const isFilterViewInitialState = {
+    data : false
+}
+
+const setIsFilterViewReducer = (state = isFilterViewInitialState, action) =>{
+    switch(action.type){
+        case SET_FILTER_VIEW.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default : return state
+    }
+}
+
 
 export {
     signUpReducer,
@@ -316,5 +334,6 @@ export {
     setuserDetailReducer ,
     setFavSaloonReducer ,
     setIsLoginReducer ,
+    setIsFilterViewReducer ,
     // setHeaderReducer ,
 }

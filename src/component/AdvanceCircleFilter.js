@@ -7,7 +7,7 @@ import SvgScisorFilter from '../../MySvg/SvgScisorFilter'
 
 
 const {width, height} = Dimensions.get('window')
-export default function AdvanceCircleFilter(){
+const AdvanceCircleFilter = () =>{
 
     const renderItem = ({ item }) => {
         return(
@@ -16,8 +16,8 @@ export default function AdvanceCircleFilter(){
                 {/* <Icon size={20} style={styles.icon} name={item.icon} /> */}
                 <View style={{width:55,height:55, borderRadius:55 ,backgroundColor:'#fff'
                 ,justifyContent:'center',alignItems:'center',marginTop:10}}>
-                <View style={{width:40,height:40}}>
-                    <SvgScisorFilter/>
+                <View style={{width:40,height:40 }}>
+                  { <SvgScisorFilter/> ? <SvgScisorFilter/> : null }
                 </View>
                 </View>
             </View>
@@ -42,7 +42,7 @@ export default function AdvanceCircleFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                // swipeSpeedMultiplier={120}
+                swipeSpeedMultiplier={80}
             />
         
         )
@@ -69,3 +69,5 @@ const styles = StyleSheet.create({
 
     }   
 })
+
+export default AdvanceCircleFilter

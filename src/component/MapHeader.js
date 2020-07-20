@@ -4,31 +4,43 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import Helpers from '../Helpers'
+import AsyncStorage from '@react-native-community/async-storage'
+import { setIsLogin, setIsFilterView } from '../redux/authenticate/actions'
 
+// import  { setIsLogin }  from '../redux/authenticate/actions/'
+// import Helpers from '../Helpers'
 
 
 const MapHeader = (props) =>{
 
-    const [value, onChangeText] = React.useState('');
-   
-    // const getGreet = (name) =>{
-    //     let hour = new Date().getHours()
-    //     console.log('Hour is >>' , hour)
-    //     switch(true){
-    //         case (hour >= 1 && hour <12):
-    //             return `Good Morning! ${name}`
-    //         case (hour >= 12 && hour<17):
-    //             return `Good Afternoon! ${name}`
-    //         case (hour >= 17 && hour <= 24):
-    //             return `Good Evening! ${name}`
-    //         default:
-    //             return `Good Evening! ${name}`
-    //     }
-    // }
+    const [value, onChangeText] = React.useState('')  ;
 
+    const exit = async() =>{
+        // alert('check')
+        try {
+            await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
+                // props.setIsLogin(false)             
+                // alert('Check')   
+                props.nav.navigation.navigate('SignIn')
+            })
+        } catch (error) {
+            console.log('Error >>>' , error)
+        }
+    
+    }
+   
     const handleImagePress = ()=>{
+        // if()
         console.log('Image is Pressed')
-        props.nav.navigation.navigate('EditProfile')
+        props.imgUri ? props.nav.navigation.navigate('EditProfile') : Helpers.removeKey('@KOMB_JWT_TOKEN',()=>{
+            props.setIsLogin(false)                
+            props.nav.navigation.navigate('SignIn')
+        })
+    }
+
+    const handleFilterPress = () =>{
+        // console.log('Filter is Pressedd >>>>>>')
+        props.filterView == false ? props.setIsFilterView(true) : props.setIsFilterView(false)   
     }
 
     return(
@@ -41,7 +53,7 @@ const MapHeader = (props) =>{
                     <Text style={{fontSize:20 ,fontFamily:'AbrilFatFace'}}>
                         {Helpers.getGreet(props.name)}
                     </Text>
-                    <TouchableOpacity onPress={()=>handleImagePress()}>
+                    <TouchableOpacity onPress={()=>{ handleImagePress() } }>
                         <Image style={{borderRadius:40 , height:40 , width:40,borderWidth:3,borderColor:'#fff'}}
                             source={{uri : props.imgUri}}
                         />
@@ -97,6 +109,18 @@ const styles = StyleSheet.create(
     }
 )
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        setIsLogin : (data) => dispatch(setIsLogin(data)) ,
+        setIsFilterView : (data) => dispatch(setIsFilterView(data))
+    }
+}
+
+const mapStateToProps = (state) =>{
+    return{
+        filterView : state.setIsFilterViewReducer.data
+    }
+}
 
 
-export default MapHeader;
+export default connect(mapStateToProps,mapDispatchToProps)(MapHeader);
