@@ -93,6 +93,7 @@ const Map = (props) =>{
         }
 
         let { coords } = await Location.getCurrentPositionAsync({});
+        console.log('Coords >>>' , coords.latitude)
         setUserLat(coords.latitude) ; setUserLng(coords.longitude)
     }
 
@@ -136,8 +137,14 @@ const Map = (props) =>{
     useEffect(()=>{
         console.log('Map is Mounted >>>>>>>>>>>>>>>>>>')
         getLoc()
-        getToken()
+        // getToken()
     },[])
+
+    useEffect(()=>{
+        if(userLat && userLng){
+            getToken()
+        }
+    },[userLat , userLng])
 
     const handleFilterPress = () =>{
         // console.log('Filter View Current State >>>' , filterView)
