@@ -9,7 +9,7 @@ export default class AnimatedText extends React.Component {
     super(props);
     let text = props.desc
 
-    const textArr = text.trim().split(' ');
+    const textArr = text.trim().split('');
     console.log('Text Arr >>>' , textArr)
     textArr.forEach((_, i) => {
       this.animatedValues[i] = new Animated.Value(0);
@@ -45,7 +45,7 @@ export default class AnimatedText extends React.Component {
               style={[styles.textStyle , {opacity: this.animatedValues[index]} ]}
             >
               {word}
-              {`${index < this.textArr.length ? ' ' : ''}`}
+              {`${index < this.textArr.length ? '' : ''}`}
             </Animated.Text>
           );
         })}

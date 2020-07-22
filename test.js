@@ -13,18 +13,19 @@ let myTime = moment.utc().format()
 console.log(myTime)
 
 
-const myArr = [3,2,1,0]
+// const myArr = [3,2,1,0]
 
-myArr.reverse().map((val,index)=>{
-    console.log('Reverese Val is >>>' , val)
+// myArr.reverse().map((val,index)=>{
+//     console.log('Reverese Val is >>>' , val)
+// })
+
+let myStr = 'Quick Brwn Fox Jumps Over The Lazy Dog'
+
+let myArr = myStr.trim().split('')
+
+let myCharArr = myArr.map((val,index)=>{
+    console.log('val>>',val)
+    // val.trim().split('')
 })
 
-
-const data = {
-    info:{
-        name:'Mark'
-    },
-    age:28
-}
-
-console.log('Data is >>' ,data.info.name)
+console.log('MyArray is >>' ,myCharArr)

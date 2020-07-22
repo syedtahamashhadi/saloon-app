@@ -8,15 +8,6 @@ import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Mutations from '../appolo/mutations'
 
-const FORGOT_PASSWORD= gql `
-    mutation abc($email: String!) {
-        resetPassword(email: $email)
-        {
-        email
-        userName
-        }  
-    }
-`
 
 const ForgotPassword = (props) =>{
     const [email,setEmail] = React.useState('')

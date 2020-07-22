@@ -4,6 +4,9 @@ import AnimatedText from './AnimatedText'
 import { Avatar } from 'react-native-elements'
 import Animated from 'react-native-reanimated'
 import SvgTopChatMen from '../../MySvg/SvgTopChatMen'
+import TypeWriter from 'react-native-typewriter'
+import TypingText from './NewAnimatedText'
+
 
 
 const Chat = (props) =>{
@@ -28,9 +31,26 @@ const Chat = (props) =>{
                                 fontSize:18,color:'#1D194D',fontFamily:'ExoBold'}}>
                    {props.desc}
                 </Text> */}
-                <View style={{marginVertical:18,marginHorizontal:20,}}>
+
+                {/* <View style={{marginVertical:18,marginHorizontal:20,}}>
                     <AnimatedText desc={props.desc}/>
+                </View> */}
+
+                {/* <View style={styles.textWrapper}>
+                <TypeWriter typing={1} style={{marginVertical:18,marginHorizontal:20,
+                            fontSize:18,color:'#1D194D',fontFamily:'ExoBold'}}>
+                    {`${props.desc}`}
+                </TypeWriter>
+                </View> */}
+
+                <View style={{marginVertical:18,marginHorizontal:20,}}>
+                    <TypingText 
+                        text={props.desc}
+                        textSize={18}
+                        color='black'
+                    />
                 </View>
+
             </View>
         </View>
     )
@@ -47,5 +67,11 @@ const styles = StyleSheet.create(
             borderTopRightRadius:12,
             borderBottomRightRadius:12,
         },
+        textWrapper: {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+
+            // justifyContent: 'center'
+          },
     }
 )

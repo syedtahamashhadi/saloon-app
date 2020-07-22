@@ -102,10 +102,11 @@ const Map = (props) =>{
             const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
             if(token !== null){
                 console.log('Async storage token is >>>', token)
+                console.log('Use lAt >>>' , userLat , '  ' , userLng)
                 nearestSaloonQuery(
                     {
                         variables: { 
-                            latitude: 24.929505 , longitude: 67.115988    //changing to current pos of user
+                            latitude: userLat , longitude: userLng    //changing to current pos of user
                         } ,
                         context:{
                             headers:{

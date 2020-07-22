@@ -13,6 +13,8 @@ const RegisterComplaint = (props) =>{
     console.log('Register Complain Props >>' , props)
     const [selectedSaloon,setSlectedSaloon] = React.useState('')
     const [complainDesc , setComplainDesc] = React.useState('')
+    const [mySaloons,setMySaloons] = React.useState([...props.nearestSaloon])
+
     console.log('Selected Saloon is  >>' , selectedSaloon)
 
     const [sendComplainMutation , { data , loading , error }] = useMutation(Mutations.SEND_COMPLAIN)
@@ -41,28 +43,28 @@ const RegisterComplaint = (props) =>{
                 console.log(error)
             }
         }
-        getToken()
-        // if(selectedSaloon != '' && complainDesc != ''){
-        //     loading !== true && sendComplain(
-        //         {
-        //             variables:{
-        //                 id: selectedSaloon , desc: complainDesc
-        //             },
-        //             context:{
-        //                 headers:{
-        //                     authorization: props.token
-        //                 }
-        //             }
-        //         }
-        //     )
-        // }
-        
+
+        if(complainDesc !== '' && selectedSaloon !== ''){
+            getToken()
+            // console.log('Complain Desc >>' , complainDesc , '  ' , selectedSaloon)
+        }else{
+            alert('Select Saloon or Enter Desc')
+        }
     }
 
     console.log('Data >> ' , data)
     console.log('Loading >> ' , loading)
     console.log('Error >> ' , error)
 
+    React.useEffect(()=>{
+        console.log('Saloons before >>>', mySaloons)
+        let dummyData = {displayName:'---Select Saloon---' , _id: null}
+        setMySaloons([dummyData , ...props.nearestSaloon])
+        // console.log('Saloons after >>>', mySaloons)
+
+    },[])
+
+    console.log('Saloons after >>>', mySaloons)
 
     React.useEffect(()=>{
         if(data){
@@ -107,7 +109,7 @@ const RegisterComplaint = (props) =>{
                             // mode='dropdown'
                         >
                             {
-                                props.nearestSaloon.map((val,index)=>{
+                                mySaloons.map((val,index)=>{
                                     return(
                                         <Picker.Item label={val.displayName} 
                                             value={val._id}/>
