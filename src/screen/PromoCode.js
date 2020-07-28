@@ -23,6 +23,7 @@ const GET_PROMO_CODE = gql `
         code
         couponType
         status
+        pictureURL
     }
 }
 `
@@ -34,7 +35,7 @@ const PromoCode = (props) => {
     console.log('Error >>' , loading)
     console.log('Loading >>' , error)
 
-    React.useState(()=>{
+    React.useEffect(()=>{
         async function getToken(){
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
@@ -77,6 +78,7 @@ const PromoCode = (props) => {
                 <ScrollView style={styles.momentsHeader}>
                     {
                         data && data.getPromoCode.map((val,index)=>{
+                            console.log('Promo Code Data >>>>>>' , val)
                             return(
                                 <PromoCodeCard detail={val}/>
 
