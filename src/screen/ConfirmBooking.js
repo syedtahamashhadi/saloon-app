@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/react-hooks'
 import {connect} from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import Mutations from '../appolo/mutations'
+import GestureRecognizer from 'react-native-swipe-gestures'
 
 
 
@@ -95,6 +96,23 @@ const ConfirmBooking = (props) =>{
         // props.navigation.navigate('')
         }
     },[data])
+
+    const onSwipeUp = () =>{
+        console.log('Swipe Up >>>')
+        setPageView(1)
+    }
+
+
+    const onSwipeDown = () =>{
+        console.log('Swipe Down >>>')
+        setPageView(3)
+    }
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
+
     return(
         <View style={styles.container}>
            
@@ -120,7 +138,13 @@ const ConfirmBooking = (props) =>{
                 </View>
 
             {/* </View> */}
-            <View style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}>
+            <GestureRecognizer
+                onSwipeUp={(state)=>onSwipeUp()}
+                onSwipeDown={(state)=>onSwipeDown()}
+                config={config}
+                style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}
+            >
+            {/* <View style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}> */}
                 <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
                    
@@ -154,7 +178,8 @@ const ConfirmBooking = (props) =>{
                 <View style={{marginTop:15 , marginHorizontal:20}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
-            </View>
+            {/* </View> */}
+            </GestureRecognizer>
 
         </View>
     )

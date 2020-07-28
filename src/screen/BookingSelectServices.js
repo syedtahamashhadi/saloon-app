@@ -6,6 +6,8 @@ import SimpleIcon from 'react-native-vector-icons/SimpleLineIcons'
 import Button from '../component/Button'
 import { selectedServiceBookingSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
+import GestureRecognizer from 'react-native-swipe-gestures'
+
 
 
 
@@ -47,6 +49,22 @@ const BookingSelectServices = (props) =>{
         setSelectedService(val)
         console.log('Selected Service is >>',selectedService)
     }
+
+    const onSwipeUp = () =>{
+        console.log('Swipe Up >>>')
+        setPageView(1)
+    }
+
+
+    const onSwipeDown = () =>{
+        console.log('Swipe Down >>>')
+        setPageView(3.5)
+    }
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
 
     const serviceData = [  {icon:require('../../assets/scisor-icon.png'),name:'Hair Cut'},
                             {icon:require('../../assets/blade-icon.png'),name:'Shave'},
@@ -113,7 +131,15 @@ const BookingSelectServices = (props) =>{
 
             </View>
 
-            <View style={{flex:6.5 , borderTopLeftRadius:15,borderTopRightRadius:15,backgroundColor:'#fff' ,elevation:20}}>
+            <GestureRecognizer
+                onSwipeUp={()=>onSwipeUp()}
+                onSwipeDown={()=>onSwipeDown()}
+                config={config}
+                style={{flex:6.5 , borderTopLeftRadius:15,borderTopRightRadius:15,backgroundColor:'#fff' ,elevation:20}}
+            >
+
+
+            {/* <View style={{flex:6.5 , borderTopLeftRadius:15,borderTopRightRadius:15,backgroundColor:'#fff' ,elevation:20}}> */}
 
                     <TouchableOpacity  onPress={()=>handlePageView()}
                                 style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
@@ -154,7 +180,10 @@ const BookingSelectServices = (props) =>{
                         <Button title='Next' btnColor='#49D3CE' handleButton={handleNextButton}/>
                     </View>
 
-            </View>
+            {/* </View> */}
+
+            </GestureRecognizer>
+
 
         </View>
     )

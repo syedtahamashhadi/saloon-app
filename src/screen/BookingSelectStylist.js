@@ -1,12 +1,10 @@
 import React from 'react'
 import { View , Text ,StyleSheet , TouchableOpacity , ScrollView , Image} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
-
 import { selectedStylistBookingSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
-
 import Chat from '../component/Chat'
-
+import GestureRecognizer , { swipeDirection } from 'react-native-swipe-gestures'
 
 
 const BookingSelectStylist = (props) =>{
@@ -43,6 +41,21 @@ const BookingSelectStylist = (props) =>{
         pageView==3.5 ? setPageView(1) : setPageView(3.5)
     }
 
+    const onSwipeUp = () =>{
+        console.log('Swipe Up >>>')
+        setPageView(1)
+    }
+
+
+    const onSwipeDown = () =>{
+        console.log('Swipe Down >>>')
+        setPageView(3.5)
+    }
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
 
     return(
         <View style={styles.container}>
@@ -62,7 +75,14 @@ const BookingSelectStylist = (props) =>{
                     </View>
                 </View>
 
-                <View style={{flex:6.5 , backgroundColor:'#fff' , borderTopLeftRadius:15 , borderTopRightRadius:15 ,width:'100%',elevation:20 }}>
+                <GestureRecognizer
+                    onSwipeUp={(state) => onSwipeUp()}
+                    onSwipeDown={()=> onSwipeDown()}
+                    config={config}
+                    style={{flex:6.5 , backgroundColor:'#fff' , borderTopLeftRadius:15 , borderTopRightRadius:15 ,width:'100%',elevation:20 }}
+                >
+
+                {/* <View style={{flex:6.5 , backgroundColor:'#fff' , borderTopLeftRadius:15 , borderTopRightRadius:15 ,width:'100%',elevation:20 }}> */}
 
 
                     <TouchableOpacity  onPress={()=>handlePageView()}
@@ -116,10 +136,10 @@ const BookingSelectStylist = (props) =>{
                             }
                         </View>
                     </ScrollView>
-                    
 
+                {/* </View>  */}
+                </GestureRecognizer>
 
-                </View> 
 
 
         </View>

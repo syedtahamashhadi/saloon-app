@@ -3,6 +3,7 @@ import { View , Text , TouchableOpacity , StyleSheet , ScrollView} from 'react-n
 import Chat from '../component/Chat'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
+import GestureRecognizer from 'react-native-swipe-gestures'
 
 
 
@@ -25,6 +26,22 @@ const PaymentMethods = (props) =>{
         
     }
 
+    const onSwipeUp = () =>{
+        console.log('Swipe Up >>>')
+        setPageView(1)
+    }
+
+
+    const onSwipeDown = () =>{
+        console.log('Swipe Down >>>')
+        setPageView(3)
+    }
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
+
     const cardDetail = [{number:'8564' , cardId: "cfbb"},{number:'9387' , cardId: "cfbb"},{number:'6363' , cardId: "cfbb"}]
     return(
 
@@ -44,8 +61,16 @@ const PaymentMethods = (props) =>{
                     </View>
                 </View>
 
-                <View style={{flex:6.5,borderTopLeftRadius:15,borderTopRightRadius:15 ,
-                                 elevation:30 ,width:'100%',backgroundColor:'#fff'}}>
+                <GestureRecognizer
+                    onSwipeUp={(state)=>onSwipeUp()}
+                    onSwipeDown={(state)=>onSwipeDown()}
+                    config={config}
+                    style={{flex:6.5,borderTopLeftRadius:15,borderTopRightRadius:15 ,
+                        elevation:30 ,width:'100%',backgroundColor:'#fff'}}
+                >
+
+                {/* <View style={{flex:6.5,borderTopLeftRadius:15,borderTopRightRadius:15 ,
+                                 elevation:30 ,width:'100%',backgroundColor:'#fff'}}> */}
                     
                     <View style={{alignItems:'center',top:10 , marginHorizontal:20}}>
                         <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
@@ -92,7 +117,9 @@ const PaymentMethods = (props) =>{
                             </TouchableOpacity>                            
                         </View>
                     </View>
-                </View>
+                {/* </View> */}
+                </GestureRecognizer>
+                
 
         </View>
     )

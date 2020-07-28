@@ -9,6 +9,8 @@ import { selectedDateTimeSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import GestureRecognizer from 'react-native-swipe-gestures'
+
 
 const ADD_APPOINMENT = gql `
     mutation abc {
@@ -143,6 +145,23 @@ const PickDate = (props) =>{
         setVal(val)
         setPageView(1)
     }
+
+    const onSwipeUp = () =>{
+        console.log('Swipe Up >>>')
+        setPageView(1)
+    }
+
+
+    const onSwipeDown = () =>{
+        console.log('Swipe Down >>>')
+        setPageView(3)
+    }
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
+
     console.log('Current Date >>>>>>>>>>>>>>>>>>>>>>' , currentDate)
     return(
         <View style={styles.container}>
@@ -161,7 +180,13 @@ const PickDate = (props) =>{
                 </View>
             </View>
 
-            <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}> 
+            <GestureRecognizer
+                onSwipeUp={()=>onSwipeUp()}
+                onSwipeDown={()=>onSwipeDown()}
+                config={config}
+                style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}
+            >
+            {/* <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}>  */}
                 
                 <View style={{alignItems:'center',top:10}}>
                   
@@ -208,7 +233,8 @@ const PickDate = (props) =>{
                 <View style={{marginTop:8 , marginHorizontal:20}}>
                     <Button title='Next' handleButton={handleButton}/>
                 </View>            
-            </View>            
+            {/* </View>             */}
+            </GestureRecognizer>
 
         </View>
     )
