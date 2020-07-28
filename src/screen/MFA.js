@@ -12,6 +12,8 @@ const MFA = (props) =>{
 
     const [otp,setOtp] = React.useState(null)
     const [fieldErr,setFieldErr] = React.useState(null)
+    const [email,setEmail] = React.useState(null)
+
 
     console.log('Props Signin >>>' , props.signIn )
     console.log('Props SignUp >>>>',props.signUp)
@@ -72,6 +74,16 @@ const MFA = (props) =>{
         checkKey()
     },[] )
 
+    React.useEffect(()=>{
+        if(screen == 'signUp'){
+            setEmail(props.signUp.data.signupUser.email)
+         }else if(screen == 'signIn'){
+            setEmail(props.signIn.data.loginUser.email) 
+         }else if( screen == 'reSignUp'){
+            setEmail(props.route.params.reSignUpEmail)
+         }
+    },[])
+
     const storeData = async (value) =>{
         console.log('Store Data Fired >>' , value)
         try {
@@ -79,7 +91,12 @@ const MFA = (props) =>{
                 props.setIsLogin(true)
                 props.mfa(data)
                 // props.navigation.navigate('Map')
-                screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.navigate('Map')
+                // screen == 'signUp' ? props.navigation.replace('Congragulation') : props.navigation.navigate('Map')
+                if(screen == 'signUp' || screen == 'reSignUp'){
+                    props.navigation.replace('Congragulation')
+                }else{
+                    props.navigation.navigate('Map')
+                }
             })
         } catch (error) {
             console.log('Error AsyncStorage >>' , error)

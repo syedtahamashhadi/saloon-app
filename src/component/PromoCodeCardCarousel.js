@@ -29,7 +29,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-nativ
                     }}
                 >
                     <View style={styles.promoCard}>
-                        <ImageBackground source={promoCodeImage} style={styles.image}>
+                        <ImageBackground source={{ uri : item.pictureURL}} style={styles.image}>
                             <View style={styles.flexColumn}>
                                 <Text style={styles.badge}>{`${item.discount}%`}</Text>
                                 <BlurView intensity={100} style={styles.cardBottom}>

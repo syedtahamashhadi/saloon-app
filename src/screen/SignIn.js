@@ -54,6 +54,19 @@ const SignIn = (props) =>{
        
     }
 
+    React.useEffect(()=>{
+        fieldErr && console.log('Field Err is  >>>' , fieldErr.slice(23))
+
+        if(fieldErr && fieldErr.slice(23) == ' Please verify your code sent to your email first'){
+            props.navigation.navigate('MFA' , 
+                                        {
+                                            screen: 'reSignUp',
+                                            reSignUpEmail:email
+                                        }
+                                    )
+        }
+    },[fieldErr])
+
     // React.useEffect(()=>{
     //    DeviceInfo.getUniqueId().then(deviceInfo =>{
     //     console.log('Device is is >>' , deviceInfo)
