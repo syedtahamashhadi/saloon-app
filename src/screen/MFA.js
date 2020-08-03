@@ -16,7 +16,7 @@ const MFA = (props) =>{
 
 
     console.log('Props Signin >>>' , props.signIn )
-    console.log('Props SignUp >>>>',props.signUp)
+    // console.log('Props SignUp >>>>',props.signUp)
 
     const { screen } = props.route.params
 
