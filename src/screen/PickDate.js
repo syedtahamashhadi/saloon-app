@@ -46,8 +46,9 @@ const PickDate = (props) =>{
     let date = new Date() 
 
     let month = `${date.getMonth()}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
+    let cuurrentDay = `${date.getDate()}`.length == 1 ? `0${date.getDate()}` : date.getDate()
 
-    let currentDate = `${date.getFullYear()}-${ month }-${date.getDate()}`
+    let currentDate = `${date.getFullYear()}-${ month }-${cuurrentDay}`
     console.log('Current date >>' ,`${date.getMonth()+1}`)
 
     console.log('Current Date >>' , currentDate , '>>>>>' , date.getMonth())
@@ -205,7 +206,7 @@ const PickDate = (props) =>{
                             onDayPress={val=>handleDatePress(val)}
                             // onDayLongPress={false}
                             minDate={currentDate}
-                            // minDate={'2020-07-13'}
+                            // minDate={'2020-08-04'}
                             hideExtraDays={true}
                             markedDates={ selectedDateMark ? selectedDateMark : null}
                             theme={{

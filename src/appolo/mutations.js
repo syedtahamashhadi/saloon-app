@@ -158,6 +158,19 @@ const Mutations = {
                     }
     ` ,
 
+    ADD_PAYMENT_CARD : gql `
+                        mutation abc($number: String , $exp_month: String , $exp_year: String , $cvc: String) {
+                            addCardToken(number: $number, exp_month: $exp_month  , exp_year: $exp_year , cvc: $cvc)
+                            {
+                            cards{
+                                cardId
+                            }
+                            customerId
+                            }  
+                        }
+    
+    ` ,
+
 } 
 
 export default Mutations ;

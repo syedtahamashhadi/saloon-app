@@ -18,6 +18,7 @@ import { SIGNUP,
 
 /******************************** SignUp Reducer ***********************************/
 
+
 const signUpInitialState={
     // credentials: [],
     // isRequestSent: false,
@@ -40,7 +41,7 @@ const signUpReducer = (state = signUpInitialState , action) =>{
             return{
                 ...state,
                 isSignUp: true,
-                data: action.payLoad
+                data: action.payLoad,
             }
         // case SIGNUP.FAILURE :
         //     return{
@@ -64,9 +65,10 @@ const loginInitialState={
 
 const loginReducer = (state= loginInitialState , action)=>{
     switch (action.type) {
-      
         case SIGNIN.SUCCESS:
-            return{
+            console.log('Login Success Reducer>>>>' , action.payLoad)
+
+        return{
                 ...state,
                 isLogin: true,
                 data: action.payLoad ,

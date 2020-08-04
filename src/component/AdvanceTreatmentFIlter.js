@@ -44,7 +44,7 @@ export default function AdvanceTreatmentFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                // swipeSpeedMultiplier={120}
+                swipeSpeedMultiplier={140}
                 // visiblityPadding={4}
             />
         )
@@ -68,11 +68,11 @@ const styles = StyleSheet.create({
     circleContainer:{
         backgroundColor: '#1D184D', 
         borderRadius: 220, 
-        height: 470,
+        height: 440,
         padding: 15,
         width: 400,
         position: 'absolute',
-        bottom: -190,
+        bottom: -140,
         left: 35
     }   
 })

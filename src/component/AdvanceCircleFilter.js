@@ -42,7 +42,7 @@ const AdvanceCircleFilter = () =>{
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={80}
+                swipeSpeedMultiplier={150}
             />
         
         )

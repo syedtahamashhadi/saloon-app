@@ -27,7 +27,7 @@ const MFA = (props) =>{
 
     // props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
 
-    let email = screen == 'signUp' ? props.signUp.data.signupUser.email  : props.signIn.data.loginUser.email 
+    // let email = screen == 'signUp' ? props.signUp.data.signupUser.email  : props.signIn.data.loginUser.email 
     const handleButton=()=>{
         // console.log('Button is Pressed...',props.mfaState)
         if(otp == null || otp.length < 6 ){
@@ -75,9 +75,11 @@ const MFA = (props) =>{
     },[] )
 
     React.useEffect(()=>{
+        console.log('MFA Mounted >>>',props.signIn )
         if(screen == 'signUp'){
             setEmail(props.signUp.data.signupUser.email)
          }else if(screen == 'signIn'){
+             console.log('Sign In Data >>>' , props.signIn )
             setEmail(props.signIn.data.loginUser.email) 
          }else if( screen == 'reSignUp'){
             setEmail(props.route.params.reSignUpEmail)

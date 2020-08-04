@@ -8752,6 +8752,11 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
+memoize-one@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.1.0.tgz#a2387c58c03fff27ca390c31b764a79addf3f906"
+  integrity sha512-2GApq0yI/b22J2j9rhbrAlsHb0Qcz+7yWxeLG8h+95sl1XPUgeLimQSOdur4Vw7cUhrBHwaUZxWFZueojqNRzA==
+
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -11374,6 +11379,13 @@ react-native-swipe-gestures@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
   integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
+
+react-native-swipeable-modal@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-swipeable-modal/-/react-native-swipeable-modal-2.0.1.tgz#81a59cf6b31641490e6844ef6c9e85c0fb38826f"
+  integrity sha512-fdYf7V9zn79evNlgzyzJ/QKaU8KbZN2JcQEPUdvpjfLqUkeAc+4RtpEjFD03p2bSApa1dDbWGCGkoSdVBXBpxA==
+  dependencies:
+    memoize-one "^4.0.0"
 
 react-native-switch@^2.0.0:
   version "2.0.0"

@@ -2,6 +2,8 @@ import React from 'react'
 import {View,Text,StyleSheet , TextInput} from 'react-native'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import Button from '../../../component/Button'
+import Mutations from '../../../appolo/mutations'
+import { useMutation } from '@apollo/react-hooks'
 
 
 const PaymentSetting= () =>{
@@ -11,12 +13,45 @@ const PaymentSetting= () =>{
     const [expDate,setExpDate] = React.useState(null)
     const [cv,setCv] = React.useState(null)
 
+    // const [addPaymentCard , {data , loading , error}]  = useMutation(Mutations.ADD_PAYMENT_CARD) 
+
+
     const handleBack = ()=>{
         console.log('Back is Pressed...')
     }
     const handleButton = () =>{
         console.log('Button is Pressed....')
+
+        // async function getToken(){
+        //     try {
+        //         const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+
+        //         if(token !== null){
+        //             loading !== true && addPaymentCard(
+        //                 {
+        //                     variables:{
+        //                         number: number , exp_month: expDate , exp_year: expDate , cvc: cv
+        //                     },
+        //                     context:{
+        //                         headers:{
+        //                             authorization: token
+        //                         }
+        //                     }
+        //                 }
+        //             )
+        //         }
+        //     } catch (error) {
+        //         console.log(error)
+        //         alert('Error')
+        //     }
+        // }
+        // getToken()
+
+
     }
+
+   
+
 
     return(
         <View style={styles.container}>

@@ -28,7 +28,7 @@ import { SIGNIN ,
 const signUpSuccess = (data) =>{
     return{
         type: SIGNUP.SUCCESS,
-        payLoad: data
+        payLoad: data,
     }
 }
 
@@ -50,7 +50,7 @@ const signUpSuccess = (data) =>{
 // }
 
 const loginSuccess = (data) =>{
-    console.log('Login Success is Fired>>')
+    console.log('Login Success is Fired>>' , data)
 
     return{
         type : SIGNIN.SUCCESS,

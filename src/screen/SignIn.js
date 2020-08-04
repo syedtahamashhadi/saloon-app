@@ -77,7 +77,7 @@ const SignIn = (props) =>{
     useEffect(()=>{
         if(data){
             // setFieldErr(null)
-            // console.log('Data is Fired >>>>>>>>>')
+            console.log('Data is Fired >>>>>>>>>',data)
             props.signIn(data)
             props.navigation.replace('MFA' , 
                 {

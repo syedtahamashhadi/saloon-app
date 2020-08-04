@@ -149,8 +149,8 @@ const Map = (props) =>{
     const handleFilterPress = () =>{
         // console.log('Filter View Current State >>>' , filterView)
         // setFilterView(!filterView)
-        // filterView == false ? setFilterView(true) : setFilterView(false)
-        props.filterView == false ? props.setIsFilterView(true) : props.setIsFilterView(false) 
+        filterView == false ? setFilterView(true) : setFilterView(false)
+        // props.filterView == false ? props.setIsFilterView(true) : props.setIsFilterView(false) 
     }
 
     const handleBarPress = () =>{
@@ -263,7 +263,7 @@ const Map = (props) =>{
                 handleFilterPress={handleFilterPress}
             />
 
-            {props.filterView == true ? <AdvanceFilters  handleFilterPress={handleFilterPress}/> : null}
+            {filterView == true ? <AdvanceFilters  handleFilterPress={handleFilterPress}/> : null}
             {/* {props.filterView == true ? <Text>Testing</Text> : null} */}
 
                 
@@ -295,11 +295,11 @@ const styles= StyleSheet.create({
     
     container:{
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
        
     },
     map:{
-        flex:8,
+        flex:1,
         width:Dimensions.get("window").width,
         height:Dimensions.get("window").height
     },
