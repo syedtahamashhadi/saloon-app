@@ -13,6 +13,7 @@ import { SIGNIN ,
     SET_FAV_SALOON,
     SET_IS_LOGIN ,
     SET_FILTER_VIEW ,
+    USER_PAYMENT_CARDS ,
 } from './constants'
 
 
@@ -216,6 +217,14 @@ const setIsFilterView = (data) =>{
     }
 }
 
+/***************************** User Payment Cards ******************/
+
+const userPaymentCardSuccess = (data) =>{
+    return{
+        type: USER_PAYMENT_CARDS.SUCCESS ,
+        payLoad: data
+    }
+}
 
 export {
     signUpSuccess,
@@ -233,4 +242,5 @@ export {
     setFavSaloonSuccess ,
     setIsLogin ,
     setIsFilterView ,
+    userPaymentCardSuccess ,
 }

@@ -35,7 +35,7 @@ const PaymentNavigation = (props) =>{
             <TransactionHeader nav={props.navigation}/>
 
             <Tab.Navigator
-                initialRouteName="TransactionHistory"
+                initialRouteName={props.route.params.currentScreen}
                 tabBarOptions={{
                     animationEnabled: 'false',
                     activeTintColor: '#49d3ce',

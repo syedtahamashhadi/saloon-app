@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet,Dimensions, Image } from 'react-native'
+import { View, Text, StyleSheet,Dimensions, Image , TouchableOpacity } from 'react-native'
 import CircleList from 'react-native-circle-list'
 // import data from  '../advance_circle_filter/Data'
 // import Icon from 'react-native-vector-icons/FontAwesome'
@@ -10,17 +10,27 @@ import myIcon from '../../assets/Icon--24.png'
 const {width, height} = Dimensions.get('window')
 export default function AdvanceTreatmentFilter(){
 
+    const [selectedStyle,setSelectedStyle] = React.useState(null)
+    const [mainText,setMainText] = React.useState(null)
+
+
     const renderItem = ({ item }) => {
+        let bColor = item.name == selectedStyle ? 'red' : '#fff'
+
         return(
             <View style={styles.container}>
                 {/* <Icon size={20} style={styles.icon} name={item.icon} /> */}
-                <View style={{width:45,height:45, borderRadius:45 ,backgroundColor:'#fff'
+                <TouchableOpacity onPress={()=>setSelectedStyle(item.name)} activeOpacity={0.6}>
+                <View style={{width:45,height:45, borderRadius:45 ,backgroundColor: bColor
                 ,justifyContent:'center',alignItems:'center'}}>
                 <View style={{overflow: 'hidden'}}>
                     <Image style={styles.icon} source={item.icon} />
                 </View>
                 </View>
-        <Text style={styles.text}>{item.name}</Text>
+                {item.id== mainText+1 ? <Text style={{color: 'white',marginTop:15,fontSize: 12,textAlign:'center'}}>{item.name}</Text> : 
+                    <Text style={{color: '#1D184D',marginTop:10,fontSize: 12,textAlign:'center',}}>{item.name}</Text>    
+                }
+                </TouchableOpacity>
             </View>
         )
     }
@@ -35,7 +45,7 @@ export default function AdvanceTreatmentFilter(){
                     {name:'Test4',id:7,value:'t4', icon:require('../../assets/Icon--28.png')},
                     {name:'Test5',id:8,value:'t5', icon:require('../../assets/Icon--65.png')},
                     {name:'Hair Cut',id:9,value:'t5', icon:require('../../assets/Icon--65.png')},
-                    ]
+                ]
 
 
         return (
@@ -46,7 +56,9 @@ export default function AdvanceTreatmentFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={100}
+                swipeSpeedMultiplier={80}
+                onScrollEnd={(item)=>setMainText(item)}
+
                 // visiblityPadding={4}
             />
         )
@@ -56,6 +68,7 @@ const styles = StyleSheet.create({
     container:{
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor:'red'
     },
     icon:{
         borderRadius: 50,
@@ -67,7 +80,8 @@ const styles = StyleSheet.create({
     text:{
         color: 'white',
         marginTop:10,
-        fontSize: 12
+        fontSize: 12,
+        textAlign:'center',
     },  
     circleContainer:{
         backgroundColor: '#1D184D', 

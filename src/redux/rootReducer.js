@@ -14,6 +14,7 @@ import { loginReducer,
         setFavSaloonReducer ,
         setIsLoginReducer ,
         setIsFilterViewReducer ,
+        userPaymentCardReducer ,
     } from './authenticate/reducers'
 
 
@@ -34,6 +35,7 @@ const rootReducer = combineReducers(
         setFavSaloonReducer : setFavSaloonReducer ,
         setIsLoginReducer : setIsLoginReducer ,
         setIsFilterViewReducer : setIsFilterViewReducer ,
+        userPaymentCardReducer : userPaymentCardReducer ,
     }
 )
 

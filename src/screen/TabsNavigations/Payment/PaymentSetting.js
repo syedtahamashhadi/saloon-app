@@ -4,6 +4,7 @@ import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import Button from '../../../component/Button'
 import Mutations from '../../../appolo/mutations'
 import { useMutation } from '@apollo/react-hooks'
+import AsyncStorage from '@react-native-community/async-storage'
 
 
 const PaymentSetting= () =>{
@@ -51,23 +52,26 @@ const PaymentSetting= () =>{
 
         if(name == ''){
             alert('Name Format is not correct')
-        }else if(number == null || number.length < 14){
-            alert('Card No Format is not correct')
+        }else if(number == null || number.length !== 16){
+            alert('Card Number Format is not correct')
         }else if(/^\d{2}\-\d{2}$/.test(expDate) == false){
             alert('Exp Date Format is not Correct')
         }else if(/^[0-9]{3,4}$/.test(cv) == false){
             alert('CV format is not correct')
         }else{
-            alert('Payment is done')
-            // getToken()
+            // alert('Payment is done')
+            getToken()
         }  
     }
 
+    console.log('Loading >>>' , loading)
 
     React.useEffect(()=>{
         if(data){
             alert('Congrats Your Card Has Been Added')
+            console.log('Data >>>' , data)
         }else if(error){
+            console.log('Error >>>' , error)
             alert('Something went Wrong TryAgain!')
         }
     },[data,error])

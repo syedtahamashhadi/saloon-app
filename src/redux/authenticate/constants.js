@@ -66,6 +66,10 @@ const SET_FILTER_VIEW = {
     SUCCESS: 'SET_FILTER_VIEW'
 }
 
+const USER_PAYMENT_CARDS = {
+    SUCCESS: 'USER_PAYMENT_CARDS_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -80,6 +84,7 @@ export {SIGNUP ,
         SET_USER_DETAIL,
         SET_FAV_SALOON ,
         SET_IS_LOGIN ,
-        SET_FILTER_VIEW
+        SET_FILTER_VIEW ,
+        USER_PAYMENT_CARDS
     }
 

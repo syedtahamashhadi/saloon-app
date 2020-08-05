@@ -32,7 +32,11 @@ export default function AdvanceCircleFilter(){
             return(
             <View style={styles.container} key={item.id}>
                 <TouchableOpacity onPress={()=>setSelectedStyle(item.name)} activeOpacity={0.6}>
-                <Text style={{color:'#1D184D', fontSize: 12, fontFamily:'AbrilFatFace'}}>{item.name}</Text>
+                {item.id==mainText+1 ? <Text style={{color:'#1D184D', fontSize: 12, fontFamily:'AbrilFatFace',textAlign:'center'}}>
+                    {item.name}
+                    </Text>:
+                    <Text style={{color:'#49D3CE', fontSize: 12, fontFamily:'AbrilFatFace'}}>{item.name}</Text>
+                }
                 <View style={{width:55,height:55, borderRadius:55 ,backgroundColor:'#fff'
                 ,justifyContent:'center',alignItems:'center',marginTop:10}}>
                 <View style={{overflow: 'hidden'}}>
@@ -68,8 +72,8 @@ export default function AdvanceCircleFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={160}
-                onScrollEnd={(item)=>console.log('Test>>',item)}
+                swipeSpeedMultiplier={120}
+                onScrollEnd={(item)=>setMainText(item)}
             />
         
         )
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
     container:{
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor: 'red'
     },
     icon:{
         borderRadius: 50,
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         backgroundColor: '#49D3CE', 
         borderRadius: 300, 
-        height: 460,
+        height: 455,
         padding: 12,
         width: 470,
         bottom: -40,

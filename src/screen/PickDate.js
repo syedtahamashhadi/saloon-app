@@ -181,26 +181,33 @@ const PickDate = (props) =>{
                 </View>
             </View>
 
-            <GestureRecognizer
+            {/* <GestureRecognizer
                 onSwipeUp={()=>onSwipeUp()}
                 onSwipeDown={()=>onSwipeDown()}
                 config={config}
                 style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}
-            >
-            {/* <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}>  */}
-                
+            > */}
+            <View style={{flex:7,backgroundColor:'#fff',borderTopLeftRadius:20,borderTopRightRadius:20,elevation:20}}> 
                 <View style={{alignItems:'center',top:10}}>
-                  
+                  <GestureRecognizer
+                  onSwipeUp={()=>onSwipeUp()}
+                  onSwipeDown={()=>onSwipeDown()}
+                  config={config}
+                  >
                     <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
                         <View style={{height:20,width:60}}>
                             <View style={{width:60,height:2,backgroundColor:'blue'}}></View>
                         </View>
                     </TouchableOpacity>
+                    </GestureRecognizer>
 
                 </View>
 
+                <ScrollView>
+
                 <View style={{marginTop:0}}>
+
                     <View>
                         <Calendar 
                             onDayPress={val=>handleDatePress(val)}
@@ -234,8 +241,10 @@ const PickDate = (props) =>{
                 <View style={{marginTop:8 , marginHorizontal:20}}>
                     <Button title='Next' handleButton={handleButton}/>
                 </View>            
-            {/* </View>             */}
-            </GestureRecognizer>
+                </ScrollView>
+            </View>            
+
+            {/* </GestureRecognizer> */}
 
         </View>
     )

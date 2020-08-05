@@ -13,6 +13,7 @@ import { SIGNUP,
          SET_FAV_SALOON ,
          SET_IS_LOGIN ,
          SET_FILTER_VIEW ,
+         USER_PAYMENT_CARDS ,
         } from './constants';
 
 
@@ -320,6 +321,23 @@ const setIsFilterViewReducer = (state = isFilterViewInitialState, action) =>{
     }
 }
 
+/***************************** User Payment Cards ******************/
+
+const userPaymentCardInitialState ={
+    data : null
+}
+
+const userPaymentCardReducer =(state = userPaymentCardInitialState , action) =>{
+    switch (action.type) {
+        case USER_PAYMENT_CARDS.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+            
+        default: return state;
+    }
+}
 
 export {
     signUpReducer,
@@ -337,5 +355,6 @@ export {
     setFavSaloonReducer ,
     setIsLoginReducer ,
     setIsFilterViewReducer ,
+    userPaymentCardReducer ,
     // setHeaderReducer ,
 }

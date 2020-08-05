@@ -4,6 +4,7 @@ import Chat from '../component/Chat'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import GestureRecognizer from 'react-native-swipe-gestures'
+import {userPaymentCardSuccess} from '../redux/authenticate/actions'
 import Queries from '../appolo/queries'
 import { connect } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
@@ -56,6 +57,7 @@ const PaymentMethods = (props) =>{
     React.useEffect(()=>{
         if(data){
             console.log('Payment Card Data >>' , data)
+            props.userPaymentCards(data)
         }else if(error){
             console.log('Payment Card error >>' , error)
         }
@@ -136,7 +138,7 @@ const PaymentMethods = (props) =>{
 
                     <View style={{marginTop:35,marginHorizontal:20}}>
                         {
-                            cardDetail.map((val,index)=>{
+                            data && data.getCustomerAndCard.card.map((val,index)=>{
                                 console.log('Card Details >>' , val)
                                 let myColor = val.number == slectedCard.number ? '#49D3CE' : 'black'
                                 return(
@@ -148,7 +150,7 @@ const PaymentMethods = (props) =>{
                                                 </View>
                                                 <View style={{justifyContent:'center'}}>
                                                     <Text style={{fontSize:16 , fontWeight:'bold' , color:myColor}}>
-                                                        {`***${val.number}`}
+                                                        {`***${val.last4}`}
                                                     </Text>
                                                 </View>
                                             </View>
@@ -159,8 +161,8 @@ const PaymentMethods = (props) =>{
                         }
 
                         <View style={styles.addCard}>
-                            <TouchableOpacity onPress={()=>props.navigation.navigate('UserDetail',{
-                                currentScreen: 'Payment Method'
+                            <TouchableOpacity onPress={()=>props.navigation.navigate('PaymentNavigation',{
+                                currentScreen: 'PaymentSettings'
                             })}>
                                 <AntIcon name='plus' size={50} color='#49D3CE' />
                             </TouchableOpacity>                            
@@ -200,6 +202,11 @@ const styles = StyleSheet.create(
     }
 )
 
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        userPaymentCards : (data) => dispatch(userPaymentCardSuccess(data))
+    }
+}
 
 const mapStateToProps = (state) =>{
     return{
@@ -207,4 +214,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps,null)(PaymentMethods);
+export default connect(mapStateToProps,mapDispatchToProps)(PaymentMethods);
