@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,Text,StyleSheet , TextInput} from 'react-native'
+import {View,Text,StyleSheet , TextInput , ScrollView} from 'react-native'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import Button from '../../../component/Button'
 import Mutations from '../../../appolo/mutations'
@@ -7,54 +7,74 @@ import { useMutation } from '@apollo/react-hooks'
 
 
 const PaymentSetting= () =>{
-
+    //getUserCards
     const [name,setName] = React.useState('')
     const [number,setNumber] = React.useState(null)
     const [expDate,setExpDate] = React.useState(null)
+    const [expMonth,setExpMonth] = React.useState(null)
+    const [expYear,setExpYear] = React.useState(null)
     const [cv,setCv] = React.useState(null)
 
-    // const [addPaymentCard , {data , loading , error}]  = useMutation(Mutations.ADD_PAYMENT_CARD) 
+    const [addPaymentCard , {data , loading , error}]  = useMutation(Mutations.ADD_PAYMENT_CARD) 
 
 
-    const handleBack = ()=>{
-        console.log('Back is Pressed...')
+    // const handleBack = ()=>{
+    //     console.log('Back is Pressed...')
+    // }
+
+    const getToken = async() =>{
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+
+            if(token !== null){
+                loading !== true && addPaymentCard(
+                    {
+                        variables:{
+                            number: number , exp_month: expDate.slice(0,2) , exp_year: expDate.slice(3,5) , cvc: cv
+                        },
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                )
+            }
+        } catch (error) {
+            console.log(error)
+            alert('Error')
+        }
     }
+
     const handleButton = () =>{
         console.log('Button is Pressed....')
 
-        // async function getToken(){
-        //     try {
-        //         const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
-
-        //         if(token !== null){
-        //             loading !== true && addPaymentCard(
-        //                 {
-        //                     variables:{
-        //                         number: number , exp_month: expDate , exp_year: expDate , cvc: cv
-        //                     },
-        //                     context:{
-        //                         headers:{
-        //                             authorization: token
-        //                         }
-        //                     }
-        //                 }
-        //             )
-        //         }
-        //     } catch (error) {
-        //         console.log(error)
-        //         alert('Error')
-        //     }
-        // }
-        // getToken()
-
-
+        if(name == ''){
+            alert('Name Format is not correct')
+        }else if(number == null || number.length < 14){
+            alert('Card No Format is not correct')
+        }else if(/^\d{2}\-\d{2}$/.test(expDate) == false){
+            alert('Exp Date Format is not Correct')
+        }else if(/^[0-9]{3,4}$/.test(cv) == false){
+            alert('CV format is not correct')
+        }else{
+            alert('Payment is done')
+            // getToken()
+        }  
     }
 
-   
 
+    React.useEffect(()=>{
+        if(data){
+            alert('Congrats Your Card Has Been Added')
+        }else if(error){
+            alert('Something went Wrong TryAgain!')
+        }
+    },[data,error])
 
     return(
         <View style={styles.container}>
+            <ScrollView>
             <View style={{alignItems:'center'}}>
           
             <View style={{marginTop:15}}>
@@ -83,6 +103,8 @@ const PaymentSetting= () =>{
                     value={number}
                     style={styles.textInput}
                     secureTextEntry={true}
+                    keyboardType={'numeric'}
+
                 />
             </View>
 
@@ -93,6 +115,9 @@ const PaymentSetting= () =>{
                         onChangeText={text => setExpDate(text)}
                         value={expDate}
                         style={styles.smallTextInput}
+                        placeholder='04-06'
+                        keyboardType={'numeric'}
+
                     />
                 </View>
                 <View style={styles.smallInputsContainer}>
@@ -101,6 +126,9 @@ const PaymentSetting= () =>{
                         onChangeText={text => setCv(text)}
                         value={cv}
                         style={styles.smallTextInput}
+                        placeholder='808'
+                        keyboardType={'numeric'}
+
                     />
                 </View>
             </View>
@@ -109,6 +137,7 @@ const PaymentSetting= () =>{
             <View style={{marginTop:10 , marginHorizontal:20 }}>
                 <Button title='Apply Changes' textSize={18} handleButton={handleButton}/>
             </View>
+            </ScrollView>
         </View>
     )
 }
