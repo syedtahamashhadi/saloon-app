@@ -4,7 +4,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign'
 import ConfirmBookingCard from '../component/ConfirmBookingCard'
 import Button from '../component/Button'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation , useLazyQuery } from '@apollo/react-hooks'
 import {connect} from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import Mutations from '../appolo/mutations'
@@ -17,6 +17,7 @@ const ConfirmBooking = (props) =>{
     console.log('Date Time Props' , props)
 
     const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
+
 
     console.log('Data is >>' , data)
     console.log('Loading is >>' , loading)

@@ -257,11 +257,14 @@ const Map = (props) =>{
                 </MapView>
             </View>
 
-            <MapFooter 
-                handleBarPress={handleBarPress}
-                handleCurrentLoc={handleCurrentLoc}
-                handleFilterPress={handleFilterPress}
-            />
+            {
+            filterView == false && 
+                <MapFooter 
+                    handleBarPress={handleBarPress}
+                    handleCurrentLoc={handleCurrentLoc}
+                    handleFilterPress={handleFilterPress}
+                />
+            }
 
             {filterView == true ? <AdvanceFilters  handleFilterPress={handleFilterPress}/> : null}
             {/* {props.filterView == true ? <Text>Testing</Text> : null} */}

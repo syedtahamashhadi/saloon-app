@@ -6051,6 +6051,13 @@ expo-pwa@0.0.20:
     fs-extra "9.0.0"
     update-check "1.5.3"
 
+expo-react-native-modalbox@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/expo-react-native-modalbox/-/expo-react-native-modalbox-2.2.5.tgz#2ff827c59a3b70c2a9d2b14282a96684fe3fa06f"
+  integrity sha512-OyFr3Dgaa2EfATC+S9Zl1AB9eEhszj4w//C7HYFhAwwJQKZLLxnnEh4mgQ8Z9ScIn12dv/zG7F5Jiai4XbJFYw==
+  dependencies:
+    prop-types "^15.5.10"
+
 expo-sqlite@~8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/expo-sqlite/-/expo-sqlite-8.1.0.tgz#858eb28e1143db281de8a49c99b4a953a81d0834"

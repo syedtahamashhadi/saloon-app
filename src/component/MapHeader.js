@@ -71,7 +71,9 @@ const MapHeader = (props) =>{
                             underlineColorAndroid="transparent"
                         />
                     </View>
-                    <TouchableOpacity onPress={()=>props.handleFilterPress()}>
+                    <TouchableOpacity onPress={()=>props.handleFilterPress()}
+                        hitSlop={{top: 20, left: 50, bottom: 20, right: 50}}
+                    >
                         <View style={{borderRadius:40 , backgroundColor:'white' , width:40 , height:40}}>
                             <AntIcon name='filter' size={25} style={{marginHorizontal:7 , marginVertical:6}}/>
                         </View>

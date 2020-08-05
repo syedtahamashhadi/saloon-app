@@ -128,7 +128,18 @@ const Queries = {
                         }
     ` ,
 
-
+    GET_USER_PAYMENT_CARDS : gql `
+                                query abc($userId: String){
+                                    getCustomerAndCard(userId: $userId)
+                                    {
+                                        customerId
+                                        cards{
+                                            last4
+                                            cardId
+                                        }
+                                    }
+                                }
+    `
 }
 
 export default Queries ;
