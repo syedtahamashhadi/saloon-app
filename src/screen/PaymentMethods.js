@@ -22,6 +22,7 @@ const PaymentMethods = (props) =>{
 
     const [getUserPaymentCards , {data , loading , error}] = useLazyQuery(Queries.GET_USER_PAYMENT_CARDS)
 
+    console.log('User Id >>>' , props.userInfo._id)
 
     const getToken = async() =>{
         try {
@@ -56,7 +57,7 @@ const PaymentMethods = (props) =>{
 
     React.useEffect(()=>{
         if(data){
-            console.log('Payment Card Data >>' , data)
+            console.log('Payment Card Data >>' , data.getCustomerAndCard[0].cards)
             props.userPaymentCards(data)
         }else if(error){
             console.log('Payment Card error >>' , error)
@@ -67,13 +68,16 @@ const PaymentMethods = (props) =>{
     
     const handleCardPress = (val) =>{
         console.log('Button is Pressed....',val.cardId)
-        setSelectedCard(val)
-        props.navigation.navigate('ConfirmBooking',
-            {
-                selectedCard: val ,
-                ...props.route.params
-            }
-        ) 
+        if(props.route.params.time){
+            setSelectedCard(val)
+            props.navigation.navigate('ConfirmBooking',
+                {
+                    selectedCard: val ,
+                    ...props.route.params 
+                }
+            ) 
+        }
+       
     }
 
     const onSwipeUp = () =>{
@@ -138,7 +142,7 @@ const PaymentMethods = (props) =>{
 
                     <View style={{marginTop:35,marginHorizontal:20}}>
                         {
-                            data && data.getCustomerAndCard.card.map((val,index)=>{
+                            data && data.getCustomerAndCard[0].cards.map((val,index)=>{
                                 console.log('Card Details >>' , val)
                                 let myColor = val.number == slectedCard.number ? '#49D3CE' : 'black'
                                 return(

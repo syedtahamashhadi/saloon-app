@@ -31,7 +31,7 @@ const PaymentSetting= () =>{
                 loading !== true && addPaymentCard(
                     {
                         variables:{
-                            number: number , exp_month: expDate.slice(0,2) , exp_year: expDate.slice(3,5) , cvc: cv
+                            number: number , exp_month: expDate.slice(0,2) , exp_year: `20${expDate.slice(3,5)}` , cvc: cv
                         },
                         context:{
                             headers:{
@@ -71,8 +71,8 @@ const PaymentSetting= () =>{
             alert('Congrats Your Card Has Been Added')
             console.log('Data >>>' , data)
         }else if(error){
-            console.log('Error >>>' , error)
-            alert('Something went Wrong TryAgain!')
+            console.log('Error >>>' , error.message.slice(15))
+            error.message.slice(15) == 'This Card already exists.' ? alert(error.message.slice(15)) : alert('Something Went Wrong TryAgain!')
         }
     },[data,error])
 
@@ -106,7 +106,7 @@ const PaymentSetting= () =>{
                     onChangeText={text => setNumber(text)}
                     value={number}
                     style={styles.textInput}
-                    secureTextEntry={true}
+                    // secureTextEntry={true}
                     keyboardType={'numeric'}
 
                 />

@@ -52,16 +52,20 @@ export default function AdvanceCircleFilter(){
     
 
 
-    const data  = [{name:'Hair Cut',id:1,value:'t1', icon:HairCut },
+    const data  = [
+                    {name:'Hair Cut',id:1,value:'t1', icon:HairCut },
                     {name:'Shave',id:2,value:'t2', icon:Shave},
                     {name:'Hair Styling',id:3,value:'t3', icon:HairStyling},
                     {name:'Spa',id:4,value:'t4', icon:Spa},
                     {name:'Beard Trim',id:5,value:'t5', icon:BeardTrim},
-                    {name:'Hair Cut',id:6,value:'t6', icon:HairCut},
-                    {name:'Shave',id:7,value:'t7', icon:Shave},
-                    {name:'Hair Styling',id:8,value:'t8', icon:HairStyling},
-                    {name:'Beard Trim',id:9,value:'t9', icon:BeardTrim},    
-                    ]
+                    {name:'Hair Cut2',id:6,value:'t6', icon:HairCut},
+                    {name:'Shave2',id:7,value:'t7', icon:Shave},
+                    {name:'Hair Styling2',id:8,value:'t8', icon:HairStyling},
+                    {name:'Beard Trim2',id:9,value:'t9', icon:BeardTrim},   
+                    {name:'Hair Cut3',id:10,value:'t10', icon:HairCut },
+                    {name:'Shave3',id:11,value:'t11', icon:Shave},
+                    {name:'Hair Styling3',id:12,value:'t12', icon:HairStyling}, 
+                ]
 
 
         return (
@@ -72,7 +76,7 @@ export default function AdvanceCircleFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={120}
+                swipeSpeedMultiplier={30}
                 onScrollEnd={(item)=>setMainText(item)}
             />
         

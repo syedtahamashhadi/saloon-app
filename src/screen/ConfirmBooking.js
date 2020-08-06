@@ -39,6 +39,9 @@ const ConfirmBooking = (props) =>{
     let serviceName = props.service.data.name
     let servicePrice = props.service.data.price
     let duration = props.service.data.approxTime
+    let customerId = props.userPaymentCards.data.getCustomerAndCard[0].customerId
+
+    console.log('Customer Id >>>' , servicePrice)
 
 
     console.log('Card id is >>' , newDateTime )
@@ -56,8 +59,8 @@ const ConfirmBooking = (props) =>{
                         {
                             variables:{
                                 salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
-                                , services: [serviceId] , cardId: selectedCard.cardId , 
-                                appointmentDateTime: newDateTime , price: servicePrice
+                                , services: [serviceId] , cardId: selectedCard.cardId , customerId: customerId ,
+                                appointmentDateTime: newDateTime , amount: servicePrice*100
                             },
                             context:{
                                 headers:{
@@ -133,7 +136,7 @@ const ConfirmBooking = (props) =>{
                             <AwsomeIcon name='cc-visa' size={50} color='blue' />
                         </View>
                         <View>
-                            <Text style={{fontSize:25,fontWeight:'bold'}}>{`***${selectedCard.number}`}</Text>
+                            <Text style={{fontSize:25,fontWeight:'bold'}}>{`***${selectedCard.last4}`}</Text>
                         </View>
                     </View>
                 </View>
@@ -192,7 +195,8 @@ const mapStateToProps = (state) =>{
         stylist: state.selectedStylistBookingReducer ,
         service: state.selectedServiceBookingReducer ,
         dateTime: state.selectedDateTimeBookingReducer ,
-        token: state.mfaReducer.token
+        token: state.mfaReducer.token,
+        userPaymentCards: state.userPaymentCardReducer
     }
 }
 
