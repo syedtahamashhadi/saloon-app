@@ -96,7 +96,7 @@ const ConfirmBooking = (props) =>{
     React.useEffect(()=>{
         if(data){
             console.log('Appointment is added >>' , data)
-            props.navigation.replace('SaloonNavigation')
+            props.navigation.replace('CurrentBookings')
         // props.navigation.navigate('')
         }
     },[data])
