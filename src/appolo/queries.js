@@ -89,7 +89,7 @@ const Queries = {
                             treatment
                             status
                             timeZone
-                            price
+                            amount
                             isReward
                             isPromoCode
                             createdAt

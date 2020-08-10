@@ -65,7 +65,7 @@ export default function AdvanceTreatmentFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={30}
+                swipeSpeedMultiplier={40}
                 onScrollEnd={(item)=>setMainText(item)}
 
                 // visiblityPadding={4}

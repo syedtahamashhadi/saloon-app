@@ -56,6 +56,7 @@ import FooterBar from '../component/FooterBar'
 import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
 import NotificationSettings from '../screen/NotificationSettings'
 import Notifications from '../screen/Notifications'
+import CameraScreen from '../screen/CameraScreen'
 // import Testing from '../screen/Testing'
 
 
@@ -136,6 +137,7 @@ const UserNav = (props) =>{
                         <Stack.Screen name= 'TosPpNavigation' component={TosPpNavigation}/>
                         <Stack.Screen name='NotificationSettings' component={NotificationSettings}/>
                         <Stack.Screen name='Notifications' component={Notifications}/>
+                        <Stack.Screen name='CameraScreen' component={CameraScreen}/>
 
                     </React.Fragment>
 

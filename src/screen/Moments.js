@@ -21,6 +21,7 @@ export default function Moments(props) {
     const [beforeImageUrl,setBeforeImageUrl] = useState(null)
     const [afterImageUrl,setAfterImageUrl] = useState(null)
 
+    const name = 'Raheem'
 
 
     const [addMoments , { data , loading , error  }] = useMutation(Mutations.ADD_MOMENTS)
@@ -109,6 +110,10 @@ export default function Moments(props) {
       
     }
 
+    const openCameraScreen = () =>{
+        props.navigation.navigate('CameraScreen')
+    }
+
       
     const handleUpload = () =>{
 
@@ -180,7 +185,7 @@ export default function Moments(props) {
                     <Text style={styles.fontSize_40}>Moments</Text>
                     <Text style={styles.fontSize_20}>Before & After Selfies</Text>
                 </View>
-                <TouchableOpacity onPress={()=>handleUpload()}>
+                <TouchableOpacity onPress={openCameraScreen}>
                     <Icon style={styles.cameraIcon} size={20} name='camera'/>
                 </TouchableOpacity>
             </View>

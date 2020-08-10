@@ -76,7 +76,7 @@ export default function AdvanceCircleFilter(){
                 keyExtractor={item => item.id}
                 renderItem={renderItem}
                 containerStyle={styles.circleContainer}
-                swipeSpeedMultiplier={30}
+                swipeSpeedMultiplier={50}
                 onScrollEnd={(item)=>setMainText(item)}
             />
         

@@ -28,6 +28,9 @@ const SaloonList = (props) =>{
             
             <View style={{marginHorizontal:20}}>
                 <HomeScreenBanner nav={props.navigation}/>
+                {/* <MapHeader name={name} imgUri={imgUri} nav={props} 
+                    handleFilterPress={handleFilterPress}
+                /> */}
             </View>
         
             <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:40 , marginHorizontal:20}}>

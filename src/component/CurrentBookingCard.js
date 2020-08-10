@@ -52,7 +52,7 @@ const CurrentBookingCard = (props) =>{
                 <View style={{width:'74.5%',height:60,backgroundColor:'#fcfcfc',marginLeft:10,flexDirection:'column'}}>
                     <View style={{flexDirection:'row' , justifyContent:'space-between',flex:1,backgroundColor:'#fcfcfc'}}>
     <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{props.detail.services[0].name}</Text>
-                        <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${props.detail.price}`}</Text>
+                        <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${props.detail.amount/100}`}</Text>
                     </View>
 
                     <View style={{flexDirection:'row' , justifyContent:'space-between',marginBottom:14}}>

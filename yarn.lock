@@ -5900,6 +5900,16 @@ expo-calendar@^8.1.0:
   resolved "https://registry.yarnpkg.com/expo-calendar/-/expo-calendar-8.1.0.tgz#367d51481a1aad9e3d87459f680398872990af4d"
   integrity sha512-9qP7s9zF/0wFwzrWIDV7S+pDrqgUD6lDIZaAsLYIH6zaYqanafQkAPASOyTm7QbtkboVE5MCZ7LdqsBS+UdbNA==
 
+expo-camera@^8.3.1:
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.3.1.tgz#e17c080c4aafd71f66495c2b6dfc53dcd31b0368"
+  integrity sha512-weFanDVsJKAbm5g90zWIUD4zVrXKoQq7g2BTg4zy4p24YsGfXKYRH4ja0YRgr3Ci/abGaaRNZjsPMJiNskR+tA==
+  dependencies:
+    fbjs "1.0.0"
+    invariant "2.2.4"
+    lodash "^4.6.0"
+    prop-types "^15.6.0"
+
 expo-cli@^3.21.5:
   version "3.21.5"
   resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-3.21.5.tgz#92f01b88476804757529b09e7b03d7844df1fa84"
@@ -6027,6 +6037,11 @@ expo-location@^8.1.0, expo-location@~8.1.0:
   integrity sha512-G9JvsK1t9Z5Iybf+FCG81Jgm9Ee9leqpazxOPVabUJEWu/55Iex3yLGX04BuIA4ozAlJKBPzkhPdyqKdC7zrSw==
   dependencies:
     invariant "^2.2.4"
+
+expo-media-library@^8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-8.4.0.tgz#3aafe558c9da581dc166518a3a26ba5af94cb87f"
+  integrity sha512-B7ui4nPtDdqZsVC6AvfaS231Do+njZRHEHlqxMpT9KFLIN+a2+2xNTNXvDwWC19td5CRK5Cnb78IEfzRUag9AQ==
 
 expo-permissions@~8.1.0:
   version "8.1.0"

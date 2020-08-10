@@ -24,9 +24,9 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-nativ
             <View >
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => {
-                        this.numberCarousel.scrollToIndex(index);
-                    }}
+                    // onPress={() => {
+                    //     this.numberCarousel.scrollToIndex(index);
+                    // }}
                 >
                     <View style={styles.promoCard}>
                         <ImageBackground source={{ uri : item.pictureURL}} style={styles.image}>

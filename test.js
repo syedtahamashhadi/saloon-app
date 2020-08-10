@@ -33,6 +33,7 @@ var moment = require('moment');
 // let regex = '/^\d{2}\-\d{2}$/'
 
 let val = '02-04'
+let name = 'Raheem'
 
 // let check = regex === val ? 'matched' : 'not-matched'
 console.log(val.slice(3,5))
