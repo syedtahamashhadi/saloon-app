@@ -194,6 +194,16 @@ const Mutations = {
     
     ` ,
 
+    APPLY_PROMO_CODE : gql `
+                        mutation abc($price: Float , $promoCode: String) {
+                            applyPromoCode(price:$price, promoCode: $promoCode)
+                            {
+                            _id
+                            discountedPrice
+                            }  
+                        }
+    `
+
 } 
 
 export default Mutations ;

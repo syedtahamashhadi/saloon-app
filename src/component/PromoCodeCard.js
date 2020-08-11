@@ -1,13 +1,24 @@
 import React from 'react';
 const {width, height} = Dimensions.get('window')
-import {View, Text, ImageBackground, StyleSheet, Dimensions } from 'react-native';
+import {View, Text, ImageBackground, StyleSheet, Dimensions , Clipboard} from 'react-native';
 import promoCodeImage from '../../assets/barber-shave.jpg'
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import SafeAreaView from "react-native-safe-area-view";
 import { BlurView } from 'expo-blur';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const PromoCodeCard = (props) => {
+    console.log('Props >>>> ' , props)
+
+
+    const copyToClipBoard = (text) =>{
+        console.log('Text >>>>' , text)
+        Clipboard.setString(text)
+    }
+
+
+
     return (
         // <SafeAreaProvider>
             <SafeAreaView forceInset={{ top: 'always' }} style={{flex: 1}}>
@@ -15,12 +26,23 @@ const PromoCodeCard = (props) => {
 
                 <View style={styles.promoCard}>
                     <ImageBackground source={{uri : props.detail.pictureURL}} style={styles.image}>
-                        <View style={styles.flexColumn}>
-                        <Text style={styles.badge}>{`${props.detail.discount}%`}</Text>
-                        <BlurView intensity={100} style={styles.cardBottom}>
-                            <Text style={styles.fontSize_25}>Happy Movemeber</Text>
-                            <Text style={{color: 'white'}}>22 Powlowski Plains</Text>
-                        </BlurView>
+                        <View style={{width:'100%',height:'100%'}}>
+                            <Text style={styles.badge}>{`${props.detail.discount}%`}</Text>
+
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={()=>{copyToClipBoard(props.detail.code)}}
+                            >
+                            <Text style={{textAlign:'center',marginTop:'13%',fontFamily:'ExoBold',fontSize:18,color: 'black'}}>
+                                {/* Cx8D5zlsK */}
+                                {props.detail.code}
+                            </Text>
+                            </TouchableOpacity>
+                            {/* <View style={{justifyContent:'center',backgroundColor:'green',width:'100%',height:'100%'}}>
+                                <Text style={{textAlign:'center',fontFamily:'ExoBold'}}>
+                                    Cxas865
+                                </Text>
+                            </View> */}
                         </View>
                     </ImageBackground>
                 </View>
@@ -40,12 +62,15 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         overflow: 'hidden',
         width: (width - 40),
-        height: (180),
-        resizeMode: 'cover'
+        height: (190),
+        resizeMode: 'cover',
+        borderWidth:0.5,
+        elevation:5
     },
     flexColumn: {
-        flex: 1,
-        justifyContent: 'space-between',
+        // flex: 1,
+        color:'black'
+        // justifyContent: 'space-between',
     },
     badge: {
         backgroundColor: '#49D3CE',

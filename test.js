@@ -38,6 +38,17 @@ let name = 'Raheem'
 // let check = regex === val ? 'matched' : 'not-matched'
 console.log(val.slice(3,5))
 
+const date = new Date()
+
+const expiry = new Date(date)
+
+let tme =  date.getTime()
+console.log(new Date(tme))
+console.log('time =>',tme)
+let myDate = moment().format('YYYY-MM-DD')
+
+
+console.log('Date >>>' , date)
 
 // let regex = '/^[0-9]{3, 4}$/'
 // let val = '235'

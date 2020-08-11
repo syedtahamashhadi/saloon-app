@@ -66,7 +66,7 @@ const PromoCode = (props) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.header}>
-                <Text style={styles.fontSize_30}>Promo Code</Text>
+                <Text style={[styles.fontSize_30]}>Promo Code</Text>
             </View>
 
             {data && <PromoCardCarousel detail={data.getPromoCode}/> }
@@ -79,6 +79,10 @@ const PromoCode = (props) => {
                     {
                         data && data.getPromoCode.map((val,index)=>{
                             console.log('Promo Code Data >>>>>>' , val)
+                            let date = new Date()
+                            let currentDateIntoTime = date.getTime()
+                            let expDateIntoTime = new Date(val.expiredAt).getTime()
+                            console.log('Exp Date >>',expDateIntoTime , ' Current Time  ' , currentDateIntoTime)
                             return(
                                 <PromoCodeCard detail={val}/>
 

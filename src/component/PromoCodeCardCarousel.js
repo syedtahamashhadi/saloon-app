@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Dimensions, ImageBackground} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Dimensions, ImageBackground , Clipboard} from 'react-native';
 import Carousel from 'react-native-anchor-carousel';
 const { width, height } = Dimensions.get('window');
 import data from './Data';
@@ -12,6 +12,11 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-nativ
 
     handleBookNow = (props) => {
         this.props.navigation.navigate('PromoCode')
+    }
+
+    copyToClipBoard = (text) =>{
+        console.log('Text >>>>' , text)
+        Clipboard.setString(text)
     }
 
     // console.log('Promocode Props >>')
@@ -30,12 +35,19 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-nativ
                 >
                     <View style={styles.promoCard}>
                         <ImageBackground source={{ uri : item.pictureURL}} style={styles.image}>
-                            <View style={styles.flexColumn}>
+                            <View style={{width:'100%',height:'100%'}}>
                                 <Text style={styles.badge}>{`${item.discount}%`}</Text>
-                                <BlurView intensity={100} style={styles.cardBottom}>
+                                {/* <BlurView intensity={100} style={styles.cardBottom}>
                                     <Text style={styles.fontSize_25}>Happy Movemeber</Text>
-                                    <Text style={{color: 'white'}}>22 Powlowski Plains</Text>
-                                </BlurView>
+                                    <Text style={{color: 'black'}}>22 Powlowski Plains</Text>
+                                </BlurView> */}
+                                <TouchableOpacity
+                                    onPress={()=>this.copyToClipBoard(item.code)}
+                                >
+                                <Text style={{textAlign:'center',marginTop:'8%',fontFamily:'ExoBold',fontSize:18,color: 'black'}}>
+                                    {item.code}
+                                </Text>
+                                </TouchableOpacity>
                             </View>
                         </ImageBackground>
                     </View>
@@ -78,9 +90,14 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         overflow: 'hidden',
         width: wp('80%'),
-        height: hp('30%'),
+        height: hp('24%'),
         resizeMode: 'cover',
-        marginRight: 0
+        marginRight: 0,
+        borderWidth:0.5,
+        elevation:5
+        // marginTop:30,
+        // backgroundColor:'red',
+        // marginVertical:50
     },
     flexColumn: {
         flex: 1,

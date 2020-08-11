@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , StyleSheet , TouchableOpacity , ScrollView} from 'react-native'
+import {View , Text , StyleSheet , TouchableOpacity , ScrollView , Clipboard} from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import ConfirmBookingCard from '../component/ConfirmBookingCard'
 import Button from '../component/Button'
@@ -11,17 +11,26 @@ import Mutations from '../appolo/mutations'
 import GestureRecognizer from 'react-native-swipe-gestures'
 
 
-
 const ConfirmBooking = (props) =>{
 
     console.log('Date Time Props' , props)
 
+    const [promoCode,setPromoCode]=React.useState('')
+    const [servicePrice,setServicePrice]=React.useState(props.service.data.price)
+    // const [discountedPrice,]
+
     const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
+    // const [applyPromoCode , { data : dataPromoCode , loading : loadingPromoCode , error: errorPromoCode }] = useMutation(Mutations.APPLY_PROMO_CODE)
 
 
     console.log('Data is >>' , data)
     console.log('Loading is >>' , loading)
     console.log('Error is >>' , error)
+
+    // console.log('Data is >>' , dataPromoCode)
+    // console.log('Loading is >>' , loadingPromoCode)
+    // console.log('Error is >>' , errorPromoCode)
+
 
 
     const [pageView,setPageView] = React.useState(3)
@@ -37,7 +46,7 @@ const ConfirmBooking = (props) =>{
     let stylistName = `${props.stylist.data.firstName} ${props.stylist.data.lastName}`
     let serviceId = props.service.data._id
     let serviceName = props.service.data.name
-    let servicePrice = props.service.data.price
+    // let servicePrice = props.service.data.price
     let duration = props.service.data.approxTime
     let customerId = props.userPaymentCards.data.getCustomerAndCard[0].customerId
 
@@ -60,7 +69,7 @@ const ConfirmBooking = (props) =>{
                             variables:{
                                 salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
                                 , services: [serviceId] , cardId: selectedCard.cardId , customerId: customerId ,
-                                appointmentDateTime: newDateTime , amount: servicePrice*100
+                                appointmentDateTime: newDateTime , amount: servicePrice*100 
                             },
                             context:{
                                 headers:{
@@ -68,7 +77,7 @@ const ConfirmBooking = (props) =>{
                                 }
                             }
                         }
-                    )
+                    ) 
                 }
             } catch (error) {
                 console.log(error)
@@ -77,20 +86,6 @@ const ConfirmBooking = (props) =>{
         }
         getToken()
 
-        // loading !== true && addAppointment(
-        //     {
-        //         variables:{
-        //             salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
-        //             , services: [serviceId] , cardId: selectedCard.cardId , appointmentDateTime: newDateTime ,
-        //             price: servicePrice
-        //         },
-        //         context:{
-        //             headers:{
-        //                 authorization: props.token
-        //             }
-        //         }
-        //     }
-        // )
     }
    
     React.useEffect(()=>{
@@ -99,6 +94,9 @@ const ConfirmBooking = (props) =>{
             props.navigation.replace('CurrentBookings')
         // props.navigation.navigate('')
         }
+        // else if(dataPromoCode){
+        //     console.log('Data Promo Code >>', dataPromoCode)
+        // }
     },[data])
 
     const onSwipeUp = () =>{
@@ -116,6 +114,9 @@ const ConfirmBooking = (props) =>{
         velocityThreshold: 0.3,
         directionalOffsetThreshold: 80
     };
+
+
+  
 
     return(
         <View style={styles.container}>
@@ -148,6 +149,8 @@ const ConfirmBooking = (props) =>{
                 config={config}
                 style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}
             >
+                {/* <ScrollView></ScrollView> */}
+
             {/* <View style={{flex:6.5,backgroundColor:'#fff', elevation:25,borderTopLeftRadius:15,borderTopRightRadius:15 }}> */}
                 <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:10}}>
@@ -156,6 +159,7 @@ const ConfirmBooking = (props) =>{
                         <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                     </View>
                 </TouchableOpacity>
+                <ScrollView>
 
                 <View style={{marginTop:10,alignItems:'center'}}>
                     <Text style={{fontSize:18,fontFamily:'ExoBold'}}>Confirmed time:</Text>
@@ -175,14 +179,20 @@ const ConfirmBooking = (props) =>{
                         duration={duration}
                         staff={stylistName}
                         total={`£ ${servicePrice}`}
+                        price={servicePrice}
+                        discountedPrice={setServicePrice}
+                        handleChangeText={setPromoCode}
+                        promoCode={promoCode}
+                        // handleApplyPromoCode={handleApplyPromoCode}
                     />
-
                 </View>
+                
                 
                 <View style={{marginTop:15 , marginHorizontal:20}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
             {/* </View> */}
+            </ScrollView>
             </GestureRecognizer>
 
         </View>
