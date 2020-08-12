@@ -3,6 +3,7 @@ import {View , Text , StyleSheet , TextInput , TouchableOpacity , ActivityIndica
 import AsyncStorage from '@react-native-community/async-storage'
 import { useMutation , useLazyQuery } from '@apollo/react-hooks'
 import Mutations from '../appolo/mutations'
+import {connect} from 'react-redux'
 
 const ConfirmBookingCard = (props) =>{
 
@@ -51,6 +52,10 @@ const ConfirmBookingCard = (props) =>{
             alert('Promo Code is not Valid!')
         }
     },[data,error])
+
+    React.useEffect(()=>{
+        props.handleChangeText(props.copiedPromoCode)
+    },[])
 
     return(
         // <View style={styles.container}>
@@ -102,7 +107,7 @@ const ConfirmBookingCard = (props) =>{
                                 placeholderTextColor='#F1F3F8'
                                 // fontFamily='ExoBold'
                             />
-                            {/* <Text>test</Text> */}
+                            {/* <Text style={{fontSize:16,fontFamily:'ExoBold'}}>test</Text> */}
                         </View>
             
                         <View style={{width:'100%',alignItems:'flex-end',marginTop:3}}>
@@ -131,7 +136,13 @@ const ConfirmBookingCard = (props) =>{
     )
 }
 
-export default ConfirmBookingCard;
+const mapStateToProps = (state) =>{
+    return{
+        copiedPromoCode : state.setPromoCodeCopiedReducer.data
+    }
+}
+
+export default connect(mapStateToProps,null)(ConfirmBookingCard);
 
 const styles = StyleSheet.create(
     {

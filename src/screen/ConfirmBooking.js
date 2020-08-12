@@ -94,6 +94,7 @@ const ConfirmBooking = (props) =>{
     React.useEffect(()=>{
         if(data){
             console.log('Appointment is added >>' , data)
+            props.copiedPromoCode(null)
             props.navigation.replace('CurrentBookings')
         // props.navigation.navigate('')
         }
@@ -212,7 +213,9 @@ const mapStateToProps = (state) =>{
         service: state.selectedServiceBookingReducer ,
         dateTime: state.selectedDateTimeBookingReducer ,
         token: state.mfaReducer.token,
-        userPaymentCards: state.userPaymentCardReducer
+        userPaymentCards: state.userPaymentCardReducer ,
+        copiedPromoCode : state.setPromoCodeCopiedReducer.data
+
     }
 }
 
