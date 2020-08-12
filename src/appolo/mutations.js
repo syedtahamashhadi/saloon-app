@@ -106,28 +106,6 @@ const Mutations = {
     ` ,
 
 
-    // ADD_APPOINMENT : gql `
-    //                     mutation abc($salonId: String! , $serviceProviderId: String! , 
-    //                             $timeZone: String! , $services: [String] , $cardId: String! , $appointmentDateTime: DateTime! ,
-    //                             $price: Float!) {
-    //                         addAppointment(salonId:$salonId, 
-    //                     serviceProviderId: $serviceProviderId , timeZone: $timeZone, 
-    //                         services: $services, cardId: $cardId, appointmentDateTime: $appointmentDateTime, price:$price)
-    //                         {
-    //                         status
-    //                         salon
-    //                         {
-    //                             displayName
-    //                         }
-    //                         services{
-    //                             _id
-    //                             name
-    //                             discription
-    //                         }
-    //                         }  
-    //                     } 
-    // ` ,
-
     ADD_APPOINMENT : gql `
                         mutation abc($salonId: String! , $serviceProviderId: String! , 
                                 $timeZone: String! , $services: [String] , $cardId: String! , $customerId: String!
