@@ -12,9 +12,14 @@ const PromoCodeCard = (props) => {
     console.log('Props >>>> ' , props)
 
 
+    // const [copiedCode,setCopiedCode] = React.useState(null)
+
+
     const copyToClipBoard = (text) =>{
         console.log('Text >>>>' , text)
         Clipboard.setString(text)
+        props.setCode(text)
+        // setCopiedCode(text)
     }
 
 
@@ -27,10 +32,13 @@ const PromoCodeCard = (props) => {
                 <View style={styles.promoCard}>
                     <ImageBackground source={{uri : props.detail.pictureURL}} style={styles.image}>
                         <View style={{width:'100%',height:'100%'}}>
-                            <Text style={styles.badge}>{`${props.detail.discount}%`}</Text>
+                            <Text style={styles.badge}>{props.detail.couponType == "percentage" ? `${props.detail.discount}%` : 
+                                `£${props.detail.discount}`}</Text>
+
+                            {/* <BlurView intensity={50} style={styles.cardBottom}> */}
 
                             <TouchableOpacity
-                                activeOpacity={0.8}
+                                activeOpacity={0.2}
                                 onPress={()=>{copyToClipBoard(props.detail.code)}}
                             >
                             <Text style={{textAlign:'center',marginTop:'13%',fontFamily:'ExoBold',fontSize:18,color: 'black'}}>
@@ -43,6 +51,9 @@ const PromoCodeCard = (props) => {
                                     Cxas865
                                 </Text>
                             </View> */}
+                        {props.copiedCode == props.detail.code && <Text style={{fontSize:12,textAlign:'center'}}>Copied</Text>}
+                        {/* </BlurView> */}
+
                         </View>
                     </ImageBackground>
                 </View>
@@ -89,6 +100,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor:'black'
     },
     fontSize_25:{
         fontSize: 20,

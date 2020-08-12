@@ -70,6 +70,10 @@ const USER_PAYMENT_CARDS = {
     SUCCESS: 'USER_PAYMENT_CARDS_SUCCESS'
 }
 
+const SET_PROMO_CODE_COPIED = {
+    SUCCESS: 'SET_PROMO_CODE_COPIED_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -85,6 +89,7 @@ export {SIGNUP ,
         SET_FAV_SALOON ,
         SET_IS_LOGIN ,
         SET_FILTER_VIEW ,
-        USER_PAYMENT_CARDS
+        USER_PAYMENT_CARDS ,
+        SET_PROMO_CODE_COPIED
     }
 

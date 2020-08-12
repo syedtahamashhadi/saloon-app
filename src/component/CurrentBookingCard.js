@@ -32,7 +32,7 @@ const CurrentBookingCard = (props) =>{
         <TouchableOpacity onPress={()=>props.nav.navigate('BookingDetail',
                                                             {
                                                                 style: props.detail.services[0].name,
-                                                                amount: props.detail.price,
+                                                                amount: props.detail.amount,
                                                                 dateTime: `${date.slice(2,4)} ${convertingMonth(month)}, ${time} PM`,
                                                                 stylist: props.detail.serviceProvider,
                                                                 salon: props.detail.salon,
@@ -52,7 +52,7 @@ const CurrentBookingCard = (props) =>{
                 <View style={{width:'74.5%',height:60,backgroundColor:'#fcfcfc',marginLeft:10,flexDirection:'column'}}>
                     <View style={{flexDirection:'row' , justifyContent:'space-between',flex:1,backgroundColor:'#fcfcfc'}}>
     <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{props.detail.services[0].name}</Text>
-                        <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${props.detail.amount/100}`}</Text>
+                        <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${props.detail.amount}`}</Text>
                     </View>
 
                     <View style={{flexDirection:'row' , justifyContent:'space-between',marginBottom:14}}>

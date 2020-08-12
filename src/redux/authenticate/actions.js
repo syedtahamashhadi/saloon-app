@@ -14,6 +14,7 @@ import { SIGNIN ,
     SET_IS_LOGIN ,
     SET_FILTER_VIEW ,
     USER_PAYMENT_CARDS ,
+    SET_PROMO_CODE_COPIED ,
 } from './constants'
 
 
@@ -226,6 +227,15 @@ const userPaymentCardSuccess = (data) =>{
     }
 }
 
+/************************** Set Promo Code Copied  *********************/
+
+const setPromoCodeCopied = (data) =>{
+    return{
+        type: SET_PROMO_CODE_COPIED.SUCCESS,
+        payLoad: data
+    }
+}
+
 export {
     signUpSuccess,
     loginSuccess,
@@ -243,4 +253,5 @@ export {
     setIsLogin ,
     setIsFilterView ,
     userPaymentCardSuccess ,
+    setPromoCodeCopied ,
 }
