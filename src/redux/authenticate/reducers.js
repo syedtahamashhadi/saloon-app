@@ -14,6 +14,7 @@ import { SIGNUP,
          SET_IS_LOGIN ,
          SET_FILTER_VIEW ,
          USER_PAYMENT_CARDS ,
+         SET_PROMO_CODE_COPIED ,
         } from './constants';
 
 
@@ -339,6 +340,25 @@ const userPaymentCardReducer =(state = userPaymentCardInitialState , action) =>{
     }
 }
 
+
+/************************** Set Promo Code Copied  *********************/
+
+const setPromoCodeCopiedInitialState ={
+    data : null
+}
+
+
+const setPromoCodeCopiedReducer = (state= setPromoCodeCopiedInitialState , action) =>{
+    switch (action.type) {
+        case SET_PROMO_CODE_COPIED.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default: return state;
+    }
+}
+
 export {
     signUpReducer,
     loginReducer,
@@ -356,5 +376,5 @@ export {
     setIsLoginReducer ,
     setIsFilterViewReducer ,
     userPaymentCardReducer ,
-    // setHeaderReducer ,
+    setPromoCodeCopiedReducer ,
 }

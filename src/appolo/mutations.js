@@ -109,11 +109,11 @@ const Mutations = {
     ADD_APPOINMENT : gql `
                         mutation abc($salonId: String! , $serviceProviderId: String! , 
                                 $timeZone: String! , $services: [String] , $cardId: String! , $customerId: String!
-                                 $appointmentDateTime: DateTime! , $amount: Float!) {
+                                 $appointmentDateTime: DateTime! , $amount: Float! , $promoCode: String) {
                             addAppointment(salonId:$salonId, 
                         serviceProviderId: $serviceProviderId , timeZone: $timeZone, 
                             services: $services, cardId: $cardId, customerId: $customerId, 
-                                appointmentDateTime: $appointmentDateTime, amount:$amount)
+                                appointmentDateTime: $appointmentDateTime, amount:$amount, promoCode:$promoCode)
                             {
                             status
                             salon
@@ -160,8 +160,8 @@ const Mutations = {
     ` ,
 
     ADD_PAYMENT_CARD : gql `
-                        mutation abc($number: String , $exp_month: String , $exp_year: String , $cvc: String) {
-                            addCardToken(number: $number, exp_month: $exp_month  , exp_year: $exp_year , cvc: $cvc)
+                        mutation abc($number: String , $exp_month: String , $exp_year: String , $cvc: String , $cardHolderName: String) {
+                            addCardToken(number: $number, exp_month: $exp_month  , exp_year: $exp_year , cvc: $cvc , cardHolderName:$cardHolderName)
                             {
                             cards{
                                 cardId

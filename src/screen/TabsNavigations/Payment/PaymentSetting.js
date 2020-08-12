@@ -31,7 +31,8 @@ const PaymentSetting= () =>{
                 loading !== true && addPaymentCard(
                     {
                         variables:{
-                            number: number , exp_month: expDate.slice(0,2) , exp_year: `20${expDate.slice(3,5)}` , cvc: cv
+                            number: number , exp_month: expDate.slice(0,2) , 
+                            exp_year: `20${expDate.slice(3,5)}` , cvc: cv , cardHolderName: name
                         },
                         context:{
                             headers:{

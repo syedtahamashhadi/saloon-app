@@ -7,6 +7,7 @@ import {SafeAreaProvider} from "react-native-safe-area-context";
 import PromoCodeCard from "../component/PromoCodeCard";
 import PromoCardCarousel from "../component/PromoCodeCardCarousel";
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import {setPromoCodeCopied} from '../redux/authenticate/actions'
 import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { useLinkProps } from '@react-navigation/native';
@@ -28,6 +29,8 @@ const GET_PROMO_CODE = gql `
 }
 `
 const PromoCode = (props) => {
+
+    const [copiedCode,setCopiedCode] = React.useState(null)
 
     const [getPromoCodeQuery,{data , loading , error}] = useLazyQuery(GET_PROMO_CODE)
 
@@ -56,6 +59,12 @@ const PromoCode = (props) => {
         }
         getToken()
     },[])
+
+    React.useEffect(()=>{
+        if(copiedCode){
+            props.copyPromoCode(copiedCode)
+        }
+    },[copiedCode])
     
     return (
     
@@ -69,23 +78,23 @@ const PromoCode = (props) => {
                 <Text style={[styles.fontSize_30]}>Promo Code</Text>
             </View>
 
-            {data && <PromoCardCarousel detail={data.getPromoCode}/> }
+            {/* {data && <PromoCardCarousel detail={data.getPromoCode}/> } */}
 
             <View>
-                <View style={styles.header}>
+                {/* <View style={styles.header}>
                     <Text style={styles.fontSize_20}>NEAR YOU</Text>
-                </View>
+                </View> */}
                 <ScrollView style={styles.momentsHeader}>
                     {
                         data && data.getPromoCode.map((val,index)=>{
                             console.log('Promo Code Data >>>>>>' , val)
-                            let date = new Date()
-                            let currentDateIntoTime = date.getTime()
-                            let expDateIntoTime = new Date(val.expiredAt).getTime()
-                            console.log('Exp Date >>',expDateIntoTime , ' Current Time  ' , currentDateIntoTime)
+                            // let date = new Date()
+                            // let currentDateIntoTime = date.getTime()
+                            // let expDateIntoTime = new Date(val.expiredAt).getTime()
+                            // console.log('Exp Date >>',expDateIntoTime , ' Current Time  ' , currentDateIntoTime)
+                            
                             return(
-                                <PromoCodeCard detail={val}/>
-
+                               <PromoCodeCard detail={val} setCode={setCopiedCode} copiedCode={copiedCode}/>
                             )
 
                         })
@@ -113,7 +122,7 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     momentsHeader: {
-        height: hp('50%'),
+        height: hp('100%'),
     },
 })
 
@@ -123,4 +132,10 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps,null)(PromoCode)
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        copyPromoCode: (data)=> dispatch(setPromoCodeCopied(data))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PromoCode)

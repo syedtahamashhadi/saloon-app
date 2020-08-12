@@ -45,8 +45,10 @@ const ConfirmBookingCard = (props) =>{
 
     React.useEffect(()=>{
         if(data){
-            console.log('Data >>>')
+            console.log('Data >>>', data)
             props.discountedPrice(data.applyPromoCode.discountedPrice)
+        }else if(error){
+            alert('Promo Code is not Valid!')
         }
     },[data,error])
 
@@ -81,10 +83,10 @@ const ConfirmBookingCard = (props) =>{
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:8}}>
                             <Text style={{fontSize:15,color:'grey',fontFamily:'ExoRegular'}}>Total:</Text>
-                                {/* {(data && data.applyPromoCode.discountedPrice) ? 
+                                {data  ? 
                                     <Text style={{fontSize:16,fontFamily:'ExoBold'}}>{`£ ${data.applyPromoCode.discountedPrice}`}</Text>
-                                    :<Text style={{fontSize:16,fontFamily:'ExoBold'}}>{props.total}</Text>} */}
-                                    <Text style={{fontSize:16,fontFamily:'ExoBold'}}>{props.total}</Text>
+                                    :<Text style={{fontSize:16,fontFamily:'ExoBold'}}>{props.total}</Text>}
+                                    {/* <Text style={{fontSize:16,fontFamily:'ExoBold'}}>{props.total}</Text> */}
 
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:8}}>
@@ -113,7 +115,7 @@ const ConfirmBookingCard = (props) =>{
                                             alignItems:'center',borderRadius:15,backgroundColor:'#49D3CE',marginBottom:8,marginRight:-4
                                 }}
                                 activeOpacity={0.7}
-                                onPress={()=>{handleApplyPromoCode()}}
+                                onPress={()=>{props.priceAvail == null && handleApplyPromoCode()}}
                             >
 
                                {!loading ? <Text>Apply Code</Text> : <ActivityIndicator size={25} color='#fff'/>}

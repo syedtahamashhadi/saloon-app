@@ -16,8 +16,8 @@ const ConfirmBooking = (props) =>{
     console.log('Date Time Props' , props)
 
     const [promoCode,setPromoCode]=React.useState('')
-    const [servicePrice,setServicePrice]=React.useState(props.service.data.price)
-    // const [discountedPrice,]
+    const [servicePrice,setServicePrice]=React.useState(props.service.data.price/100)
+    const [discountedPrice,setDiscountedPrice]=React.useState(null)
 
     const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
     // const [applyPromoCode , { data : dataPromoCode , loading : loadingPromoCode , error: errorPromoCode }] = useMutation(Mutations.APPLY_PROMO_CODE)
@@ -62,14 +62,17 @@ const ConfirmBooking = (props) =>{
         async function getToken(){
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
-
+                const finalPrice = discountedPrice !== null ? discountedPrice : servicePrice
+                let promoCode = discountedPrice ? promoCode : ''
+                console.log('Final Price >>>' , finalPrice)
                 if(token !== null){
+
                     loading !== true && addAppointment(
                         {
                             variables:{
                                 salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
                                 , services: [serviceId] , cardId: selectedCard.cardId , customerId: customerId ,
-                                appointmentDateTime: newDateTime , amount: servicePrice*100 
+                                appointmentDateTime: newDateTime , amount: finalPrice , promoCode: promoCode
                             },
                             context:{
                                 headers:{
@@ -115,7 +118,9 @@ const ConfirmBooking = (props) =>{
         directionalOffsetThreshold: 80
     };
 
-
+    React.useEffect(()=>{
+        console.log('This is Discounted Price',discountedPrice)
+    },[discountedPrice])
   
 
     return(
@@ -180,7 +185,8 @@ const ConfirmBooking = (props) =>{
                         staff={stylistName}
                         total={`£ ${servicePrice}`}
                         price={servicePrice}
-                        discountedPrice={setServicePrice}
+                        discountedPrice={setDiscountedPrice}
+                        priceAvail={discountedPrice}
                         handleChangeText={setPromoCode}
                         promoCode={promoCode}
                         // handleApplyPromoCode={handleApplyPromoCode}
