@@ -15,6 +15,7 @@ import { SIGNUP,
          SET_FILTER_VIEW ,
          USER_PAYMENT_CARDS ,
          SET_PROMO_CODE_COPIED ,
+         USER_BOOKINGS_LIST ,
         } from './constants';
 
 
@@ -359,6 +360,25 @@ const setPromoCodeCopiedReducer = (state= setPromoCodeCopiedInitialState , actio
     }
 }
 
+/************************** User Booking List  *********************/
+
+const userBookingSuccessInitialState ={
+    data : null
+}
+
+
+const userBookingSuccessReducer = (state= userBookingSuccessInitialState , action) =>{
+    switch (action.type) {
+        case USER_BOOKINGS_LIST.SUCCESS:
+            console.log('Booking List Reducer is Fired >>>' , action.payLoad)
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default: return state;
+    }
+}
+
 export {
     signUpReducer,
     loginReducer,
@@ -377,4 +397,5 @@ export {
     setIsFilterViewReducer ,
     userPaymentCardReducer ,
     setPromoCodeCopiedReducer ,
+    userBookingSuccessReducer ,
 }

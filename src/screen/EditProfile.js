@@ -25,7 +25,7 @@ const EditProfile = (props) =>{
 
 
     const [selectedCard,setSelectedCard] = React.useState(null)
-    const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'CurrentBookings'},
+    const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'BookingsNavigation'},
                         {img:<SvgWhatsNew /> , desc:`What's New` , nav:'WhatsNew'},
     {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},
     {img:<SvgMoments /> , desc:`Moment's` , nav:'Moments'},{img:<SvgRewards /> , desc:'Reward Credits' , nav:'RewardsNavigation'},

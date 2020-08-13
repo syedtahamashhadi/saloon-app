@@ -1,10 +1,11 @@
 import React from 'react';
 const {width, height} = Dimensions.get('window')
-import {View, Text, ImageBackground, StyleSheet, Dimensions , Clipboard} from 'react-native';
+import {View, Text, ImageBackground, StyleSheet, Dimensions , Clipboard, ToastAndroid} from 'react-native';
 import promoCodeImage from '../../assets/barber-shave.jpg'
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import SafeAreaView from "react-native-safe-area-view";
 import { BlurView } from 'expo-blur';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -18,11 +19,12 @@ const PromoCodeCard = (props) => {
     const copyToClipBoard = (text) =>{
         console.log('Text >>>>' , text)
         Clipboard.setString(text)
+        ToastAndroid.show("Copy to Clipboard", ToastAndroid.SHORT);
         props.setCode(text)
         // setCopiedCode(text)
     }
 
-
+    let myBorderColor = props.copiedCode == props.detail.code ? '#49D3CE' : 'black'
 
     return (
         // <SafeAreaProvider>
@@ -30,10 +32,18 @@ const PromoCodeCard = (props) => {
             {/* // <View > */}
 
                 <View style={styles.promoCard}>
-                    <ImageBackground source={{uri : props.detail.pictureURL}} style={styles.image}>
+                    <ImageBackground source={{uri : props.detail.pictureURL}} style={[{borderColor:myBorderColor},styles.image]}>
                         <View style={{width:'100%',height:'100%'}}>
+                        <View style={styles.cardTop}>
                             <Text style={styles.badge}>{props.detail.couponType == "percentage" ? `${props.detail.discount}%` : 
-                                `£${props.detail.discount}`}</Text>
+                                `£${props.detail.discount}`}
+                            </Text>
+                            <View>
+                            {props.copiedCode == props.detail.code && 
+                                <Icon color="#49D3CE" name='copy' size={20}/>}                                
+                            </View>
+                        </View>
+
 
                             {/* <BlurView intensity={50} style={styles.cardBottom}> */}
 
@@ -42,7 +52,6 @@ const PromoCodeCard = (props) => {
                                 onPress={()=>{copyToClipBoard(props.detail.code)}}
                             >
                             <Text style={{textAlign:'center',marginTop:'13%',fontFamily:'ExoBold',fontSize:18,color: 'black'}}>
-                                {/* Cx8D5zlsK */}
                                 {props.detail.code}
                             </Text>
                             </TouchableOpacity>
@@ -51,7 +60,7 @@ const PromoCodeCard = (props) => {
                                     Cxas865
                                 </Text>
                             </View> */}
-                        {props.copiedCode == props.detail.code && <Text style={{fontSize:12,textAlign:'center'}}>Copied</Text>}
+                        
                         {/* </BlurView> */}
 
                         </View>
@@ -67,6 +76,13 @@ const PromoCodeCard = (props) => {
 const styles = StyleSheet.create({
     promoCard:{
         flex: 1,
+        alignItems: 'center'
+    },
+    cardTop: {
+        justifyContent: 'space-between', 
+        flexDirection: 'row', 
+        marginTop: 20, 
+        marginHorizontal: 20,
         alignItems: 'center'
     },
     image:{
@@ -92,8 +108,8 @@ const styles = StyleSheet.create({
         width: 60,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 20,
-        marginLeft: 20
+        // marginTop: 20,
+        // marginLeft: 20
     },
     cardBottom:{
         height: 80,

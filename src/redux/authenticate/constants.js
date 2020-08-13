@@ -74,6 +74,10 @@ const SET_PROMO_CODE_COPIED = {
     SUCCESS: 'SET_PROMO_CODE_COPIED_SUCCESS'
 }
 
+const USER_BOOKINGS_LIST = {
+    SUCCESS: 'USER_BOOKING_LIST_SUCCESS'
+}
+
 export {SIGNUP , 
         SIGNIN ,
         MFA ,
@@ -90,6 +94,7 @@ export {SIGNUP ,
         SET_IS_LOGIN ,
         SET_FILTER_VIEW ,
         USER_PAYMENT_CARDS ,
-        SET_PROMO_CODE_COPIED
+        SET_PROMO_CODE_COPIED ,
+        USER_BOOKINGS_LIST
     }
 

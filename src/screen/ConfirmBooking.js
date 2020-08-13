@@ -64,8 +64,8 @@ const ConfirmBooking = (props) =>{
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
                 const finalPrice = discountedPrice !== null ? discountedPrice : servicePrice
-                let promoCode = discountedPrice ? promoCode : ''
-                console.log('Final Price >>>' , finalPrice)
+                let newPromoCode = discountedPrice !== null ? promoCode : ''
+                console.log('Final Price >>>' , newPromoCode)
                 if(token !== null){
 
                     loading !== true && addAppointment(
@@ -73,7 +73,7 @@ const ConfirmBooking = (props) =>{
                             variables:{
                                 salonId: saloonId , serviceProviderId: stylistId , timeZone: "Karachi"
                                 , services: [serviceId] , cardId: selectedCard.cardId , customerId: customerId ,
-                                appointmentDateTime: newDateTime , amount: finalPrice , promoCode: promoCode
+                                appointmentDateTime: newDateTime , amount: finalPrice , promoCode: newPromoCode
                             },
                             context:{
                                 headers:{
@@ -96,7 +96,7 @@ const ConfirmBooking = (props) =>{
         if(data){
             console.log('Appointment is added >>' , data)
             props.copiedPromoCode(null)
-            props.navigation.replace('CurrentBookings')
+            props.navigation.replace('BookingsNavigation')
         // props.navigation.navigate('')
         }
         // else if(dataPromoCode){

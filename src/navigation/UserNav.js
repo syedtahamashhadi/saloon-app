@@ -57,6 +57,7 @@ import TosPpNavigation from '../screen/TabsNavigations/TOS_PP/TosPpNavigation'
 import NotificationSettings from '../screen/NotificationSettings'
 import Notifications from '../screen/Notifications'
 import CameraScreen from '../screen/CameraScreen'
+import BookingsNavigation from '../screen/TabsNavigations/Bookings/BookingsNavigation'
 // import Testing from '../screen/Testing'
 
 
@@ -138,6 +139,7 @@ const UserNav = (props) =>{
                         <Stack.Screen name='NotificationSettings' component={NotificationSettings}/>
                         <Stack.Screen name='Notifications' component={Notifications}/>
                         <Stack.Screen name='CameraScreen' component={CameraScreen}/>
+                        <Stack.Screen name='BookingsNavigation' component={BookingsNavigation}/>
 
                     </React.Fragment>
 

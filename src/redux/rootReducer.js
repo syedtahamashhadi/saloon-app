@@ -16,7 +16,7 @@ import { loginReducer,
         setIsFilterViewReducer ,
         userPaymentCardReducer ,
         setPromoCodeCopiedReducer ,  
-
+        userBookingSuccessReducer
     } from './authenticate/reducers'
 
 
@@ -39,7 +39,7 @@ const rootReducer = combineReducers(
         setIsFilterViewReducer : setIsFilterViewReducer ,
         userPaymentCardReducer : userPaymentCardReducer ,
         setPromoCodeCopiedReducer : setPromoCodeCopiedReducer ,
-
+        userBookingSuccessReducer : userBookingSuccessReducer ,
     }
 )
 

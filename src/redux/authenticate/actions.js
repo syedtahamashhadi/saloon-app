@@ -15,6 +15,7 @@ import { SIGNIN ,
     SET_FILTER_VIEW ,
     USER_PAYMENT_CARDS ,
     SET_PROMO_CODE_COPIED ,
+    USER_BOOKINGS_LIST ,
 } from './constants'
 
 
@@ -236,6 +237,17 @@ const setPromoCodeCopied = (data) =>{
     }
 }
 
+/************************** User Booking List  *********************/
+
+const userBookingListSuccess = (data) =>{
+    console.log('Booking List Action is Fired >>>' , data)
+
+    return{
+        type: USER_BOOKINGS_LIST.SUCCESS,
+        payLoad: data
+    }
+}
+
 export {
     signUpSuccess,
     loginSuccess,
@@ -254,4 +266,5 @@ export {
     setIsFilterView ,
     userPaymentCardSuccess ,
     setPromoCodeCopied ,
+    userBookingListSuccess
 }

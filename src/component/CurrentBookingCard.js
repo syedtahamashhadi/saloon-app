@@ -29,7 +29,7 @@ const CurrentBookingCard = (props) =>{
     const month = date.slice(0,1)
 
     return(
-        <TouchableOpacity onPress={()=>props.nav.navigate('BookingDetail',
+        <TouchableOpacity onPress={()=>props.isDetailView && props.nav.navigate('BookingDetail',
                                                             {
                                                                 style: props.detail.services[0].name,
                                                                 amount: props.detail.amount,
