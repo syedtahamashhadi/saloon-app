@@ -20,7 +20,7 @@ const Canceled = (props) =>{
 
     React.useEffect(()=>{
         if(props.bookings){
-            const filteredAppointmet = props.bookings.getUserAppointment.filter(val => val.status == 'cancel')
+            const filteredAppointmet = props.bookings.filter(val => val.status == 'cancel')
             setCanceledAppointment(filteredAppointmet)
             console.log('Filter Appointment >>' , filteredAppointmet)
         }
@@ -37,7 +37,7 @@ const Canceled = (props) =>{
                
                <View style={{marginHorizontal:20 , marginTop:25}}>
                 {
-                    canceledAppointment ? canceledAppointment.reverse().map((val,index)=>{
+                    canceledAppointment ? canceledAppointment.map((val,index)=>{
                         //   let component =  val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation}/> : null
                         return(
                             <CurrentBookingCard detail={val} nav={props.navigation} isDetailView={false}/> 

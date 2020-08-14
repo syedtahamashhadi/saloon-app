@@ -16,7 +16,8 @@ import { loginReducer,
         setIsFilterViewReducer ,
         userPaymentCardReducer ,
         setPromoCodeCopiedReducer ,  
-        userBookingSuccessReducer
+        userBookingSuccessReducer ,
+        setCancelAppointmentFlagReducer ,
     } from './authenticate/reducers'
 
 
@@ -40,6 +41,7 @@ const rootReducer = combineReducers(
         userPaymentCardReducer : userPaymentCardReducer ,
         setPromoCodeCopiedReducer : setPromoCodeCopiedReducer ,
         userBookingSuccessReducer : userBookingSuccessReducer ,
+        setCancelAppointmentFlagReducer : setCancelAppointmentFlagReducer ,
     }
 )
 

@@ -34,7 +34,7 @@ const MapHeader = (props) =>{
         console.log('Image is Pressed')
         props.imgUri ? props.nav.navigation.navigate('EditProfile') : Helpers.removeKey('@KOMB_JWT_TOKEN',()=>{
             props.setIsLogin(false)                
-            props.nav.navigation.navigate('SignIn')
+            props.nav.navigation.navigate('SignIn') 
         })
     }
 

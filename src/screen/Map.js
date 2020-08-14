@@ -71,24 +71,17 @@ const Map = (props) =>{
        
     useEffect(()=>{
         if(dataUserDetail){
-            console.log('Data USer Detail Action is Fired >>',dataUserDetail)
             props.userDetail(dataUserDetail)
-            // props.favSaloon(dataUserDetail.getUserProfile.favouriteSaloon)
         }else if(errorUserDetail){
             console.log('User Detail Error >>' , errorUserDetail)
         }
     },[dataUserDetail,errorUserDetail])
-
-    // console.log('Data is >>' , dataNearestSaloon)
-    // console.log('Error is >>' , error)
-    // console.log('Loading is >>' , loading)
 
 
     const getLoc = async() =>{
         let { status } = await Location.requestPermissionsAsync() ;
         if(status !== 'granted'){
             setLocError('Permision To Access Location is Denied')
-            // setUserLat(0.0922) ; setUserLng(0.0421)
             setUserLat(51.5074) ; setUserLng(0.1278)
         }
 
@@ -125,7 +118,6 @@ const Map = (props) =>{
                         }
                     }
                 )
-                // setToken(token)
             }else{
                 console.log('Testing Async')
             }
@@ -135,9 +127,7 @@ const Map = (props) =>{
     }
 
     useEffect(()=>{
-        console.log('Map is Mounted >>>>>>>>>>>>>>>>>>')
         getLoc()
-        // getToken()
     },[])
 
     useEffect(()=>{
@@ -147,40 +137,31 @@ const Map = (props) =>{
     },[userLat , userLng])
 
     const handleFilterPress = () =>{
-        // console.log('Filter View Current State >>>' , filterView)
-        // setFilterView(!filterView)
+      
         filterView == false ? setFilterView(true) : setFilterView(false)
-        // props.filterView == false ? props.setIsFilterView(true) : props.setIsFilterView(false) 
     }
 
     const handleBarPress = () =>{
-        // console.log('Bar is Pressed')
         dataNearestSaloon && props.navigation.navigate('SaloonList',{
             nearestSaloons:dataNearestSaloon.getNearestSalons
         })
     }
 
     const handleMarkerPress = (data) =>{
-        console.log('Saloon Data >>' , data)
         props.selectedSaloon(data)
         props.navigation.navigate('SaloonNavigation')
     }
 
     const handleCurrentLoc =() =>{
-        console.log('Loc is Pressed >>>' , userLng , userLat)
         setCurrentLat(userLat)
         setCurrentLng(userLng)
     }
 
     const handleRegionChanged = (region) =>{
         console.log('Region Changed >>',region)
-        // setCurrentLat(region.latitude)
-        // setCurrentLng(region.longitude)
     }
-    // props.mfa.verifyCode.profileImageURL 
 
     let imgUri = dataUserDetail && dataUserDetail.getUserProfile.profileImageURL
-                // {uri : props.signIn.data.loginUser.profileImageURL } : 
                 
     let name = dataUserDetail ? dataUserDetail.getUserProfile.firstName : ''
 
@@ -213,22 +194,13 @@ const Map = (props) =>{
                         }
                       }
                     showsCompass={false}
-                    // showsUserLocation={true}
-                    // showsMyLocationButton={false}
-                    onRegionChangeComplete={(region)=>{
-                       
-                        handleRegionChanged(region)
-                        // setCurrentLat(region.latitude)
-                        // setCurrentLng(region.longitude)
-                    }
+                
+                    onRegionChangeComplete={(region)=>{ handleRegionChanged(region) }
                     }
                 >
                  {  dataNearestSaloon && dataNearestSaloon.getNearestSalons.map((val,index)=>{
                      let loc = val.location.coordinates 
-                    // let loc = val.loc
-                     console.log('Val is >>',val)
                         return(
-                        // <View key={index}>
                             <Marker
                                 coordinate={
                                     {
@@ -236,20 +208,14 @@ const Map = (props) =>{
                                         longitude:Number(loc[1])
                                     }
                                 }
-                                // tracksViewChanges={false}
-                                // pinColor='red'
-                                // liteMode={true}
                                 onPress={(e)=>console.log('Marker is Pressed >>>>',e.nativeEvent)}
                             > 
-                                {/* <View style={{width:50,height:35}}>
-                                    <SvgMapScisorMarker/>
-                                </View> */}
+                              
                                 <MapMarker />
                                 <Callout tooltip={true} onPress={()=>handleMarkerPress(val)}>
                                         <MyCallOut marker={val} />
                                 </Callout>
                             </Marker>
-                        // </View>
                     ) 
                     })
                    
@@ -258,17 +224,15 @@ const Map = (props) =>{
             </View>
 
             {
-            filterView == false && 
-                <MapFooter 
-                    handleBarPress={handleBarPress}
-                    handleCurrentLoc={handleCurrentLoc}
-                    handleFilterPress={handleFilterPress}
-                />
+                filterView == false && 
+                    <MapFooter 
+                        handleBarPress={handleBarPress}
+                        handleCurrentLoc={handleCurrentLoc}
+                        handleFilterPress={handleFilterPress}
+                    />
             }
 
             {filterView == true ? <AdvanceFilters  handleFilterPress={handleFilterPress}/> : null}
-            {/* {props.filterView == true ? <Text>Testing</Text> : null} */}
-
                 
         </View>
     )

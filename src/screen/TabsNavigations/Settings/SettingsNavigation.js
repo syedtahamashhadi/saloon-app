@@ -1,25 +1,23 @@
 import React from 'react';
 import {View } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import BookingsHeader from './BookingsHeader';
-import Canceled from './Canceled'
-import Scheduled from './Scheduled'
+import BookingsHeader from './SettingsHeader';
+import Languages from './Languages'
+import EditPayment from './EditPayment'
 
 
+const Tab = createMaterialTopTabNavigator(); 
 
-
-const Tab = createMaterialTopTabNavigator();
-
-const BookingsNavigation = (props) =>{
+const SettingsNavigation = (props) =>{
     console.log('Props Nav>>>' , props)
-   
+  
     return (
         // <SafeAreaProvider>
         <View style={{flex:1}}>
             <BookingsHeader nav={props.navigation}/>
             {/* <Text>Test</Text> */}
             <Tab.Navigator
-                initialRouteName="Scheduled"
+                initialRouteName="Languages"
                 tabBarOptions={{
                     animationEnabled: 'false',
                     activeTintColor: '#49d3ce',
@@ -32,19 +30,15 @@ const BookingsNavigation = (props) =>{
                     fontSize: 14,
                     margin: 0,
                     fontFamily:'ExoBold'
-
-
-
-                    // paddingVertical: 10,
                 },
                 }}>
-                <Tab.Screen options={{ tabBarLabel: 'Scheduled'}}
-                            name="Scheduled"
-                            component={Scheduled} />
+                <Tab.Screen options={{ tabBarLabel: 'Languages'}}
+                            name="Languages"
+                            component={Languages} />
 
-                <Tab.Screen options={{ tabBarLabel: `Canceled` }}
-                            name="Canceled"
-                            component={Canceled} />
+                <Tab.Screen options={{ tabBarLabel: `Edit Payment` }}
+                            name="EditPayment"
+                            component={EditPayment} />
                             
             </Tab.Navigator>
         </View>
@@ -53,10 +47,6 @@ const BookingsNavigation = (props) =>{
     );
 }
 
-// const mapDispatchToProps =(dispatch) =>{
-//     return{
-//         header : (data) => dispatch(setTabHeaderSuccess(data))
-//     }
-// }
 
-export default BookingsNavigation ;
+
+export default SettingsNavigation ;

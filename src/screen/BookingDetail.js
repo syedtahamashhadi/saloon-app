@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import Mutations from '../appolo/mutations'
+import {setCancelAppointmentFlagSuccess,userBookingListSuccess} from '../redux/authenticate/actions'
 
 
 const BookingDetail = (props) =>{
@@ -15,10 +16,9 @@ const BookingDetail = (props) =>{
 
     const [cancelAppoinment , {data , loading , error}] = useMutation(Mutations.CANCEL_APPOINMENT)
 
-    const { amount , appointmentId , dateTime , style , salon , stylist , serviceIcon} = props.route.params
+    const { amount , appointmentId , dateTime , style , salon , stylist , serviceIcon , isDetailView} = props.route.params
 
     const handleCancel = () => {
-        console.log('ID and Token >>' , appointmentId , props.token)
 
         async function getToken(){
             console.log('Fired>>>>')
@@ -45,35 +45,21 @@ const BookingDetail = (props) =>{
             }
         }
         getToken()
-        // alert('Handle Cancel')
-        // loading !== true && cancelAppoinment(
-        //     {
-        //         variables:{
-        //             id: appointmentId
-        //         },
-        //         context:{
-        //             headers:{
-        //                 authorization: props.token
-        //             }
-        //         }
-        //     }
-        // )
     };
 
     console.log('Data >>',data)
     console.log('Loading >>',loading)
     console.log('Error >>',error)
 
-
     const handleDelete = () => {
         alert('Handle Delete')
-        console.log('Service Icon >>' , serviceIcon)
     }
     
     React.useEffect(()=>{
         if(data){
-            // alert('Cenceled >>>>')
-            props.navigation.navigate('EditProfile')
+            props.setCancelApointmentFlag(true)
+            // props.bookingsList(data.cancelAppointment)
+            props.navigation.navigate('BookingsNavigation')
         }else if(error){
             alert('Something Went Wrong Try Again !')
         }
@@ -135,29 +121,29 @@ const BookingDetail = (props) =>{
                 <View style={styles.cardBottom} />
             </View>
 
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity>
-                    <Text
-                        style={styles.cancelButton}
-                        onPress={handleCancel}
-                    >
-                        Cancel</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Text
-                        style={styles.deleteButton}
-                        onPress={handleDelete}
-                    >
-                        Delete</Text>
-                </TouchableOpacity>
-            </View>
+                <View style={styles.buttonContainer}>
+                {isDetailView && <TouchableOpacity>
+                        <Text
+                            style={styles.cancelButton}
+                            onPress={handleCancel}
+                        >
+                            Cancel</Text>
+                    </TouchableOpacity>}
+                    {isDetailView && <TouchableOpacity>
+                        <Text
+                            style={styles.deleteButton}
+                            onPress={handleDelete}
+                        >
+                            Delete</Text>
+                    </TouchableOpacity>}
+                </View>
 
                 <View style={styles.bottom}>
-                    <TouchableOpacity onPress={
+                {isDetailView &&<TouchableOpacity onPress={
                                 ()=>props.navigation.navigate('PostpondPickDate',{appointmentId:appointmentId})
                                 }>
                         <Text style={[styles.fontSize_18_bold, styles.underline]}>Postponed</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
             </View>
         </View>
@@ -255,4 +241,12 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps,null)(BookingDetail);
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        setCancelApointmentFlag : (data) => dispatch(setCancelAppointmentFlagSuccess(data)) ,
+        bookingsList : (data) => dispatch(userBookingListSuccess(data)) , 
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(BookingDetail);

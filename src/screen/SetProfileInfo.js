@@ -57,7 +57,10 @@ const SetProfileInfo = (props) =>{
         if(data){
             props.navigation.replace('Map')
         }
-    },[data])    
+        else if(error){
+            alert('Something Wnt Worng TryAgain!')
+        }
+    },[data,error])    
 
     return(
         <View style={styles.container}>
@@ -160,7 +163,7 @@ const SetProfileInfo = (props) =>{
 
                 </View>
                 
-                <View style={{marginTop:35}}>
+                <View style={{marginTop:35,marginHorizontal:20}}>
                     <Button title='Continue' textSize={18} btnColor='#19479c' handleButton={handleButton}/>
 
                 </View>

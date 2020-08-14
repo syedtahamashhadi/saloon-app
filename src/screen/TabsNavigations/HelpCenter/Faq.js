@@ -39,6 +39,15 @@ const Faq = (props) =>{
         getToken()
     },[])
 
+    const handleTitlePress = (val)=>{
+        console.log('Title is pressed',val)
+        props.navigation.navigate('FaqsDescription',
+                                    {
+                                        helpTopic: val
+                                    }
+                                )
+    }
+
     return(
         <View style={styles.container}>
 
@@ -53,7 +62,7 @@ const Faq = (props) =>{
                 {
                     data && data.getHelpTopic.map((val,index)=>{
                         return(
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>handleTitlePress(val)} >
 
                                 <View style={{marginBottom:18 ,backgroundColor:'#fff',  flexDirection:'row' , 
                                         justifyContent:'space-between'}}>

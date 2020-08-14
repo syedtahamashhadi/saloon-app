@@ -25,12 +25,17 @@ const EditProfile = (props) =>{
 
 
     const [selectedCard,setSelectedCard] = React.useState(null)
-    const cardData = [{img:<SvgBookings /> , desc:'Bookings',nav:'BookingsNavigation'},
+    const cardData = [  
+                        {img:<SvgBookings /> , desc:'Bookings',nav:'BookingsNavigation'},
                         {img:<SvgWhatsNew /> , desc:`What's New` , nav:'WhatsNew'},
-    {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},
-    {img:<SvgMoments /> , desc:`Moment's` , nav:'Moments'},{img:<SvgRewards /> , desc:'Reward Credits' , nav:'RewardsNavigation'},
-    {img:<SvgPromoCode /> , desc:'Promocode' , nav: 'PromoCode'},{img:<SvgTransactions /> , desc:'Transaction History' , nav:'PaymentNavigation'},
-    {img:<SvgSettings /> , desc:'Settings' , nav:'Map'},{img:<SvgHelpCenter /> , desc:'Help Center' , nav:'HelpCenterNavigation'},]
+                        {img:<SvgFavourites /> , desc:'Favourites' , nav:'Favourites'},
+                        {img:<SvgMoments /> , desc:`Moment's` , nav:'Moments'},
+                        {img:<SvgRewards /> , desc:'Reward Credits' , nav:'RewardsNavigation'},
+                        {img:<SvgPromoCode /> , desc:'Promocode' , nav: 'PromoCode'},
+                        {img:<SvgTransactions /> , desc:'Transaction History' , nav:'PaymentNavigation'},
+                        {img:<SvgSettings /> , desc:'Settings' , nav:'SettingsNavigation'},
+                        {img:<SvgHelpCenter /> , desc:'Help Center' , nav:'HelpCenterNavigation'}
+                    ]
   
 
     const handleSelectedCard = (val)=>{
@@ -39,25 +44,7 @@ const EditProfile = (props) =>{
     }
 
     const handleLogOut = () =>{
-        console.log('LogOut is Pressed >>>')
-
-        // const token = Helpers.getToken('@KOMB_JWT_TOKEN')
-        // if(token && loading !== true){
-        //     console.log('lOgOuT>>>>')
-        //     logOut(
-        //         {
-        //             variables:{
-        //                 deviceId: props.userDetail.getUserProfile.email
-        //             },
-        //             context:{
-        //                 headers:{
-        //                     authorization: token
-        //                 }
-        //             }
-        //         }
-        //     )
-        // }
-
+        
         async function getToken (){
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
@@ -83,22 +70,8 @@ const EditProfile = (props) =>{
         getToken()
     }
 
-    // const removeKey = async () =>{
-    //     try {
-    //         await AsyncStorage.removeItem('@KOMB_JWT_TOKEN' , ()=>{
-    //             props.setIsLogin(false)                
-    //             props.navigation.navigate('SignIn')
-    //         })
-    //     } catch (error) {
-    //         console.log('Error >>>' , error)
-    //     }
-    // }
-
-    
-
     React.useEffect(()=>{
         if(data){
-            // removeKey()
             Helpers.removeKey('@KOMB_JWT_TOKEN',()=>{
                 props.setIsLogin(false)                
                 props.navigation.navigate('SignIn')
@@ -128,11 +101,9 @@ const EditProfile = (props) =>{
                                     style={{width:'100%',height:'100%',resizeMode:'cover' , borderRadius:40}}/>
                         </View>
                         <Text style={{marginTop:3,color:'#fff',fontFamily:'AbrilFatFace',fontSize:15}}>
-                            {/* Jake */}
                             {props.userDetail.getUserProfile.firstName}
                         </Text>
                         <Text style={{marginTop:0,marginBottom:15,color:'#fff',fontFamily:'AbrilFatFace'}}>
-                            {/* testing328@yopmail.com */}
                             {props.userDetail.getUserProfile.email}
                         </Text>
 

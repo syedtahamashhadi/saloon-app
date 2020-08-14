@@ -5,7 +5,7 @@ import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import Queries from '../../../appolo/queries'
-import {userBookingListSuccess} from '../../../redux/authenticate/actions'
+import {userBookingListSuccess , setCancelAppointmentFlagSuccess} from '../../../redux/authenticate/actions'
 
 
 
@@ -18,35 +18,48 @@ const BookingsHeader = (props) =>{
     
     console.log('List of Bookings >> ',props.bookings)
 
-    React.useEffect(()=>{
-        async function getToken(){
-            try {
-                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
-                if(token !== null){
-                    getUserBookingQuery(
-                        {
-                            variables:{
-                                userId: props.userDetial.getUserProfile._id
-                            },
-                            context:{
-                                headers:{
-                                    authorization: token,
-                                }
-                            },
-                        }
-                    )
-                }
-            } catch (error) {
-                console.log(error)
+
+    const getToken = async() =>{
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            if(token !== null){
+                getUserBookingQuery(
+                    {
+                        variables:{
+                            userId: props.userDetial.getUserProfile._id
+                        },
+                        context:{
+                            headers:{
+                                authorization: token,
+                            }
+                        },
+                    }
+                )
             }
+        } catch (error) {
+            console.log(error)
         }
+    }
+
+    React.useEffect(()=>{
+        props.nav.addListener('focus', () => {
+            console.log('BookingHeader is  Mounted>>>',props.cancelAppointmentFlag.isAppointmentCancel)
+            if(props.cancelAppointmentFlag.isAppointmentCancel == true){
+                getToken()
+                props.setCancelApointmentFlag(false)
+            }
+          });
+    },[props.navigation])
+    
+    React.useEffect(()=>{
         getToken()
     },[])
 
+   
     React.useEffect(()=>{
         if(data){
-            console.log('Bookings Data is >>>' , data)
-            props.bookingsList(data)
+            console.log('Bookings Data is >>>' , data.getUserAppointment)
+            props.bookingsList(data.getUserAppointment)
         }else if(error){
             console.log('Error is >>>' , error)
         }
@@ -85,13 +98,16 @@ const styles = StyleSheet.create(
 const mapStateToProps = (state) =>{
     return{
         userDetial: state.setuserDetailReducer.data ,
-        bookings : state.userBookingSuccessReducer.data
+        bookings : state.userBookingSuccessReducer.data ,
+        cancelAppointmentFlag : state.setCancelAppointmentFlagReducer ,
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        bookingsList : (data) => dispatch(userBookingListSuccess(data))
+        bookingsList : (data) => dispatch(userBookingListSuccess(data)) , 
+        setCancelApointmentFlag : (data) => dispatch(setCancelAppointmentFlagSuccess(data))
+
     }
 }
 

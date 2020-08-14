@@ -16,6 +16,7 @@ import { SIGNUP,
          USER_PAYMENT_CARDS ,
          SET_PROMO_CODE_COPIED ,
          USER_BOOKINGS_LIST ,
+         SET_CANCEL_APPOINTMENT_FLAG ,
         } from './constants';
 
 
@@ -379,6 +380,24 @@ const userBookingSuccessReducer = (state= userBookingSuccessInitialState , actio
     }
 }
 
+/************************** Set Cancel Appointment Flag  *********************/
+
+const setCancelAppointmentFlagInitialState ={
+    isAppointmentCancel : false
+}
+
+
+const setCancelAppointmentFlagReducer = (state= setCancelAppointmentFlagInitialState , action) =>{
+    switch (action.type) {
+        case SET_CANCEL_APPOINTMENT_FLAG.SUCCESS:
+            return{
+                ...state,
+                isAppointmentCancel: action.payLoad
+            }
+        default: return state;
+    }
+}
+
 export {
     signUpReducer,
     loginReducer,
@@ -398,4 +417,5 @@ export {
     userPaymentCardReducer ,
     setPromoCodeCopiedReducer ,
     userBookingSuccessReducer ,
+    setCancelAppointmentFlagReducer ,
 }

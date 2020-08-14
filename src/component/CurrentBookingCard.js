@@ -29,7 +29,7 @@ const CurrentBookingCard = (props) =>{
     const month = date.slice(0,1)
 
     return(
-        <TouchableOpacity onPress={()=>props.isDetailView && props.nav.navigate('BookingDetail',
+        <TouchableOpacity onPress={()=>props.nav.navigate('BookingDetail',
                                                             {
                                                                 style: props.detail.services[0].name,
                                                                 amount: props.detail.amount,
@@ -37,7 +37,8 @@ const CurrentBookingCard = (props) =>{
                                                                 stylist: props.detail.serviceProvider,
                                                                 salon: props.detail.salon,
                                                                 appointmentId: props.detail._id ,
-                                                                serviceIcon: props.detail.services[0].serviceIcon
+                                                                serviceIcon: props.detail.services[0].serviceIcon,
+                                                                isDetailView: props.isDetailView,
                                                             }
                                                             )}>
 
