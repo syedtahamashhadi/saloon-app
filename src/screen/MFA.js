@@ -39,7 +39,7 @@ const MFA = (props) =>{
             loading !== true && verifyOtp(
                 {
                     variables:{
-                        email: email , code: `${otp}` , deviceId: email     //mutaion required email and device id
+                        email: email , code: `${otp}` , deviceId: email , notificationToken: ''    //mutaion required email and device id
                     }
                 }
             )

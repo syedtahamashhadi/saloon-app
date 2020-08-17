@@ -33,7 +33,7 @@ const HelpCenterNavigation = (props) =>{
     return (
         // <SafeAreaProvider>
         <View style={{flex:1}}>
-            <HelpCenterHeader nav={props.navigation}/>
+            <HelpCenterHeader nav={props.navigation} navProps={props}/>
             {/* <Text>Test</Text> */}
             <Tab.Navigator
                 initialRouteName="TransactionHistory"

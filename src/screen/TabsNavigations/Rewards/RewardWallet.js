@@ -1,5 +1,7 @@
 import React from 'react'
-import {View , Text , TouchableOpacity , StyleSheet} from 'react-native'
+import {View , Text , TouchableOpacity , StyleSheet , ScrollView} from 'react-native'
+import RewardSlideBarCard from '../../../component/RewardSlideBarCard'
+import RewardHairCutCard from '../../../component/RewardHairCutCard'
 
 
 
@@ -9,11 +11,18 @@ const RewardWallet = (props) =>{
 
     return(
         <View style={styles.container}>
-            <View style={{marginTop:40 , justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:18}}>
-                    Reward Wallet
-                </Text>
+            <ScrollView>
+            <View style={{marginTop:40 }}>
+              
+                {/* <RewardHairCutCard /> */}
+                    <RewardSlideBarCard />
+
             </View>
+
+            <View style={{marginTop:20 , marginBottom:20}}>
+                <RewardHairCutCard />
+            </View>
+            </ScrollView>
         </View>
     )
 }

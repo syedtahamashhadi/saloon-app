@@ -20,8 +20,8 @@ const Mutations = {
     ` ,
 
     OTP : gql `
-            mutation abc($email: String! , $code: String! , $deviceId: String!){
-                verifyCode(email: $email, code: $code, deviceId: $deviceId) 
+            mutation abc($email: String! , $code: String! , $deviceId: String! , $notificationToken: String){
+                verifyCode(email: $email, code: $code, deviceId: $deviceId, notificationToken: $notificationToken) 
                 {
                     
                     _id

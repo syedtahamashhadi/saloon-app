@@ -1,6 +1,7 @@
 import React from 'react'
-import { View , Text , StyleSheet  , Image , ScrollView , TouchableOpacity} from 'react-native'
+import { View , Text , StyleSheet  , Image , ScrollView , TouchableOpacity } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import { WebView } from 'react-native-webview'
 
 
 const FaqsDescription = (props) =>{
@@ -24,9 +25,12 @@ const FaqsDescription = (props) =>{
                 </View>
 
                 <View style={{marginTop:20,marginHorizontal:20}}>
-                    <Text style={{fontSize:14,fontFamily:'ExoRegular'}}>
+                    <Text style={{fontSize:14,fontFamily:'ExoRegular'}}> 
                         {props.route.params.helpTopic.description}
                     </Text>
+                    {/* <WebView 
+                        source={{ html: `<p style='text-align: justify;'>Testing</p>` }}
+                    /> */}
                 </View>
 
                 <View style={{marginHorizontal:20}}>

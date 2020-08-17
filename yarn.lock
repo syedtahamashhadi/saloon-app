@@ -10994,7 +10994,7 @@ prompts@^2.3.2:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -11384,6 +11384,13 @@ react-native-screens@~2.2.0:
   dependencies:
     debounce "^1.2.0"
 
+react-native-slider@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-slider/-/react-native-slider-0.11.0.tgz#b68a0bc43c8422b24cd57947cc5ac2bcdb58fadc"
+  integrity sha512-jV9K87eu9uWr0uJIyrSpBLnCKvVlOySC2wynq9TFCdV9oGgjt7Niq8Q1A8R8v+5GHsuBw/s8vEj1AAkkUi+u+w==
+  dependencies:
+    prop-types "^15.5.6"
+
 react-native-status-bar-height@^2.2.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.5.0.tgz#bc0fb85230603850aab9667ee8111a62954de90c"
@@ -11458,10 +11465,10 @@ react-native-web@~0.11.7:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-webview@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.3.1.tgz#04a2b17a37daf04575b3abd10b1fb29d2c154c6f"
-  integrity sha512-Ac0v4lFaJl5P/haLook+UIKMW4Ru5xg0+AdxD2oJRB2TPgdqoATziYNU0LBMjntlxDp+DVzdr3fVDuLMdox0tg==
+react-native-webview@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.6.0.tgz#83a574871a52540fec6b8a813f8f6432a07429c8"
+  integrity sha512-y1/zYx9LuoiPVSM3oxf77WQjRebaYG22Kya4lr2tmIESaR1GkKzwKSpKPyEZYfu8U/WNRSrrS/i78o+R1aQRTA==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"

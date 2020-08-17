@@ -59,6 +59,7 @@ import Notifications from '../screen/Notifications'
 import CameraScreen from '../screen/CameraScreen'
 import BookingsNavigation from '../screen/TabsNavigations/Bookings/BookingsNavigation'
 import SettingsNavigation from '../screen/TabsNavigations/Settings/SettingsNavigation'
+import FaqSearch from '../screen/FaqSearch'
 // import Testing from '../screen/Testing'
 
 
@@ -142,6 +143,7 @@ const UserNav = (props) =>{
                         <Stack.Screen name='CameraScreen' component={CameraScreen}/>
                         <Stack.Screen name='BookingsNavigation' component={BookingsNavigation}/>
                         <Stack.Screen name='SettingsNavigation' component={SettingsNavigation}/>
+                        <Stack.Screen name='FaqSearch' component={FaqSearch}/>
                     </React.Fragment>
 
                 ) : (

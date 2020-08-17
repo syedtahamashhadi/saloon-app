@@ -4,6 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import BookingsHeader from './SettingsHeader';
 import Languages from './Languages'
 import EditPayment from './EditPayment'
+import ChangePassword from './ChangePassword'
 
 
 const Tab = createMaterialTopTabNavigator(); 
@@ -39,6 +40,10 @@ const SettingsNavigation = (props) =>{
                 <Tab.Screen options={{ tabBarLabel: `Edit Payment` }}
                             name="EditPayment"
                             component={EditPayment} />
+
+                <Tab.Screen options={{ tabBarLabel: `Password` }}
+                            name="ChangePassword"
+                            component={ChangePassword} />
                             
             </Tab.Navigator>
         </View>
