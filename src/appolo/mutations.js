@@ -73,6 +73,15 @@ const Mutations = {
                         }
     ` ,
 
+    CHANGE_PASSWORD : gql `
+                        mutation abc($oldPassword: String! , $password: String!) {
+                            updateUserPassword(oldPassword:$oldPassword, password:$password)
+                            {
+                                email
+                            }  
+                        }
+    ` ,
+
 
     SIGNUP : gql `
                 mutation abc(

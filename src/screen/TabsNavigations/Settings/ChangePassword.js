@@ -2,6 +2,11 @@ import React from 'react'
 import {View , Text , TextInput , TouchableOpacity , StyleSheet , ScrollView , RefreshControl} from 'react-native'
 import Button from '../../../component/Button'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { useMutation } from '@apollo/react-hooks'
+import AsyncStorage from '@react-native-community/async-storage'
+import Mutations from '../../../appolo/mutations'
+
+// import 
 
 const ChangePassword = (props) =>{
 
@@ -14,14 +19,50 @@ const ChangePassword = (props) =>{
     const [isShowReConfirmPass,setIsShowReConfirmPass] = React.useState(false)
 
 
+    const [changePassword , {data , loading , err}]  = useMutation(Mutations.CHANGE_PASSWORD)    
+
+    async function getToken(){
+        try {
+            const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+           
+            if(token !== null){
+                loading !== true && changePassword(
+                    {
+                        variables:{
+                            oldPassword: oldPassword , password: newPassword
+                        },
+                        context:{
+                            headers:{
+                                authorization: token
+                            }
+                        }
+                    }
+                ) 
+            }
+        } catch (error) {
+            console.log(error)
+            alert('Error')
+        }
+    }
 
     const handleChangePassword = () =>{
         if(oldPassword == null && newPassword == null && reConfirmPassword == null){
             alert('Fields are empty!')
         }else if(reConfirmPassword !== newPassword){
             console.log('New Password does not match with Re-Confirm Password')
+        }else{
+            getToken()
         }
     }
+
+    React.useEffect(()=>{
+        if(data){
+            console.log('Data >>>' , data)
+        }else if(err){
+            console.log('Err >>>' ,err)
+        }
+    },[data,err])
+    
 
     return(
         <View style={styles.container}>
@@ -76,7 +117,6 @@ const ChangePassword = (props) =>{
                             onChangeText={text => setReConfirmPassword(text)}
                             placeholder='Reconfirm Password'
                             secureTextEntry={!isShowReConfirmPass}
-
                             style={{width:'80%' , height:45,borderTopLeftRadius:20,borderBottomLeftRadius:20,paddingHorizontal:10,borderWidth:0.5 ,
                             borderRightWidth:0,
                             position:'absolute'}}

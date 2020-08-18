@@ -9,8 +9,6 @@ import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
 import Mutations from '../appolo/mutations'
-// import { clientKomb } from '../appolo/mutations'
-// import DeviceInfo from 'react-native-device-info'
 
 
 const SignIn = (props) =>{
@@ -32,6 +30,18 @@ const SignIn = (props) =>{
    
     // console.log('Data is >>' , data)
 
+
+    function makeid(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        console.log('Result >>>' , result)
+        return result;
+     }
+
     const handleSignIn = () =>{
         console.log('SignIn is Pressed' , email , password )
         if(email == '' && password == ''){
@@ -45,7 +55,7 @@ const SignIn = (props) =>{
             loading !== true && loginUser(
                 {
                     variables: {
-                        email:  `${email}`, password: `${password}` , deviceId: `${email}`
+                        email:  `${email}`, password: `${password}` , deviceId: `${makeid(8)}`
                     },
                 } 
             )

@@ -32,25 +32,48 @@ var moment = require('moment');
 
 // let regex = '/^\d{2}\-\d{2}$/'
 
-let val = '02-04'
-let name = 'Raheem'
+// let val = '02-04'
+// let name = 'Raheem'
 
 // let check = regex === val ? 'matched' : 'not-matched'
-console.log(val.slice(3,5))
+// console.log(val.slice(3,5))
 
-const date = new Date()
+// const date = new Date()
 
-const expiry = new Date(date)
+// const expiry = new Date(date)
 
-let tme =  date.getTime()
-console.log(new Date(tme))
-console.log('time =>',tme)
-let myDate = moment().format('YYYY-MM-DD')
+// let tme =  date.getTime()
+// console.log(new Date(tme))
+// console.log('time =>',tme)
+// let myDate = moment().format('YYYY-MM-DD')
 
 
-console.log('Date >>>' , date)
+// console.log('Date >>>' , moment().utc('18-07-2020').format() )
 
 // let regex = '/^[0-9]{3, 4}$/'
 // let val = '235'
 
 // console.log(/^[0-9]{3,4}$/.test(val))
+
+
+let myObj = [{name:'Test1',id:1},{name:'Test2',id:2},{name:'Test2',id:3},{name:'Test2',id:4}]
+let myNewObj = Array.from(myObj)
+
+
+let myNewObj2 = myNewObj.map((val)=>{
+    if(val.id == 2){
+        let newObj = {
+            name: 'Rahemm',
+            id: val.id
+        }
+        return newObj
+    }    
+    else{
+        return val
+    }
+})
+
+console.log('My Obj >>>>' , myObj);
+console.log('My NewObj >>>>' , myNewObj2);
+
+

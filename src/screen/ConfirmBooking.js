@@ -17,7 +17,7 @@ const ConfirmBooking = (props) =>{
     console.log('Date Time Props' , props)
 
     const [promoCode,setPromoCode]=React.useState('')
-    const [servicePrice,setServicePrice]=React.useState(props.service.data.price/100)
+    const [servicePrice,setServicePrice]=React.useState(props.service.data.price)
     const [discountedPrice,setDiscountedPrice]=React.useState(null)
 
     const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
@@ -51,7 +51,7 @@ const ConfirmBooking = (props) =>{
     let duration = props.service.data.approxTime
     let customerId = props.userPaymentCards.data.getCustomerAndCard[0].customerId
 
-    console.log('Customer Id >>>' , servicePrice)
+    console.log('Date Time >>>' , newDateTime)
 
 
     console.log('Card id is >>' , newDateTime )

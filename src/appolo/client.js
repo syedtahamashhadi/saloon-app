@@ -68,7 +68,7 @@ const httpLink = createHttpLink({
 )
 
 const httpKombLink = createHttpLink({
-  uri: 'http://15.165.108.170:8081/user/graphql',
+  uri: 'https://komb.validatr.io/user/graphql',
 });
 
 const clientKomb = new ApolloClient(
