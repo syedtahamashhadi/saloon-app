@@ -7,7 +7,11 @@
    "splash": {
     "image": "./assets/splash.png",
     "resizeMode": "contain",
-    "backgroundColor": "#fff"
+    "backgroundColor": "#fff" , 
+    "android":{
+      "useNextNotificationsApi": true
+    }
+
   },
   "assetBundlePatterns": [
     "**/*"
@@ -19,9 +23,11 @@
    "android": {
      "package": "com.kombapp.www",
      "versionCode": 1,
+     "googleServicesFile": "./google-services.json",
      "config": {
-      "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" }   
-      }
+      "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" },
+      "googleSignIn": { "apiKey": "AIzaSyBaHlVz4s-9dUuqT8NKKRZ42_kWsUxw5dQ" }   
+      }  
     }
   }
 }

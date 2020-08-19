@@ -57,6 +57,7 @@ var moment = require('moment');
 
 
 let myObj = [{name:'Test1',id:1},{name:'Test2',id:2},{name:'Test2',id:3},{name:'Test2',id:4}]
+
 let myNewObj = Array.from(myObj)
 
 

@@ -17,6 +17,7 @@ import { connect } from 'react-redux'
 import { setIsLogin } from '../redux/authenticate/actions'
 import Helpers from '../Helpers'
 import Mutations from '../appolo/mutations'
+import * as Device from 'expo-device';
 
 
 const EditProfile = (props) =>{
@@ -52,7 +53,7 @@ const EditProfile = (props) =>{
                     loading !== true && logOut(
                         {
                             variables:{
-                                deviceId: props.userDetail.getUserProfile.email
+                                deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
                             },
                             context:{
                                 headers:{

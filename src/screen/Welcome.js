@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet} from 'react-native'
+import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet , Platform} from 'react-native'
 import { useFonts } from '@use-expo/font'
 import Chat from '../component/Chat'
 import Button from '../component/Button'
@@ -8,10 +8,23 @@ import { guestUserSuccess } from '../redux/authenticate/actions'
 import { connect } from 'react-redux'
 import { AppLoading } from 'expo'
 import Helpers from '../Helpers'
+import Constants from 'expo-constants';
+import { Notifications } from 'expo'
+// import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
 
+// Notifications.setNotificationHandler({
+//     handleNotification: async () => ({
+//       shouldShowAlert: true,
+//       shouldPlaySound: false,
+//       shouldSetBadge: false,
+//     }),
+//   });
 
 
 const Welcome = (props) =>{
+
+    const [expoPushToken,setExpoPushToken] = React.useState('')
     console.log('Welcome Props >>',props)
 
     Helpers.test('Testing328')
@@ -30,6 +43,7 @@ const Welcome = (props) =>{
         // props.navigation.replace('GuestSlider')
     }
 
+   
    
     return(
         <View style={styles.container}>

@@ -189,6 +189,16 @@ const Mutations = {
                             discountedPrice
                             }  
                         }
+    ` ,
+
+    GET_POLICY : gql`
+                    {
+                        getPolicy {
+                            _id
+                            title
+                            description
+                        }
+                    }
     `
 
 } 

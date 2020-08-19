@@ -1,6 +1,7 @@
 import React , {useEffect} from 'react'
 import {View , Text , StyleSheet , TextInput, 
-            TouchableOpacity ,Image , ScrollView , ActivityIndicator} from 'react-native'
+            TouchableOpacity ,Image , ScrollView , ActivityIndicator , Platform} from 'react-native'
+    
 import Button from '../component/Button'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import {connect} from 'react-redux'
@@ -9,6 +10,16 @@ import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
 import Mutations from '../appolo/mutations'
+import * as Device from 'expo-device';
+
+// Notifications.setNotificationHandler({
+//     handleNotification: async () => ({
+//       shouldShowAlert: true,
+//       shouldPlaySound: false,
+//       shouldSetBadge: false,
+//     }),
+//   });
+
 
 
 const SignIn = (props) =>{
@@ -18,9 +29,7 @@ const SignIn = (props) =>{
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
     const [fieldErr,setFieldErr] = React.useState(null)
-    // const [pswdFieldErr,setPswdFieldErr] = React.useState(null)
-
-       
+    
     data ? props.navigation.replace('Welcome') : null
 
     console.log('Loading is >> ',loading)
@@ -55,7 +64,7 @@ const SignIn = (props) =>{
             loading !== true && loginUser(
                 {
                     variables: {
-                        email:  `${email}`, password: `${password}` , deviceId: `${makeid(8)}`
+                        email:  `${email}`, password: `${password}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
                     },
                 } 
             )
@@ -77,12 +86,6 @@ const SignIn = (props) =>{
         }
     },[fieldErr])
 
-    // React.useEffect(()=>{
-    //    DeviceInfo.getUniqueId().then(deviceInfo =>{
-    //     console.log('Device is is >>' , deviceInfo)
-    //    })
-       
-    // } , [])
 
     useEffect(()=>{
         if(data){
@@ -102,12 +105,11 @@ const SignIn = (props) =>{
             setFieldErr('Something Went Wrong! TryAgain')
         }
     },[data,error])
-    // React.useEffect(()=>{
-    //     if(data){
-    //         props.signIn(data)
-    //         props.navigation.replace('Map')
-    //     }
-    // },[data])
+    
+
+
+
+
 
     const errorBorderColor = fieldErr ? 'red' : 'black'
     let reqErr = (error && error.message) ? error.message.slice(15)  : null
@@ -205,6 +207,7 @@ const mapDispatchToProps = (dispatch) =>{
 }
 
 export default connect(null,mapDispatchToProps)(SignIn);
+
 
 const styles = StyleSheet.create(
     {

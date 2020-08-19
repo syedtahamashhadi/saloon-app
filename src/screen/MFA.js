@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , TextInput ,StyleSheet , ScrollView , ActivityIndicator} from 'react-native'
+import {View , Text , TextInput ,StyleSheet , ScrollView , ActivityIndicator , Platform} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Button from '../component/Button'
 import {connect} from 'react-redux'
@@ -7,12 +7,22 @@ import { mfaSuccess , loginSuccess , setIsLogin } from '../redux/authenticate/ac
 import AsyncStorage from '@react-native-community/async-storage'
 import { useMutation } from '@apollo/react-hooks'
 import Mutations from '../appolo/mutations'
+import Constants from 'expo-constants';
+import { Notifications } from 'expo'
+// import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+// import * as Device from 'expo-device';
+
+// ${Device.osBuildId}_${Device.osInternalBuildId}
+
 
 const MFA = (props) =>{
 
     const [otp,setOtp] = React.useState(null)
     const [fieldErr,setFieldErr] = React.useState(null)
     const [email,setEmail] = React.useState(null)
+    const [expoPushToken,setExpoPushToken] = React.useState('')
+
 
 
     console.log('Props Signin >>>' , props.signIn )
@@ -33,13 +43,14 @@ const MFA = (props) =>{
         if(otp == null || otp.length < 6 ){
             setFieldErr('Enter 6 digit Code !')
         }else{
-            console.log('Credentials >>>>' , email ,' >> ' , otp , ' >> ' , email)
+            console.log('Credentials >>>>' , email ,' >> ' , otp , ' >> ' , email , 'token >>' , expoPushToken)
+            alert(expoPushToken)
             setFieldErr(null)
 
             loading !== true && verifyOtp(
                 {
                     variables:{
-                        email: email , code: `${otp}` , deviceId: email , notificationToken: ''    //mutaion required email and device id
+                        email: email , code: `${otp}` , deviceId: `dsadasd`  , notificationToken: expoPushToken    //mutaion required email and device id
                     }
                 }
             )
@@ -114,6 +125,47 @@ const MFA = (props) =>{
             setFieldErr('Something Went Wrong! TryAgain')
         }
     },[data,error])
+
+    /***************************** Expo Push Notifications  ************************/
+
+    async function registerForPushNotificationsAsync() {
+        let token;
+        if (Constants.isDevice) {
+            console.log('Is Device')
+          const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+          let finalStatus = existingStatus;
+          if (existingStatus !== 'granted') {
+            const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+            finalStatus = status;
+          }
+          if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+          }
+          token = await Notifications.getExpoPushTokenAsync();
+        } else {
+          alert('Must use physical device for Push Notifications');
+        }
+      
+        // if (Platform.OS === 'android') {
+        //   Notifications.setNotificationChannelAsync('default', {
+        //     name: 'default',
+        //     importance: Notifications.AndroidImportance.MAX,
+        //     vibrationPattern: [0, 250, 250, 250],
+        //     lightColor: '#FF231F7C',
+        //   });
+        // }
+        console.log('Token >>', token)
+        return token;
+      }
+
+      React.useEffect(()=>{
+          console.log('Push Notifications >>>')
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
+      },[])
+
+
+    /******************************************************************************/
 
     let myBorder= fieldErr ? 'red' : '#fafafa'
     // let myErr = (error && error.message) ? error.message.slice(15) : null
