@@ -28,6 +28,12 @@
       "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" },
       "googleSignIn": { "apiKey": "AIzaSyBaHlVz4s-9dUuqT8NKKRZ42_kWsUxw5dQ" }   
       }  
+    },
+    "notification": {
+      "icon": "./assets/HairCut.png",
+      "color": "#1D194D",
+      "androidMode": "default",
+      "androidCollapsedTitle": "n/a"
     }
   }
 }
