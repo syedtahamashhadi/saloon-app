@@ -24,9 +24,6 @@ const MFA = (props) =>{
     const [email,setEmail] = React.useState(null)
     const [expoPushToken,setExpoPushToken] = React.useState('')
 
-
-
-    console.log('Props Signin >>>' , props.signIn )
     // console.log('Props SignUp >>>>',props.signUp)
 
     const { screen } = props.route.params
@@ -34,7 +31,6 @@ const MFA = (props) =>{
     // const checkOtpCall = props.signIn.isLogin ? OTP_SIGNIN : OTP_SIGNIN
 
     const [verifyOtp , { data , loading , error}] = useMutation(Mutations.OTP)
-    console.log('MFA Data >>>>>>>>>>' , data)
 
     // props.mfaState.isAuthenticate == true ? props.navigation.replace('Map') : null
 
@@ -44,9 +40,7 @@ const MFA = (props) =>{
         if(otp == null || otp.length < 6 ){
             setFieldErr('Enter 6 digit Code !')
         }else{
-            console.log('Credentials >>>>' , email ,' >> ' , otp , ' >> ' , email , 'token >>' , expoPushToken)
             alert(expoPushToken)
-            console.log('Push Token >>>',expoPushToken)
             setFieldErr(null)
 
             loading !== true && verifyOtp(
@@ -60,10 +54,7 @@ const MFA = (props) =>{
         
     }
 
-    console.log('Errorr >>>>>>>>>>',error)
-
     const setNotification = async (val) =>{
-        console.log('I am Fired >>')
         try {
             await AsyncStorage.setItem('@KOMB_NOTIFICATION',val)
         } catch (error) {
@@ -76,14 +67,12 @@ const MFA = (props) =>{
         let keys=[]
         try {
             keys = await AsyncStorage.getAllKeys()
-            console.log('Keys >>',keys)
             keys.includes('@KOMB_NOTIFICATION') == false ? setNotification('allowed') : null
         } catch (error) {
             null
         }
     }
     React.useEffect(()=>{
-        console.log('Check >>>')
         checkKey()
     },[] )
 
@@ -92,7 +81,6 @@ const MFA = (props) =>{
         if(screen == 'signUp'){
             setEmail(props.signUp.data.signupUser.email)
          }else if(screen == 'signIn'){
-             console.log('Sign In Data >>>' , props.signIn )
             setEmail(props.signIn.data.loginUser.email) 
          }else if( screen == 'reSignUp'){
             setEmail(props.route.params.reSignUpEmail)
@@ -100,7 +88,6 @@ const MFA = (props) =>{
     },[])
 
     const storeData = async (value) =>{
-        console.log('Store Data Fired >>' , value)
         try {
             await AsyncStorage.setItem('@KOMB_JWT_TOKEN',value , ()=>{
                 props.setIsLogin(true)
@@ -133,7 +120,6 @@ const MFA = (props) =>{
     async function registerForPushNotificationsAsync() {
         let token;
         if (Constants.isDevice) {
-            console.log('Is Device')
           const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
           let finalStatus = existingStatus;
           if (existingStatus !== 'granted') {
@@ -157,12 +143,10 @@ const MFA = (props) =>{
         //     lightColor: '#FF231F7C',
         //   });
         // }
-        console.log('Token >>', token)
         return token;
       }
 
       React.useEffect(()=>{
-          console.log('Push Notifications >>>')
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
       },[])
 

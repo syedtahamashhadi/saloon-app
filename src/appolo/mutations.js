@@ -191,6 +191,15 @@ const Mutations = {
                         }
     ` ,
 
+    UPDATE_USER_PROFILE : gql `
+                            mutation abc($country:String , $gender: String , $zipCode: String){
+                                updateUserProfile(input: {country: $country , gender: $gender , postalCode: $zipCode})
+                                {
+                                    email
+                                }  
+                            }
+    ` ,
+
 
 
 } 

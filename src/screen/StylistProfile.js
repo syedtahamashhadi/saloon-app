@@ -8,11 +8,9 @@ import Rating from '../component/Rating'
 
 const StylistProfile = (props) =>{
 
-    console.log('Stylist Profile Props >>>' , props)
     const { stylist } = props.route.params
 
     const handleBackPress = () =>{
-        console.log('Back is Pressed')
         props.navigation.goBack()
     }
     const handleHeartPress = () =>{

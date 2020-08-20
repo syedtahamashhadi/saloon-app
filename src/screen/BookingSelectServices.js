@@ -14,8 +14,6 @@ import GestureRecognizer from 'react-native-swipe-gestures'
 
 const BookingSelectServices = (props) =>{
 
-    console.log('BookingSelectServices Props >>' , props)
-
     const { data } = props.selectedStylist
     const { services } = props.selectedStylist.data
 
@@ -33,11 +31,9 @@ const BookingSelectServices = (props) =>{
     }
 
     const handleNextButton = () =>{
-        console.log('Button is Pressed')
         if(selectedService){
             props.selectService(selectedService)
             props.navigation.navigate('PickDate')
-            console.log('TEst Successs ')
         }
 
     }
@@ -47,17 +43,14 @@ const BookingSelectServices = (props) =>{
         // newselectedService.push(val);
         // setSelectedService(newselectedService)
         setSelectedService(val)
-        console.log('Selected Service is >>',selectedService)
     }
 
     const onSwipeUp = () =>{
-        console.log('Swipe Up >>>')
         setPageView(1)
     }
 
 
     const onSwipeDown = () =>{
-        console.log('Swipe Down >>>')
         setPageView(3.5)
     }
 

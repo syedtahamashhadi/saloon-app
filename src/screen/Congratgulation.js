@@ -6,12 +6,10 @@ import Button from '../component/Button'
 const SignUp = (props) =>{
 
     const handleButton = () =>{
-        console.log('Button is pressed')
         props.navigation.navigate('SetProfileInfo')
     }
 
     const handleSkip = () =>{
-        console.log('Skip is Pressed')
         props.navigation.replace('Map')
     }
 

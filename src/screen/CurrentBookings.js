@@ -10,7 +10,6 @@ import Queries from '../appolo/queries'
 
 const CurrentBookings = (props) =>{
 
-    console.log('Current Bookings Taha >>' , props.token)
 
     const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(Queries.GET_USER_BOOKING)
     
@@ -38,11 +37,6 @@ const CurrentBookings = (props) =>{
             }
             getToken()
         },[])
-
-        console.log('Loading Appoinment >>' , loading)
-        console.log('Data Appoinment >>' , data)
-        console.log('Error Appoinment >>' , error)
-
 
     
     useEffect(()=>{

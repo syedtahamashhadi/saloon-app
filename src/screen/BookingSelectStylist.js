@@ -12,14 +12,10 @@ const BookingSelectStylist = (props) =>{
     const { stylists } = props.route.params
     const { data } = props.selectedSaloon
 
-    console.log('Selcted Saloon >>' , data)
 
     const [pageView,setPageView] = React.useState(3.5)
     const [selectedCrew,setSelectedCrew] = React.useState('')
 
-    console.log('BookingSelectStylist Props >>' , props)
-
-    console.log('Testing >>>>>>>>')
     const crewData = [  {icon:require('../../assets/stylist-1.png'),name:'Mattttttttttr dsada ad'},
                         {icon:require('../../assets/stylist-2.png'),name:'Sherry'},
                         {icon:require('../../assets/stylist-3.png'),name:'Linda'},
@@ -27,7 +23,6 @@ const BookingSelectStylist = (props) =>{
                         {icon:require('../../assets/stylist-5.png'),name:'Kelly T.'},
                     ]
     const handleStylistPress = (val)=>{
-        console.log('Stylist is pressed >>',val)
         setSelectedCrew(val.firstName)
         props.selectStylist(val)
         props.navigation.navigate('BookingSelectServices')
@@ -42,13 +37,11 @@ const BookingSelectStylist = (props) =>{
     }
 
     const onSwipeUp = () =>{
-        console.log('Swipe Up >>>')
         setPageView(1)
     }
 
 
     const onSwipeDown = () =>{
-        console.log('Swipe Down >>>')
         setPageView(3.5)
     }
 

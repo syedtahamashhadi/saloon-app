@@ -22,8 +22,6 @@ const PaymentMethods = (props) =>{
 
     const [getUserPaymentCards , {data , loading , error}] = useLazyQuery(Queries.GET_USER_PAYMENT_CARDS)
 
-    console.log('User Id >>>' , props.userInfo._id)
-
     const getToken = async() =>{
         try {
             const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
@@ -53,21 +51,17 @@ const PaymentMethods = (props) =>{
         getToken()
     },[])
 
-    console.log('Loading >>' , loading)
 
     React.useEffect(()=>{
         if(data){
-            console.log('Payment Card Data >>' , data.getCustomerAndCard[0].cards)
             props.userPaymentCards(data)
         }else if(error){
             console.log('Payment Card error >>' , error)
         }
     },[data,error])
 
-    console.log('Testing Props >>>>>' , props)
     
     const handleCardPress = (val) =>{
-        console.log('Button is Pressed....',val.cardId)
         if(props.route.params.time){
             setSelectedCard(val)
             props.navigation.navigate('ConfirmBooking',
@@ -81,13 +75,11 @@ const PaymentMethods = (props) =>{
     }
 
     const onSwipeUp = () =>{
-        console.log('Swipe Up >>>')
         setPageView(1)
     }
 
 
     const onSwipeDown = () =>{
-        console.log('Swipe Down >>>')
         setPageView(3)
     }
 

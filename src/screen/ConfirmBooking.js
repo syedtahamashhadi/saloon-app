@@ -14,7 +14,6 @@ import GestureRecognizer from 'react-native-swipe-gestures'
 
 const ConfirmBooking = (props) =>{
 
-    console.log('Date Time Props' , props)
 
     const [promoCode,setPromoCode]=React.useState('')
     const [servicePrice,setServicePrice]=React.useState(props.service.data.price)
@@ -22,17 +21,6 @@ const ConfirmBooking = (props) =>{
 
     const [addAppointment , {data, loading ,error}] = useMutation(Mutations.ADD_APPOINMENT)
     // const [applyPromoCode , { data : dataPromoCode , loading : loadingPromoCode , error: errorPromoCode }] = useMutation(Mutations.APPLY_PROMO_CODE)
-
-
-    console.log('Data is >>' , data)
-    console.log('Loading is >>' , loading)
-    console.log('Error is >>' , error)
-
-    // console.log('Data is >>' , dataPromoCode)
-    // console.log('Loading is >>' , loadingPromoCode)
-    // console.log('Error is >>' , errorPromoCode)
-
-
 
     const [pageView,setPageView] = React.useState(3)
 
@@ -54,18 +42,13 @@ const ConfirmBooking = (props) =>{
     console.log('Date Time >>>' , newDateTime)
 
 
-    console.log('Card id is >>' , newDateTime )
-    console.log('Button is Pressed....',serviceId)
-
     const handleButton = () =>{
-        console.log('Button is Pressed....',serviceId)
 
         async function getToken(){
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
                 const finalPrice = discountedPrice !== null ? discountedPrice : servicePrice
                 let newPromoCode = discountedPrice !== null ? promoCode : ''
-                console.log('Final Price >>>' , newPromoCode)
                 if(token !== null){
 
                     loading !== true && addAppointment(
@@ -94,9 +77,7 @@ const ConfirmBooking = (props) =>{
    
     React.useEffect(()=>{
         if(data){
-            console.log('Appointment is added >>' , data)
             props.copiedPromoCode(null)
-            props.navigation.replace('BookingsNavigation')
         // props.navigation.navigate('')
         }
         // else if(dataPromoCode){
@@ -105,13 +86,11 @@ const ConfirmBooking = (props) =>{
     },[data])
 
     const onSwipeUp = () =>{
-        console.log('Swipe Up >>>')
         setPageView(1)
     }
 
 
     const onSwipeDown = () =>{
-        console.log('Swipe Down >>>')
         setPageView(3)
     }
 

@@ -14,15 +14,9 @@ const ForgotPassword = (props) =>{
 
     const [forgotPasswordPost,{data,loading,error}]=useMutation(Mutations.FORGOT_PASSWORD)
 
-    console.log('Data >>',data)
-    console.log('Error >>',error)
-    console.log('Loading >>',loading)
-
-
     // props.forgotPasswordState.isForgotPasswordRequestSuccess == true ? props.navigation.push('SignIn') : null
 
     const handleButton = () =>{
-        console.log('Button is pressed')
         // props.forgotPassword({email:email})
         // console.log('Store State is >>', storeState)
 

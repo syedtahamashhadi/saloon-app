@@ -18,7 +18,6 @@ const UpdatePasswords = (props) =>{
     const [fieldErr,setFieldErr] = React.useState(null)
 
     const handleButton = () =>{
-        console.log('SignIn is Pressed' , email , newPassword )
         if(email == '' && newPassword == '' && code == '' && reenterPassword == ''){
             setFieldErr('All fields are empty !')
         }else if(email == ''){

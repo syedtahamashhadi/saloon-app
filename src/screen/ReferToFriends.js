@@ -21,7 +21,6 @@ const ReferToFriends = (props) =>{
 
     return(
         <View style={styles.container}>
-            {/* <View style={{marginHorizontal:20}}> */}
 
                 <View style={styles.backContainer}>
                     <TouchableOpacity onPress={()=>props.navigation.goBack()}>
@@ -54,24 +53,9 @@ const ReferToFriends = (props) =>{
                                 
                     })}
                     
-
-                    {/* <View style={styles.socialContainer}>
-                        <TouchableOpacity onPress={()=>console.log('Social is Pressed')}>
-
-                            <View style={styles.socialContent}>
-                                <View style={styles.socialIcon}>
-                                    <Awsome5Icon name='facebook-messenger' size={20}/>
-                                </View>
-                                <Text style={styles.socialText}>
-                                        Messenger
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View> */}
                 
                 </View>
                 
-            {/* </View> */}
         </View>
     )
 }

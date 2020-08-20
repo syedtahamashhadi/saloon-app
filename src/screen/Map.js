@@ -26,8 +26,6 @@ if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental)
 
 const Map = (props) =>{
 
-    console.log('Map Props' , props)
-
     const [userLat,setUserLat] = React.useState(51.5074)
     const [userLng,setUserLng] = React.useState(0.1278)
     const [currentLat,setCurrentLat] = React.useState(null)
@@ -58,7 +56,6 @@ const Map = (props) =>{
 
     useEffect(()=>{
         if(dataNearestSaloon){
-            console.log('Action is Fired >>',dataNearestSaloon)
             props.nearestSaloon(dataNearestSaloon) 
             dataNearestSaloon.getNearestSalons.forEach(val => {
                 setCurrentLat(Number(val.location.coordinates[0]))
@@ -86,7 +83,6 @@ const Map = (props) =>{
         }
 
         let { coords } = await Location.getCurrentPositionAsync({});
-        console.log('Coords >>>' , coords.latitude)
         setUserLat(coords.latitude) ; setUserLng(coords.longitude)
     }
 
@@ -95,8 +91,6 @@ const Map = (props) =>{
         try {
             const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
             if(token !== null){
-                console.log('Async storage token is >>>', token)
-                console.log('Use lAt >>>' , userLat , '  ' , userLng)
                 nearestSaloonQuery(
                     {
                         variables: { 

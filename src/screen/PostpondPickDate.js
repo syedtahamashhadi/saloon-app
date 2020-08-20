@@ -24,12 +24,6 @@ const PostpondPickDate = (props) =>{
     const [val , setVal] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
-    console.log('PicDate Props >>>' , props.token)
-
-    console.log('Data ' , data)
-    console.log('Loading ' , loading)
-    console.log('Error ' , error)
-
     let date = new Date() 
 
     let currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()+1}`
@@ -115,7 +109,6 @@ const PostpondPickDate = (props) =>{
 
     useEffect(()=>{
         if(data){
-            console.log('Appointment is rescheduled.....',data)
             props.navigation.navigate('EditProfile')
         }else if(error){
             alert('Something went wrong try again !')
@@ -124,7 +117,6 @@ const PostpondPickDate = (props) =>{
 
 
     const handleDatePress = (val) =>{
-        console.log('Date is >>>>' , val)       
         // const myObj = {  }
         // myObj[val.dateString]={selected: true, marked: true, selectedColor: '#49D3CE' }
         setSelectedDateMark(
