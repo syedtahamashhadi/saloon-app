@@ -5,6 +5,7 @@ import {useQuery , useLazyQuery} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import Queries from '../../../appolo/queries'
+import { FaqSuccess } from '../../../redux/authenticate/actions'
 
 
 const Faq = (props) =>{
@@ -38,6 +39,13 @@ const Faq = (props) =>{
         }
         getToken()
     },[])
+
+
+    React.useEffect(()=>{
+        if(data){
+            props.faqs(data)
+        }
+    },[data,error])
 
     const handleTitlePress = (val)=>{
         console.log('Title is pressed',val)
@@ -102,4 +110,10 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps,null)(Faq);
+const mapDisptachToProps = (dispatch) =>{
+    return{
+        faqs : data => dispatch(FaqSuccess(data))
+    }
+}
+
+export default connect(mapStateToProps,mapDisptachToProps)(Faq);

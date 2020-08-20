@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "685943479093",
-    "firebase_url": "https://com-kombapp.firebaseio.com",
-    "project_id": "com-kombapp",
-    "storage_bucket": "com-kombapp.appspot.com"
+    "project_number": "954545521500",
+    "firebase_url": "https://com-kombapp-75bda.firebaseio.com",
+    "project_id": "com-kombapp-75bda",
+    "storage_bucket": "com-kombapp-75bda.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:685943479093:android:70bfe4d5da72c4bcf40a7c",
+        "mobilesdk_app_id": "1:954545521500:android:45b64ee6043f5cb580f799",
         "android_client_info": {
           "package_name": "com.kombapp.www"
         }
       },
       "oauth_client": [
         {
-          "client_id": "685943479093-dgeei6sad6d267j3nlc3mn5rsgbc2jgt.apps.googleusercontent.com",
+          "client_id": "954545521500-c6487nrvtt8h8pfjjmhos3com2v1ddid.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaHlVz4s-9dUuqT8NKKRZ42_kWsUxw5dQ"
+          "current_key": "AIzaSyAI7qoc-BE__NVkPmvBEuO5Cl1__XtT720"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "685943479093-dgeei6sad6d267j3nlc3mn5rsgbc2jgt.apps.googleusercontent.com",
+              "client_id": "954545521500-c6487nrvtt8h8pfjjmhos3com2v1ddid.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

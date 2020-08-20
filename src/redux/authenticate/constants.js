@@ -83,7 +83,18 @@ const SET_CANCEL_APPOINTMENT_FLAG = {
     SUCCESS: 'CANCEL_APPOINTMENT_FLAG_SUCCESS'
 }
 
-export {SIGNUP , 
+
+const TOS_PP = {
+    SUCCESS: 'TO_PP_SUCCESS'
+}
+
+const FAQ = {
+    SUCCEES: 'FAQ_SUCCESS'
+}
+
+
+export {
+        SIGNUP , 
         SIGNIN ,
         MFA ,
         FORGOT_PASSWORD ,
@@ -102,5 +113,7 @@ export {SIGNUP ,
         SET_PROMO_CODE_COPIED ,
         USER_BOOKINGS_LIST ,
         SET_CANCEL_APPOINTMENT_FLAG ,
+        TOS_PP,
+        FAQ,
     }
 

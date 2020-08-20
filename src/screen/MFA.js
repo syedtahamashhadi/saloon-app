@@ -11,6 +11,7 @@ import Constants from 'expo-constants';
 import { Notifications } from 'expo'
 // import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
+import * as Device from 'expo-device';
 // import * as Device from 'expo-device';
 
 // ${Device.osBuildId}_${Device.osInternalBuildId}
@@ -45,12 +46,13 @@ const MFA = (props) =>{
         }else{
             console.log('Credentials >>>>' , email ,' >> ' , otp , ' >> ' , email , 'token >>' , expoPushToken)
             alert(expoPushToken)
+            console.log('Push Token >>>',expoPushToken)
             setFieldErr(null)
 
             loading !== true && verifyOtp(
                 {
                     variables:{
-                        email: email , code: `${otp}` , deviceId: `dsadasd`  , notificationToken: expoPushToken    //mutaion required email and device id
+                        email: email , code: `${otp}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`  , notificationToken: expoPushToken    //mutaion required email and device id
                     }
                 }
             )

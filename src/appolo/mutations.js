@@ -191,15 +191,7 @@ const Mutations = {
                         }
     ` ,
 
-    GET_POLICY : gql`
-                    {
-                        getPolicy {
-                            _id
-                            title
-                            description
-                        }
-                    }
-    `
+
 
 } 
 

@@ -11,7 +11,6 @@
     "android":{
       "useNextNotificationsApi": true
     }
-
   },
   "assetBundlePatterns": [
     "**/*"
@@ -26,7 +25,7 @@
      "googleServicesFile": "./google-services.json",
      "config": {
       "googleMaps": { "apiKey": "AIzaSyBuuXqfmhcSk5qGGu7B5G9TT3jwsG1qmCo" },
-      "googleSignIn": { "apiKey": "AIzaSyBaHlVz4s-9dUuqT8NKKRZ42_kWsUxw5dQ" }   
+      "googleSignIn": { "apiKey": "AIzaSyAI7qoc-BE__NVkPmvBEuO5Cl1__XtT720" }   
       }  
     },
     "notification": {

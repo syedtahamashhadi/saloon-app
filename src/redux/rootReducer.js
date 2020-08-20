@@ -18,6 +18,8 @@ import { loginReducer,
         setPromoCodeCopiedReducer ,  
         userBookingSuccessReducer ,
         setCancelAppointmentFlagReducer ,
+        tosPpSuccessReducer ,
+        faqSuccessReducer ,
     } from './authenticate/reducers'
 
 
@@ -42,6 +44,8 @@ const rootReducer = combineReducers(
         setPromoCodeCopiedReducer : setPromoCodeCopiedReducer ,
         userBookingSuccessReducer : userBookingSuccessReducer ,
         setCancelAppointmentFlagReducer : setCancelAppointmentFlagReducer ,
+        tosPpSuccessReducer : tosPpSuccessReducer ,
+        faqSuccessReducer : faqSuccessReducer ,
     }
 )
 

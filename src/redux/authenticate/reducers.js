@@ -17,7 +17,10 @@ import { SIGNUP,
          SET_PROMO_CODE_COPIED ,
          USER_BOOKINGS_LIST ,
          SET_CANCEL_APPOINTMENT_FLAG ,
+         TOS_PP,
+         FAQ
         } from './constants';
+import { Switch } from 'react-native-gesture-handler';
 
 
 /******************************** SignUp Reducer ***********************************/
@@ -398,6 +401,44 @@ const setCancelAppointmentFlagReducer = (state= setCancelAppointmentFlagInitialS
     }
 }
 
+/************************** Tos & Pp Success  *********************/
+
+const tosPpInitialState ={
+    data : null
+}
+
+
+const tosPpSuccessReducer = (state= tosPpInitialState , action) =>{
+    switch (action.type) {
+        case TOS_PP.SUCCESS:
+            return{
+                ...state,
+                data: action.payLoad
+            }
+        default: return state;
+    }
+}
+
+
+
+/***************************** Faq ****************************/
+
+const faqInitialState = {
+    data: null
+}
+
+const faqSuccessReducer = (state = faqInitialState , action) =>{
+    switch (action.type) {
+        case FAQ.SUCCEES:
+            return{
+                ...state ,
+                data: action.payLoad
+            }   
+    
+        default: return state ;
+    }
+}
+
 export {
     signUpReducer,
     loginReducer,
@@ -418,4 +459,6 @@ export {
     setPromoCodeCopiedReducer ,
     userBookingSuccessReducer ,
     setCancelAppointmentFlagReducer ,
+    tosPpSuccessReducer , 
+    faqSuccessReducer ,
 }

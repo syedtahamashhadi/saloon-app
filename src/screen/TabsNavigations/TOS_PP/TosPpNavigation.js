@@ -42,7 +42,7 @@ const TosPpNavigation = (props) =>{
                 },
                
                 }}>
-                <Tab.Screen options={{ tabBarLabel: 'Terms of Usse'}}
+                <Tab.Screen options={{ tabBarLabel: 'Terms of Use'}}
                             name="TermsOfUse"
                             component={TermsOfUse} />
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {View,Text, TextInput, StyleSheet, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
 const {width} = Dimensions.get('window');
+import { connect } from 'react-redux'
 
 const searchData = [
         {
@@ -37,11 +38,13 @@ const searchData = [
 ]
 
 const FaqSearch = (props) => {
+    console.log('Faq Search >>>', props.faqs)
     const [text, setText] = React.useState('');
-    const [data, setData] = React.useState(searchData)
+    const [data, setData] = React.useState(null)
 
    const SearchFilterFunction = (text) => {
-        const newData = searchData.filter(function(item) {
+       console.log('Search >>' , props.faqs.data.getHelpTopic)
+        const newData = data.filter(function(item) {
           const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
           const textData = text.toUpperCase();
           return itemData.indexOf(textData) > -1;
@@ -50,6 +53,12 @@ const FaqSearch = (props) => {
         setData(newData);
       }
 
+      React.useEffect(()=>{
+        if(props.faqs.data){
+            setData(props.faqs.data.getHelpTopic)
+        }
+
+      },[])
     return (
         <View style={styles.container}>
 
@@ -75,10 +84,10 @@ const FaqSearch = (props) => {
 
 
         <View style={styles.item_list}>
-            {data.map((item) => {
+            {data && data.map((val) => {
                 return(
-                    <TouchableOpacity style={styles.item}>
-                        <Text style={styles.textStyle}>{item.title}</Text>
+                    <TouchableOpacity style={styles.item} onPress={()=>props.navigation.navigate('FaqsDescription', {helpTopic: val }) } >
+                        <Text style={styles.textStyle}>{val.title}</Text>
                     </TouchableOpacity>
                 )
             })}
@@ -89,7 +98,8 @@ const FaqSearch = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-
+        flex:1,
+        backgroundColor:'#ffff'
     },
     input:{
         flexDirection: 'row',
@@ -111,15 +121,21 @@ const styles = StyleSheet.create({
         borderBottomColor: 'lightgray'
     },
     item_list:{
-        marginTop: 30,
+        marginTop: 10,
         marginHorizontal: 20,
         // flex: 1
     },
     textStyle: {
         paddingVertical: 10,
-        fontSize: 20,
+        fontSize: 16,
         color: 'gray'
     }
 });
 
-export default FaqSearch ;
+const mapStateToProps = (state) =>{
+    return{
+        faqs: state.faqSuccessReducer
+    }
+} 
+
+export default connect(mapStateToProps,null)(FaqSearch) ;

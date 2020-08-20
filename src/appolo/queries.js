@@ -139,6 +139,16 @@ const Queries = {
                                         }
                                     }
                                 }
+    ` ,
+
+    GET_POLICY : gql`
+        {
+            getPolicy {
+                _id
+                title
+                description
+            }
+        }
     `
 }
 

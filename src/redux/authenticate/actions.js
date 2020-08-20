@@ -17,6 +17,8 @@ import { SIGNIN ,
     SET_PROMO_CODE_COPIED ,
     USER_BOOKINGS_LIST ,
     SET_CANCEL_APPOINTMENT_FLAG ,
+    TOS_PP,
+    FAQ,
 } from './constants'
 
 
@@ -257,6 +259,27 @@ const setCancelAppointmentFlagSuccess = (data) =>{
     }
 }
 
+/************************** Tos && PP  *********************/
+
+const TosPpSuccess = (data) =>{
+    // console.log('Action Cancel Appointment Fired >>>>>>>>')
+    return{
+        type: TOS_PP.SUCCESS,
+        payLoad: data
+    }
+}
+
+
+/************************* FAQ's ****************************/
+
+const FaqSuccess = (data) =>{
+    return{
+        type: FAQ.SUCCEES,
+        payLoad: data
+    }
+}
+
+
 export {
     signUpSuccess,
     loginSuccess,
@@ -277,4 +300,6 @@ export {
     setPromoCodeCopied ,
     userBookingListSuccess ,
     setCancelAppointmentFlagSuccess ,
+    TosPpSuccess ,
+    FaqSuccess ,
 }

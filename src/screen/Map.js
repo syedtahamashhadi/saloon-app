@@ -28,8 +28,8 @@ const Map = (props) =>{
 
     console.log('Map Props' , props)
 
-    const [userLat,setUserLat] = React.useState(null)
-    const [userLng,setUserLng] = React.useState(null)
+    const [userLat,setUserLat] = React.useState(51.5074)
+    const [userLng,setUserLng] = React.useState(0.1278)
     const [currentLat,setCurrentLat] = React.useState(null)
     const [currentLng,setCurrentLng] = React.useState(null)
     const [filterView,setFilterView] = React.useState(false)

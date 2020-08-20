@@ -19,7 +19,7 @@ const ChangePassword = (props) =>{
     const [isShowReConfirmPass,setIsShowReConfirmPass] = React.useState(false)
 
 
-    const [changePassword , {data , loading , err}]  = useMutation(Mutations.CHANGE_PASSWORD)    
+    const [changePassword , {data , loading , error}]  = useMutation(Mutations.CHANGE_PASSWORD)    
 
     async function getToken(){
         try {
@@ -45,11 +45,16 @@ const ChangePassword = (props) =>{
         }
     }
 
+    console.log('Data >>' , data)
+    console.log('error >>' , error)
+    console.log('Loading >>' , loading)
+
+
     const handleChangePassword = () =>{
-        if(oldPassword == null && newPassword == null && reConfirmPassword == null){
+        if(oldPassword == null || newPassword == null || reConfirmPassword == null){
             alert('Fields are empty!')
         }else if(reConfirmPassword !== newPassword){
-            console.log('New Password does not match with Re-Confirm Password')
+            alert('New Password does not match with Re-Confirm Password')
         }else{
             getToken()
         }
@@ -58,10 +63,12 @@ const ChangePassword = (props) =>{
     React.useEffect(()=>{
         if(data){
             console.log('Data >>>' , data)
-        }else if(err){
-            console.log('Err >>>' ,err)
+            alert('Your Password has Been Changed')
+        }else if(error){
+            console.log('Err >>>' ,error)
+            alert('Something Went Wrong')
         }
-    },[data,err])
+    },[data,error])
     
 
     return(
@@ -75,14 +82,14 @@ const ChangePassword = (props) =>{
                 <View style={{width:'90%' , height:45,borderRadius:20,borderWidth:0.2,justifyContent:'center'}}>
                 <TouchableOpacity onPress={()=>setIsShowOldPass(!isShowOldPass)}>
                    
-                    <EntypoIcon name={isShowOldPass ? 'eye' : 'eye-with-line'} size={25} style={{alignSelf:'flex-end',paddingRight:10}}/>
+                    <EntypoIcon name={isShowOldPass ? 'eye' : 'eye-with-line'} size={20} style={{alignSelf:'flex-end',paddingRight:10}}/>
                 </TouchableOpacity>
                 <TextInput 
                     value={oldPassword}
                     onChangeText={text => setOldPassword(text)}
                     placeholder='Old Password'
                     secureTextEntry={!isShowOldPass}
-                    style={{width:'80%' , height:45,borderTopLeftRadius:20,borderBottomLeftRadius:20,paddingHorizontal:10,borderWidth:0.5 ,
+                    style={{width:'90%' , height:45,borderTopLeftRadius:20,borderBottomLeftRadius:20,paddingHorizontal:10,borderWidth:0.5 ,
                     borderRightWidth:0,
                     position:'absolute'
                 }}
@@ -93,7 +100,7 @@ const ChangePassword = (props) =>{
                 <View style={{width:'90%' , height:45,borderRadius:20,borderWidth:0.2,justifyContent:'center' , marginTop:20}}>
                         
                         <TouchableOpacity onPress={()=>setIsShowNewPass(!isShowNewPass)}>
-                            <EntypoIcon name={isShowNewPass ? 'eye' : 'eye-with-line'} size={25} style={{alignSelf:'flex-end',paddingRight:10}}/>
+                            <EntypoIcon name={isShowNewPass ? 'eye' : 'eye-with-line'} size={20} style={{alignSelf:'flex-end',paddingRight:10}}/>
                         </TouchableOpacity>
 
                         <TextInput 
@@ -110,7 +117,7 @@ const ChangePassword = (props) =>{
                 <View style={{width:'90%' , height:45,borderRadius:20,borderWidth:0.2,justifyContent:'center' , marginTop:20}}>
                         
                     <TouchableOpacity onPress={()=>setIsShowReConfirmPass(!isShowReConfirmPass)}>
-                        <EntypoIcon name={isShowReConfirmPass ? 'eye' : 'eye-with-line'} size={25} style={{alignSelf:'flex-end',paddingRight:10}}/>
+                        <EntypoIcon name={isShowReConfirmPass ? 'eye' : 'eye-with-line'} size={20} style={{alignSelf:'flex-end',paddingRight:10}}/>
                     </TouchableOpacity>
                         <TextInput 
                             value={reConfirmPassword}
