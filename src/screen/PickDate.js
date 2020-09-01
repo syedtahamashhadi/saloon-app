@@ -10,10 +10,24 @@ import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import GestureRecognizer from 'react-native-swipe-gestures'
-
+const ADD_APPOINMENT = gql `
+    mutation abc {
+        addAppointment(salonId:"5e352f43e998cb2157837b28", 
+    serviceProviderId: "5e26e88be89f9d4799fe8378", timeZone: "Karachi", serviceId: "5e935b39bc8f3f00238b1279", cardId: "cfbb", appointmentDateTime: "2025-12-03T10:15:30Z", 
+    price:4.5)
+        {
+        status
+        salon
+        {
+            displayName
+        }
+        }  
+    } 
+`
 
 const PickDate = (props) =>{
 
+    const [addAppointment , {data, loading ,error}] = useMutation(ADD_APPOINMENT)
 
     const [pageView,setPageView]=React.useState(3)
     const [selectedDate,setSelectedDate] = React.useState(null)
@@ -28,7 +42,8 @@ const PickDate = (props) =>{
 
     let currentDate = `${date.getFullYear()}-${ month }-${cuurrentDay}`
 
-    const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},]
+    const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},{tm:'12:00'}, {tm:'12:30'}, 
+    {tm:'13:00'}, {tm: '13:30'}, {tm:'14:00'}, {tm: '14:30'}, {tm: '15:00'}, {tm: '15:30'}]
     const [time,setTime] = React.useState(false)
 
     const getTime = (val) =>{
@@ -168,7 +183,7 @@ const PickDate = (props) =>{
                     <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
                         <View style={{height:20,width:60}}>
-                            <View style={{width:60,height:2,backgroundColor:'blue'}}></View>
+                            <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                         </View>
                     </TouchableOpacity>
                     </GestureRecognizer>

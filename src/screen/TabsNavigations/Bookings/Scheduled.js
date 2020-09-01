@@ -13,7 +13,7 @@ const Scheduled = (props) =>{
                
                <View style={{marginHorizontal:20 , marginTop:25}}>
                 {
-                    props.bookings && props.bookings.reverse().map((val,index)=>{
+                    props.bookings && props.bookings.map((val,index)=>{
                         return(
                             val.status !== 'cancel' ? <CurrentBookingCard detail={val} nav={props.navigation} isDetailView={true}/> : null
                         )

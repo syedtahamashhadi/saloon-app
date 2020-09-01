@@ -92,6 +92,9 @@ const FAQ = {
     SUCCEES: 'FAQ_SUCCESS'
 }
 
+const NOTIFICATION_NAV = {
+    SUCCEES: 'NOTIFICATION_NAV_SUCCESS'
+}
 
 export {
         SIGNUP , 
@@ -115,5 +118,5 @@ export {
         SET_CANCEL_APPOINTMENT_FLAG ,
         TOS_PP,
         FAQ,
-    }
-
+        NOTIFICATION_NAV
+}

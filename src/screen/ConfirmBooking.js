@@ -10,10 +10,9 @@ import {connect} from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage'
 import Mutations from '../appolo/mutations'
 import GestureRecognizer from 'react-native-swipe-gestures'
-
-
+import moment from 'moment'
+import tz from 'moment-timezone'
 const ConfirmBooking = (props) =>{
-
 
     const [promoCode,setPromoCode]=React.useState('')
     const [servicePrice,setServicePrice]=React.useState(props.service.data.price)
@@ -26,7 +25,10 @@ const ConfirmBooking = (props) =>{
 
     const {selectedCard , time , strDay , day , month ,year} = props.route.params
 
-    let newDateTime = `${props.dateTime.data.date}T10:${props.dateTime.data.time}Z`
+    let dateTime = moment.utc(`${props.dateTime.data.date} ${props.dateTime.data.time}`).tz('Asia/Karachi')
+
+    let newDateTime = dateTime.utc().format()
+
     let saloonId = props.saloon.data._id
     let saloonName = props.saloon.data.displayName
     let contactNo = props.saloon.data.contactNo
@@ -78,6 +80,8 @@ const ConfirmBooking = (props) =>{
     React.useEffect(()=>{
         if(data){
             props.copiedPromoCode(null)
+            props.navigation.replace('BookingsNavigation')
+
         // props.navigation.navigate('')
         }
         // else if(dataPromoCode){
@@ -153,7 +157,7 @@ const ConfirmBooking = (props) =>{
                     <View style={{marginTop:15}}>
                 <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`${strDay} ${day} ${month}, ${year}`}</Text>
                     </View>
-                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`at ${time} AM`}</Text>
+                <Text style={{fontSize:18,color:'#49D3CE',fontFamily:'ExoBold'}}>{`at ${time}`}</Text>
                 </View>
 
                 <View style={{marginHorizontal:20,marginTop:25}}>

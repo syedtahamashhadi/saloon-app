@@ -18,7 +18,8 @@ import { SIGNUP,
          USER_BOOKINGS_LIST ,
          SET_CANCEL_APPOINTMENT_FLAG ,
          TOS_PP,
-         FAQ
+         FAQ,
+         NOTIFICATION_NAV
         } from './constants';
 import { Switch } from 'react-native-gesture-handler';
 
@@ -439,6 +440,25 @@ const faqSuccessReducer = (state = faqInitialState , action) =>{
     }
 }
 
+
+/***************************** NOTIFICATION NAV ****************************/
+
+const notificationNavInitialState = {
+    data: null
+}
+
+const notificationNavSuccessReducer = (state = notificationNavInitialState , action) =>{
+    switch (action.type) {
+        case NOTIFICATION_NAV.SUCCEES:
+            return{
+                ...state ,
+                data: action.payLoad
+            }   
+    
+        default: return state ;
+    }
+}
+
 export {
     signUpReducer,
     loginReducer,
@@ -461,4 +481,5 @@ export {
     setCancelAppointmentFlagReducer ,
     tosPpSuccessReducer , 
     faqSuccessReducer ,
+    notificationNavSuccessReducer
 }

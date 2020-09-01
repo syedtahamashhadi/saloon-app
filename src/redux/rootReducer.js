@@ -20,11 +20,13 @@ import { loginReducer,
         setCancelAppointmentFlagReducer ,
         tosPpSuccessReducer ,
         faqSuccessReducer ,
+        notificationNavSuccessReducer
     } from './authenticate/reducers'
 
 
 const rootReducer = combineReducers(
     {
+    
         loginReducer: loginReducer,
         signUpReducer: signUpReducer,
         mfaReducer: mfaReducer,
@@ -46,6 +48,7 @@ const rootReducer = combineReducers(
         setCancelAppointmentFlagReducer : setCancelAppointmentFlagReducer ,
         tosPpSuccessReducer : tosPpSuccessReducer ,
         faqSuccessReducer : faqSuccessReducer ,
+        notificationNavSuccessReducer: notificationNavSuccessReducer
     }
 )
 

@@ -61,6 +61,7 @@ import BookingsNavigation from '../screen/TabsNavigations/Bookings/BookingsNavig
 import SettingsNavigation from '../screen/TabsNavigations/Settings/SettingsNavigation'
 import FaqSearch from '../screen/FaqSearch'
 // import Testing from '../screen/Testing'
+import {NotificationNavSuccess} from '../redux/authenticate/actions'
 
 
 
@@ -68,8 +69,12 @@ import FaqSearch from '../screen/FaqSearch'
 const Stack = createStackNavigator();
 
 const UserNav = (props) =>{
-    
     const [isLogin,setIsLogin] = React.useState(false)
+
+
+
+    console.log('props in userNAV', props)
+    const {notificationData} = props
 
     const getToken = async () =>{
         console.log('Get Token is Fired >>>>>>>>>>>')
@@ -87,7 +92,16 @@ const UserNav = (props) =>{
     }
 
     React.useEffect(()=>{
-        console.log('User Nav Is Fired >>>>')
+        // if(notificationRoute){
+        //     props.navigation.navigate(notificationRoute)
+            // console.log("notificationData.data.route", notificationData.data.route)
+        // }
+console.log('notificationData >>>', notificationData)
+        
+            notificationData ? props.notificationNav(notificationData) : null
+        
+
+
         getToken()
     } )
 
@@ -190,7 +204,9 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        setIsLogin : (data) => dispatch(setIsLogin(data))
+        setIsLogin : (data) => dispatch(setIsLogin(data)),
+        notificationNav: (data) => dispatch(NotificationNavSuccess(data)) 
+
     }
 }
 

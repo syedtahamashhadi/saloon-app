@@ -1,12 +1,12 @@
 {
   "expo": {
    "name": "Komb",
-   "icon": "./assets/splash.png",
+   "icon": "./assets/KOmb-03.png",
    "version": "1.0.0",
    "slug": "Komb",
    "splash": {
-    "image": "./assets/splash.png",
-    "resizeMode": "contain",
+    "image": "./assets/KOmb_logo.png",
+    "resizeMode": "cover",
     "backgroundColor": "#fff" , 
     "android":{
       "useNextNotificationsApi": true

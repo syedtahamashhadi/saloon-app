@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React from 'react';
 import {View,Text} from 'react-native'
 import { useFonts } from '@use-expo/font'
 import { AppLoading } from 'expo'
@@ -14,8 +14,27 @@ import * as Permissions from 'expo-permissions'
 
 
 const store = configureStore()
+const App = (props) => {
+  // const [origin, setOrigin] = React.useState('')
+  const [notificationData, setNotificationData] = React.useState(null)
 
-export default function App() {
+console.log('App js props >>>>', props)
+  // const notificationListener = useRef();
+  const responseListener = React.useRef();
+  // console.log("NOtificaiton origin" ,origin)
+  console.log("NOtificaiton notificationData" ,notificationData)
+
+  React.useEffect(()=>{
+    console.log("app.js Notification add lister", Notifications.addListener)
+    Notifications.addListener(handlePushNotification) 
+  },[] )
+
+  const handlePushNotification = (notification) => {
+    console.log("orign >>>>> ",notification)
+  // setOrigin(origin)
+  // setNotificationData(null)
+  setNotificationData(notification)
+  };
 
   const [fontLoaded] = useFonts(
     {
@@ -29,6 +48,7 @@ export default function App() {
   if(!fontLoaded){
     return <AppLoading />
   }
+
   
   return (
 
@@ -36,7 +56,7 @@ export default function App() {
 
       <ApolloProvider client={client}> 
         
-        <UserNav /> 
+        <UserNav notificationData={notificationData} /> 
 
       </ApolloProvider> 
     
@@ -45,3 +65,6 @@ export default function App() {
   );
 }
 
+
+
+export default App;

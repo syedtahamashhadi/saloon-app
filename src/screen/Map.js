@@ -26,6 +26,7 @@ if(Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental)
 
 const Map = (props) =>{
 
+    console.log("pROPS IN MAP",props)
     const [userLat,setUserLat] = React.useState(51.5074)
     const [userLng,setUserLng] = React.useState(0.1278)
     const [currentLat,setCurrentLat] = React.useState(null)
@@ -121,8 +122,20 @@ const Map = (props) =>{
     }
 
     useEffect(()=>{
+        console.log('useEffect in Map >>>>>>')
         getLoc()
     },[])
+
+    React.useEffect(() => {
+        console.log('props.notificationNav.notification', props.notificationNav ? props.notificationNav : 'undefined')
+
+        // if(props.notificationNav && props.notificationNav.origin == 'selected'){
+        //     console.log("props.notificationNav.data.route",props.notificationNav.data.route)
+        // props.navigation.navigate(props.notificationNav.data.route)
+        // }
+        props.notificationNav ? alert('Testing >>>>>>>>>>>') : null
+
+    }, [props.notificationNav])
 
     useEffect(()=>{
         if(userLat && userLng){
@@ -237,6 +250,7 @@ const mapStateToProps = (state) =>{
         token: state.mfaReducer.token ,
         mfa: state.mfaReducer.data ,
         filterView : state.setIsFilterViewReducer.data ,
+        notificationNav: state.notificationNavSuccessReducer.data,
     }
 }
 

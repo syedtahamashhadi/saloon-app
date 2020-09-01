@@ -24,7 +24,21 @@ const MFA = (props) =>{
     const [email,setEmail] = React.useState(null)
     const [expoPushToken,setExpoPushToken] = React.useState('')
 
-    // console.log('Props SignUp >>>>',props.signUp)
+    React.useEffect(()=>{
+        // console.log("Notification add lister", Notifications.addListener)
+
+        // Notifications.addListener(handlePushNotification) 
+        // => {
+        //     console.log("NOtificaiton origin" ,origin)
+        //     console.log("NOtificaiton data" ,data)
+        // })
+        checkKey()
+    },[] )
+
+    // const handlePushNotification = ({ origin, data }) => {
+    //     console.log("NOtificaiton origin" ,origin)
+    //     console.log("NOtificaiton data" ,data)
+    //   };
 
     const { screen } = props.route.params
 
@@ -72,9 +86,7 @@ const MFA = (props) =>{
             null
         }
     }
-    React.useEffect(()=>{
-        checkKey()
-    },[] )
+    
 
     React.useEffect(()=>{
         console.log('MFA Mounted >>>',props.signIn )
@@ -143,6 +155,8 @@ const MFA = (props) =>{
         //     lightColor: '#FF231F7C',
         //   });
         // }
+        console.log('Notification token', token)
+        alert(token)
         return token;
       }
 
