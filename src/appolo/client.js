@@ -40,7 +40,7 @@ const defaultOptions={
     fetchPolicy: 'cache-and-network',         //https://medium.com/@galen.corey/understanding-apollo-fetch-policies-705b5ad71980
   },                                          //https://stackoverflow.com/questions/46246029/how-to-set-fetchpolicy-globally-on-apollo-client-queries?rq=1
   query: {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   }
 }
 const httpLink = createHttpLink({

@@ -14,6 +14,9 @@ const GET_FAVOURITE_SALOON = gql `
         getFavoriteSalons{
             favoriteSalon{
                 displayName
+                _id
+                distance
+                rating
             }
         }
     }
@@ -50,6 +53,12 @@ const Favourites = (props) =>{
         getToken()
     },[])
 
+
+    React.useEffect(()=>{
+        if(data){
+            console.log('Fav Saloon Data >>' , data)
+        }
+    },[data,error])
     return(
         <View style={styles.container}>
 
@@ -67,10 +76,13 @@ const Favourites = (props) =>{
                     <AntIcon name='filter' size={25}/>
                 </View>
             </View>
+            {
+                data && data.getFavoriteSalons.favoriteSalon.map((val,index)=>{
+                    return(
 
-            <View style={styles.favouriteMainContainer}>
+                        <View style={styles.favouriteMainContainer} key={index}>
 
-                <TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.8}>
 
 
                 <View style={styles.favouriteContainer}>
@@ -82,7 +94,7 @@ const Favourites = (props) =>{
                         <View style={{width:200,height:'100%' , backgroundColor:'#fff'}}>
 
                             <Text style={styles.shopName}>
-                                Slough Barber
+                                {val.displayName}
                             </Text>
                             <View style={styles.distanceContainer}>
                                 <AwsomeIcon name='map-marker' size={15} color='#FA7268'/>
@@ -97,7 +109,7 @@ const Favourites = (props) =>{
                             </View>
 
                             <View style={styles.ratingContainer}>
-                                <Rating rating={4.2} starSize={12} textSize={12}/>
+                                <Rating rating={val.rating} starSize={12} textSize={12}/>
                             </View>
 
                         </View>
@@ -108,6 +120,11 @@ const Favourites = (props) =>{
                 </TouchableOpacity>
 
             </View>
+
+                    )
+                })
+            }
+            
 
         </View>
     )
@@ -151,6 +168,7 @@ const styles = StyleSheet.create(
         favouriteMainContainer:{
             marginTop:30,
             marginHorizontal:20,
+            // backgroundColor:'green'
         },
         favouriteContainer:{
             width:'100%',
@@ -163,7 +181,7 @@ const styles = StyleSheet.create(
         imageContainer:{
             // height:'100%',
             width:'30%',
-            backgroundColor:'red',
+            // backgroundColor:'red',
             borderTopLeftRadius:10,
             borderBottomLeftRadius:10
         },

@@ -149,7 +149,29 @@ const Queries = {
                 description
             }
         }
-    `
+    ` , 
+
+    GET_FAV_SALOON : gql `
+        {
+        getFavoriteSalons{
+            favoriteSalon{
+                _id
+            }
+        }
+        }
+  
+    ` ,
+
+    GET_NOTIFICATIONS : gql `
+        {
+            getUserNotifications{
+                title
+                body
+                notificationType
+                createdAt
+            }
+        }
+    ` ,
 }
 
 export default Queries ;

@@ -2,10 +2,45 @@ import React from 'react'
 import { View , Text , ScrollView, StyleSheet , TouchableOpacity } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import FooterBar from '../component/FooterBar'
+import Queries from '../appolo/queries'
+import { useLazyQuery } from '@apollo/react-hooks'
+import AsyncStorage from '@react-native-community/async-storage'
+
 // import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 const Notifications = (props) =>{
+
+    const [getAllNotifications,{data,loading,error}] = useLazyQuery(Queries.GET_NOTIFICATIONS)
+
+    React.useEffect(()=>{
+        (async()=>{
+            try {
+                const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+                if(token !== null){
+                    getAllNotifications(
+                        {
+                            context:{
+                                headers:{
+                                    authorization: token
+                                }
+                            }
+                        }
+                    )
+                }
+            } catch (error) {
+                console.log('Token Errr >>' , error)
+            }
+        })()
+    },[])
+
+    React.useEffect(()=>{
+        if(data){
+            console.log('Data is >>' , data)
+        }else if(error){
+            console.log('Error is >>' , error)
+        }
+    },[data,error])
 
     return(
         <View style={styles.container}>

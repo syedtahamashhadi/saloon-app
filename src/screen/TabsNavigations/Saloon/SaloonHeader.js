@@ -10,8 +10,8 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 
 const SET_FAV_SALOON = gql `
-mutation abc($id: String! , $status:  Boolean!) {
-    setFavoriteSalons(salonId: $id, status: $status)
+mutation abc($salonId: String! , $status:  Boolean!) {
+    setFavoriteSalons(salonId: $salonId, status: $status)
     {
      email
      favoriteSalon{
@@ -35,7 +35,7 @@ const GET_FAV_SALOON = gql `
 
 const Saloon = (props) =>{
 
-    const [setFavSaloon , { data:dataSetFavSaloon , loading , error:errFavSaloon }] = useMutation(SET_FAV_SALOON)
+    const [setFavSaloon , { data:dataSetFavSaloon , loading:loadingFavSaloon , error:errFavSaloon }] = useMutation(SET_FAV_SALOON)
     
     const [getFavSaloon , { data:dataGetFavSaloon , loading: loadingGetFavSaloon , error: errGetFavSaloon }] = useLazyQuery(GET_FAV_SALOON)
 
@@ -71,11 +71,14 @@ const Saloon = (props) =>{
     const getToken = async() =>{
         try {
             const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
+            console.log('Token >>>')
             if(token !== null){
+                console.log('Current state 4 >>>' , !favPressed)
+
                 setFavSaloon(
                     {
                         variables:{
-                            id : saloon._id , status : true
+                            salonId : saloon._id , status : !favPressed
                         } , 
                         context:{
                             headers:{
@@ -90,20 +93,30 @@ const Saloon = (props) =>{
         }
     }
 
+    const handleHeartPressed = () =>{
+        setFavPressed(!favPressed)
+        loadingFavSaloon !== true && getToken()
 
-
-    // React.useEffect(()=>{
-    // if(data){
-    //     console.log('Fav Saloon Data >>' , data)
-    // }else if(error){
-    //     console.log('Fav Saloon Error >>' , error)
-    // }
-    // },[data,error])
+    }
 
     React.useEffect(()=>{
-        // if(dataGetFavSaloon)
+        if(dataGetFavSaloon){
+            console.log('Get Fav Saloon >>>' , dataGetFavSaloon)
+            props.favSaloon(dataGetFavSaloon.getFavoriteSalons)
+            dataGetFavSaloon.getFavoriteSalons.favoriteSalon.forEach((val)=>{
+                saloon._id == val._id ? setFavPressed(true) : setFavPressed(false)
+            })
+        }
     },[dataGetFavSaloon,errGetFavSaloon])
 
+
+    React.useEffect(()=>{
+        if(dataSetFavSaloon){
+            console.log('Fav Saloon Setted' , dataSetFavSaloon)
+        }else if(errFavSaloon){
+            console.log('Err set fav saloon >>' , errFavSaloon)
+        }
+    },[dataSetFavSaloon,errFavSaloon])
 
     let heartBackgroundColor = favPressed ? '#FA7268' : '#fff'
     let heartColor = favPressed ? '#fff' : '#FA7268'
@@ -125,7 +138,7 @@ const Saloon = (props) =>{
                                     <AntIcon name="hearto" size={22} color="#FA7268" style={{padding:9}}/>
                                 </View>
                             </TouchableOpacity> */}
-                             <TouchableOpacity onPress={()=>setFavPressed(!favPressed)}>
+                             <TouchableOpacity onPress={()=>handleHeartPressed()}>
                                 <View style={[{backgroundColor:heartBackgroundColor},styles.heartIcon]}>
                                     <AntIcon name="hearto" size={22} color={heartColor}  style={{padding:9}}/>
                                 </View>
@@ -174,7 +187,13 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps,null)(Saloon);
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        favSaloon: data => dispatch(setFavSaloonSuccess(data))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Saloon);
 
 
 const styles = StyleSheet.create(
