@@ -11,12 +11,12 @@ import Scheduled from './Scheduled'
 const Tab = createMaterialTopTabNavigator();
 
 const BookingsNavigation = (props) =>{
-    console.log('Props Nav>>>' , props)
+    console.log('Props Nav>>> booking nav' , props)
    
     return (
         // <SafeAreaProvider>
         <View style={{flex:1}}>
-            <BookingsHeader nav={props.navigation}/>
+            <BookingsHeader nav={props}/>
             {/* <Text>Test</Text> */}
             <Tab.Navigator
                 initialRouteName="Scheduled"

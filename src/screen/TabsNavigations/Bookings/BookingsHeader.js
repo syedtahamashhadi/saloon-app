@@ -11,9 +11,9 @@ import {userBookingListSuccess , setCancelAppointmentFlagSuccess} from '../../..
 
 const BookingsHeader = (props) =>{
 
-    console.log('State >>' , props)
+    console.log('State >> in bookings header' , props)
 
-
+   
     const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(Queries.GET_USER_BOOKING)
     
     console.log('List of Bookings >> ',props.bookings)
@@ -42,7 +42,7 @@ const BookingsHeader = (props) =>{
     }
 
     React.useEffect(()=>{
-        props.nav.addListener('focus', () => {
+        props.nav.navigation.addListener('focus', () => {
             console.log('BookingHeader is  Mounted>>>',props.cancelAppointmentFlag.isAppointmentCancel)
             if(props.cancelAppointmentFlag.isAppointmentCancel == true){
                 getToken()
@@ -53,7 +53,7 @@ const BookingsHeader = (props) =>{
     
     React.useEffect(()=>{
         getToken()
-    },[])
+    }, [props.nav])
 
    
     React.useEffect(()=>{
@@ -68,7 +68,7 @@ const BookingsHeader = (props) =>{
     return(
         <View style={styles.container}>
             <View style={{marginTop:35 , marginHorizontal:20 ,flexDirection:'row'}}>
-                <TouchableOpacity onPress={()=>props.nav.goBack()}>
+                <TouchableOpacity onPress={()=>props.nav.navigation.goBack()}>
                     <AntIcon name='arrowleft' size={25} />
                 </TouchableOpacity>
             </View>

@@ -158,7 +158,7 @@ const styles = StyleSheet.create(
             borderRadius:10,
             elevation:5,
             flexDirection:'row',
-            // backgroundColor:'green'
+            backgroundColor:'#fff'
         },
         imageContainer:{
             // height:'100%',

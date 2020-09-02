@@ -19,7 +19,7 @@ const PromoCodeCard = (props) => {
     const copyToClipBoard = (text) =>{
         console.log('Text >>>>' , text)
         Clipboard.setString(text)
-        ToastAndroid.show("Copy to Clipboard", ToastAndroid.SHORT);
+        ToastAndroid.show(`Copy to Clipboard ${text}`, ToastAndroid.SHORT);
         props.setCode(text)
         // setCopiedCode(text)
     }
@@ -28,8 +28,8 @@ const PromoCodeCard = (props) => {
 
     return (
         // <SafeAreaProvider>
-            <SafeAreaView forceInset={{ top: 'always' }} style={{flex: 1}}>
-            {/* // <View > */}
+            // <SafeAreaView forceInset={{ top: 'always' }} style={{flex: 1}}>
+             <View > 
 
                 <View style={styles.promoCard}>
                     <ImageBackground source={{uri : props.detail.pictureURL}} style={[{borderColor:myBorderColor},styles.image]}>
@@ -50,8 +50,9 @@ const PromoCodeCard = (props) => {
                             <TouchableOpacity
                                 activeOpacity={0.2}
                                 onPress={()=>{copyToClipBoard(props.detail.code)}}
+                                style={{alignItems: 'center'}}
                             >
-                            <Text style={{textAlign:'center',marginTop:'13%',fontFamily:'ExoBold',fontSize:18,color: 'black'}}>
+                            <Text style={styles.coupnCode}>
                                 {props.detail.code}
                             </Text>
                             </TouchableOpacity>
@@ -66,15 +67,15 @@ const PromoCodeCard = (props) => {
                         </View>
                     </ImageBackground>
                 </View>
-                {/* // </View> */}
+                </View>
 
-            </SafeAreaView>
-        // </SafeAreaProvider>
+           
     );
 }
 
 const styles = StyleSheet.create({
     promoCard:{
+        marginTop: 20,
         flex: 1,
         alignItems: 'center'
     },
@@ -122,6 +123,17 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white',
     },
+    coupnCode:{
+        width: 100, 
+        textAlign:'center',
+        marginTop:'13%',
+        fontFamily:'ExoBold',
+        fontSize:18,
+        color: 'black', 
+        backgroundColor: 'white',
+        elevation: 5,
+
+    }
 })
 
 export default PromoCodeCard

@@ -55,7 +55,7 @@ const BookingDetail = (props) =>{
         if(data){
             props.setCancelApointmentFlag(true)
             // props.bookingsList(data.cancelAppointment)
-            props.navigation.navigate('BookingsNavigation')
+            props.navigation.navigate('BookingsNavigation',{remount:true})
         }else if(error){
             alert('Something Went Wrong Try Again !')
         }
@@ -161,7 +161,7 @@ const styles = StyleSheet.create(
             paddingBottom: 0,
             backgroundColor: '#fcfcfc',
             height: 180,
-            marginTop: '15%',
+            marginTop: 30,
             // width:'100%',
             position: 'relative'
         },
@@ -171,7 +171,7 @@ const styles = StyleSheet.create(
             borderRadius: 5,
             borderStyle: 'dashed',
             position: 'relative',
-            bottom: -16,
+            // bottom: -,
         },
         fontSize_18_bold:{
             fontSize: 18,

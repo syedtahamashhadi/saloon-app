@@ -13,6 +13,7 @@ import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { useLinkProps } from '@react-navigation/native';
 import { connect } from 'react-redux'
 import AsyncStorage from '@react-native-community/async-storage';
+import SvgEmptyBox from '../../MySvg/EmptyBox'
 
 const GET_PROMO_CODE = gql `
 {
@@ -34,6 +35,7 @@ const PromoCode = (props) => {
 
     const [getPromoCodeQuery,{data , loading , error}] = useLazyQuery(GET_PROMO_CODE)
 
+    console.log('data,>>>>>', data)
     React.useEffect(()=>{
         async function getToken(){
             try {
@@ -76,14 +78,19 @@ const PromoCode = (props) => {
 
             {/* {data && <PromoCardCarousel detail={data.getPromoCode}/> } */}
 
-            <View>
-                {/* <View style={styles.header}>
-                    <Text style={styles.fontSize_20}>NEAR YOU</Text>
-                </View> */}
-                <ScrollView style={styles.momentsHeader}>
-                    {
+            <View style={styles.momentsHeader}>
+                {data && data.getPromoCode.length == 0
+                ?
+                <View style={styles.emptyContainer}>
+                        <SvgEmptyBox/>
+                        <Text style={{fontSize: 20}}>You have no Promo code!</Text>    
+                </View>
+                :
+                <ScrollView>
+                    { 
                         data && data.getPromoCode.map((val,index)=>{
                             console.log('Promo Code Data >>>>>>' , val)
+                                    
                             // let date = new Date()
                             // let currentDateIntoTime = date.getTime()
                             // let expDateIntoTime = new Date(val.expiredAt).getTime()
@@ -94,9 +101,12 @@ const PromoCode = (props) => {
                             )
 
                         })
+                        
                     }
                 
                 </ScrollView>
+
+                }
             </View>
         </View>
     );
@@ -118,8 +128,14 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     momentsHeader: {
+        flex: 1,
         height: hp('100%'),
     },
+    emptyContainer:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })
 
 const mapStateToProps = (state) =>{
