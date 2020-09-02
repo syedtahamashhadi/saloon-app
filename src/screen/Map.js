@@ -127,13 +127,10 @@ const Map = (props) =>{
     },[])
 
     React.useEffect(() => {
-        console.log('props.notificationNav.notification', props.notificationNav ? props.notificationNav : 'undefined')
-
-        // if(props.notificationNav && props.notificationNav.origin == 'selected'){
-        //     console.log("props.notificationNav.data.route",props.notificationNav.data.route)
-        // props.navigation.navigate(props.notificationNav.data.route)
-        // }
-        props.notificationNav ? alert('Testing >>>>>>>>>>>') : null
+      
+        // console.log('Reducer Notification Data >>',props.notificationNav.data)
+        props.notificationNav !== null && props.navigation.navigate(props.notificationNav.data.data.route)
+        
 
     }, [props.notificationNav])
 

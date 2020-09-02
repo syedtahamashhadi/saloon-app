@@ -92,15 +92,11 @@ const UserNav = (props) =>{
     }
 
     React.useEffect(()=>{
-        // if(notificationRoute){
-        //     props.navigation.navigate(notificationRoute)
-            // console.log("notificationData.data.route", notificationData.data.route)
-        // }
-console.log('notificationData >>>', notificationData)
         
-            notificationData ? props.notificationNav(notificationData) : null
+        if(notificationData){
         
-
+            notificationData.origin == 'selected' && props.notificationNav(notificationData)
+        }
 
         getToken()
     } )

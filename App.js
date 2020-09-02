@@ -31,8 +31,6 @@ console.log('App js props >>>>', props)
 
   const handlePushNotification = (notification) => {
     console.log("orign >>>>> ",notification)
-  // setOrigin(origin)
-  // setNotificationData(null)
   setNotificationData(notification)
   };
 
@@ -56,7 +54,9 @@ console.log('App js props >>>>', props)
 
       <ApolloProvider client={client}> 
         
+        {/* <UserNav notificationData={notificationData} />  */}
         <UserNav notificationData={notificationData} /> 
+
 
       </ApolloProvider> 
     
