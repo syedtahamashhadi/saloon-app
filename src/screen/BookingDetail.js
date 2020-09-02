@@ -21,11 +21,9 @@ const BookingDetail = (props) =>{
     const handleCancel = () => {
 
         async function getToken(){
-            console.log('Fired>>>>')
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
                 if(token !== null){
-                   console.log('Fired>>>> 2')
 
                     loading !== true && cancelAppoinment(
                         {
@@ -47,9 +45,7 @@ const BookingDetail = (props) =>{
         getToken()
     };
 
-    console.log('Data >>',data)
-    console.log('Loading >>',loading)
-    console.log('Error >>',error)
+
 
     const handleDelete = () => {
         alert('Handle Delete')

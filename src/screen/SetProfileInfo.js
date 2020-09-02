@@ -6,20 +6,14 @@ import SocialCard from '../component/SocialCard'
 import gql from 'graphql-tag'
 import {useMutation} from '@apollo/react-hooks'
 import { connect } from 'react-redux'
+import Mutation from '../appolo/mutations'
 
 
-const UPDATE_USER_PROFILE = gql `
-mutation abc($country:String , $gender: String , $zipCode: String){
-    updateUserProfile(input: {country: $country , gender: $gender , postalCode: $zipCode})
-    {
-        email
-    }  
-  }
-`
+
 
 const SetProfileInfo = (props) =>{
 
-    const [updateUserProfile , {data , loading , error}] = useMutation(UPDATE_USER_PROFILE)
+    const [updateUserProfile , {data , loading , error}] = useMutation(Mutation.UPDATE_USER_PROFILE)
 
     const [fName , setFName] = React.useState('')
     const [email , setEmail] = React.useState('')

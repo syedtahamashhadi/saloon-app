@@ -21,7 +21,6 @@ export default function Moments(props) {
     const [beforeImageUrl,setBeforeImageUrl] = useState(null)
     const [afterImageUrl,setAfterImageUrl] = useState(null)
 
-    const name = 'Raheem'
 
 
     const [addMoments , { data , loading , error  }] = useMutation(Mutations.ADD_MOMENTS)

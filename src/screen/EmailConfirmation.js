@@ -20,16 +20,10 @@ mutation abc($email: String!) {
 
 const EmailConfirm = (props) =>{
 
-    console.log('Email Confirmation Props >>>>' , props)
-
     const [ resendOtp , {data, loading , error } ] = useMutation(RESEND_OTP)
 
     const [didIt,setDidIt] = React.useState(false)
     const [resend,setResend] = React.useState(false)
-
-    console.log('Data is >>' , data)
-    console.log('Loading is >>' , loading)
-    console.log('Error is >>' , error)
 
 
     const handleButton = () =>{
@@ -45,7 +39,6 @@ const EmailConfirm = (props) =>{
     }
 
     const handleResend = () =>{
-        console.log('Test')
         loading !== true && resendOtp(
             {
                 variables:{

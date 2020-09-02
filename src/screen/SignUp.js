@@ -21,9 +21,7 @@ const SignUp = (props) =>{
     const [fieldErr,setFieldErr] = React.useState(null)
 
     // props.signUpState.isSignUp == true ? props.navigation.replace('SignIn') : null 
-    console.log('Loading is >> ',loading)
-    console.log('Data is >> ',data)
-    console.log('Error is >> ',error)
+
 
     
     const socialData = [{icon:'facebook',link:'www.facebook.com',bColor:'#3b5998'},
@@ -65,30 +63,7 @@ const SignUp = (props) =>{
                 )
                 break;
         }
-        // if(firstName == '' && lastName == '' && email == '' && password == '' && phone == ''){
-        //     setFieldErr('All fields are empty !')
-        // }else if(firstName == ''){
-        //     setFieldErr('Enter Your First-Name !')
-        // }else if(lastName == '' ){
-        //     console.log('Last Name')
-        //     setFieldErr('Enter Your Last-Name !')
-        // }else if(email == ''){
-        //     setFieldErr('Enter Your Email !')
-        // }else if(password == ''){
-        //     setFieldErr('Enter Your Password !')
-        // }else if(phone == ''){
-        //     setFieldErr('Enter Your Contact Number !')
-        // }else if(email.includes('@') == false){
-        //     setFieldErr('Email Format is not Correct !')
-        // }else{
-        //     loading !== true && signupUser(
-        //         {
-        //             variables:{
-        //                 firstName: firstName , lastName: lastName , email: email , password: password , phone: `${phone}`
-        //             }
-        //         }
-        //     )
-        // }
+
     }
 
     React.useEffect(()=>{
@@ -107,8 +82,6 @@ const SignUp = (props) =>{
         }
     },[data,error])
     const errorBorderColor = fieldErr ? 'red' : 'black'
-
-    console.log('Border color >>' , errorBorderColor , fieldErr , data)
     
     return(
         // <ScrollView showsVerticalScrollIndicator={false}>

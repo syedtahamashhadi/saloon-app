@@ -38,12 +38,10 @@ const searchData = [
 ]
 
 const FaqSearch = (props) => {
-    console.log('Faq Search >>>', props.faqs)
     const [text, setText] = React.useState('');
     const [data, setData] = React.useState(null)
 
    const SearchFilterFunction = (text) => {
-       console.log('Search >>' , props.faqs.data.getHelpTopic)
         const newData = data.filter(function(item) {
           const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
           const textData = text.toUpperCase();

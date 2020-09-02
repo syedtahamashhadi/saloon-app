@@ -32,14 +32,6 @@ const SignIn = (props) =>{
     
     data ? props.navigation.replace('Welcome') : null
 
-    console.log('Loading is >> ',loading)
-    console.log('Data is >> ',data)
-    console.log('Error is >> ',error)
-
-   
-    // console.log('Data is >>' , data)
-
-
     function makeid(length) {
         var result           = '';
         var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -47,7 +39,6 @@ const SignIn = (props) =>{
         for ( var i = 0; i < length; i++ ) {
            result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        console.log('Result >>>' , result)
         return result;
      }
 
@@ -90,7 +81,6 @@ const SignIn = (props) =>{
     useEffect(()=>{
         if(data){
             // setFieldErr(null)
-            console.log('Data is Fired >>>>>>>>>',data)
             props.signIn(data)
             props.navigation.replace('MFA' , 
                 {
@@ -114,7 +104,6 @@ const SignIn = (props) =>{
     const errorBorderColor = fieldErr ? 'red' : 'black'
     let reqErr = (error && error.message) ? error.message.slice(15)  : null
 
-    console.log('My Error' , reqErr)
     return(
 
         

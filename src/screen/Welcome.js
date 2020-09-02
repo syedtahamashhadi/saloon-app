@@ -1,5 +1,5 @@
 import React from 'react'
-import {View , Text , Image , TouchableOpacity , Dimensions, StyleSheet , Platform} from 'react-native'
+import {View , Text , Image , TouchableOpacity , StyleSheet , ScrollView, Dimensions} from 'react-native'
 import { useFonts } from '@use-expo/font'
 import Chat from '../component/Chat'
 import Button from '../component/Button'
@@ -46,7 +46,7 @@ const Welcome = (props) =>{
    
    
     return(
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={{marginHorizontal:20}}>
                 <View style={{marginTop:60}}>
                     <Text style={{fontSize:24,color:'#1D194D',fontFamily:'ExoRegular'}}>WELCOME TO</Text>
@@ -71,7 +71,7 @@ const Welcome = (props) =>{
 
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -90,11 +90,13 @@ const mapStateToProps = state =>{
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Welcome);
 
+const {width, height} = Dimensions.get('window')
 const styles = StyleSheet.create(
     {
         container:{
             flex:1,
             backgroundColor:'#fff',
+            height: 300
             // marginHorizontal:20
         }
     }

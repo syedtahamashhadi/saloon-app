@@ -32,7 +32,6 @@ const cameraHandle = async() => {
 const onPictureSaved = (data) => {
     const asset = MediaLibrary.createAssetAsync(data.uri);
     setPhoto(asset)
-    console.log(asset, 'asset')
 }
 
 if (hasPermission === null) {

@@ -8,17 +8,14 @@ import { connect } from 'react-redux'
 
 
 const SaloonList = (props) =>{
-    console.log('SaloonList Props' , props)
 
     const {nearestSaloons} = props.route.params
-    console.log('Nearest Saloons' , nearestSaloons)
     const saloonData = [{time:8,name:'Toney & Guy',rating:4.7,distance:1.3},
                         {time:15,name:'La Coupe',rating:4.7,distance:1.3},
                         {time:17,name:'Slough Barber',rating:4.7,distance:1.3}
                         ]
 
     const handleSaloonPress = (data) =>{
-        console.log(`Saloon is pressed`)
         props.selectedSaloon(data)
         props.navigation.navigate('SaloonNavigation')
     }

@@ -3,6 +3,7 @@ import {View , Text , StyleSheet ,ScrollView , TouchableOpacity } from 'react-na
 import Image from 'react-native-remote-svg'
 
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import moment from 'moment'
 
 const CurrentBookingCard = (props) =>{
    
@@ -22,10 +23,13 @@ const CurrentBookingCard = (props) =>{
             case 12: return 'Dec'
         }
     }
-    console.log('Props test>>' , props)
+    console.log('date appointment dat',props.detail)
     // const d = new Date()
     const date = props.detail.appointmentDateTime.slice(6,10)
-    const time = props.detail.appointmentDateTime.slice(14,19)
+    const time = props.detail.appointmentDateTime.slice(11,16)
+    // const now = moment(`${newTime}`, "h:mm:ss A").format("HH:mm:ss")
+
+    console.log('time now >>>', time)
     const month = date.slice(0,1)
 
     return(
@@ -33,7 +37,7 @@ const CurrentBookingCard = (props) =>{
                                                             {
                                                                 style: props.detail.services[0].name,
                                                                 amount: props.detail.amount,
-                                                                dateTime: `${date.slice(2,4)} ${convertingMonth(month)}, ${time} PM`,
+                                                                dateTime: `${date.slice(2,4)} ${convertingMonth(month)}, ${time}`,
                                                                 stylist: props.detail.serviceProvider,
                                                                 salon: props.detail.salon,
                                                                 appointmentId: props.detail._id ,
@@ -52,7 +56,7 @@ const CurrentBookingCard = (props) =>{
                   
                 <View style={{width:'74.5%',height:60,backgroundColor:'#fcfcfc',marginLeft:10,flexDirection:'column'}}>
                     <View style={{flexDirection:'row' , justifyContent:'space-between',flex:1,backgroundColor:'#fcfcfc'}}>
-    <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{props.detail.services[0].name}</Text>
+                        <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{props.detail.services[0].name}</Text>
                         <Text style={{fontSize:17,fontFamily:'ExoBold'}}>{`£ ${props.detail.amount}`}</Text>
                     </View>
 
@@ -63,7 +67,7 @@ const CurrentBookingCard = (props) =>{
                             {/* <View style={styles.blink}></View> */}
                             <AntIcon name='clockcircleo' size={14} style={styles.blink}/>
                             <Text style={{fontSize:13,fontFamily:'ExoBold',opacity:0.6}}>
-                                {`${date.slice(2,4)} ${convertingMonth(month)}, ${time} PM`}
+                                {`${date.slice(2,4)} ${convertingMonth(month)}, ${time}`}
                             </Text>
 
                         </View>

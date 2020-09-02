@@ -19,6 +19,7 @@ import { SIGNIN ,
     SET_CANCEL_APPOINTMENT_FLAG ,
     TOS_PP,
     FAQ,
+    NOTIFICATION_NAV
 } from './constants'
 
 
@@ -279,6 +280,14 @@ const FaqSuccess = (data) =>{
     }
 }
 
+/************************* NOTIFICATION NAV****************************/
+
+const NotificationNavSuccess = (data) =>{
+    return{
+        type: NOTIFICATION_NAV.SUCCEES,
+        payLoad: data
+    }
+}
 
 export {
     signUpSuccess,
@@ -302,4 +311,5 @@ export {
     setCancelAppointmentFlagSuccess ,
     TosPpSuccess ,
     FaqSuccess ,
+    NotificationNavSuccess
 }

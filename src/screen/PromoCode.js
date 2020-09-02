@@ -34,10 +34,6 @@ const PromoCode = (props) => {
 
     const [getPromoCodeQuery,{data , loading , error}] = useLazyQuery(GET_PROMO_CODE)
 
-    console.log('Data >>' , data)
-    console.log('Error >>' , loading)
-    console.log('Loading >>' , error)
-
     React.useEffect(()=>{
         async function getToken(){
             try {

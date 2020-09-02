@@ -10,8 +10,6 @@ import { connect } from 'react-redux'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import GestureRecognizer from 'react-native-swipe-gestures'
-
-
 const ADD_APPOINMENT = gql `
     mutation abc {
         addAppointment(salonId:"5e352f43e998cb2157837b28", 
@@ -37,22 +35,15 @@ const PickDate = (props) =>{
     const [val , setVal] = React.useState(false)
     const [timeErr , setTimeErr] =React.useState(false)
 
-    console.log('PicDate Props >>>' , props.signIn.token)
-
-    console.log('Data ' , data)
-    console.log('Loading ' , loading)
-    console.log('Error ' , error)
-
     let date = new Date() 
 
     let month = `${date.getMonth()}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
     let cuurrentDay = `${date.getDate()}`.length == 1 ? `0${date.getDate()}` : date.getDate()
 
     let currentDate = `${date.getFullYear()}-${ month }-${cuurrentDay}`
-    console.log('Current date >>' ,`${date.getMonth()+1}`)
 
-    console.log('Current Date >>' , currentDate , '>>>>>' , date.getMonth())
-    const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},]
+    const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},{tm:'12:00'}, {tm:'12:30'}, 
+    {tm:'13:00'}, {tm: '13:30'}, {tm:'14:00'}, {tm: '14:30'}, {tm: '15:00'}, {tm: '15:30'}]
     const [time,setTime] = React.useState(false)
 
     const getTime = (val) =>{
@@ -91,7 +82,6 @@ const PickDate = (props) =>{
     const handleButton = () =>{
         if(selectedDate && time){
             let dateTime={date:selectedDate,time:time}
-            console.log('Str Day is >>' , convertingDay(val.dateString))
             let dateTimeDetail = {
                 time: time,
                 strDay: convertingDay(val.dateString) ,
@@ -100,7 +90,6 @@ const PickDate = (props) =>{
                 month: convertingMonth(val.month)
             }
 
-            console.log('Button is Pressed....',dateTime)
             props.selectDateTime(dateTime)
             props.navigation.navigate('PaymentMethods',{
                ...dateTimeDetail
@@ -148,13 +137,11 @@ const PickDate = (props) =>{
     }
 
     const onSwipeUp = () =>{
-        console.log('Swipe Up >>>')
         setPageView(1)
     }
 
 
     const onSwipeDown = () =>{
-        console.log('Swipe Down >>>')
         setPageView(3)
     }
 
@@ -163,7 +150,6 @@ const PickDate = (props) =>{
         directionalOffsetThreshold: 80
     };
 
-    console.log('Current Date >>>>>>>>>>>>>>>>>>>>>>' , currentDate)
     return(
         <View style={styles.container}>
             
@@ -197,7 +183,7 @@ const PickDate = (props) =>{
                     <TouchableOpacity  onPress={()=>{pageView==3 ? setPageView(1) : setPageView(3)}}
                     style={{flexDirection:'row', justifyContent:'center',marginTop:0}}>
                         <View style={{height:20,width:60}}>
-                            <View style={{width:60,height:2,backgroundColor:'blue'}}></View>
+                            <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                         </View>
                     </TouchableOpacity>
                     </GestureRecognizer>
