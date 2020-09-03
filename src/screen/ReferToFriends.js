@@ -1,5 +1,5 @@
 import React from 'react'
-import { View , Text , StyleSheet , TouchableOpacity } from 'react-native'
+import { View , Text , StyleSheet , TouchableOpacity, Share } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import Awsome5Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -11,13 +11,34 @@ import EntIcon from 'react-native-vector-icons/Entypo'
 
 
 const ReferToFriends = (props) =>{
-
+    console.log('props in ReferToFriends', props)
+    const beforeImage = props.route.params.beforeImage.uri
+    console.log('before url',beforeImage)
     const socialList = [    {icon: AwsomeIcon , icon_name:'facebook' , name:'Facebook'},
                             {icon: Awsome5Icon , icon_name:'facebook-messenger' , name: 'Messenger'},
                             {icon: AwsomeIcon , icon_name:'whatsapp' , name: 'WhatsApp'},
                             {icon: AntIcon , icon_name:'twitter' , name: 'Twitter'},
-                            {icon: EntIcon , icon_name:'dots-three-horizontal' , name: 'Other'},
+                            {icon: EntIcon , icon_name:'dots-three-horizontal' , name: 'Other', action: othersShare},
                         ]
+
+   function othersShare() {
+    try {
+      const result =  Share.share({
+        message:`Share message`,
+        title:"React Native Camera Expo Example",
+        url: beforeImage
+      });
+
+      if (result.action === Share.sharedAction) {
+        alert("Post Shared")
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+        alert("Post cancelled")
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
     return(
         <View style={styles.container}>
@@ -35,9 +56,10 @@ const ReferToFriends = (props) =>{
                 <View style={styles.socialMainContainer}>
                     
                     {socialList.map((val,index)=>{
+                        console.log("val in share >>",val)
                         return(
-                            <View style={styles.socialContainer}>
-                                <TouchableOpacity onPress={()=>console.log('Social is Pressed')}>
+                            <View style={styles.socialContainer} key={index}>
+                                <TouchableOpacity onPress={val.action} >
 
                                     <View style={styles.socialContent}>
                                         <View style={styles.socialIcon}>

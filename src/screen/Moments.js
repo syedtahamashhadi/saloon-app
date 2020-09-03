@@ -21,6 +21,8 @@ export default function Moments(props) {
     const [beforeImageUrl,setBeforeImageUrl] = useState(null)
     const [afterImageUrl,setAfterImageUrl] = useState(null)
 
+    console.log('beforeImage', beforeImage)
+    console.log('afterImage', afterImage)
 
 
     const [addMoments , { data , loading , error  }] = useMutation(Mutations.ADD_MOMENTS)
@@ -38,7 +40,10 @@ export default function Moments(props) {
 
 
     const handleShare = () => {
-        props.navigation.navigate('ReferToFriends')
+        props.navigation.navigate('ReferToFriends', {
+            beforeImage: beforeImage,
+            afterImage: afterImage
+        })
     }
 
     const getToken = async()=>{
