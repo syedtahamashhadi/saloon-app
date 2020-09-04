@@ -8,7 +8,6 @@ const UpdateUserProfile = (props) =>{
 
     const [firstName,setFirstName] = React.useState('')
     const [lastName,setLastName] = React.useState('')
-    const [email,setEmail] = React.useState('')
     const [country,setCountry] = React.useState('')
     const [phone,setPhone] = React.useState('')
     const [fieldErr,setFieldErr] = React.useState(null)
@@ -17,7 +16,7 @@ const UpdateUserProfile = (props) =>{
     const handleButton = ()=>{
         console.log('Button is pressed' , typeof phone)
         switch (true) {
-            case (firstName == '' && lastName == '' && email == '' && country == '' && phone == ''):
+            case (firstName == '' && lastName == '' && country == '' && phone == ''):
                 setFieldErr('All fields are empty !')
                 break;
             case (firstName == ''):
@@ -25,9 +24,6 @@ const UpdateUserProfile = (props) =>{
                 break;
             case (lastName == ''):
                 setFieldErr('Enter Your Last-Name !')
-                break;
-            case (email == ''):
-                setFieldErr('Enter Your Email !')
                 break;
             case (country == ''):
                 setFieldErr('Enter Your country !')
@@ -42,7 +38,7 @@ const UpdateUserProfile = (props) =>{
                 loading !== true && signupUser(
                     {
                         variables:{
-                            firstName: firstName , lastName: lastName , email: email , country: country , phone: `${phone}`
+                            firstName: firstName , lastName: lastName , country: country , phone: `${phone}`
                         }
                     }
                 )
@@ -63,7 +59,7 @@ const UpdateUserProfile = (props) =>{
                 </TouchableOpacity>
             </View>
             <View style={{marginTop:0,justifyContent:'center',alignItems:'center'}}>
-                <View style={{width:90 , height:50 }}>
+                <View style={{width:100 , height:100 }}>
                     <Image source={require('../../assets/create-account-badge.png')} style={styles.image} />
                 </View>
                 <View style={{marginTop:15}}>
@@ -93,15 +89,6 @@ const UpdateUserProfile = (props) =>{
                 <View style={styles.inputContainer}>
                     <TextInput 
                         style={styles.inputField}
-                        onChangeText= {val=>setEmail(val)}
-                        value={email}
-                        placeholder='Email'
-                        fontSize={16}
-                    />
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput 
-                        style={styles.inputField}
                         onChangeText= {val=>setCountry(val)}
                         value={country}
                         placeholder='Country'
@@ -119,7 +106,7 @@ const UpdateUserProfile = (props) =>{
                     />
                 </View>
 
-                <View style={{marginTop:30}}>
+                <View style={{marginTop:50}}>
                     <Button title='Update' btnColor='#1D194D' handleButton={handleButton}/>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={()=>props.navigation.goBack()}>
