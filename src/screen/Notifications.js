@@ -1,11 +1,12 @@
 import React from 'react'
-import { View , Text , ScrollView, StyleSheet , TouchableOpacity } from 'react-native'
+import { View , Text , ScrollView, StyleSheet ,ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import FooterBar from '../component/FooterBar'
 import Queries from '../appolo/queries'
 import { useLazyQuery } from '@apollo/react-hooks'
 import AsyncStorage from '@react-native-community/async-storage'
-
+const {height, width} = Dimensions.get('window') 
+import NotificationCard from '../component/NotificationCard'
 // import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
@@ -41,13 +42,13 @@ const Notifications = (props) =>{
             console.log('Error is >>' , error)
         }
     },[data,error])
+    console.log('Notification data', data)
 
     return(
         <View style={styles.container}>
 
-            <View style={{marginHorizontal:20 , marginTop:50}}>
-
-                <View style={{flexDirection:'row' , justifyContent:'space-between' , backgroundColor:'#fff' , alignItems:'center'}}>
+            <View style={{marginTop: 50}}>
+                <View style={{marginHorizontal: 20, flexDirection:'row', justifyContent:'space-between' , backgroundColor:'#fff' , alignItems:'center'}}>
                     <Text style={{fontFamily:'AbrilFatFace' , fontSize:30 }}>
                         Notifications
                     </Text>
@@ -57,17 +58,27 @@ const Notifications = (props) =>{
                         </TouchableOpacity>
                     </View>
                 </View>
-
-                <View style={{marginTop:60}}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-
-                    </ScrollView>
-                </View>
-               
-                
-
             </View>
-            <View style={{marginTop:'100%'}}>
+            {!data 
+                ? 
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" color="#49D3CE" />
+                </View>
+                :
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <View style={styles.notificationContainer}>
+                        {
+                            data && data.getUserNotifications.reverse().map((item, index) => {
+                                return(
+                                    <NotificationCard data={item}/>
+                                )
+                            })
+                        }
+                    </View>       
+                    </ScrollView>
+            }
+                                
+            <View style={styles.notificationBottom}>
                 <View style={{alignItems:'flex-end'}}>
                     <FooterBar nav={props.navigation}/>
                 </View>
@@ -92,6 +103,16 @@ const styles = StyleSheet.create(
             justifyContent:'center',
             alignItems:'center'
         },
+        notificationContainer:{
+            marginTop: 10,
+            // justifyContent: 'space-around',
+            alignItems: 'center'
+        },
+        notificationBottom:{
+            position: 'absolute',
+            bottom: 0,
+            right: 0
+        }
     }
 )
 

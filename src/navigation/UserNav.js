@@ -62,6 +62,7 @@ import SettingsNavigation from '../screen/TabsNavigations/Settings/SettingsNavig
 import FaqSearch from '../screen/FaqSearch'
 // import Testing from '../screen/Testing'
 import {NotificationNavSuccess} from '../redux/authenticate/actions'
+import UpdateUserProfile from '../screen/UpdateUserProfile'
 
 
 
@@ -154,6 +155,8 @@ const UserNav = (props) =>{
                         <Stack.Screen name='BookingsNavigation' component={BookingsNavigation}/>
                         <Stack.Screen name='SettingsNavigation' component={SettingsNavigation}/>
                         <Stack.Screen name='FaqSearch' component={FaqSearch}/>
+                        <Stack.Screen name='UpdateUserProfile' component={UpdateUserProfile}/>
+
                     </React.Fragment>
 
                 ) : (
