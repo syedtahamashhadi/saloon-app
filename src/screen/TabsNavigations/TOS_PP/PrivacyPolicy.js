@@ -13,10 +13,10 @@ const PrivacyPolicy = (props) =>{
     return(
         <View style={styles.container}>
            <View style={{marginHorizontal:20,marginTop:20}}>
-                <Text style={{fontSize:20,fontFamily:'ExoBold'}}>Overview</Text>
-                {props.tosPp.getPolicy[1].description && 
-                <Text style={{fontSize:14,fontFamily:'ExoRegular' , marginTop:16}}>
-                        {props.tosPp.getPolicy[1].description}
+                <Text style={{fontSize:20,fontFamily:'ExoBold'}}>{props.tosPp && props.tosPp.getPolicy[0].title}</Text>
+                {props.tosPp && props.tosPp.getPolicy[0].description && 
+                <Text style={{fontSize:18,fontFamily:'ExoRegular' , marginTop:16}}>
+                        {props.tosPp.getPolicy[0].description}
                 </Text>}
             </View>
         </View>
