@@ -155,7 +155,6 @@ const MFA = (props) =>{
         //   });
         // }
         console.log('Notification token', token)
-        alert(token)
         return token;
       }
 

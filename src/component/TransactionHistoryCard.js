@@ -6,13 +6,13 @@ import { useQuery } from '@apollo/react-hooks'
 
 const TransactionHistoryCard = (props) =>{
     console.log('props in TransactionHistoryCard', props.data )
-    const {amount, appointmentDateTime, salon:{displayName, address}, services} = props.data
+    const {amount, createdAt, salon:{displayName, address}, services} = props.data
     // const {displayName, address} = props.data.salon
     // const {name} = props.data.services
-    console.log(amount, appointmentDateTime, displayName, services, address)
+    console.log(amount, createdAt, displayName, services, address)
     return(
         // <View style={styles.container}>
-            <View style={{marginTop:20,width:'100%'}}>
+            <View style={{marginBottom:20,marginTop: 10, width:'100%'}}>
                 <View style={{marginHorizontal:20,paddingHorizontal:20,borderTopRightRadius:10,borderTopLeftRadius:10,
                                 paddingVertical:10,elevation:5,backgroundColor:'#fff'}}>
 
@@ -21,7 +21,7 @@ const TransactionHistoryCard = (props) =>{
                        {displayName}
                     </Text>
                     <Text style={{fontSize:12 , fontFamily:'AbrilFatFace', color: 'gray'}}>
-                       {appointmentDateTime.slice(0, 10)}
+                       {createdAt.slice(0, 10)}
                     </Text>
                     </View>
                     <View style={{marginTop:5 , flexDirection:'row'}}>
