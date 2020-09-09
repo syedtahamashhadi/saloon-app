@@ -1,5 +1,5 @@
 import React from 'react'
-import {View ,  StyleSheet , ScrollView} from 'react-native'
+import {View ,  StyleSheet, ScrollView} from 'react-native'
 import CurrentBookingCard from '../../../component/CurrentBookingCard'
 import {connect} from 'react-redux'
 
@@ -8,8 +8,13 @@ const Scheduled = (props) =>{
 
      return(
         <View style={styles.container}>
-          
-             <ScrollView showsVerticalScrollIndicator={false}>
+          {!props
+            ? 
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <ActivityIndicator size="large" color="#49D3CE" />
+            </View>
+            :
+            <ScrollView showsVerticalScrollIndicator={false}>
                
                <View style={{marginHorizontal:20 , marginTop:25}}>
                 {
@@ -20,10 +25,9 @@ const Scheduled = (props) =>{
 
                     })
                 }
-               </View>
-               
+               </View>               
             </ScrollView>
-
+          }             
         </View>
     )
 }

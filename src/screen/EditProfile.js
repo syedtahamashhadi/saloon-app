@@ -90,8 +90,8 @@ const EditProfile = (props) =>{
                 <View style={{marginHorizontal:20}}>
                    
                     <View style={{marginTop:35,flexDirection:'row',justifyContent:'flex-end'}}>
-                        <TouchableOpacity onPress={()=>console.log('Edit is Pressed')}>
-                            <Text style={{color:'#fff',fontSize:16}}>Edit</Text>
+                        <TouchableOpacity onPress={()=>props.navigation.navigate('UpdateUserProfile')}>
+                            <Text style={{color:'#fff',fontSize:16}}>Edit Profile</Text>
                         </TouchableOpacity>
                     </View>
 

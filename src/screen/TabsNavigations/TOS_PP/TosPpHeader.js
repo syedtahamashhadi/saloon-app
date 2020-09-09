@@ -10,7 +10,7 @@ import { TosPpSuccess } from '../../../redux/authenticate/actions'
 
 const TransactionHeader = (props) =>{
 
-    console.log('State >>' , props)
+    console.log('State in tos>>' , props)
 
     const [getPolicy , {data , loading , error}] = useLazyQuery(Queries.GET_POLICY)
 
@@ -57,9 +57,8 @@ const TransactionHeader = (props) =>{
             </View>
 
             <View style={{marginHorizontal:20 , marginTop:10 , marginBottom:5}}>
-                <Text style={{fontFamily:'AbrilFatFace' , fontSize:30}}>
+                <Text style={{fontFamily:'AbrilFatFace' , fontSize:27}}>
                     Terms and Privacy Policy
-                    {/* {props.header.data} */}
                 </Text>
             </View>
 
