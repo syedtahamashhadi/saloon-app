@@ -54,7 +54,6 @@ const MFA = (props) =>{
         if(otp == null || otp.length < 6 ){
             setFieldErr('Enter 6 digit Code !')
         }else{
-            alert(expoPushToken)
             setFieldErr(null)
 
             loading !== true && verifyOtp(

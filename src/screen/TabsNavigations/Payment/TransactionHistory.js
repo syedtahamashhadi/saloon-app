@@ -1,40 +1,21 @@
 import React from 'react'
-import {View , Text , StyleSheet , ScrollView} from 'react-native'
+import {View , Text , StyleSheet ,ActivityIndicator, ScrollView} from 'react-native'
 import AwsomeIcon from 'react-native-vector-icons/FontAwesome'
 import gql from 'graphql-tag'
 import { useQuery , useLazyQuery } from '@apollo/react-hooks'
 import { connect } from 'react-redux'
 import { setTabHeaderSuccess } from '../../../redux/authenticate/actions'
 import AsyncStorage from '@react-native-community/async-storage'
-
-
-const GET_TRANSACTION_HISTORY = gql `
-{
-    getUserPaymentHistory{
-        _id
-        amount
-        isPromoCode
-        createdAt
-        salon{
-            displayName
-            distance
-        }
-        amount
-        service{
-            name
-        }
-
-    }
-}
-`
+import Queries from '../../../appolo/queries'
+import TransactionHistoryCard from '../../../component/TransactionHistoryCard'
 
 
 const TransactionHistory = (props) =>{
     console.log('Props History' , props)
 
-    const [getTransactionHistoryQuery,{ data , loading , error }] = useLazyQuery(GET_TRANSACTION_HISTORY)
+    const [getUserBookingQuery,{data , loading , error}] = useLazyQuery(Queries.GET_USER_BOOKING)
 
-    console.log('Data is >>' , data)
+    console.log('Data is  taransaction history>>' , data)
     console.log('Loading is >>' , loading)
     console.log('Error is >>' , error)
 
@@ -43,8 +24,10 @@ const TransactionHistory = (props) =>{
             try {
                 const token = await AsyncStorage.getItem('@KOMB_JWT_TOKEN')
                 if(token !== null){
-                    getTransactionHistoryQuery(
-                        {
+                    getUserBookingQuery(
+                        {variables:{
+                                userId: props.userDetial.getUserProfile._id
+                            },
                             context:{
                                 headers:{
                                     authorization: token
@@ -74,29 +57,18 @@ const TransactionHistory = (props) =>{
 
     return(
         <View style={styles.container}>
-            <View style={{marginTop:30,width:'100%'}}>
-                <View style={{marginHorizontal:20,paddingHorizontal:20,height:100,borderTopRightRadius:10,borderTopLeftRadius:10,
-                                paddingVertical:10,elevation:5,backgroundColor:'#fff'}}>
-                    <Text style={{fontSize:18 , fontFamily:'AbrilFatFace'}}>
-                        La Coupe
-                    </Text>
-
-                    <View style={{marginTop:5 , flexDirection:'row'}}>
-                        <AwsomeIcon name='map-marker' size={15} color='#FA7268'/>
-                        <Text style={{fontSize:12 , paddingLeft:5}}>1.3 miles to your location</Text>
-                    </View>
-                    <View style={{marginTop:10 , flexDirection:'row'}}>
-                        <Text style={{fontSize:18,fontFamily:'AbrilFatFace'}}>$ 10.00</Text>
-                        <Text style={{fontSize:12 , paddingLeft:8 , color:'grey' , paddingTop:5}}>
-                            / haircut
-                        </Text>
-                    </View>
-                    <View style={{width:'100%',height:1,borderWidth:2,borderStyle:'dashed',borderColor:'grey',
-                                marginBottom:0,borderRadius:5,opacity:0.3 ,marginTop:'2.5%',
-                                }}></View>
-                    {/* <View style={{height:2 , borderRadius:5 , borderStyle:'dashed' , borderColor:'red'}}></View> */}
-                </View>
-            </View>
+            {
+                loading ? 
+                <ActivityIndicator size='large' color='#49d3ce' />
+                :
+                <ScrollView>
+                    {data && data.getUserAppointment.map((item, index) => {
+                        return <TransactionHistoryCard key={index} data={item}/>
+                    })
+                    }
+                </ScrollView>
+            }
+            
         </View>
     )
 }
@@ -112,7 +84,8 @@ const styles= StyleSheet.create(
 
 const mapStateToProps = (state) =>{
     return{
-        token: state.mfaReducer.token
+        token: state.mfaReducer.token,
+        userDetial: state.setuserDetailReducer.data,      
     }
 }
 
