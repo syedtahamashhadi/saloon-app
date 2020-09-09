@@ -43,7 +43,9 @@ const CurrentBookings = (props) =>{
         if(data){
             console.log('User Appoinment Data >>' , data)
         }else if(error){
-            console.log('User Appoinment Error >>' , error)
+            // console.log('User Appoinment Error >>' , error)
+            console.log('User Appoinment Error >' , error)
+
         }
     },[data,error])
     
