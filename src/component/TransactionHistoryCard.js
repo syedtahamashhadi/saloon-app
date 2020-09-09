@@ -29,7 +29,7 @@ const TransactionHistoryCard = (props) =>{
                         <Text style={{fontSize:12 , paddingLeft:5}}>{address}</Text>
                     </View>
                     <View style={{marginTop:10 , flexDirection:'row'}}>
-                        <Text style={{fontSize:18,fontFamily:'AbrilFatFace'}}>$ {amount}.00</Text>
+                        <Text style={{fontSize:18,fontFamily:'AbrilFatFace'}}>£ {amount}.00</Text>
                         <Text style={{fontSize:12 , paddingLeft:8 , color:'grey' , paddingTop:5}}>
                             / {services.map(item => {
                                 return item.name
