@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react'
+import React , {useEffect, version} from 'react'
 import {View , Text , StyleSheet , TextInput, 
             TouchableOpacity ,Image , ScrollView , ActivityIndicator , Platform} from 'react-native'
     
@@ -11,6 +11,8 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import SvgSignInIcon from '../../MySvg/SvgSignInIcon'
 import Mutations from '../appolo/mutations'
 import * as Device from 'expo-device';
+import * as Facebook from 'expo-facebook'
+
 
 // Notifications.setNotificationHandler({
 //     handleNotification: async () => ({
@@ -19,6 +21,41 @@ import * as Device from 'expo-device';
 //       shouldSetBadge: false,
 //     }),
 //   });
+
+
+
+const facebookLogin = async () =>{
+    console.log('Facebook Login ')
+    try {
+        await Facebook.initializeAsync({
+          appId: '1369340263270360',
+        //   status     : true,
+        //   xfbml      : true,
+        // version    : 'v2.7'
+        });
+        const {
+          type,
+          token,
+          expirationDate,
+          permissions,
+          declinedPermissions,
+        } = await Facebook.logInWithReadPermissionsAsync({
+          permissions: ['public_profile','email'],
+        });
+        if (type === 'success') {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+          console.log('facebook login response >>> ' , response)
+          Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+        } else {
+          // type === 'cancel'
+        }
+      } catch ({ message }) {
+        console.log('facebook login error >>> ' , message)
+
+        alert(`Facebook Login Error: ${message}`);
+      }
+}
 
 
 
@@ -44,22 +81,25 @@ const SignIn = (props) =>{
 
     const handleSignIn = () =>{
         console.log('SignIn is Pressed' , email , password )
-        if(email == '' && password == ''){
-            setFieldErr('Enter Your Email and Password !')
-        }else if(email == ''){
-            setFieldErr('Enter Your Email !')
-        }else if(password == ''){
-            setFieldErr('Enter Your Password !')
-        }else{
-            setFieldErr(null)
-            loading !== true && loginUser(
-                {
-                    variables: {
-                        email:  `${email}`, password: `${password}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
-                    },
-                } 
-            )
-        }
+
+        facebookLogin()
+
+        // if(email == '' && password == ''){
+        //     setFieldErr('Enter Your Email and Password !')
+        // }else if(email == ''){
+        //     setFieldErr('Enter Your Email !')
+        // }else if(password == ''){
+        //     setFieldErr('Enter Your Password !')
+        // }else{
+        //     setFieldErr(null)
+        //     loading !== true && loginUser(
+        //         {
+        //             variables: {
+        //                 email:  `${email}`, password: `${password}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
+        //             },
+        //         } 
+        //     )
+        // }
         
        
     }

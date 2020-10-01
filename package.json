@@ -6,7 +6,8 @@
     "build-android": "expo build:android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "fetch-hash": "expo fetch:android:hashes"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
@@ -23,13 +24,14 @@
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-    "expo": "~37.0.3",
+    "expo": "~37.0.3",  
     "expo-blur": "^8.1.2",
     "expo-calendar": "^8.1.0",
     "expo-camera": "^8.3.1",
     "expo-cli": "^3.21.5",
     "expo-constants": "^9.1.1",
     "expo-device": "^2.2.1",
+    "expo-facebook": "^9.0.0",
     "expo-font": "^8.1.1",
     "expo-image-picker": "^8.3.0",
     "expo-location": "^8.1.0",
