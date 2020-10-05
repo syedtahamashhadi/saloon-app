@@ -45,16 +45,23 @@ const ConfirmBookingCard = (props) =>{
 
 
     React.useEffect(()=>{
-        if(data){
-            console.log('Data >>>', data)
-            props.discountedPrice(data.applyPromoCode.discountedPrice)
-        }else if(error){
-            alert('Promo Code is not Valid!')
+        if(props.guest){
+            null
+        }else{
+            if(data){
+                console.log('Data >>>', data)
+                props.discountedPrice(data.applyPromoCode.discountedPrice)
+            }else if(error){
+                alert('Promo Code is not Valid!')
+            }
         }
+        
     },[data,error])
 
     React.useEffect(()=>{
-        props.handleChangeText(props.copiedPromoCode)
+        if(!props.guest){
+            props.handleChangeText(props.copiedPromoCode)
+        }
     },[])
 
     return(
@@ -94,7 +101,7 @@ const ConfirmBookingCard = (props) =>{
                                     {/* <Text style={{fontSize:16,fontFamily:'ExoBold'}}>{props.total}</Text> */}
 
                         </View>
-                        <View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:8}}>
+                        {props.guest ? null :<View style={{flexDirection:'row',justifyContent:'space-between',marginBottom:8}}>
                             <Text style={{fontSize:15,color:'grey',fontFamily:'ExoRegular'}}>Promo Code:</Text>
                             <TextInput 
                                 value={props.promoCode}
@@ -108,7 +115,7 @@ const ConfirmBookingCard = (props) =>{
                                 // fontFamily='ExoBold'
                             />
                             {/* <Text style={{fontSize:16,fontFamily:'ExoBold'}}>test</Text> */}
-                        </View>
+                        </View>}
             
                         <View style={{width:'100%',alignItems:'flex-end',marginTop:3}}>
                             {/* <View style={{width:'35%',height:30,justifyContent:'center',

@@ -37,10 +37,12 @@ const PickDate = (props) =>{
 
     let date = new Date() 
 
-    let month = `${date.getMonth()}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
+    let month = `${date.getMonth()+1}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
     let cuurrentDay = `${date.getDate()}`.length == 1 ? `0${date.getDate()}` : date.getDate()
 
     let currentDate = `${date.getFullYear()}-${ month }-${cuurrentDay}`
+
+    console.log('Current Date >>> ', currentDate , date.getDate() , date.getMonth())
 
     const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},{tm:'12:00'}, {tm:'12:30'}, 
     {tm:'13:00'}, {tm: '13:30'}, {tm:'14:00'}, {tm: '14:30'}, {tm: '15:00'}, {tm: '15:30'}, {tm: '16:00'}, {tm: '16:30'}, 

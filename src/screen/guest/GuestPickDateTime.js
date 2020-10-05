@@ -18,8 +18,13 @@ const GuestPickDateTime = (props) =>{
     console.log('Date Time Props >>',props)
     console.log('State Date ' , selectedDate)
     let date = new Date() 
-    let currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    // let currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
+    let month = `${date.getMonth()+1}`.length == 1 ? `0${date.getMonth()+1}` : date.getMonth()+1
+    let cuurrentDay = `${date.getDate()}`.length == 1 ? `0${date.getDate()}` : date.getDate()
+
+    let currentDate = `${date.getFullYear()}-${ month }-${cuurrentDay}`
+    console.log('Current Date >> ',currentDate)
     const timeData = [{tm:'09:00'},{tm:'09:30'},{tm:'10:00'},{tm:'10:30'},{tm:'11:00'},{tm:'11:30'},]
     const [time,setTime] = React.useState(false)
 
@@ -78,7 +83,26 @@ const GuestPickDateTime = (props) =>{
 
                 <View style={{marginTop:0}}>
                     <View>
-                        <Calendar 
+                    <Calendar 
+                            onDayPress={val=>handleDatePress(val)}
+                            // onDayLongPress={false}
+                            minDate={currentDate}
+                            // minDate={'2020-08-04'}
+                            hideExtraDays={true}
+                            markedDates={ selectedDateMark ? selectedDateMark : null}
+                            theme={{
+                                selectedDayBackgroundColor: '#00A700',
+                                selectedDayTextColor:'#fff',
+                                // monthTextColor: 'blue',
+                                textMonthFontFamily:'ExoBold',
+                                textDayHeaderFontFamily:'ExoRegular',
+                                textDayFontFamily:'ExoRegular',
+                                // backgroundColor:'red',
+                                // arrowColor: 'red',
+                                // indicatorColor:'red',
+                            }}
+                        />
+                        {/* <Calendar 
                             onDayPress={val=>handleDatePress(val)}
                             // minDate={currentDate}
                             // hideExtraDays={true}
@@ -91,7 +115,7 @@ const GuestPickDateTime = (props) =>{
                                 textDayHeaderFontFamily:'ExoRegular',
                                 textDayFontFamily:'ExoRegular',
                             }}
-                        />
+                        /> */}
                     </View>
                     
                 </View>

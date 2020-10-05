@@ -82,24 +82,24 @@ const SignIn = (props) =>{
     const handleSignIn = () =>{
         console.log('SignIn is Pressed' , email , password )
 
-        facebookLogin()
+        // facebookLogin()
 
-        // if(email == '' && password == ''){
-        //     setFieldErr('Enter Your Email and Password !')
-        // }else if(email == ''){
-        //     setFieldErr('Enter Your Email !')
-        // }else if(password == ''){
-        //     setFieldErr('Enter Your Password !')
-        // }else{
-        //     setFieldErr(null)
-        //     loading !== true && loginUser(
-        //         {
-        //             variables: {
-        //                 email:  `${email}`, password: `${password}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
-        //             },
-        //         } 
-        //     )
-        // }
+        if(email == '' && password == ''){
+            setFieldErr('Enter Your Email and Password !')
+        }else if(email == ''){
+            setFieldErr('Enter Your Email !')
+        }else if(password == ''){
+            setFieldErr('Enter Your Password !')
+        }else{
+            setFieldErr(null)
+            loading !== true && loginUser(
+                {
+                    variables: {
+                        email:  `${email}`, password: `${password}` , deviceId: `${Device.osBuildId}_${Device.osInternalBuildId}`
+                    },
+                } 
+            )
+        }
         
        
     }

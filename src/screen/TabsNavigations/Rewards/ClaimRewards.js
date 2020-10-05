@@ -7,7 +7,7 @@ import Button from '../../../component/Button'
 
 
 const ClaimReward = (props) =>{
-
+    console.log('Props >>' , props)
     const handleButton = ()=>{
         console.log('Button is Pressed >>')
     }

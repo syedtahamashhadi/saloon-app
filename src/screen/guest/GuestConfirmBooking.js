@@ -41,7 +41,7 @@ const GuestConfirmBooking = (props) =>{
 
     const { slectedCard }= props.route.params
 
-    console.log('Date Time Props' , slectedCard)
+    console.log('Selected Card >> ' , slectedCard)
 
 
     // let newDateTime = `${props.dateTime.data.date}T10:${props.dateTime.data.time}Z`
@@ -120,6 +120,7 @@ const GuestConfirmBooking = (props) =>{
                         <View style={{width:60,height:2,backgroundColor:'#49D3CE'}}></View>
                     </View>
                 </TouchableOpacity>
+                <ScrollView>
 
                 <View style={{marginTop:10,alignItems:'center'}}>
                     <Text style={{fontSize:18,fontFamily:'ExoBold'}}>Confirmed Time:</Text>
@@ -139,6 +140,7 @@ const GuestConfirmBooking = (props) =>{
                         duration='30 Minutes'
                         staff= 'Matt Perry'
                         total= '$ 30.00'
+                        guest= {true}
                     />
 
                 </View>
@@ -146,6 +148,8 @@ const GuestConfirmBooking = (props) =>{
                 <View style={{marginTop:15 , marginHorizontal:20}}>
                     <Button title='Confirm Booking' handleButton={handleButton} textSize={18}/>
                 </View>
+                </ScrollView>
+
             </View>
 
         </View>

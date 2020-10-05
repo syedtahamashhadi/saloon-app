@@ -8,6 +8,7 @@ import moment from 'moment'
 const CurrentBookingCard = (props) =>{
    
     const convertingMonth = (month) =>{
+        console.log('Month >>> ', month )
         switch (parseInt(month)) {
             case 1: return 'Jan'
             case 2: return 'Feb'
@@ -25,12 +26,14 @@ const CurrentBookingCard = (props) =>{
     }
     console.log('date appointment dat',props.detail)
     // const d = new Date()
-    const date = props.detail.appointmentDateTime.slice(6,10)
+    const date = props.detail.appointmentDateTime.slice(5,10)
     const time = props.detail.appointmentDateTime.slice(11,16)
     // const now = moment(`${newTime}`, "h:mm:ss A").format("HH:mm:ss")
 
     console.log('time now >>>', time)
-    const month = date.slice(0,1)
+    console.log('Date >> ' , date , ' ' , props.detail)
+    const month = date.slice(0,2)
+    console.log('Day >> ', date.slice(3))
 
     return(
         <TouchableOpacity onPress={()=>props.nav.navigate('BookingDetail',
@@ -67,7 +70,7 @@ const CurrentBookingCard = (props) =>{
                             {/* <View style={styles.blink}></View> */}
                             <AntIcon name='clockcircleo' size={14} style={styles.blink}/>
                             <Text style={{fontSize:13,fontFamily:'ExoBold',opacity:0.6}}>
-                                {`${date.slice(2,4)} ${convertingMonth(month)}, ${time}`}
+                                {`${date.slice(3)} ${convertingMonth(month)}, ${time}`}
                             </Text>
 
                         </View>

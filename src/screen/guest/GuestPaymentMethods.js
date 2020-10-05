@@ -13,12 +13,14 @@ const GuestPaymentMethods = (props) =>{
     const [pageView , setPageView] = useState(3)
     const [slectedCard , setSelectedCard] = useState('')
     console.log('Testing Props >>>>>' , props)
+
     const handleCardPress = (val) =>{
         console.log('Button is Pressed....',val.cardId)
         setSelectedCard(val)
         props.navigation.navigate('GuestConfirmBooking', {
             slectedCard: val
         })
+        // alert('Card is Pressed')
         
     }
 

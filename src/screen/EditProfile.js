@@ -90,9 +90,9 @@ const EditProfile = (props) =>{
                 <View style={{marginHorizontal:20}}>
                    
                     <View style={{marginTop:35,flexDirection:'row',justifyContent:'flex-end'}}>
-                        <TouchableOpacity onPress={()=>props.navigation.navigate('UpdateUserProfile')}>
-                            <Text style={{color:'#fff',fontSize:16}}>Edit Profile</Text>
-                        </TouchableOpacity>
+                        {/* <TouchableOpacity onPress={()=>props.navigation.navigate('UpdateUserProfile')}> */}
+                            <Text style={{color:'#fff',fontSize:16}}>Edit</Text>
+                        {/* </TouchableOpacity> */}
                     </View>
 
                     <View style={{marginTop:5,width:'100%',justifyContent:'center',alignItems:'center',}}>

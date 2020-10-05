@@ -12,8 +12,7 @@ import EntIcon from 'react-native-vector-icons/Entypo'
 
 const ReferToFriends = (props) =>{
     console.log('props in ReferToFriends', props)
-    const beforeImage = props.route.params.beforeImage.uri
-    console.log('before url',beforeImage)
+ 
     const socialList = [    {icon: AwsomeIcon , icon_name:'facebook' , name:'Facebook'},
                             {icon: Awsome5Icon , icon_name:'facebook-messenger' , name: 'Messenger'},
                             {icon: AwsomeIcon , icon_name:'whatsapp' , name: 'WhatsApp'},
@@ -22,22 +21,23 @@ const ReferToFriends = (props) =>{
                         ]
 
    function othersShare() {
-    try {
-      const result =  Share.share({
-        message:`Share message`,
-        title:"React Native Camera Expo Example",
-        url: beforeImage
-      });
+       console.log('Others Share Logic >> ')
+    // try {
+    //   const result =  Share.share({
+    //     message:`Share message`,
+    //     title:"React Native Camera Expo Example",
+    //     url: beforeImage
+    //   });
 
-      if (result.action === Share.sharedAction) {
-        alert("Post Shared")
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-        alert("Post cancelled")
-      }
-    } catch (error) {
-      alert(error.message);
-    }
+    //   if (result.action === Share.sharedAction) {
+    //     alert("Post Shared")
+    //   } else if (result.action === Share.dismissedAction) {
+    //     // dismissed
+    //     alert("Post cancelled")
+    //   }
+    // } catch (error) {
+    //   alert(error.message);
+    // }
   };
 
     return(
